@@ -34,7 +34,7 @@ export default function Filters() {
         className="relative flex justify-center items-center bg-white border focus:outline-none shadow text-gray-600 rounded focus:ring ring-gray-200 group"
         onClick={handleDropdownToggle}
       >
-        <p className="px-4">Ciudad </p>
+        <p className="px-4">{filters.city || "Ciudad"} </p>
         <span className="border-l p-2 hover:bg-gray-100">
           <svg
             className="w-5 h-5"
