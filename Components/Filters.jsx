@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 
 const Cities = ["Buenos Aires", "Cordoba", "Mexico", "Chile", "Salta"];
