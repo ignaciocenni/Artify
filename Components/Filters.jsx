@@ -47,84 +47,92 @@ export default function Filters() {
 
   return (
     <div className="w-80 h-72 pt-5 pl-5">
-      <div>Filters</div>
-      <button
-        className="relative flex justify-center items-center bg-white border focus:outline-none shadow text-gray-600 rounded focus:ring ring-gray-200 group"
-        onClick={handleDropdownToggle}
-      >
-        <p className="px-4">{filters.city || "Ciudad"} </p>
-        <span className="border-l p-2 hover:bg-gray-100">
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="https://file.rendit.io/n/0aXnru4DI8UuSC0ZygNs.svg"
+      <h1>Filters</h1>
+      <div>
+        <button className=" mt-4 relative flex justify-center items-center bg-white border focus:outline-none shadow text-gray-600 rounded focus:ring ring-gray-200 group"
+          onClick={handleDropdownToggle}>
+          <p className="px-4">{filters.city || "Ciudad"} </p>
+          <span className="border-l p-2 hover:bg-gray-100">
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="https://file.rendit.io/n/0aXnru4DI8UuSC0ZygNs.svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </span>
+          <div
+            className={`absolute ${isDropdownOpen ? "block" : "hidden"
+              } top-full min-w-full w-max bg-white shadow-md mt-1 rounded z-10`}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M19 9l-7 7-7-7"
-            ></path>
-          </svg>
-        </span>
-        <div
-          className={`absolute ${
-            isDropdownOpen ? "block" : "hidden"
-          } top-full min-w-full w-max bg-white shadow-md mt-1 rounded z-10`}
-        >
-          <ul className="text-left border rounded">
-            {Cities.map((city) => (
-              <li
-                key={city}
-                className="px-4 py-1 hover:bg-grey-100 border-b cursor-pointer"
-                onClick={() => handleCitySelect(city)}
-              >
-                {city}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </button>
-      <div className="flex flex-row justify-between relative  items-center">
+            <ul className="text-left border rounded">
+              {Cities.map((city) => (
+                <li
+                  key={city}
+                  className="px-4 py-1 hover:bg-grey-100 border-b cursor-pointer"
+                  onClick={() => handleCitySelect(city)}
+                >
+                  {city}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </button>
+
+      </div>
+      <div className="flex flex-row justify-between relative items-center">
         <input
-          className="w-28 h-9"
+          className="w-28 h-9 mt-6 rounded-md"
           name="min"
-          placeholder="Min"
+          type="number"
+          pattern="[0-9]*"
+          placeholder="Min."
           value={filters.min}
           onChange={handlerImput}
+          style={{ borderRadius: '4px' }}
         />
-        <h1> A </h1>
+        <h1 className="mt-6"> A </h1>
         <input
-          className="w-28 h-9"
+          className="w-28 h-9 mt-6 rounded-md"
           name="max"
-          placeholder="Max"
+          type="number"
+          pattern="[0-9]*"
+          placeholder="Max."
           value={filters.max}
           onChange={handlerImput}
+          style={{ borderRadius: '4px' }}
         />
       </div>
 
-      <p className="px-4">Category</p>
-      {Categorys.map((cat) => (
-        <p
-          key={cat}
-          className={`px-4 cursor-pointer ${
-            filters.category.includes(cat) ? "text-blue-500" : ""
-          }`}
-          onClick={() => handleCategorySelect(cat)}
-        >
-          {cat} {filters.category.includes(cat) && "X"}
-        </p>
-      ))}
-
-      <div className="overflow-hidden bg-[#0a0a0a] flex flex-col justify-center relative w-20 h-11 items-center rounded-lg z-0">
-        <button
-          className="text-xs font-['Inter'] font-bold text-white relative w-1/2"
-          onClick={clickHandler}
-        >
-          Aplicar
-        </button>
+      <div className="flex-col">
+        <h1 className="mt-4" >Category</h1>
+        {Categorys.map((cat) => (
+          <div
+            key={cat}
+            onClick={() => handleCategorySelect(cat)}
+            className={`mx-1 mt-4 px-4 py-2 bg-[#0a0a0a] rounded-full ${filters.category.includes(cat) ? "bg-[var(--background-sec)] text-white" : "bg-[#0a0a0a] text-white"
+              } cursor-pointer inline-block`}
+          >
+            {cat} {filters.category.includes(cat) && "X"}
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-center">
+        <div className="mt-4 overflow-hidden bg-[#0a0a0a] flex flex-col justify-center relative w-20 h-11 items-center rounded-lg z-0">
+          <button
+            className=" text-xs font-['Inter'] font-bold text-white relative w-1/2"
+            onClick={clickHandler}
+          >
+            Aplicar
+          </button>
+        </div>
       </div>
     </div>
   );
