@@ -30,8 +30,8 @@ model Product {
   image       String
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
-  userId      Int        // Campo para la relación con el modelo User
   user        User       @relation(fields: [userId], references: [id]) // Relación con el modelo User
+  userId      Int        // Campo para la relación con el modelo User
   reviews     Review[]   // Relación con el modelo Review
   categoryId  Int        // Campo para la relación con el modelo Category
   category    Category   @relation(fields: [categoryId], references: [id]) // Relación con el modelo Category
@@ -42,8 +42,8 @@ model Review {
   comment   String
   rating    Int
   createdAt DateTime @default(now())
-  productId Int      // Campo para la relación con el modelo Product
   product   Product  @relation(fields: [productId], references: [id]) // Relación con el modelo Product
+  productId Int      // Campo para la relación con el modelo Product
 }
 
 model Category {
