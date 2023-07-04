@@ -33,7 +33,9 @@ const NavBar = () => {
           />
         </Link>
           <button className="text-black text-xs border-2 border-black rounded h-11">
+            <Link href="/">
             <p className="px-4">Explorar</p>
+            </Link>
           </button>
           <input
             onChange={handlerValue}
@@ -46,7 +48,7 @@ const NavBar = () => {
           >
             <p className="px-4">Buscar</p>
           </button>
-        <Link href="/">
+        <Link href="/profile">
         <Image src="/images/me.png" width={50} height={50} />
         </Link>
         <div className="relative flex justify-evenly w-1/5">
@@ -62,7 +64,7 @@ const NavBar = () => {
         <div className="absolute mt-14 bg-white border rounded shadow z-40">
           <ul className="py-1">
             <li className="px-4 py-2 hover:bg-gray-100">
-                <Link className="flex" href="/">
+                <Link className="flex" href="/profile">
                     <Image src="/images/userImage.svg" width={20} height={20} />
                     <p>Perfil</p>
                 </Link>
