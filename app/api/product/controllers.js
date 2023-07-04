@@ -53,4 +53,6 @@ const productDelete = async (id) => {
   });
 };
 
+//...
+
 export { allProducts, addProduct, productDelete };

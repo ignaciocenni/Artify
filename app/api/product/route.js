@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { addProduct, allProducts } from "./controllers";
+
+import { addProduct, allProducts, productDelete } from "./controllers";
 
 // Changes
 // Get All Products.
