@@ -7,8 +7,8 @@ export async function GET() {
   return NextResponse.json(res);
 }
 
-export async function POST(req) {
-  const { name, email, password, rol } = req.json();
+export async function POST(request) {
+  const { name, email, password, rol } = await request.json();
   const newUser = await prisma.User.create({
     data: {
       name,

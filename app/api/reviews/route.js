@@ -6,8 +6,8 @@ export async function GET(){
     return NextResponse.json(res)
 }
 
-export async function POST(req){
-    const { comment,rating,productId } = req.json();
+export async function POST(request){
+    const { comment,rating,productId } =  await request.json();
     const newReview = await prisma.Review.create({
         data:{
             comment,
