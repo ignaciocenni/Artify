@@ -21,9 +21,10 @@ const handlerText = () => {
                 <button className="text-black text-xs border-2 border-black rounded h-11">
                     <p className="px-4">Explorar</p>
                 </button>
-                <input 
+                <input
+                 
                 onChange={handlerValue}
-                className="h-11 border-2 border-black rounded-full bg-[#F3E8FF] " 
+                className="text-black h-11 border-2 border-black rounded-full bg-[#F3E8FF] " 
                 type="text" />
                 <button 
                 onClick={handlerText}
