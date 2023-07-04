@@ -11,7 +11,7 @@ export default function Profile() {
         <div className="flex w-2/4 justify-evenly">
             <div className="flex justify-center flex-col items-center">
                 <Image src="/images/me-194.9x150.png" width={144} height={144} />
-                <h1 className="pb-2">@Username</h1>
+                <h1 className="pb-2 font-bold text-3xl">@Username</h1>
                 <p className="pb-2">Artesano</p>
                 <div className="flex w-full justify-around">
                     <Link href="/">Post</Link>
