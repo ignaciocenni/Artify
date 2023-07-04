@@ -2,3 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --detail:#0A0A0A;
+    --grey: #737373;
+    --background: #FAF5FF;
+    --primary:#FAFAFA;
+    --background-sec:#C4B5FD;
+    --secundary:#581C87;
+    --extra:#7451D7;
+}
+
+body {
+  
+  background: var(--background)
+}
