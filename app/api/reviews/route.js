@@ -1,5 +1,5 @@
 import { NextResponse} from "next/server";
-import {prisma} from '../users/route'
+import prisma from "../db/client";
 
 export async function GET(){
     const res = await prisma.Review.findMany()
