@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-
 import { addProduct, allProducts, productDelete } from "./controllers";
 
-// Changes
+// Changes...
 // Get All Products.
 export async function GET() {
   try {

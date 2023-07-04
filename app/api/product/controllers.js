@@ -1,6 +1,6 @@
 import prisma from "../db/client";
 
-// Seria necesario incluir los usuarios?
+// Seria necesario incluir los usuarios?...
 const allProducts = async () => {
   const response = await prisma.Product.findMany();
   if (response.length) throw new Error("There are not products.");
@@ -52,7 +52,5 @@ const productDelete = async (id) => {
     },
   });
 };
-
-//...
 
 export { allProducts, addProduct, productDelete };
