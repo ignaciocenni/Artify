@@ -1,12 +1,10 @@
 import { NextResponse } from "next/server";
-import { data } from "../response";
 import prisma from "../db/client";
 
-
 export async function GET() {
-  return NextResponse.json(data);
+  const res = await prisma.Product.findMany();
+  return NextResponse.json(res);
 }
-
 export async function POST(request) {
   const { name, description, price, stock, image, userId, categoryId } = await request.json();
   const newProduct = await prisma.Product.create({
@@ -28,5 +26,6 @@ export async function POST(request) {
       },
     },
   });
+
   return NextResponse.json(newProduct);
 }
