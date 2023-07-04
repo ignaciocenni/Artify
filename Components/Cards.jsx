@@ -1,8 +1,8 @@
 import React from "react";
 import Card from "./Card";
-import { publicacionesArtesania } from "./data";
+import { publicacionesArtesania } from "./data.js";
 
-export const Cards = () => {
+export default function Cards() {
   return (
     <div className="grid grid-cols-4 w-[800px] px-2">
       {publicacionesArtesania.map((data) => (
@@ -18,5 +18,4 @@ export const Cards = () => {
       ))}
     </div>
   );
-};
-
+}
