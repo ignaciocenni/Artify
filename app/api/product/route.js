@@ -22,7 +22,7 @@ export async function POST(req) {
   const nameRegex = /^[A-Za-z\s]+$/;
   if (nameRegex.test(name)) {
     return NextResponse.json(
-      { error: "The must be a normal name." },
+      { error: "The must be a normal name..." },
       { status: 400 }
     );
   }
