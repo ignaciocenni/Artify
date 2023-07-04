@@ -1,8 +1,17 @@
-"use client"
 import Image from "next/image"
+import { useState } from "react"
+
 
 const NavBar = () => {
+    const [inputSearch, setInputSearch] = useState("")
 
+const handlerValue = (event) => {
+    const value = event.target.value
+    setInputSearch(value)
+}
+const handlerText = () => {
+    console.log(inputSearch);
+}
 
   return (
     <div className="flex justify-center items-center h-24 w-full pt-2.5">
@@ -13,9 +22,12 @@ const NavBar = () => {
                     <p className="px-4">Explorar</p>
                 </button>
                 <input 
+                onChange={handlerValue}
                 className="h-11 border-2 border-black rounded-full bg-[#F3E8FF] " 
                 type="text" />
-                <button className="text-black text-xs border-2 border-black rounded h-11">
+                <button 
+                onClick={handlerText}
+                className="text-black text-xs border-2 border-black rounded h-11">
                     <p className="px-4">Buscar</p>
                 </button>
                 <div className="flex justify-evenly w-1/5">
