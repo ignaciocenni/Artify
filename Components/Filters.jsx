@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 const Cities = ["Buenos Aires", "Cordoba", "Mexico", "Chile", "Salta"];
+const Categorys = ["Hogar", "Accesorios", "Madera", "Reciclado", "Natural"];
 
 export default function Filters() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -8,6 +9,7 @@ export default function Filters() {
     city: "",
     max: "",
     min: "",
+    category: []
   });
 
   const handleDropdownToggle = () => {
@@ -18,11 +20,27 @@ export default function Filters() {
     setFilters({ ...filters, city });
     setIsDropdownOpen(false);
   };
+
   const handlerImput = (event) => {
     const property = event.target.name;
     const value = event.target.value;
     setFilters({ ...filters, [property]: value });
   };
+
+  const handleCategorySelect = (category) => {
+    if (filters.category.includes(category)) {
+      setFilters({
+        ...filters,
+        category: filters.category.filter((cat) => cat !== category)
+      });
+    } else {
+      setFilters({
+        ...filters,
+        category: [...filters.category, category]
+      });
+    }
+  };
+
   const clickHandler = () => {
     console.log(filters);
   };
@@ -86,6 +104,19 @@ export default function Filters() {
           onChange={handlerImput}
         />
       </div>
+
+      <p className="px-4">Category</p>
+      {Categorys.map((cat) => (
+        <p
+          key={cat}
+          className={`px-4 cursor-pointer ${
+            filters.category.includes(cat) ? "text-blue-500" : ""
+          }`}
+          onClick={() => handleCategorySelect(cat)}
+        >
+          {cat} {filters.category.includes(cat) && "X"}
+        </p>
+      ))}
 
       <div className="overflow-hidden bg-[#0a0a0a] flex flex-col justify-center relative w-20 h-11 items-center rounded-lg z-0">
         <button
