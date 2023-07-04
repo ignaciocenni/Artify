@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  password String
+  rol      Rol      @default(USER)
+  products Product[] // Relación con el modelo Product
+}
+
+model Product {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  stock       Int
+  image       String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  userId      Int        // Campo para la relación con el modelo User
+  user        User       @relation(fields: [userId], references: [id]) // Relación con el modelo User
+  reviews     Review[]   // Relación con el modelo Review
+  categoryId  Int        // Campo para la relación con el modelo Category
+  category    Category   @relation(fields: [categoryId], references: [id]) // Relación con el modelo Category
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  comment   String
+  rating    Int
+  createdAt DateTime @default(now())
+  productId Int      // Campo para la relación con el modelo Product
+  product   Product  @relation(fields: [productId], references: [id]) // Relación con el modelo Product
+}
+
+model Category {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  products    Product[] // Relación con el modelo Product
+}
+
+enum Rol {
+  ADMIN
+  USER
+}

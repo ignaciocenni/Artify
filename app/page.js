@@ -1,7 +1,11 @@
 'use client'
-import  {FiltersCompounent}  from "@/components/Filters/FiltersCompounent"
+import Card from "@/Components/Card";
+import { Cards } from "@/Components/Cards";
+
 export default function Home() {
   return (
-    <div><FiltersCompounent/></div>
-  )
+    <div>
+      <Cards />
+    </div>
+  );
 }
