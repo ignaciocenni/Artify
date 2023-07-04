@@ -1,20 +1,22 @@
 import { NextResponse } from "next/server";
-import prisma from "../db/client";
+import { allUsers, addUser } from "./controllers";
 
 export async function GET() {
-  const res = await prisma.User.findMany();
-  return NextResponse.json(res);
+  try {
+    const res = await allUsers();
+    return NextResponse.json(res, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 404 });
+  }
 }
 
 export async function POST(request) {
   const { name, email, password, rol } = await request.json();
-  const newUser = await prisma.User.create({
-    data: {
-      name,
-      email,
-      password,
-      rol,
-    },
-  });
-  return NextResponse.json(newUser);
+
+  try {
+    const newUser = await addUser(name, email, password, rol);
+    return NextResponse.json(newUser, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 404 });
+  }
 }
