@@ -13,28 +13,28 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
+  id       Int       @id @default(autoincrement())
   name     String
-  email    String   @unique
+  email    String    @unique
   password String
-  rol      Rol      @default(USER)
+  rol      Rol       @default(USER)
   products Product[] // Relación con el modelo Product
 }
 
 model Product {
-  id          Int        @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
   description String
   price       Float
   stock       Int
   image       String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  user        User       @relation(fields: [userId], references: [id]) // Relación con el modelo User
-  userId      Int        // Campo para la relación con el modelo User
-  reviews     Review[]   // Relación con el modelo Review
-  categoryId  Int        // Campo para la relación con el modelo Category
-  category    Category   @relation(fields: [categoryId], references: [id]) // Relación con el modelo Category
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id]) // Relación con el modelo User
+  userId      Int // Campo para la relación con el modelo User
+  reviews     Review[] // Relación con el modelo Review
+  categoryId  Int // Campo para la relación con el modelo Category
+  category    Category @relation(fields: [categoryId], references: [id]) // Relación con el modelo Category
 }
 
 model Review {
@@ -42,12 +42,12 @@ model Review {
   comment   String
   rating    Int
   createdAt DateTime @default(now())
-  product   Product  @relation(fields: [productId], references: [id]) // Relación con el modelo Product
-  productId Int      // Campo para la relación con el modelo Product
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade) // Relación con el modelo Product
+  productId Int // Campo para la relación con el modelo Product
 }
 
 model Category {
-  id          Int    @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   description String
   products    Product[] // Relación con el modelo Product
