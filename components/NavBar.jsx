@@ -22,7 +22,7 @@ const NavBar = () => {
 
   return (
     <div className="flex justify-center items-center h-[100px] w-full pt-2.5">
-      <nav className="flex py-5 gap-8 justify-center w-[800px] h-[90px] ">
+      <nav className="flex py-5 justify-evenly w-1/2 h-[90px] ">
         <div className="flex content-center items-center ">
           <Link href="/">
             <Image
@@ -51,7 +51,7 @@ const NavBar = () => {
             <h1 className="">Buscar</h1>
           </button>
         </div>
-        <div className="flex content-center items-center gap-5">
+        <div className="flex gap-5">
           <Link href="/profile">
             <Image
               src="/images/me.png"
@@ -74,10 +74,9 @@ const NavBar = () => {
             </button>
           </div>
         </div>
-        <div className="flex content-center items-center ">
           {isOpen && (
-            <div className="absolute mt-14 bg-white border rounded shadow z-40 ">
-              <ul className="py-1">
+            <div className="absolute top-0 right-0 w-[20%] bg-white border rounded shadow z-40 ">
+              <ul className="py-1 px-2">
                 <li className="px-4 py-2 hover:bg-gray-100">
                   <Link className="flex" href="/profile">
                     <Image
@@ -86,7 +85,7 @@ const NavBar = () => {
                       height={20}
                       alt="icon"
                     />
-                    <p>Perfil</p>
+                    <p className="px-7">Perfil</p>
                   </Link>
                 </li>
                 <li className="px-4 py-2 hover:bg-gray-100">
@@ -97,7 +96,7 @@ const NavBar = () => {
                       height={20}
                       alt="icon"
                     />
-                    <p>Editar</p>
+                    <p className="px-7">Editar</p>
                   </Link>
                 </li>
                 <li className="px-4 py-2 hover:bg-gray-100">
@@ -108,7 +107,7 @@ const NavBar = () => {
                       height={20}
                       alt="icon"
                     />
-                    <p>Panel de Control</p>
+                    <p className="px-7">Panel de Control</p>
                   </Link>
                 </li>
                 <li className="px-4 py-2 hover:bg-gray-100">
@@ -119,7 +118,7 @@ const NavBar = () => {
                       height={20}
                       alt="icon"
                     />
-                    <p>Explorar</p>
+                    <p className="px-7">Explorar</p>
                   </Link>
                 </li>
                 <li className="px-4 py-2 hover:bg-gray-100">
@@ -130,7 +129,7 @@ const NavBar = () => {
                       height={20}
                       alt="icon"
                     />
-                    <p>Configurar</p>
+                    <p className="px-7">Configurar</p>
                   </Link>
                 </li>
                 <li className="px-4 py-2 hover:bg-gray-100">
@@ -141,13 +140,12 @@ const NavBar = () => {
                       height={20}
                       alt="icon"
                     />
-                    <p>Cerrar Sesiòn</p>
+                    <p className="px-7">Cerrar Sesiòn</p>
                   </Link>
                 </li>
               </ul>
             </div>
           )}
-        </div>
       </nav>
     </div>
   );

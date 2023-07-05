@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Card({ id, image, user, price, title, userImage }) {
   return (
-    <div className="object-cover flex flex-col justify-center align-first grid-cols-1 w-[180px] py-3 ">
+    <div className="object-cover flex flex-col justify-center align-first grid-cols-1 px-3 py-3 ">
       <div className="relative h-[300px]">
         <Image
           alt={`Imagen de perfil del usuario ${id}`}
