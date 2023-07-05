@@ -10,10 +10,10 @@ const updateProduct = async (id, name, description, price, stock, image) => {
     },
     data: {
       name: name,
-      description :description,
-      price : price,
-      stock:stock,
-      image:image
+      description: description,
+      price: price,
+      stock: stock,
+      image: image,
     },
   });
   return product;
@@ -64,13 +64,18 @@ const addProduct = async (
 // Check this function.
 const productDelete = async (id) => {
   if (typeof id !== "number") throw new Error("Id must be a number");
-
+  const searchedUser = await prisma.Product.findFirst({
+    where: {
+      id: id,
+    },
+  });
+  if (!searchedUser) throw new Error("Product doesn't exist");
   const searchIdProd = await prisma.Product.delete({
     where: {
       id: id,
     },
   });
-  return searchIdProd
+  return searchIdProd;
 };
 
-export { allProducts, addProduct, productDelete,updateProduct };
+export { allProducts, addProduct, productDelete, updateProduct };
