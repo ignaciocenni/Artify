@@ -4,7 +4,7 @@ import { publicacionesArtesania } from "./data.js";
 
 export default function Cards() {
   return (
-    <div className="grid grid-cols-4 w-[800px] px-2">
+    <div className="grid grid-cols-4 w-[50rem] px-2">
       {publicacionesArtesania.map((data) => (
         <Card
           key={data.id}
