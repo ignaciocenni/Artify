@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className=" z-10"> 
       <NavBar />
-      <div className="flex">
+      <div className="flex items-start">
       <Filters/>
       <Cards />
       </div>
