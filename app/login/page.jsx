@@ -52,7 +52,7 @@ export default function page() {
           {/* <p className="text-xs italic">Please choose a password.</p> */}
         </div>
         <div className="flex items-center justify-center" >
-          <button className=" bg-slate-500 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px]"
+          <button className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px]"
             type="submit"
             onClick={handleClick}
           >
@@ -61,12 +61,12 @@ export default function page() {
 
         </div>
 
-        <a className="inline-block align-baseline font-bold text-sm text-slate-500  hover:text-black mt-2" href="#">
+        <a className="inline-block align-baseline font-bold text-sm text-slate-500  hover:text-[var(--background-sec)] mt-2" href="#">
           Forgot Password?
         </a>
 
         <div className=" mt-5 flex items-center justify-center" >
-          <button className=" bg-slate-500 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px]"
+          <button className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px]"
             type="submit"
             onClick={handleCreateCount}
           >
