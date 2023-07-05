@@ -1,7 +1,32 @@
 import { NextResponse } from "next/server";
-import { addProduct, allProducts, productDelete } from "./controllers";
+import {
+  addProduct,
+  allProducts,
+  productDelete,
+  updateProduct,
+} from "./controllers";
 
 // Changes...
+
+//put product
+export async function PUT(request) {
+  const { id, name, description, price, stock, image } = await request.json();
+
+  try {
+    const response = await updateProduct(
+      id,
+      name,
+      description,
+      price,
+      stock,
+      image
+    );
+    return NextResponse.json(response, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 404 });
+  }
+}
+
 // Get All Products.
 export async function GET() {
   try {
@@ -69,8 +94,8 @@ export async function POST(req) {
 }
 
 // Delete by Product Id ( check controller )
-export async function DELETE(req) {
-  const { id } = req.json();
+export async function DELETE(request) {
+  const { id } = await request.json();
 
   try {
     await productDelete(id);
