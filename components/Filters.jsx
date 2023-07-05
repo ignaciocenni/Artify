@@ -47,7 +47,7 @@ export default function Filters() {
   };
 
   return (
-    <div className="flex flex-col items-start w-[30rem] py-2 px-5 w">
+    <div className="flex flex-col items-start w-[25%] py-2 px-5 w">
       <div className="gap-1 items-start">
         <h1 className="text-2xl font-semibold">Filtros</h1>
         <div>
