@@ -8,10 +8,23 @@
 
 ## PRs y ramas de características
 
-- Trabajar con ramas de características y PR hacia la rama principal.
-- Los PR deben ser pequeños, enfocados en una cosa y con una descripción clara.
-- Los commits deben ser pequeños y específicos con mensajes informativos y claros. Ejemplos: `feat(api/players route): add endpoint GET /players/:id`, `refactor(client/dashboard): date logic for product expirations`, `fix(api/users controller): return 404 on inexistent user`, `test(api/math): add missing tests for division by zero`.
-- Nombrar las ramas de manera informativa. Ejemplos: `feat/user_creation`, `fix/currency_with_decimal`, `chore/lint_ci`, `refactor/auth_routing`.
+#### Trabajar con ramas de características y PR hacia la rama principal.
+
+#### Los PR deben ser pequeños, enfocados en una cosa y con una descripción clara.
+
+#### Los commits deben ser pequeños y específicos con mensajes informativos y claros. Ejemplos:
+
+- `feat(api/players route): add endpoint GET /players/:id`
+- `refactor(client/dashboard): date logic for product expirations`
+- `fix(api/users controller): return 404 on inexistent user`
+- `test(api/math): add missing tests for division by zero`
+
+#### Nombrar las ramas de manera informativa. Ejemplos:
+
+- `feat/user_creation`
+- `fix/currency_with_decimal`
+- `chore/lint_ci`
+- `refactor/auth_routing`
 
 ## Revisión de código
 
