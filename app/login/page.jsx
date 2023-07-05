@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { validate } from "./validate";
+import Link from "next/link";
 
 export default function page() {
   const [form, setForm] = useState({
@@ -12,8 +13,6 @@ export default function page() {
     email: "",
     password: ""
   })
-
-
   const handleClick = () => {
     alert("login");
   }
@@ -21,26 +20,39 @@ export default function page() {
     alert("redirecciona a sign in")
   }
   const handleChange = (event) => {
-    setForm({...form,
-    [event.target.name]:event.target.value}) 
+    const name = event.target.name;
+    const value = event.target.value;
+    setForm({ ...form, [name]: value })
+    const validationform = validate({ ...form, [name]: value })
+    if (validate)
+      setErrors(validationform)
+    else setErrors('')
+  }
+  const handleOnSubmit = async (event) => {
+    event.preventDefault();
+    console.log(Object.entries(form));
 
   }
 
   return (
     <div className=" text-center h-[100vh] grid justify-center items-center">
 
-      <form className="">
-        <h1 className="font-semibold text-3x1">Hola de nuevo!</h1>
+      <form className="" onSubmit={handleOnSubmit}>
+        <h1 className="font-semibold text-[32px]">Hola de nuevo!</h1>
         <br />
         <div className="mb-4">
-
           <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username"
             type="text"
             placeholder="Correo electrónico"
             onChange={handleChange}
             name="email"
             value={form.email} />
+          <div className=" h-[50px]w-[200px]">
+            <span className=" text-red-700 ">{errors.email}</span>
+          </div>
         </div>
+
+
         <div className="mb-6">
 
           <input className="shadow appearance-none border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline border-ra rounded-md" id="password"
@@ -49,11 +61,12 @@ export default function page() {
             name="password"
             value={form.password}
             placeholder="Contraseña" />
-          {/* <p className="text-xs italic">Please choose a password.</p> */}
+          <div className=" h-[50px]w-[100px]">
+            <span className=" text-red-700 ">{errors.password}</span>
+          </div>
         </div>
         <div className="flex items-center justify-center" >
           <button className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px]"
-            type="submit"
             onClick={handleClick}
           >
             Continuar
@@ -61,18 +74,16 @@ export default function page() {
 
         </div>
 
-        <a className="inline-block align-baseline font-bold text-sm text-slate-500  hover:text-[var(--background-sec)] mt-2" href="#">
+        <a className="inline-block align-baseline font-bold text-sm text-slate-500  hover:text-[var(--background-sec)] mt-2" href="/login/recuperate">
           Forgot Password?
         </a>
 
         <div className=" mt-5 flex items-center justify-center" >
-          <button className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px]"
-            type="submit"
-            onClick={handleCreateCount}
-          >
-            Cuenta Nueva
-          </button >
-
+          <Link href="/signin">
+            <button className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px]">
+              Cuenta Nueva
+            </button >
+          </Link>
         </div>
       </form>
 
