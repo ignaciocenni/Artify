@@ -10,27 +10,16 @@ import message from "../../public/images/message.svg";
 import Link from "next/link";
 
 import Image from "next/image";
-import { publicacionesArtesania } from "../../Components/data.js";
+import { publicacionesArtesania } from "../../components/databs.js";
 
 export default function Detail() {
   return (
     <div className="flex flex-col justify-center items-center content-center gap-14">
       <div className="flex items-start justify-center">
-        <Image
-          className="absolute top-2 left-2"
-          src={close}
-          alt="close"
-          width={50}
-          height={50}
-        />
+        <Image className="absolute top-2 left-2" src={close} alt="close" width={50} height={50} />
 
         <div className="flex py-5 items-center">
-          <Image
-            src={flechaIzq}
-            alt="flecha izquierda"
-            width={50}
-            height={50}
-          />
+          <Image src={flechaIzq} alt="flecha izquierda" width={50} height={50} />
 
           <Image
             className="rounded-3xl"
@@ -66,9 +55,7 @@ export default function Detail() {
           </div>
 
           <div className="flex gap-3">
-            <h1 className="font-bold text-3xl">
-              {publicacionesArtesania[0].titulo}
-            </h1>
+            <h1 className="font-bold text-3xl">{publicacionesArtesania[0].titulo}</h1>
             <Image src={favorite} alt="favorite" />
           </div>
 
@@ -81,26 +68,21 @@ export default function Detail() {
           </div>
 
           <div className="flex items-center gap-2">
-            <h1 className="text-4xl font-bold">
-              ${publicacionesArtesania[0].precio}
-            </h1>
+            <h1 className="text-4xl font-bold">${publicacionesArtesania[0].precio}</h1>
           </div>
 
           <div className="flex items-center gap-2">
-            <h1 className="text-sm font-light">
-              Publicado hoy en Córdoba, Córdoba
-            </h1>
+            <h1 className="text-sm font-light">Publicado hoy en Córdoba, Córdoba</h1>
           </div>
 
           <div className="flex flex-col py-3 gap-2 my-0 px-0 w-[524px] h-[363px]">
             <h1 className="font-medium text-xl">Descripción del vendedor</h1>
             <p className="font-light">
-              Descubre la fascinante escultura de arte que cautivará tus
-              sentidos. Esta impresionante pieza fusiona la elegancia clásica
-              con un toque contemporáneo, evocando emociones y despertando la
-              imaginación. Hecha a mano con meticuloso detalle, esta escultura
-              es una obra maestra que trasciende el tiempo y embellece cualquier
-              espacio. ¡Una joya para los amantes del arte!
+              Descubre la fascinante escultura de arte que cautivará tus sentidos. Esta
+              impresionante pieza fusiona la elegancia clásica con un toque contemporáneo, evocando
+              emociones y despertando la imaginación. Hecha a mano con meticuloso detalle, esta
+              escultura es una obra maestra que trasciende el tiempo y embellece cualquier espacio.
+              ¡Una joya para los amantes del arte!
             </p>
           </div>
 
@@ -152,7 +134,7 @@ export default function Detail() {
             <button
               // onClick={handlerText}
               className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white text-xs rounded-2xl"
-              >
+            >
               <h1 className="text-xs font-extrabold px-4">Comentar</h1>
             </button>
           </div>
@@ -160,45 +142,37 @@ export default function Detail() {
         <div>
           <h1 className="font-semibold">Ultimos realizadas</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit optio
-            dolore nesciunt nulla iusto alias porro! Sit, provident nulla dolore
-            molestiae veritatis quos omnis doloremque! Amet quod impedit veniam
-            optio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-            explicabo sunt delectus tempore nam, a numquam facilis nulla nostrum
-            corporis fugit distinctio qui, quis fuga ipsa hic blanditiis
-            doloribus magnam?Lorem ipsum dolor sit amet, consectetur adipisicing
-            elit. Saepe corrupti illum totam ipsum dolore magnam quidem
-            consequatur aspernatur at molestiae in, obcaecati quos earum
-            architecto, cumque ratione labore qui iure?Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Odit optio dolore nesciunt nulla
-            iusto alias porro! Sit, provident nulla dolore molestiae veritatis
-            quos omnis doloremque! Amet quod impedit veniam optio?Lorem ipsum
-            dolor sit amet consectetur adipisicing elit. Eos explicabo sunt
-            delectus tempore nam, a numquam facilis nulla nostrum corporis fugit
-            distinctio qui, quis fuga ipsa hic blanditiis doloribus magnam?Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. Saepe corrupti
-            illum totam ipsum dolore magnam quidem consequatur aspernatur at
-            molestiae in, obcaecati quos earum architecto, cumque ratione labore
-            qui iure?Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Odit optio dolore nesciunt nulla iusto alias porro! Sit, provident
-            nulla dolore molestiae veritatis quos omnis doloremque! Amet quod
-            impedit veniam optio?Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Eos explicabo sunt delectus tempore nam, a numquam
-            facilis nulla nostrum corporis fugit distinctio qui, quis fuga ipsa
-            hic blanditiis doloribus magnam?Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Saepe corrupti illum totam ipsum
-            dolore magnam quidem consequatur aspernatur at molestiae in,
-            obcaecati quos earum architecto, cumque ratione labore qui
-            iure?Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit
-            optio dolore nesciunt nulla iusto alias porro! Sit, provident nulla
-            dolore molestiae veritatis quos omnis doloremque! Amet quod impedit
-            veniam optio?Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Eos explicabo sunt delectus tempore nam, a numquam facilis
-            nulla nostrum corporis fugit distinctio qui, quis fuga ipsa hic
-            blanditiis doloribus magnam?Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Saepe corrupti illum totam ipsum dolore magnam
-            quidem consequatur aspernatur at molestiae in, obcaecati quos earum
-            architecto, cumque ratione labore qui iure?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit optio dolore nesciunt
+            nulla iusto alias porro! Sit, provident nulla dolore molestiae veritatis quos omnis
+            doloremque! Amet quod impedit veniam optio?Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Eos explicabo sunt delectus tempore nam, a numquam facilis nulla
+            nostrum corporis fugit distinctio qui, quis fuga ipsa hic blanditiis doloribus
+            magnam?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe corrupti illum
+            totam ipsum dolore magnam quidem consequatur aspernatur at molestiae in, obcaecati quos
+            earum architecto, cumque ratione labore qui iure?Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Odit optio dolore nesciunt nulla iusto alias porro! Sit, provident
+            nulla dolore molestiae veritatis quos omnis doloremque! Amet quod impedit veniam
+            optio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos explicabo sunt
+            delectus tempore nam, a numquam facilis nulla nostrum corporis fugit distinctio qui,
+            quis fuga ipsa hic blanditiis doloribus magnam?Lorem ipsum dolor sit amet, consectetur
+            adipisicing elit. Saepe corrupti illum totam ipsum dolore magnam quidem consequatur
+            aspernatur at molestiae in, obcaecati quos earum architecto, cumque ratione labore qui
+            iure?Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit optio dolore nesciunt
+            nulla iusto alias porro! Sit, provident nulla dolore molestiae veritatis quos omnis
+            doloremque! Amet quod impedit veniam optio?Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Eos explicabo sunt delectus tempore nam, a numquam facilis nulla
+            nostrum corporis fugit distinctio qui, quis fuga ipsa hic blanditiis doloribus
+            magnam?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe corrupti illum
+            totam ipsum dolore magnam quidem consequatur aspernatur at molestiae in, obcaecati quos
+            earum architecto, cumque ratione labore qui iure?Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Odit optio dolore nesciunt nulla iusto alias porro! Sit, provident
+            nulla dolore molestiae veritatis quos omnis doloremque! Amet quod impedit veniam
+            optio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos explicabo sunt
+            delectus tempore nam, a numquam facilis nulla nostrum corporis fugit distinctio qui,
+            quis fuga ipsa hic blanditiis doloribus magnam?Lorem ipsum dolor sit amet, consectetur
+            adipisicing elit. Saepe corrupti illum totam ipsum dolore magnam quidem consequatur
+            aspernatur at molestiae in, obcaecati quos earum architecto, cumque ratione labore qui
+            iure?
           </p>
         </div>
       </div>

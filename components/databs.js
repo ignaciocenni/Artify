@@ -21,8 +21,7 @@ export const publicacionesArtesania = [
   },
   {
     id: 3,
-    imagenProducto:
-      "https://elmundoinfinito.com/wp-content/uploads/2017/09/producto-artesanal.jpg",
+    imagenProducto: "https://elmundoinfinito.com/wp-content/uploads/2017/09/producto-artesanal.jpg",
     titulo: "Joyas de plata",
     precio: 80,
     username: "Nacho",
@@ -31,8 +30,7 @@ export const publicacionesArtesania = [
   },
   {
     id: 4,
-    imagenProducto:
-      "https://i.pinimg.com/originals/2b/6c/88/2b6c88efb45d2ea946daf216c0a22b55.jpg",
+    imagenProducto: "https://i.pinimg.com/originals/2b/6c/88/2b6c88efb45d2ea946daf216c0a22b55.jpg",
     titulo: "Escultura de madera",
     precio: 120,
     username: "Nahu",
@@ -41,8 +39,7 @@ export const publicacionesArtesania = [
   },
   {
     id: 5,
-    imagenProducto:
-      "https://cdn.forbes.com.mx/2014/08/Cortesia-Artesanos-Mexico.jpg",
+    imagenProducto: "https://cdn.forbes.com.mx/2014/08/Cortesia-Artesanos-Mexico.jpg",
     titulo: "Pintura al óleo",
     precio: 200,
     username: "Tomi",
@@ -61,8 +58,7 @@ export const publicacionesArtesania = [
   },
   {
     id: 7,
-    imagenProducto:
-      "https://cdn.forbes.com.mx/2014/08/Cortesia-Artesanos-Mexico.jpg",
+    imagenProducto: "https://cdn.forbes.com.mx/2014/08/Cortesia-Artesanos-Mexico.jpg",
     titulo: "Cestería tradicional",
     precio: 60,
     username: "Eduardo",
@@ -71,8 +67,7 @@ export const publicacionesArtesania = [
   },
   {
     id: 8,
-    imagenProducto:
-      "https://i.pinimg.com/originals/2b/6c/88/2b6c88efb45d2ea946daf216c0a22b55.jpg",
+    imagenProducto: "https://i.pinimg.com/originals/2b/6c/88/2b6c88efb45d2ea946daf216c0a22b55.jpg",
     titulo: "Collares de piedras",
     precio: 25,
     username: "Enzo",
@@ -81,8 +76,7 @@ export const publicacionesArtesania = [
   },
   {
     id: 9,
-    imagenProducto:
-      "https://cdn.forbes.com.mx/2014/08/Cortesia-Artesanos-Mexico.jpg",
+    imagenProducto: "https://cdn.forbes.com.mx/2014/08/Cortesia-Artesanos-Mexico.jpg",
     titulo: "Cuadros en acuarela",
     precio: 150,
     username: "Sofi",
