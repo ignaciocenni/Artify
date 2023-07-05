@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { validate } from "./validate";
 import Link from "next/link";
+import GoogleLogin from "@/components/google";
 
 export default function page() {
   const [form, setForm] = useState({
@@ -84,6 +85,11 @@ export default function page() {
               Cuenta Nueva
             </button >
           </Link>
+        </div>
+        <br />
+        <br />        
+        <div >
+          <GoogleLogin/>
         </div>
       </form>
 
