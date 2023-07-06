@@ -1,15 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const Slice = createSlice({
-    name:'valores',
-    initialState:{
-        nombre:'hernan',
+    name: 'valores',
+    initialState: {
+        nombre: [],
+        
     },
-    reducers:{
-        rename: (state, action) =>{
-            state.nombre= action.payload;
+
+    reducers: {
+        GET_INFO: (state, action) => {
+            state.nombre = [action.payload];
         }
     }
 })
 
-export const {rename} = Slice.actions
+export const { GET_INFO } = Slice.actions
