@@ -12,7 +12,7 @@ const allUsers = async () => {
 };
 
 const addUser = async (name, email, password, rol) => {
-  if (!name || !email || !password || !rol) throw new Error("Missing arguments");
+  if (!name || !email || !password) throw new Error("Missing arguments");
 
   const searchedUser = await prisma.User.findFirst({ where: { email } });
   if (searchedUser === null) {
@@ -29,6 +29,4 @@ const addUser = async (name, email, password, rol) => {
   } else throw new Error("User already exists");
 };
 
-
-
-export { allUsers, addUser};
+export { allUsers, addUser };
