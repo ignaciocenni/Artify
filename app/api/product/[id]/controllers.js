@@ -5,6 +5,9 @@ const getProduct = async (id) => {
     where: {
       id: id,
     },
+    include: {
+      reviews: true,
+    },
   });
   if (!searchedUser) throw new Error("Product doesn't exist");
   return searchedUser;

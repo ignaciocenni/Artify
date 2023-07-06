@@ -1,13 +1,33 @@
 import prisma from "../db/client";
 
 const getAllProducts = async () => {
-  const response = await prisma.Product.findMany();
+  const response = await prisma.Product.findMany({
+    include: {
+      reviews: true,
+    },
+  });
   if (!response.length) throw new Error("There are not product");
   return response;
 };
 
-const addProduct = async (name, description, price, stock, image, userId, categoryId) => {
-  if (!name || !description || !price || !stock || !image || !userId || !categoryId)
+const addProduct = async (
+  name,
+  description,
+  price,
+  stock,
+  image,
+  userId,
+  categoryId
+) => {
+  if (
+    !name ||
+    !description ||
+    !price ||
+    !stock ||
+    !image ||
+    !userId ||
+    !categoryId
+  )
     throw new Error("Missing arguments");
 
   const newProduct = await prisma.Product.create({
