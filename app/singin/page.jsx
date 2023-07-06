@@ -1,22 +1,37 @@
 "use client";
 
 import { useState } from "react";
-import { validate } from "../validate";
+import { validate } from "../login/validate";
 import Link from "next/link";
+import axios from "axios";
 
+const postUser = async (form) =>{
+ try {
+   const response = await axios.post("http://localhost:3000/api/users", form)
+   console.log(response.data);
+ } catch (error) {
+    console.log(error.message);
+ }
+}
 export default function page() {
-  const [form, setForm] = useState({
+    
+
+    const [form, setForm] = useState({
     email: "",
     password: "",
     name: "",
-  });
+    rol: "USER"
+    });
+  
   const [errors, setErrors] = useState({
     email: "",
     password: "",
   });
 
   const handleClick = () => {
-    alert("redirecciona a /setCategories y hace dispatch a create user");
+    event.preventDefault()
+    postUser(form)
+    console.log("creado con exito");
   };
 
   const handleChange = (event) => {
@@ -25,7 +40,7 @@ export default function page() {
 
   return (
     <div className=" text-center h-[100vh] grid justify-center items-center">
-      <form className="">
+      <form>
         <h1 className="font-semibold text-3x1">
           Porfavor ingrese los datos solicitados!
         </h1>
@@ -41,6 +56,15 @@ export default function page() {
             value={form.email}
           />
         </div>
+        <div className="mb-4">
+
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username"
+            type="text"
+            placeholder="Nombre y Apellido"
+            onChange={handleChange}
+            name="name"
+            value={form.name} />
+        </div>
         <div className="mb-6">
           <input
             className="shadow appearance-none border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline border-ra rounded-md"
@@ -53,33 +77,13 @@ export default function page() {
           />
           {/* <p className="text-xs italic">Please choose a password.</p> */}
         </div>
-        <div className="mb-4">
-
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username"
-            type="text"
-            placeholder="Nombre y Apellido"
-            onChange={handleChange}
-            name="name"
-            value={form.name} />
-        </div>
-        <div className="mb-4">
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username"
-            type="text"
-            placeholder="Nombre de Usuario"
-            onChange={handleChange}
-            name="userName"
-            value={form.userName} />
-        </div>
         <div className="flex items-center justify-center">
-          <Link href="/login/singin/userData">
             <button
               className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px]"
-              type="submit"
               onClick={handleClick}
             >
               Continuar
             </button>
-          </Link>
         </div>
       </form>
       <p className="text-center text-gray-500 text-xs">

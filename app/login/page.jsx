@@ -67,7 +67,7 @@ export default function page() {
         </a>
 
         <div className=" mt-5 flex items-center justify-center" >
-          <Link href="/login/singin">
+          <Link href="/singin">
           <button className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px]"
             type="submit"
             onClick={handleCreateCount}
