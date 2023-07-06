@@ -3,12 +3,11 @@ import Link from "next/link";
 
 export default function Card(props) {
   const { id, image, user, price, title, userImage } = props
-  console.log(id);
   return (
     <div className="object-cover flex flex-col justify-center align-first grid-cols-1 px-3 py-3 ">
       <div className="relative h-[300px]">
         <Link
-          href="/detail"
+          href={`/detail/${id}`}
         >
           <Image
             id="id"
