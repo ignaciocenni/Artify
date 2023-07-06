@@ -25,9 +25,11 @@ export async function PUT(request) {
   }
 }
 
-export async function GET() {
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const name = searchParams.get("name");
   try {
-    const response = await getAllProducts();
+    const response = await getAllProducts(name);
     return NextResponse.json(response, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 404 });

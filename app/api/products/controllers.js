@@ -1,12 +1,27 @@
 import prisma from "../db/client";
 
-const getAllProducts = async () => {
+const getAllProducts = async (name) => {
+  if (name) {
+    const response = await prisma.Product.findMany({
+      where: {
+        name: {
+          contains: name,
+          mode: "insensitive",
+        },
+      },
+      include: {
+        reviews: true,
+      },
+    });
+    if (!response.length) throw new Error("Not found");
+    return response;
+  }
   const response = await prisma.Product.findMany({
     include: {
       reviews: true,
     },
   });
-  if (!response.length) throw new Error("There are not product");
+  if (!response.length) throw new Error("Products not found");
   return response;
 };
 
