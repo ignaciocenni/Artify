@@ -7,6 +7,17 @@ const getProduct = async (id) => {
     },
     include: {
       reviews: true,
+      category: {
+        select: {
+          name: true,
+        },
+      },
+      user: {
+        select: {
+          email: true,
+          name: true,
+        },
+      },
     },
   });
   if (!searchedUser) throw new Error("Product doesn't exist");
