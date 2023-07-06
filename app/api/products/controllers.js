@@ -28,7 +28,8 @@ const getAllProducts = async (name) => {
 const addProduct = async (name, description, price, stock, image, userId, categoryId) => {
   if (!name || !description || !price || !stock || !image || !userId || !categoryId)
     throw new Error("Missing arguments");
-  const nameRegex = /^[a-zA-Z0-9\s.,]*$/;
+  const nameRegex = /^[a-zA-Z0-9\s.,áéíóúÁÉÍÓÚñÑ]*$/;
+
   if (!nameRegex.test(name)) throw new Error("The must be a normal name...");
   if (description.length <= 12) throw new Error("The description must be more of 12 letters.");
   if (price <= 0) throw new Error("Price cannot be less than or equal to $0");
