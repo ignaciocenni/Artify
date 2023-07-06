@@ -15,16 +15,35 @@ import { publicacionesArtesania } from "../../../components/databs.js";
 
 const getDetail = async (id) => {
   const response = await fetch(`http://localhost:3000/api/products/${id}`);
-  
-   const data = await response.json();
-   return data;
+
+  const data = await response.json();
+  return data;
 };
+const data = {
+  "id": 30,
+  "name": "Pintura Mona Lisa Copia",
+  "description": "Product description that is more than 12 letters",
+  "price": 19.99,
+  "stock": 10,
+  "image": "https://example.com/image.jpg",
+  "createdAt": "2023-07-06T20:48:33.586Z",
+  "updatedAt": "2023-07-06T20:48:33.586Z",
+  "userId": 6,
+  "categoryId": 2,
+  "reviews": [],
+  "category": {
+    "name": "madera"
+  },
+  "user": {
+    "email": "enzo@google.com",
+    "name": "enzo"
+  }
+}
 
+const Detail = async ({ params }) => {
+  const data = await getDetail(params.id);
+ // const rating = 
 
-const Detail = async ({params}) => {
- const data = await getDetail(params.id);
- 
-  
   return (
     <div className="flex flex-col justify-center items-center content-center gap-14">
       <div className="flex items-start justify-center">
@@ -35,7 +54,7 @@ const Detail = async ({params}) => {
 
           <Image
             className="rounded-3xl"
-            src={data.image}
+            src={''}
             alt="imagen publicacion"
             width={600}
             height={50}
@@ -45,12 +64,12 @@ const Detail = async ({params}) => {
         </div>
         <div className="py-5 px-3 flex flex-col items-start gap-4">
           <div className="flex flex-wrap items-center content-center gap-1">
-           {data.category.map((cat)=>{
-           return <div key={cat} className="flex py-1 px-5 items-center content-center gap-2 rounded-2xl bg-[var(--background-sec)] text-center font-semibold text-base">
-              {cat}
+
+
+            <div className="flex py-1 px-5 items-center content-center gap-2 rounded-2xl bg-[var(--background-sec)] text-center font-semibold text-base">
+              {data.category.name}
             </div>
-})
-           }
+
           </div>
 
           <div className="flex gap-3">
@@ -59,11 +78,12 @@ const Detail = async ({params}) => {
           </div>
 
           <div className="flex content-center items-center gap-1">
-            <Image src={star} alt="favorite" />
+            {/* <Image src={star} alt="favorite" />
             <Image src={star} alt="favorite" />
             <Image src={star} alt="favorite" />
             <Image src={starHalf} alt="favorite" />
-            <Image src={starBorder} alt="favorite" />
+            <Image src={starBorder} alt="favorite" /> */}
+           
           </div>
 
           <div className="flex items-center gap-2">
@@ -96,7 +116,7 @@ const Detail = async ({params}) => {
                     height={40}
                   />
                   <h1 className="font-medium hover:underline">
-                    {publicacionesArtesania[0].username}
+                    {data.user.name}
                   </h1>
                 </div>
               </Link>
@@ -136,7 +156,7 @@ const Detail = async ({params}) => {
         </div>
         <div>
           <h1 className="font-semibold">Ultimos realizadas</h1>
-          {data.reviews.map((rev)=>{
+          {data.reviews.map((rev) => {
             return <div key={rev.id}>
               <h3>Rating :{rev.rating}</h3>
               <p>{rev.comment}</p>
