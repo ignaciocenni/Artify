@@ -2,8 +2,7 @@ import React from "react";
 import Card from "./Card";
 import { publicacionesArtesania } from "./databs";
 export default function Cards({data}) {
-  const info = data[0]
-  console.log(info);
+  const info = publicacionesArtesania
   return (
     <div className="grid grid-cols-4 w-1/2 px-2">
       {info.map((resp) => (

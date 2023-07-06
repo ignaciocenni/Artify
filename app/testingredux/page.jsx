@@ -16,8 +16,8 @@ export default function Page() {
       dispacht(GET_INFO(serverresponse))
     }
     prueba()
-  }, [])
-  console.log();
+      dispacht(GET_INFO(serverresponse))
+  }, [dispacht])
 
   return (
     <div className=" z-10">
