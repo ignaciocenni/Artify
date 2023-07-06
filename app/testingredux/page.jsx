@@ -1,21 +1,28 @@
 'use client'
 import { useDispatch, useSelector } from "react-redux";
-import { rename } from "@/store/slice";
-import {useState} from 'react'
+import { GET_INFO } from "@/store/slice";
+import { useEffect } from "react"
+import Cards from "@/components/Cards";
+
+
 export default function Page() {
-   const [newValue, setnewValue] = useState('')
-    const nombre = useSelector(state => state.valores.nombre)
-    const dispacht= useDispatch();
-    const handlerChange=()=>{
-      dispacht(rename(newValue)) ; 
-      setnewValue('')
+  const nombre = useSelector(state => state.valores.nombre)
+  const dispacht = useDispatch();
+  useEffect(() => {
+    async function prueba() {
+      const serverresponse = await fetch("http://localhost:3000/api/product")
+        .then(Response => Response.json())
+        .then((data)=>data)
+      dispacht(GET_INFO(serverresponse))
     }
-    return (
-      <div className=" z-10">
-        {nombre}
-        <br />
-        <input type="text" value={newValue} onChange={event =>setnewValue(event.target.value)} />
-        <button onClick={handlerChange}>cambiar</button>
-      </div>
-    );
-  }
+    prueba()
+  }, [])
+  console.log();
+
+  return (
+    <div className=" z-10">
+  {    <Cards
+      data={nombre}/> }
+    </div>
+  );
+}
