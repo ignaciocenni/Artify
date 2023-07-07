@@ -14,7 +14,7 @@ const postUser = async (form) => {
     console.log(error.message);
   }
 };
-export default function page() {
+export default function SignInPage() {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -38,9 +38,8 @@ export default function page() {
   };
 
   return (
-    
     <div>
-      <NavBarSecundary/>
+      <NavBarSecundary />
       <div className=" text-center grid justify-center items-center mt-10">
         <form className="w-96 flex flex-col gap-5">
           <h1 className="font-semibold text-3xl mb-5">Crear cuenta</h1>
@@ -81,15 +80,14 @@ export default function page() {
           <div className="flex items-center justify-center">
             <button
               className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-lg  text-white font-bold py-3 px-3 rounded-xl focus:outline-none focus:shadow-outline w-full"
-              onClick={handleClick}>
+              onClick={handleClick}
+            >
               Continuar
             </button>
           </div>
         </form>
       </div>
-      <p className="mt-56 text-center text-gray-500 text-xs">
-        Apify. All rights reserved.
-      </p>
+      <p className="mt-56 text-center text-gray-500 text-xs">Apify. All rights reserved.</p>
     </div>
   );
 }

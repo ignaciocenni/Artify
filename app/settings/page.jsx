@@ -5,8 +5,8 @@ export default function Settings() {
   return (
     <div>
       <NavBarSecundary />
-      <section >
-        <SlideBarSettings/>
+      <section>
+        <SlideBarSettings />
       </section>
     </div>
   );
