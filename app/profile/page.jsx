@@ -1,9 +1,12 @@
+"use client"
 import Cards from "@/Components/Cards";
 import NavBar from "@/Components/NavBar";
 import Image from "next/image";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 export default function Profile() {
+  const products = useSelector(state => state.valores.nombre);
   return (
     <div className="z-10">
       <NavBar />
@@ -29,7 +32,7 @@ export default function Profile() {
         </div>
       </div>
       <div className="flex justify-center items-center w-full">
-        <Cards />
+        <Cards products={products}/>
       </div>
     </div>
   );
