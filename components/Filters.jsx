@@ -1,5 +1,5 @@
 "use client";
-import { countrie, price } from "@/store/slice";
+import { countrie, price, category } from "@/store/slice";
 import { useState } from "react";
 import { useDispatch } from "react-redux"
 
@@ -52,13 +52,13 @@ export default function Filters({ products }) {
   };
 
   const clickHandler = () => {
-    console.log(filters);
+    dispatch(category(filters))
   };
 
   return (
     <div className="flex flex-col items-start w-[25%] py-2 px-5 w">
       <div className="gap-1 items-start">
-        <h1 className="text-2xl font-semibold">Filtros</h1>
+        <h1 className="text-2xl font-semibold">Filters</h1>
         <div>
           <button
             className=" py-2 relative flex justify-center items-center bg-white  focus:outline-none  text-gray-600 rounded focus:ring ring-gray-200 group"
@@ -116,8 +116,13 @@ export default function Filters({ products }) {
             onChange={handlerImput}
             style={{ borderRadius: "4px" }}
           />
-          <button onClick={handleBuscar}>
-            Buscar
+
+        </div>
+        <div className="flex justify-center items-center content-center">
+          <button
+            className=" mt-4 overflow-hidden hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-xl text-xs font-bold px-6 h-11"
+            onClick={handleBuscar}>
+            Aplicar
           </button>
         </div>
       </div>
@@ -125,7 +130,7 @@ export default function Filters({ products }) {
       <hr />
 
       <div className="flex flex-col">
-        <h1 className="text-2xl font-semibold">Categorias</h1>
+        <h1 className="text-2xl font-semibold">Categories</h1>
         {Categorys.map((cat) => (
           <button
             key={cat}
@@ -139,12 +144,13 @@ export default function Filters({ products }) {
         ))}
       </div>
       <div className="flex justify-center items-center content-center">
-        <button
-          className=" mt-4 overflow-hidden hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-xl text-xs font-bold px-6 h-11"
-          onClick={clickHandler}>
-          Aplicar
-        </button>
-      </div>
+          <button
+            className=" mt-4 overflow-hidden hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-xl text-xs font-bold px-6 h-11"
+            onClick={clickHandler}>
+            Aplicar
+          </button>
+        </div>
+
     </div>
   );
 }
