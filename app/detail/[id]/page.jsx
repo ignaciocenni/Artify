@@ -1,37 +1,49 @@
+"use client";
 
 import close from "../../../public/images/close.svg";
 import flechaIzq from "../../../public/images/flecha_izquierda.svg";
 import flechaDer from "../../../public/images/flecha_derecha.svg";
-import favorite from "../../../public/images/favorite_fill.svg";
+
 import star from "../../../public/images/star.svg";
 import starHalf from "../../../public/images/star_half.svg";
 import starBorder from "../../../public/images/star_border.svg";
 import user from "../../../public/images/me.png";
 import message from "../../../public/images/message.svg";
 import Link from "next/link";
-
 import Image from "next/image";
 import { publicacionesArtesania } from "../../../components/databs.js";
+import Heart from "@/components/Heart";
 
 const getDetail = async (id) => {
   const response = await fetch(`http://localhost:3000/api/products/${id}`);
-  
-   const data = await response.json();
-   return data;
+  const data = await response.json();
+  return data;
 };
 
+const Detail = async ({ params }) => {
+  const { id } = params;
+  const data = await getDetail(id);
 
-const Detail = async ({params}) => {
- const data = await getDetail(params.id);
- 
-  
   return (
     <div className="flex flex-col justify-center items-center content-center gap-14">
       <div className="flex items-start justify-center">
-        <Image className="absolute top-2 left-2" src={close} alt="close" width={50} height={50} />
+        <Link href={"/"}>
+          <Image
+            className="absolute top-2 left-2"
+            src={close}
+            alt="close"
+            width={50}
+            height={50}
+          />
+        </Link>
 
         <div className="flex py-5 items-center">
-          <Image src={flechaIzq} alt="flecha izquierda" width={50} height={50} />
+          <Image
+            src={flechaIzq}
+            alt="flecha izquierda"
+            width={50}
+            height={50}
+          />
 
           <Image
             className="rounded-3xl"
@@ -43,19 +55,19 @@ const Detail = async ({params}) => {
 
           <Image src={flechaDer} alt="flecha derecha" width={50} height={50} />
         </div>
+
         <div className="py-5 px-3 flex flex-col items-start gap-4">
           <div className="flex flex-wrap items-center content-center gap-1">
-           {data.category.map((cat)=>{
-           return <div key={cat} className="flex py-1 px-5 items-center content-center gap-2 rounded-2xl bg-[var(--background-sec)] text-center font-semibold text-base">
-              {cat}
+            <div className="flex py-1 px-5 items-center content-center gap-2 rounded-2xl bg-[var(--background-sec)] text-center font-semibold text-base">
+              {data.category.name[0].toUpperCase() +
+                data.category.name.slice(1)}
             </div>
-})
-           }
           </div>
 
           <div className="flex gap-3">
             <h1 className="font-bold text-3xl">{data.name}</h1>
-            <Image src={favorite} alt="favorite" />
+
+            <Heart />
           </div>
 
           <div className="flex content-center items-center gap-1">
@@ -71,14 +83,14 @@ const Detail = async ({params}) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <h1 className="text-sm font-light">Publicado hoy en Córdoba, Córdoba</h1>
+            <h1 className="text-sm font-light">
+              Publicado hoy en Córdoba, Córdoba
+            </h1>
           </div>
 
           <div className="flex flex-col py-3 gap-2 my-0 px-0 w-[524px] h-[363px]">
             <h1 className="font-medium text-xl">Descripción del vendedor</h1>
-            <p className="font-light">
-              {data.description}
-            </p>
+            <p className="font-light">{data.description}</p>
           </div>
 
           <div className="content-center items-center gap-5 py-3">
@@ -89,14 +101,14 @@ const Detail = async ({params}) => {
               <Link href="/profile">
                 <div className="flex flex-row items-center gap-3 justify-centr">
                   <Image
-                    className="rounded-r-full"
+                    className="rounded-full"
                     src={user}
                     alt="imagen publicacion"
                     width={40}
                     height={40}
                   />
                   <h1 className="font-medium hover:underline">
-                    {publicacionesArtesania[0].username}
+                    {data.user.name}
                   </h1>
                 </div>
               </Link>
@@ -128,25 +140,24 @@ const Detail = async ({params}) => {
 
             <button
               // onClick={handlerText}
-              className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white text-xs rounded-2xl"
-            >
+              className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white text-xs rounded-2xl">
               <h1 className="text-xs font-extrabold px-4">Comentar</h1>
             </button>
           </div>
         </div>
         <div>
           <h1 className="font-semibold">Ultimos realizadas</h1>
-          {data.reviews.map((rev)=>{
-            return <div key={rev.id}>
-              <h3>Rating :{rev.rating}</h3>
-              <p>{rev.comment}</p>
-            </div>
-          })
-
-          }
+          {data.reviews.map((rev) => {
+            return (
+              <div key={rev.id}>
+                <h3>Rating :{rev.rating}</h3>
+                <p>{rev.comment}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
   );
-}
+};
 export default Detail;
