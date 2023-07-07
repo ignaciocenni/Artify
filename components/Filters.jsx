@@ -1,10 +1,14 @@
 "use client";
+import { countrie, price } from "@/store/slice";
 import { useState } from "react";
+import { useDispatch } from "react-redux"
+
 
 const Cities = ["Buenos Aires", "Cordoba", "Mexico", "Chile", "Salta"];
 const Categorys = ["Hogar", "Accesorios", "Madera", "Reciclado", "Natural"];
 
-export default function Filters() {
+export default function Filters({ products }) {
+  const dispatch = useDispatch()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [filters, setFilters] = useState({
     city: "",
@@ -18,8 +22,8 @@ export default function Filters() {
   };
 
   const handleCitySelect = (city) => {
-    setFilters({ ...filters, city });
-    setIsDropdownOpen(false);
+    console.log(city);
+    dispatch(countrie(city))
   };
 
   const handlerImput = (event) => {
@@ -27,6 +31,11 @@ export default function Filters() {
     const value = event.target.value;
     setFilters({ ...filters, [property]: value });
   };
+  const handleBuscar = () => {
+    const min = filters.min
+    const max = filters.max
+    dispatch(price([min, max]))
+  }
 
   const handleCategorySelect = (category) => {
     if (filters.category.includes(category)) {
@@ -70,9 +79,8 @@ export default function Filters() {
               </svg>
             </span>
             <div
-              className={`absolute ${
-                isDropdownOpen ? "block" : "hidden"
-              } top-full min-w-full w-max bg-white shadow-md mt-1 rounded z-10`}>
+              className={`absolute ${isDropdownOpen ? "block" : "hidden"
+                } top-full min-w-full w-max bg-white shadow-md mt-1 rounded z-10`}>
               <ul className="text-left border rounded">
                 {Cities.map((city) => (
                   <li
@@ -108,6 +116,9 @@ export default function Filters() {
             onChange={handlerImput}
             style={{ borderRadius: "4px" }}
           />
+          <button onClick={handleBuscar}>
+            Buscar
+          </button>
         </div>
       </div>
 
@@ -119,11 +130,10 @@ export default function Filters() {
           <button
             key={cat}
             onClick={() => handleCategorySelect(cat)}
-            className={`font-semibold flex items-center rounded-3xl ${
-              filters.category.includes(cat)
-                ? "bg-[var(--background-sec)] text-[var(--detail)] mx-1 mt-2 px-5 py-1"
-                : "bg-[var(--detail)] text-white mx-1 mt-2 px-5 py-1"
-            } cursor-pointer inline-block`}>
+            className={`font-semibold flex items-center rounded-3xl ${filters.category.includes(cat)
+              ? "bg-[var(--background-sec)] text-[var(--detail)] mx-1 mt-2 px-5 py-1"
+              : "bg-[var(--detail)] text-white mx-1 mt-2 px-5 py-1"
+              } cursor-pointer inline-block`}>
             {cat} {filters.category.includes(cat) && "x"}
           </button>
         ))}
