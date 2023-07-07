@@ -56,23 +56,4 @@ const addProduct = async (name, description, price, stock, image, userId, catego
   return newProduct;
 };
 
-const updateProduct = async (id, name, description, price, stock, image) => {
-  if (!id && !name && !description && !price && !stock && !image)
-    throw new Error("Missing argument");
-
-  const product = await prisma.product.update({
-    where: {
-      id: id,
-    },
-    data: {
-      name: name,
-      description: description,
-      price: price,
-      stock: stock,
-      image: image,
-    },
-  });
-  return product;
-};
-
-export { getAllProducts, addProduct, updateProduct };
+export { getAllProducts, addProduct };
