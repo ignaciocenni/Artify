@@ -19,7 +19,7 @@ const getDetail = async (id) => {
 
 
 const Detail = async ({ params}) => {
-  console.log(params.id);
+  const id = params.id
   const data = await getDetail(id);
   const amount = data.reviews.map((e) => e.rating).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
   const averange = amount / data.reviews.length
