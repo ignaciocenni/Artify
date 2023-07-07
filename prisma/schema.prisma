@@ -1,24 +1,33 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider          = "postgresql"
-  url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+  url               = env("POSTGRES_PRISMA_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
-  name     String
-  email    String    @unique
-  password String
-  rol      Rol       @default(USER)
-  products Product[] // Relación con el modelo Product
+  id         String    @id @default(uuid())
+  name       String
+  lastName   String
+  email      String    @unique
+  password   String
+  image      String    @default("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png")
+  aboutMe    String    @default("")
+  province   Province  @relation(fields: [provinceId], references: [id])
+  products   Product[]
+  interests  String[]  @default([])
+  provinceId Int
+  rol        Rol       @default(USER)
+}
+
+model Province {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  users User[]
 }
 
 model Product {
@@ -28,13 +37,13 @@ model Product {
   price       Float
   stock       Int
   image       String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
   user        User     @relation(fields: [userId], references: [id]) // Relación con el modelo User
-  userId      Int // Campo para la relación con el modelo User
+  userId      String // Campo para la relación con el modelo User
   reviews     Review[] // Relación con el modelo Review
   categoryId  Int // Campo para la relación con el modelo Category
   category    Category @relation(fields: [categoryId], references: [id]) // Relación con el modelo Category
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Review {
@@ -42,15 +51,15 @@ model Review {
   comment   String
   rating    Int
   createdAt DateTime @default(now())
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade) // Relación con el modelo Product
-  productId Int // Campo para la relación con el modelo Product
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int
 }
 
 model Category {
   id          Int       @id @default(autoincrement())
   name        String
   description String
-  products    Product[] // Relación con el modelo Product
+  products    Product[]
 }
 
 enum Rol {
