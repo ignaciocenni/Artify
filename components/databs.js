@@ -9,7 +9,8 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T22:00:04.478Z",
     "updatedAt": "2023-07-07T00:50:52.098Z",
     "userId": 6,
-    "categoryId": 2,
+    "categoryId": [],
+    "countrie":"Mexico",
     "reviews": [
       
     ]
@@ -24,7 +25,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T22:00:13.845Z",
     "updatedAt": "2023-07-07T00:50:56.816Z",
     "userId": 6,
-    "categoryId": 2,
+    "categoryId": [],
     "reviews": [
       
     ]
@@ -39,7 +40,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T22:01:15.420Z",
     "updatedAt": "2023-07-07T00:51:35.815Z",
     "userId": 6,
-    "categoryId": 2,
+    "categoryId": [],
     "reviews": [
       
     ]
@@ -54,7 +55,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T22:01:25.471Z",
     "updatedAt": "2023-07-07T00:51:41.535Z",
     "userId": 6,
-    "categoryId": 2,
+    "categoryId": [],
     "reviews": [
       
     ]
@@ -69,7 +70,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T22:02:07.795Z",
     "updatedAt": "2023-07-07T00:51:46.162Z",
     "userId": 6,
-    "categoryId": 2,
+    "categoryId": [],
     "reviews": [
       
     ]
@@ -84,7 +85,8 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T22:02:16.188Z",
     "updatedAt": "2023-07-07T00:51:50.730Z",
     "userId": 6,
-    "categoryId": 2,
+    "categoryId": [],
+    "countrie":"Mexico",
     "reviews": [
       
     ]
@@ -99,7 +101,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T23:53:16.132Z",
     "updatedAt": "2023-07-07T00:51:56.413Z",
     "userId": 15,
-    "categoryId": 2,
+    "categoryId": [],
     "reviews": [
       
     ]
@@ -114,7 +116,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-07T00:16:49.719Z",
     "updatedAt": "2023-07-07T00:54:00.850Z",
     "userId": 15,
-    "categoryId": 2,
+    "categoryId": [],
     "reviews": [
       
     ]
@@ -129,7 +131,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T21:53:36.772Z",
     "updatedAt": "2023-07-07T01:01:22.571Z",
     "userId": 6,
-    "categoryId": 2,
+    "categoryId": [],
     "reviews": [
       
     ]
@@ -144,7 +146,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-07T03:26:26.962Z",
     "updatedAt": "2023-07-07T03:26:26.962Z",
     "userId": 16,
-    "categoryId": 2,
+    "categoryId": [],
     "reviews": [
       
     ]
@@ -174,7 +176,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-07T00:51:46.193Z",
     "updatedAt": "2023-07-07T00:51:46.193Z",
     "userId": 6,
-    "categoryId": 2,
+    "categoryId": [],
     "reviews": [
       
     ]
@@ -189,7 +191,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T20:48:08.484Z",
     "updatedAt": "2023-07-07T00:58:58.157Z",
     "userId": 6,
-    "categoryId": 2,
+    "categoryId": [],
     "reviews": [
       {
         "id": 8,
@@ -231,7 +233,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T20:53:58.780Z",
     "updatedAt": "2023-07-07T01:01:02.531Z",
     "userId": 5,
-    "categoryId": 2,
+    "categoryId": [],
     "reviews": [
       
     ]
@@ -246,7 +248,8 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T20:48:33.586Z",
     "updatedAt": "2023-07-07T00:59:10.219Z",
     "userId": 6,
-    "categoryId": 2,
+    "categoryId": [],
+    "countrie":"Buenos Aires",
     "reviews": [
       
     ]
@@ -261,7 +264,8 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T20:51:18.708Z",
     "updatedAt": "2023-07-07T00:59:36.045Z",
     "userId": 5,
-    "categoryId": 2,
+    "categoryId": [],
+    "countrie":"Buenos Aires",
     "reviews": [
       
     ]
@@ -276,7 +280,8 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T21:27:10.909Z",
     "updatedAt": "2023-07-07T01:01:07.734Z",
     "userId": 6,
-    "categoryId": 7,
+    "categoryId": [],
+    "countrie":"Mexico",
     "reviews": [
       
     ]
@@ -291,7 +296,8 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T21:41:00.042Z",
     "updatedAt": "2023-07-07T01:01:13.518Z",
     "userId": 6,
-    "categoryId": 7,
+    "categoryId": ["Hogar","Madera","Natural"],
+    "countrie":"Buenos Aires",
     "reviews": [
       
     ]
@@ -306,7 +312,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T21:49:32.491Z",
     "updatedAt": "2023-07-07T01:01:17.986Z",
     "userId": 6,
-    "categoryId": 2,
+    "categoryId": [],
     "reviews": [
       
     ]
@@ -321,7 +327,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T21:57:56.615Z",
     "updatedAt": "2023-07-07T01:01:39.327Z",
     "userId": 6,
-    "categoryId": 2,
+    "categoryId":["Accesorios","Madera","Reciclado"],
     "reviews": [
       
     ]
@@ -336,7 +342,8 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T21:58:28.088Z",
     "updatedAt": "2023-07-07T01:01:43.809Z",
     "userId": 6,
-    "categoryId": 2,
+    "categoryId": [],
+    "countrie":"Mexico",
     "reviews": [
       
     ]
@@ -351,7 +358,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T20:51:47.098Z",
     "updatedAt": "2023-07-07T00:59:41.688Z",
     "userId": 5,
-    "categoryId": 2,
+    "categoryId": ["Natural","Madera","Reciclado"],
     "reviews": [
       
     ]
@@ -366,7 +373,7 @@ export const publicacionesArtesania = [[
     "createdAt": "2023-07-06T20:53:30.330Z",
     "updatedAt": "2023-07-07T00:59:47.226Z",
     "userId": 5,
-    "categoryId": 2,
+    "categoryId":["Madera"],
     "reviews": [
       
     ]
