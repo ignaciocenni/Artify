@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { allUsers, addUser} from "./controllers";
+import { allUsers, addUser } from "./controllers";
 
 export async function GET() {
   try {
@@ -11,13 +11,20 @@ export async function GET() {
 }
 
 export async function POST(request) {
-  const { name, email, password, rol } = await request.json();
+  const { name, password, lastName, email, rol, provinceId } =
+    await request.json();
 
   try {
-    const newUser = await addUser(name, email, password, rol);
+    const newUser = await addUser(
+      name,
+      password,
+      lastName,
+      email,
+      rol,
+      provinceId
+    );
     return NextResponse.json(newUser, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 404 });
   }
 }
-
