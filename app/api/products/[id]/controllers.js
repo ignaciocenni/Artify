@@ -16,6 +16,7 @@ const getProduct = async (id) => {
         select: {
           email: true,
           name: true,
+          image: true,
         },
       },
     },
