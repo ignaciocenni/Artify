@@ -3,13 +3,10 @@ import close from "../../../public/images/close.svg";
 import flechaIzq from "../../../public/images/flecha_izquierda.svg";
 import flechaDer from "../../../public/images/flecha_derecha.svg";
 import favorite from "../../../public/images/favorite_fill.svg";
-import star from "../../../public/images/star.svg";
-import starHalf from "../../../public/images/star_half.svg";
-import starBorder from "../../../public/images/star_border.svg";
 import user from "../../../public/images/me.png";
 import message from "../../../public/images/message.svg";
 import Link from "next/link";
-
+import Stars from "@/components/Stars";
 import Image from "next/image";
 import { publicacionesArtesania } from "../../../components/databs.js";
 
@@ -19,18 +16,47 @@ const getDetail = async (id) => {
   const data = await response.json();
   return data;
 };
-const data = {
-  "id": 30,
-  "name": "Pintura Mona Lisa Copia",
+ const data = {
+  "id": 29,
+  "name": "Collar",
   "description": "Product description that is more than 12 letters",
   "price": 19.99,
   "stock": 10,
-  "image": "https://example.com/image.jpg",
-  "createdAt": "2023-07-06T20:48:33.586Z",
-  "updatedAt": "2023-07-06T20:48:33.586Z",
+  "image": "https://cristaljoyas.com/media/catalog/product/cache/image/700x560/e9c3970ab036de70892d86c6d221abfe/f/c/fcop10105223g_a1.jpg",
+  "createdAt": "2023-07-06T20:48:08.484Z",
+  "updatedAt": "2023-07-07T00:58:58.157Z",
   "userId": 6,
   "categoryId": 2,
-  "reviews": [],
+  "reviews": [
+    {
+      "id": 8,
+      "comment": "hola",
+      "rating": 10,
+      "createdAt": "2023-07-06T23:41:36.439Z",
+      "productId": 29
+    },
+    {
+      "id": 9,
+      "comment": "hfasfa",
+      "rating": 13,
+      "createdAt": "2023-07-06T23:41:50.592Z",
+      "productId": 29
+    },
+    {
+      "id": 10,
+      "comment": "hfasfa",
+      "rating": 1,
+      "createdAt": "2023-07-06T23:41:54.567Z",
+      "productId": 29
+    },
+    {
+      "id": 11,
+      "comment": "hfasfa",
+      "rating": 11,
+      "createdAt": "2023-07-06T23:42:06.742Z",
+      "productId": 29
+    }
+  ],
   "category": {
     "name": "madera"
   },
@@ -41,10 +67,11 @@ const data = {
 }
 
 const Detail = async ({ params }) => {
-  const data = await getDetail(params.id);
- // const rating = 
+ // const data = await getDetail(params.id);
 
-  return (
+ const addition = data.reviews.map((e) => e.rating).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+ const averange = addition / data.reviews.length
+ return (
     <div className="flex flex-col justify-center items-center content-center gap-14">
       <div className="flex items-start justify-center">
         <Image className="absolute top-2 left-2" src={close} alt="close" width={50} height={50} />
@@ -77,12 +104,8 @@ const Detail = async ({ params }) => {
             <Image src={favorite} alt="favorite" />
           </div>
 
-          <div className="flex content-center items-center gap-1">
-            {/* <Image src={star} alt="favorite" />
-            <Image src={star} alt="favorite" />
-            <Image src={star} alt="favorite" />
-            <Image src={starHalf} alt="favorite" />
-            <Image src={starBorder} alt="favorite" /> */}
+          <div >
+           <Stars averange= {averange} />
            
           </div>
 
@@ -156,9 +179,8 @@ const Detail = async ({ params }) => {
         </div>
         <div>
           <h1 className="font-semibold">Ultimos realizadas</h1>
-          {data.reviews.map((rev) => {
+          {data.reviews.length && data.reviews.map((rev) => {
             return <div key={rev.id}>
-              <h3>Rating :{rev.rating}</h3>
               <p>{rev.comment}</p>
             </div>
           })
