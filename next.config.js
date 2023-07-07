@@ -8,6 +8,7 @@ const nextConfig = {
       "media.istockphoto.com",
       "scontent.fcor18-1.fna.fbcdn.net",
       "elmundoinfinito.com",
+      "cristaljoyas.com"
     ],
   },
 };
