@@ -3,16 +3,12 @@
 import close from "../../../public/images/close.svg";
 import flechaIzq from "../../../public/images/flecha_izquierda.svg";
 import flechaDer from "../../../public/images/flecha_derecha.svg";
-
-import star from "../../../public/images/star.svg";
-import starHalf from "../../../public/images/star_half.svg";
-import starBorder from "../../../public/images/star_border.svg";
 import user from "../../../public/images/me.png";
 import message from "../../../public/images/message.svg";
 import Link from "next/link";
 import Image from "next/image";
-import { publicacionesArtesania } from "../../../components/databs.js";
 import Heart from "@/components/Heart";
+import Stars from "@/components/Stars";
 
 const getDetail = async (id) => {
   const response = await fetch(`http://localhost:3000/api/products/${id}`);
@@ -20,10 +16,13 @@ const getDetail = async (id) => {
   return data;
 };
 
-const Detail = async ({ params }) => {
-  const { id } = params;
-  const data = await getDetail(id);
 
+
+const Detail = async ({ params}) => {
+  console.log(params.id);
+  const data = await getDetail(id);
+  const amount = data.reviews.map((e) => e.rating).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  const averange = amount / data.reviews.length
   return (
     <div className="flex flex-col justify-center items-center content-center gap-14">
       <div className="flex items-start justify-center">
@@ -47,7 +46,7 @@ const Detail = async ({ params }) => {
 
           <Image
             className="rounded-3xl"
-            src={data.image}
+             src={data.images} esta comentado por q la imagen rompe
             alt="imagen publicacion"
             width={600}
             height={50}
@@ -71,11 +70,7 @@ const Detail = async ({ params }) => {
           </div>
 
           <div className="flex content-center items-center gap-1">
-            <Image src={star} alt="favorite" />
-            <Image src={star} alt="favorite" />
-            <Image src={star} alt="favorite" />
-            <Image src={starHalf} alt="favorite" />
-            <Image src={starBorder} alt="favorite" />
+           <Stars averange ={ averange}/> 
           </div>
 
           <div className="flex items-center gap-2">
@@ -150,7 +145,6 @@ const Detail = async ({ params }) => {
           {data.reviews.map((rev) => {
             return (
               <div key={rev.id}>
-                <h3>Rating :{rev.rating}</h3>
                 <p>{rev.comment}</p>
               </div>
             );
