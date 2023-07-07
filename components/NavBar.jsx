@@ -100,7 +100,7 @@ const NavBar = () => {
                   </Link>
                 </li>
                 <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link className="flex" href="/">
+                  <Link className="flex" href="/settings">
                     <Image
                       src="/images/controlPanelImage.svg"
                       width={20}
@@ -122,7 +122,7 @@ const NavBar = () => {
                   </Link>
                 </li>
                 <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link className="flex" href="/">
+                  <Link className="flex" href="/settings">
                     <Image
                       src="/images/settingsImage.svg"
                       width={20}
