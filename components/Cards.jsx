@@ -12,7 +12,7 @@ export default function Cards({ products }) {
             key={resp.id}
             id={resp.id}
             image={resp.image}
-            user={resp.user.name}
+            user={`${resp.user.name} ${resp.user.lastName}`}
             price={resp.price}
             title={resp.name}
             userImage={resp.user.image}
