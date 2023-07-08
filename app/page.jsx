@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { GET_INFO } from "@/store/slice";
 import { useEffect, useState } from "react"
 
+
+
 export default function Home() {
   const [error, setError] = useState(null);
   const products = useSelector(state => state.valores.nombre);
@@ -20,9 +22,7 @@ export default function Home() {
               cause: response.status,
             })
           }
-          
           return response.json()
-          
         })
         .then((data) => data)
         .catch((errorInformation) => {
@@ -34,8 +34,7 @@ export default function Home() {
     }
     allProducts()
   }, [])
-  console.log(products, "products");
-console.log(error);
+
   return (
     <div className=" z-10">
       <NavBar />
@@ -46,6 +45,7 @@ console.log(error);
         ) : (
           <Cards products={products} /> // Renderiza el componente Cards
         )}
+
       </div>
     </div>
   );
