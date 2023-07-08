@@ -66,7 +66,7 @@ const Detail = async ({ params }) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <h1 className="text-sm font-light">Publicado hoy en Córdoba, Córdoba</h1>
+            <h1 className="text-sm font-light">{`Publicado hoy en ${data?.user.province.name} `}</h1>
           </div>
 
           <div className="flex flex-col py-3 gap-2 my-0 px-0 w-[524px] h-[363px]">
