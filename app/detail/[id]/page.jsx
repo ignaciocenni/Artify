@@ -16,37 +16,26 @@ const getDetail = async (id) => {
   return data;
 };
 
-
-
-const Detail = async ({ params}) => {
-  const id = params.id
+const Detail = async ({ params }) => {
+  const id = params.id;
   const data = await getDetail(id);
-  const amount = data.reviews.map((e) => e.rating).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-  const averange = amount / data.reviews.length
+  const amount = data.reviews
+    .map((e) => e.rating)
+    .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  const averange = amount / data.reviews.length;
   return (
     <div className="flex flex-col justify-center items-center content-center gap-14">
       <div className="flex items-start justify-center">
         <Link href={"/"}>
-          <Image
-            className="absolute top-2 left-2"
-            src={close}
-            alt="close"
-            width={50}
-            height={50}
-          />
+          <Image className="absolute top-2 left-2" src={close} alt="close" width={50} height={50} />
         </Link>
 
         <div className="flex py-5 items-center">
-          <Image
-            src={flechaIzq}
-            alt="flecha izquierda"
-            width={50}
-            height={50}
-          />
+          <Image src={flechaIzq} alt="flecha izquierda" width={50} height={50} />
 
           <Image
             className="rounded-3xl"
-             src={data.images} esta comentado por q la imagen rompe
+            src={data.image}
             alt="imagen publicacion"
             width={600}
             height={50}
@@ -58,8 +47,7 @@ const Detail = async ({ params}) => {
         <div className="py-5 px-3 flex flex-col items-start gap-4">
           <div className="flex flex-wrap items-center content-center gap-1">
             <div className="flex py-1 px-5 items-center content-center gap-2 rounded-2xl bg-[var(--background-sec)] text-center font-semibold text-base">
-              {data.category.name[0].toUpperCase() +
-                data.category.name.slice(1)}
+              {data.category.name[0].toUpperCase() + data.category.name.slice(1)}
             </div>
           </div>
 
@@ -70,7 +58,7 @@ const Detail = async ({ params}) => {
           </div>
 
           <div className="flex content-center items-center gap-1">
-           <Stars averange ={ averange}/> 
+            <Stars averange={averange} />
           </div>
 
           <div className="flex items-center gap-2">
@@ -78,9 +66,7 @@ const Detail = async ({ params}) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <h1 className="text-sm font-light">
-              Publicado hoy en Córdoba, Córdoba
-            </h1>
+            <h1 className="text-sm font-light">Publicado hoy en Córdoba, Córdoba</h1>
           </div>
 
           <div className="flex flex-col py-3 gap-2 my-0 px-0 w-[524px] h-[363px]">
@@ -102,9 +88,7 @@ const Detail = async ({ params}) => {
                     width={40}
                     height={40}
                   />
-                  <h1 className="font-medium hover:underline">
-                    {data.user.name}
-                  </h1>
+                  <h1 className="font-medium hover:underline">{data.user.name}</h1>
                 </div>
               </Link>
 
@@ -135,7 +119,8 @@ const Detail = async ({ params}) => {
 
             <button
               // onClick={handlerText}
-              className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white text-xs rounded-2xl">
+              className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white text-xs rounded-2xl"
+            >
               <h1 className="text-xs font-extrabold px-4">Comentar</h1>
             </button>
           </div>
