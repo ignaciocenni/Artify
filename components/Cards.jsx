@@ -2,7 +2,7 @@
 import Card from "./Card";
 
 export default function Cards({ products }) {
-  const response = products.slice(0, 1)[0];
+  const response = products
   console.log(response);
   return (
     <div className="grid grid-cols-4 w-1/2 px-2">
