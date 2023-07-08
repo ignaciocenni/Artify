@@ -9,8 +9,8 @@ export const Slice = createSlice({
 
     reducers: {
         GET_INFO: (state, action) => {
-            state.nombre = [action.payload];
-            state.copyProducts = [action.payload];
+            state.nombre = action.payload;
+            state.copyProducts = action.payload;
         },
         price: (state, { type, payload }) => {
             const price = [...state.nombre[0]]
