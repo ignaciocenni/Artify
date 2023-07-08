@@ -16,7 +16,13 @@ const getProduct = async (id) => {
         select: {
           email: true,
           name: true,
+          lastName: true,
           image: true,
+          province: {
+            select: {
+              name: true,
+            },
+          },
         },
       },
     },
