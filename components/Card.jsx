@@ -23,8 +23,8 @@ export default function Card(props) {
         </Link>
       </div>
       <div>
-        <h3 className="text-sm font-medium pt-1">${price}</h3>
-        <h3 className="text-sm font-semibold">{title}</h3>
+        <h3 className="text-sm font-medium pt-1 ">${price}</h3>
+        <h3 className="text-sm font-semibold h-[50px]">{title}</h3>
         <div className="flex">
           <Image
             className="rounded-full"
