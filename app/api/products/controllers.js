@@ -11,6 +11,24 @@ const getAllProducts = async (name) => {
       },
       include: {
         reviews: true,
+        user: {
+          select: {
+            name: true,
+            lastName: true,
+            email: true,
+            image: true,
+            province: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+        category: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
     if (!response.length) throw new Error("Not found");
@@ -19,6 +37,24 @@ const getAllProducts = async (name) => {
   const response = await prisma.Product.findMany({
     include: {
       reviews: true,
+      user: {
+        select: {
+          name: true,
+          lastName: true,
+          email: true,
+          image: true,
+          province: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+      category: {
+        select: {
+          name: true,
+        },
+      },
     },
   });
   if (!response.length) throw new Error("Products not found");
