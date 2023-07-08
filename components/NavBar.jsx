@@ -2,8 +2,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { search } from "../store/slice";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
   const [inputSearch, setInputSearch] = useState("");
@@ -12,13 +15,14 @@ const NavBar = () => {
     setIsOpen(!isOpen);
   };
 
-  const handlerValue = (event) => {
+  const handlerValue = async (event) => {
     const value = event.target.value;
-    setInputSearch(value);
+    const res = await fetch(`http://localhost:3000/api/products?name=${event.target.value}`).then(
+      (res) => res.json()
+    );
+    dispatch(search(res));
   };
-  const handlerText = () => {
-    console.log(inputSearch);
-  };
+  const handlerText = () => {};
 
   return (
     <div className="flex justify-center items-center h-[100px] w-full pt-2.5">
@@ -47,7 +51,8 @@ const NavBar = () => {
           />
           <button
             onClick={handlerText}
-            className="hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-xl text-xs font-bold px-6 h-11">
+            className="hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-xl text-xs font-bold px-6 h-11"
+          >
             <h1 className="">Buscar</h1>
           </button>
         </div>
@@ -62,90 +67,53 @@ const NavBar = () => {
             />
           </Link>
           <div className="relative flex justify-evenly ">
-            <button
-              onClick={toggleDropdown}
-              className="rounded  focus:outline-none focus:ring">
-              <Image
-                src="/images/menuButton.svg"
-                width={40}
-                height={40}
-                alt="menu"
-              />
+            <button onClick={toggleDropdown} className="rounded  focus:outline-none focus:ring">
+              <Image src="/images/menuButton.svg" width={40} height={40} alt="menu" />
             </button>
           </div>
         </div>
-          {isOpen && (
-            <div className="absolute top-0 right-0 w-[20%] bg-white border rounded shadow z-40 ">
-              <ul className="py-1 px-2">
-                <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link className="flex" href="/profile">
-                    <Image
-                      src="/images/userImage.svg"
-                      width={20}
-                      height={20}
-                      alt="icon"
-                    />
-                    <p className="px-7">Perfil</p>
-                  </Link>
-                </li>
-                <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link className="flex" href="/">
-                    <Image
-                      src="/images/pencilImage.svg"
-                      width={20}
-                      height={20}
-                      alt="icon"
-                    />
-                    <p className="px-7">Editar</p>
-                  </Link>
-                </li>
-                <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link className="flex" href="/settings">
-                    <Image
-                      src="/images/controlPanelImage.svg"
-                      width={20}
-                      height={20}
-                      alt="icon"
-                    />
-                    <p className="px-7">Panel de Control</p>
-                  </Link>
-                </li>
-                <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link className="flex" href="/">
-                    <Image
-                      src="/images/lupaImage.svg"
-                      width={20}
-                      height={20}
-                      alt="icon"
-                    />
-                    <p className="px-7">Explorar</p>
-                  </Link>
-                </li>
-                <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link className="flex" href="/settings">
-                    <Image
-                      src="/images/settingsImage.svg"
-                      width={20}
-                      height={20}
-                      alt="icon"
-                    />
-                    <p className="px-7">Configurar</p>
-                  </Link>
-                </li>
-                <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link className="flex" href="/">
-                    <Image
-                      src="/images/leaveSession.svg"
-                      width={20}
-                      height={20}
-                      alt="icon"
-                    />
-                    <p className="px-7">Cerrar Sesiòn</p>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          )}
+        {isOpen && (
+          <div className="absolute top-0 right-0 w-[20%] bg-white border rounded shadow z-40 ">
+            <ul className="py-1 px-2">
+              <li className="px-4 py-2 hover:bg-gray-100">
+                <Link className="flex" href="/profile">
+                  <Image src="/images/userImage.svg" width={20} height={20} alt="icon" />
+                  <p className="px-7">Perfil</p>
+                </Link>
+              </li>
+              <li className="px-4 py-2 hover:bg-gray-100">
+                <Link className="flex" href="/">
+                  <Image src="/images/pencilImage.svg" width={20} height={20} alt="icon" />
+                  <p className="px-7">Editar</p>
+                </Link>
+              </li>
+              <li className="px-4 py-2 hover:bg-gray-100">
+                <Link className="flex" href="/settings">
+                  <Image src="/images/controlPanelImage.svg" width={20} height={20} alt="icon" />
+                  <p className="px-7">Panel de Control</p>
+                </Link>
+              </li>
+              <li className="px-4 py-2 hover:bg-gray-100">
+                <Link className="flex" href="/">
+                  <Image src="/images/lupaImage.svg" width={20} height={20} alt="icon" />
+                  <p className="px-7">Explorar</p>
+                </Link>
+              </li>
+              <li className="px-4 py-2 hover:bg-gray-100">
+                <Link className="flex" href="/settings">
+                  <Image src="/images/settingsImage.svg" width={20} height={20} alt="icon" />
+                  <p className="px-7">Configurar</p>
+                </Link>
+              </li>
+              <li className="px-4 py-2 hover:bg-gray-100">
+                <Link className="flex" href="/">
+                  <Image src="/images/leaveSession.svg" width={20} height={20} alt="icon" />
+                  <p className="px-7">Cerrar Sesiòn</p>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
       </nav>
     </div>
   );
