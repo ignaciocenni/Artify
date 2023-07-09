@@ -27,7 +27,6 @@ export default function Filters({ products }) {
       })
       .then((json) => {
         const names = json.map((province) => province.name);
-        console.log("Array de provincias: ", names);
         setProvinceNames(names);
       });
   }, []);
@@ -97,9 +96,8 @@ export default function Filters({ products }) {
               </svg>
             </span>
             <div
-              className={`absolute ${
-                isDropdownOpen ? "block" : "hidden"
-              } top-full min-w-full w-max bg-white shadow-md mt-1 rounded z-10`}
+              className={`absolute ${isDropdownOpen ? "block" : "hidden"
+                } top-full min-w-full w-max bg-white shadow-md mt-1 rounded z-10`}
             >
               <ul className="text-left border rounded">
                 {provinceNames.length > 0 &&
@@ -157,11 +155,10 @@ export default function Filters({ products }) {
           <button
             key={cat}
             onClick={() => handleCategorySelect(cat)}
-            className={`font-semibold flex items-center rounded-3xl ${
-              filters.category.includes(cat)
+            className={`font-semibold flex items-center rounded-3xl ${filters.category.includes(cat)
                 ? "bg-[var(--background-sec)] text-[var(--detail)] mx-1 mt-2 px-5 py-1"
                 : "bg-[var(--detail)] text-white mx-1 mt-2 px-5 py-1"
-            } cursor-pointer inline-block`}
+              } cursor-pointer inline-block`}
           >
             {cat} {filters.category.includes(cat) && "x"}
           </button>
