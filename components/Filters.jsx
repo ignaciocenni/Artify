@@ -1,5 +1,6 @@
 "use client";
 import { countrie, price, category } from "@/store/slice";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -184,6 +185,15 @@ export default function Filters({ products }) {
           Aplicar
         </button> 
       </div> */}
+       <div className="flex justify-center items-center content-center">
+          <Link href="/post-product">
+          <button
+            className=" mt-4 overflow-hidden hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-xl text-xs font-bold px-6 h-11"
+          >
+            Postear mi producto
+          </button>
+          </Link>
+        </div>
     </div>
   );
 }
