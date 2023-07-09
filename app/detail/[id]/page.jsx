@@ -26,12 +26,20 @@ const Detail = async ({ params }) => {
   return (
     <div className="flex flex-col justify-center items-center content-center gap-14">
       <div className="flex items-start justify-center">
-        <Link href={"/"}>
-          <Image className="absolute top-2 left-2" src={close} alt="close" width={50} height={50} />
+        <Link href={"/"} className="absolute top-2 left-2" >
+          <Image 
+          src={close} 
+          alt="close" 
+          width={50} 
+          height={50} />
         </Link>
 
         <div className="flex py-5 items-center">
-          <Image src={flechaIzq} alt="flecha izquierda" width={50} height={50} />
+          <Image 
+          src={flechaIzq} 
+          alt="flecha izquierda" 
+          width={50} 
+          height={50} />
 
           <Image
             className="rounded-3xl"
@@ -41,7 +49,11 @@ const Detail = async ({ params }) => {
             height={50}
           />
 
-          <Image src={flechaDer} alt="flecha derecha" width={50} height={50} />
+          <Image 
+          src={flechaDer} 
+          alt="flecha derecha" 
+          width={50} 
+          height={50} />
         </div>
 
         <div className="py-5 px-3 flex flex-col items-start gap-4">
@@ -93,7 +105,11 @@ const Detail = async ({ params }) => {
               </Link>
 
               <button className="flex flex-row rounded-2xl shadow-xl py-1 px-3 gap-1 items-center text-[var(--primary)] bg-[var(--secundary)]">
-                <Image width={35} height={35} src={message} alt="boton" />
+                <Image 
+                width={35} 
+                height={35} 
+                src={message} 
+                alt="boton" />
                 <h1 className="text-xs font-bold">Enviar mensaje</h1>
               </button>
             </div>
