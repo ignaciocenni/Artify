@@ -6,7 +6,11 @@ export default function NavBarSecundary() {
   return (
     <nav className="h-[100px] w-full flex justify-between items-start gap-2.5 py-5 px-8">
       <Link href="/">
-        <Image src={logo} alt="logo" />
+        <Image 
+        src={logo} 
+        alt="logo"
+        width={50}
+        height={50} />
       </Link>
 
       <Link href="/">
