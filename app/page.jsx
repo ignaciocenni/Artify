@@ -13,14 +13,11 @@ export default function Home() {
   const products = useSelector((state) => state.valores.products);
   const dispacht = useDispatch();
 
-  useEffect(() => {
-    async function allInfo() {
-      const categoriesResponse = await useFetch("http://localhost:3000/api/category")
-      const serverresponse = await useFetch("http://localhost:3000/api/products")
-      dispacht(GET_INFO(serverresponse));
-      dispacht(GET_CATEGORIES(categoriesResponse));
-    }
-    allInfo();
+  useEffect(async () => {
+    const categoriesResponse = await useFetch("http://localhost:3000/api/category")
+    const serverresponse = await useFetch("http://localhost:3000/api/products")
+    dispacht(GET_INFO(serverresponse));
+    dispacht(GET_CATEGORIES(categoriesResponse));
   }, []);
 
   return (
