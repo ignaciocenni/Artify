@@ -1,8 +1,8 @@
 "use client";
 import { countrie, price, category } from "@/store/slice";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CategoryFilter from "./CategoryFilter";
 
 
 
@@ -52,24 +52,24 @@ export default function Filters({ products }) {
     dispatch(price([min, max]));
   };
   const handleCategorySelect = (event) => {
-    dispatch(category(event.target.value))
+    dispatch(countrie(event.target.value))
 
-    /*     if (filters.category.includes(category)) {
-          setFilters({
-            ...filters,
-            category: filters.category.filter((cat) => cat !== category),
-          });
-        } else {
-          setFilters({
-            ...filters,
-            category: [...filters.category, category],
-          });
-        }
-        console.log([...filters.category]); */
+/*     if (filters.category.includes(category)) {
+      setFilters({
+        ...filters,
+        category: filters.category.filter((cat) => cat !== category),
+      });
+    } else {
+      setFilters({
+        ...filters,
+        category: [...filters.category, category],
+      });
+    }
+    console.log([...filters.category]); */
   };
-  // const clickHandler = () => {
-  //   dispatch(category(filters.name));
-  // };
+  const clickHandler = () => {
+    dispatch(category(filters.name));
+  };
 
   return (
     <div className="flex flex-col items-start w-[25%] py-2 px-5 w">
@@ -116,7 +116,6 @@ export default function Filters({ products }) {
             </div>
           </button>
         </div>
-
         <div className="flex flex-row justify-between relative items-center">
           <input
             className="p-2 w-28 h-9 mt-6 rounded-md"
@@ -150,18 +149,29 @@ export default function Filters({ products }) {
         </div>
       </div>
       <br />
+      <select onChange={handleCategorySelect} >
+        <option selected disabled>Categories</option>
+        <option value="allCategories">All Categories</option>
+        {
+          filterCategories.map((value, index) => (
+            <option key={index}
+              value={value}
+            >{value}
+            </option>
+          )) //debe mapear la respuesta de la api y regresar una <option/> por cada elemnto
+        }
+      </select>
 
-      <CategoryFilter />
       {/*       <div className="flex flex-col">
         <h1 className="text-2xl font-semibold">Categories</h1>
         {filterCategories.map((cat) => (
           <button
-          key={cat}
-          onClick={() => handleCategorySelect(cat)}
-          className={`font-semibold flex items-center rounded-3xl ${filters.category.includes(cat)
-            ? "bg-[var(--background-sec)] text-[var(--detail)] mx-1 mt-2 px-5 py-1"
-            : "bg-[var(--detail)] text-white mx-1 mt-2 px-5 py-1"
-          } cursor-pointer inline-block`}
+            key={cat}
+            onClick={() => handleCategorySelect(cat)}
+            className={`font-semibold flex items-center rounded-3xl ${filters.category.includes(cat)
+                ? "bg-[var(--background-sec)] text-[var(--detail)] mx-1 mt-2 px-5 py-1"
+                : "bg-[var(--detail)] text-white mx-1 mt-2 px-5 py-1"
+              } cursor-pointer inline-block`}
           >
             {cat} {filters.category.includes(cat) && "x"}
           </button>
@@ -175,7 +185,15 @@ export default function Filters({ products }) {
           Aplicar
         </button> 
       </div> */}
-
+       <div className="flex justify-center items-center content-center">
+          <Link href="/post-product">
+          <button
+            className=" mt-4 overflow-hidden hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-xl text-xs font-bold px-6 h-11"
+          >
+            Postear mi producto
+          </button >
+          </Link>
+        </div>
     </div>
   );
 }
