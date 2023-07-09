@@ -70,8 +70,8 @@ const NavBar = () => {
             <button onClick={toggleDropdown} className="rounded  focus:outline-none focus:ring">
               <Image 
               src="/images/menuButton.svg" 
-              width={40} 
-              height={40} 
+              width={50} 
+              height={50}
               alt="menu" />
             </button>
           </div>
