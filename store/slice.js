@@ -3,48 +3,56 @@ import { createSlice } from "@reduxjs/toolkit";
 export const Slice = createSlice({
   name: "valores",
   initialState: {
-    nombre: [],
+    products: [],
     copyProducts: [],
     provinces: [],
+    provincesFilter:[]
   },
 
   reducers: {
     GET_INFO: (state, action) => {
-      state.nombre = action.payload;
+      state.products = action.payload;
       state.copyProducts = action.payload;
+      state.provincesFilter = action.payload;
     },
     GET_PROVINCES: (state, action) => {
       state.provinces = action.payload;
     },
 
     price: (state, { type, payload }) => {
-      const price = [...state.nombre];
+      const price = [...state.products];
       const find = price.filter(function (num) {
         return num.price >= payload[0] && num.price <= payload[1];
       });
-      state.nombre = find;
+      state.products = find;
+      state.provincesFilter= find;
+
     },
 
     countrie: (state, action) => {
-      console.log(action.payload);
-      const countrie = [...state.nombre];
-      console.log("Provincias Redux:", countrie);
+      const countrie = [...state.copyProducts];
       const find = countrie.filter(
         (element) => element.user.province.name === action.payload
       );
       console.log(find);
-      state.nombre = find;
+      state.products = find;
+      state.provincesFilter= find;
     },
 
+
+
+
     category: (state, action) => {
-      const categoria = [...state.products[0]];
+      const categoria = [...state.products];
       const [find] = categoria.filter(
-        (element) => element.categoryId === action.payload.map((city) => city)
+        (element) => element.category.name === action.payload.map((city) => city)
       );
-      state.nombre = [find];
+      state.products = [find];
+      state.provincesFilter= find;
+
     },
     search: (state, { type, payload }) => {
-      state.nombre = payload;
+      state.products = payload;
     },
   },
 });
