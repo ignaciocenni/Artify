@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 
 export default function Profile() {
-  const products = useSelector(state => state.valores.nombre);
+  const products = useSelector(state => state.valores.products);
   return (
     <div className="z-10">
       <NavBar />
