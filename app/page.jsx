@@ -36,7 +36,6 @@ export default function Home() {
   return (
     <div className=" z-10">
       <NavBar />
-      {console.log(products)}
       <div className="flex items-start">
         <Filters />
         {error ? (
