@@ -31,10 +31,13 @@ export const Slice = createSlice({
       state.provincesFilter = find;
     },
     countrie: (state, action) => {
-      const countrie = [...state.provincesFilter];
-      state.products = action.payload === "allCategories"
-        ? countrie
-        : countrie.filter(value => value.category.name.includes(action.payload))
+      const countrie = [...state.copyProducts];
+      const find = countrie.filter(
+        (element) => element.user.province.name === action.payload
+      );
+      console.log(find);
+      state.products = find;
+      state.provincesFilter= find;
     },
     category: (state, action) => {
       const categoria = [...state.provincesFilter];

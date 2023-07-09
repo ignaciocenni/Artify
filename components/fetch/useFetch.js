@@ -1,8 +1,3 @@
-
-import { data } from "autoprefixer";
-
-
-
 export default async function useFetch( url ) {
 
     const response = await fetch(url)
