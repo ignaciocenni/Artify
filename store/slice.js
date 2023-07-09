@@ -6,7 +6,8 @@ export const Slice = createSlice({
     products: [],
     copyProducts: [],
     provinces: [],
-    provincesFilter:[]
+    provincesFilter: [],
+    categories: [],
   },
 
   reducers: {
@@ -18,38 +19,30 @@ export const Slice = createSlice({
     GET_PROVINCES: (state, action) => {
       state.provinces = action.payload;
     },
-
+    GET_CATEGORIES: (state, action) => {
+      state.categories = action.payload
+    },
     price: (state, { type, payload }) => {
       const price = [...state.products];
       const find = price.filter(function (num) {
         return num.price >= payload[0] && num.price <= payload[1];
       });
       state.products = find;
-      state.provincesFilter= find;
-
+      state.provincesFilter = find;
     },
-
     countrie: (state, action) => {
-      const countrie = [...state.copyProducts];
-      const find = countrie.filter(
-        (element) => element.user.province.name === action.payload
-      );
-      console.log(find);
-      state.products = find;
-      state.provincesFilter= find;
+      const countrie = [...state.provincesFilter];
+      state.products = action.payload === "allCategories"
+        ? countrie
+        : countrie.filter(value => value.category.name.includes(action.payload))
     },
-
-
-
-
     category: (state, action) => {
-      const categoria = [...state.products];
-      const [find] = categoria.filter(
+      const categoria = [...state.provincesFilter];
+      const find = categoria.filter(
         (element) => element.category.name === action.payload.map((city) => city)
       );
-      state.products = [find];
-      state.provincesFilter= find;
-
+      state.products = find;
+      state.provincesFilter = find;
     },
     search: (state, { type, payload }) => {
       state.products = payload;
@@ -57,4 +50,4 @@ export const Slice = createSlice({
   },
 });
 
-export const { GET_INFO, countrie, price, category, search } = Slice.actions;
+export const { GET_INFO, GET_CATEGORIES, GET_PROVINCES, countrie, price, category, search } = Slice.actions;
