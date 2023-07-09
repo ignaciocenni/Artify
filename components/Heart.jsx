@@ -14,11 +14,20 @@ export default function Heart() {
     <div>
       {toggle ? (
         <button onClick={handleToggle}>
-          <Image src={favorite} alt="favorite" />
+          <Image 
+          src={favorite} 
+          alt="favorite" 
+          height={30}
+          width={30}/>
         </button>
       ) : (
         <button onClick={handleToggle}>
-          <Image src={favoriteBorder} alt="favorite" />
+          <Image 
+          src={favoriteBorder} 
+          alt="favorite"
+          height={30}
+          width={30}
+           />
         </button>
       )}
     </div>
