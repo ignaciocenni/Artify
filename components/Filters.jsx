@@ -191,7 +191,7 @@ export default function Filters({ products }) {
             className=" mt-4 overflow-hidden hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-xl text-xs font-bold px-6 h-11"
           >
             Postear mi producto
-          </button>
+          </button >
           </Link>
         </div>
     </div>
