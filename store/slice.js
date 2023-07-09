@@ -40,12 +40,11 @@ export const Slice = createSlice({
       state.provincesFilter= find;
     },
     category: (state, action) => {
-      const categoria = [...state.provincesFilter];
-      const find = categoria.filter(
-        (element) => element.category.name === action.payload.map((city) => city)
-      );
-      state.products = find;
-      state.provincesFilter = find;
+      const category = [...state.provincesFilter];
+      state.products = action.payload === "allCategories"
+        ? category
+        : category.filter(value => value.category.name.includes(action.payload))
+      
     },
     search: (state, { type, payload }) => {
       state.products = payload;
