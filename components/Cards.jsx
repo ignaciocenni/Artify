@@ -5,7 +5,7 @@ import Loading from "@/app/loading";
 
 export default function Cards({ products }) {
   const response = products;
-  console.log(response);
+
   return (
     <div className="grid grid-cols-4 w-1/2 px-2">
       {response.length ? (

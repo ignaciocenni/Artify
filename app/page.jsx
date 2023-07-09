@@ -3,8 +3,10 @@ import Filters from "../components/Filters";
 import NavBar from "../components/NavBar";
 import Cards from "../components/Cards";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_INFO } from "@/store/slice";
+import { GET_INFO, GET_CATEGORIES } from "@/store/slice";
 import { useEffect, useState } from "react";
+import useFetch from "@/components/fetch/useFetch";
+
 
 export default function Home() {
   const [error, setError] = useState(null);
@@ -12,31 +14,18 @@ export default function Home() {
   const dispacht = useDispatch();
 
   useEffect(() => {
-    async function allProducts() {
-      const serverresponse = await fetch("http://localhost:3000/api/products")
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Vaya algo salio mal", {
-              cause: response.status,
-            });
-          }
-          return response.json();
-        })
-        .then((data) => data)
-        .catch((errorInformation) => {
-          console.log("Codigo de error;", errorInformation.cause);
-          console.log("Mensaje al usuario:", errorInformation);
-          setError(errorInformation);
-        });
+    async function allInfo() {
+      const categoriesResponse = await useFetch("http://localhost:3000/api/category")
+      const serverresponse = await useFetch("http://localhost:3000/api/products")
       dispacht(GET_INFO(serverresponse));
+      dispacht(GET_CATEGORIES(categoriesResponse));
     }
-    allProducts();
+    allInfo();
   }, []);
 
   return (
     <div className=" z-10">
       <NavBar />
-      {console.log(products)}
       <div className="flex items-start">
         <Filters />
         {error ? (

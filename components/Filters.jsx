@@ -1,12 +1,14 @@
 "use client";
 import { countrie, price, category } from "@/store/slice";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-// const Cities = ["Buenos Aires", "Cordoba", "Mexico", "Chile", "Salta"];
-const Categorys = ["Hogar", "Accesorios", "Madera", "Reciclado", "Natural"];
+
+
 
 export default function Filters({ products }) {
+  const stateCategories = useSelector(state => state.valores.categories)
+  const filterCategories = stateCategories.map((e) => (e.name))
   const dispatch = useDispatch();
   const [provinceNames, setProvinceNames] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -27,7 +29,6 @@ export default function Filters({ products }) {
       })
       .then((json) => {
         const names = json.map((province) => province.name);
-        console.log("Array de provincias: ", names);
         setProvinceNames(names);
       });
   }, []);
@@ -35,12 +36,10 @@ export default function Filters({ products }) {
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-
   const handleCitySelect = (city) => {
     setFilters({ ...filters, city: city });
     dispatch(countrie(city));
   };
-
   const handlerImput = (event) => {
     const property = event.target.name;
     const value = event.target.value;
@@ -51,9 +50,10 @@ export default function Filters({ products }) {
     const max = filters.max;
     dispatch(price([min, max]));
   };
+  const handleCategorySelect = (event) => {
+    dispatch(countrie(event.target.value))
 
-  const handleCategorySelect = (category) => {
-    if (filters.category.includes(category)) {
+/*     if (filters.category.includes(category)) {
       setFilters({
         ...filters,
         category: filters.category.filter((cat) => cat !== category),
@@ -64,10 +64,10 @@ export default function Filters({ products }) {
         category: [...filters.category, category],
       });
     }
+    console.log([...filters.category]); */
   };
-
   const clickHandler = () => {
-    dispatch(category(filters));
+    dispatch(category(filters.name));
   };
 
   return (
@@ -97,9 +97,8 @@ export default function Filters({ products }) {
               </svg>
             </span>
             <div
-              className={`absolute ${
-                isDropdownOpen ? "block" : "hidden"
-              } top-full min-w-full w-max bg-white shadow-md mt-1 rounded z-10`}
+              className={`absolute ${isDropdownOpen ? "block" : "hidden"
+                } top-full min-w-full w-max bg-white shadow-md mt-1 rounded z-10`}
             >
               <ul className="text-left border rounded">
                 {provinceNames.length > 0 &&
@@ -148,33 +147,43 @@ export default function Filters({ products }) {
           </button>
         </div>
       </div>
+      <br />
+      <select onChange={handleCategorySelect} >
+        <option selected disabled>Categories</option>
+        <option value="allCategories">All Categories</option>
+        {
+          filterCategories.map((value, index) => (
+            <option key={index}
+              value={value}
+            >{value}
+            </option>
+          )) //debe mapear la respuesta de la api y regresar una <option/> por cada elemnto
+        }
+      </select>
 
-      <hr />
-
-      <div className="flex flex-col">
+      {/*       <div className="flex flex-col">
         <h1 className="text-2xl font-semibold">Categories</h1>
-        {Categorys.map((cat) => (
+        {filterCategories.map((cat) => (
           <button
             key={cat}
             onClick={() => handleCategorySelect(cat)}
-            className={`font-semibold flex items-center rounded-3xl ${
-              filters.category.includes(cat)
+            className={`font-semibold flex items-center rounded-3xl ${filters.category.includes(cat)
                 ? "bg-[var(--background-sec)] text-[var(--detail)] mx-1 mt-2 px-5 py-1"
                 : "bg-[var(--detail)] text-white mx-1 mt-2 px-5 py-1"
-            } cursor-pointer inline-block`}
+              } cursor-pointer inline-block`}
           >
             {cat} {filters.category.includes(cat) && "x"}
           </button>
         ))}
       </div>
       <div className="flex justify-center items-center content-center">
-        <button
+                <button
           className=" mt-4 overflow-hidden hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-xl text-xs font-bold px-6 h-11"
           onClick={clickHandler}
         >
           Aplicar
-        </button>
-      </div>
+        </button> 
+      </div> */}
     </div>
   );
 }
