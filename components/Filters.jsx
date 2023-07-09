@@ -51,7 +51,7 @@ export default function Filters({ products }) {
     dispatch(price([min, max]));
   };
   const handleCategorySelect = (event) => {
-    dispatch(countrie(event.target.value))
+    dispatch(category(event.target.value))
 
 /*     if (filters.category.includes(category)) {
       setFilters({
