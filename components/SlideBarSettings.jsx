@@ -27,21 +27,33 @@ export default function SlideBarSettings() {
       <Link
         href={"/"}
         className=" w-full px-5 flex flex-row justify-start items-center gap-7">
-        <Image src={explore} alt="explore" width={30} height={30} />
+        <Image 
+        src={explore} 
+        alt="explore" 
+        width={30} 
+        height={30} />
         <h1 className="text-xl">Explorar</h1>
       </Link>
 
       <Link
         href={"/profile"}
         className=" w-full px-5 flex flex-row justify-start items-center gap-7">
-        <Image src={profile} alt="explore" width={30} height={30} />
+        <Image 
+        src={profile} 
+        alt="explore" 
+        width={30} 
+        height={30} />
         <h1 className="text-xl">Perfil</h1>
       </Link>
 
       <Link
         href={"/message"}
         className=" w-full px-5 flex flex-row justify-start items-center gap-7">
-        <Image src={message} alt="explore" width={30} height={30} />
+        <Image 
+        src={message} 
+        alt="explore" 
+        width={30} 
+        height={30} />
         <h1 className="text-xl">Mensaje</h1>
       </Link>
 
@@ -49,7 +61,11 @@ export default function SlideBarSettings() {
       <div class="w-56 "></div>
 
       <div className=" w-full px-5 flex flex-row justify-start items-center gap-7">
-        <Image src={settings} alt="explore" width={30} height={30} />
+        <Image 
+        src={settings} 
+        alt="explore" 
+        width={30} 
+        height={30} />
         <h1 className="font-bold">Configuración</h1>
       </div>
 
@@ -85,7 +101,11 @@ export default function SlideBarSettings() {
       <Link
         href={"/"}
         className=" w-full px-5 flex flex-row justify-start items-center gap-7">
-        <Image src={logout} alt="explore" width={30} height={30} />
+        <Image 
+        src={logout} 
+        alt="explore" 
+        width={30} 
+        height={30} />
         <h1 className="text-xl font-medium text-[var(--secundary)]">Cerrar Sesion</h1>
       </Link>
     </section>
