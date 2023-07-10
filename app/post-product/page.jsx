@@ -1,9 +1,12 @@
 "use client";
-
-import { useState } from "react";
+import { useEffect,useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import  validate  from "./validate";
+import { GET_INFO, GET_CATEGORIES } from "@/store/slice";
+import validate from "./validate";
+import NavBarSecundary from "@/components/NavBarSecundary";
+import useFetch from "@/components/fetch/useFetch";
+
 const postProduct = async (form) => {
   try {
     const response = await axios.post("http://localhost:3000/api/products", form);
@@ -12,7 +15,6 @@ const postProduct = async (form) => {
     console.log(error.message);
   }
 };
-
 
 export default function Page() {
   const [form, setForm] = useState({
@@ -24,13 +26,26 @@ export default function Page() {
     categoryId: "",
     userId: "5bdbf1b3-bec2-42d8-bc52-10a056af8adc",
   });
-  
+
   const [errors, setErrors] = useState({});
 
-  const categories = useSelector((state) => state.valores.categories)
+  const categories = useSelector((state) => state.valores.categories);
 
- 
-  console.log(form)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function AllInfo() {
+      const categoriesResponse = await useFetch(
+        "http://localhost:3000/api/category"
+      );
+      dispatch(GET_CATEGORIES(categoriesResponse));
+    }
+    AllInfo();
+  }, [dispatch]);
+
+
+
+  console.log(form);
 
   const handleClick = () => {
     event.preventDefault();
@@ -50,106 +65,108 @@ export default function Page() {
 
     setErrors(validate({ ...form, [name]: parsedValue }));
     setForm({ ...form, [name]: parsedValue });
-    
   };
-  const isFormValid = Object.keys(errors).length > 0 || Object.values(form).some(value => value === '');
+  const isFormValid =
+    Object.keys(errors).length > 0 ||
+    Object.values(form).some((value) => value === "");
 
   return (
-    <div className=" text-center h-[100vh] grid justify-center items-center">
-      <form>
-        <h1 className="font-semibold text-3x1">Porfavor ingrese los datos de su producto!</h1>
-        <br />
-        <div className="mb-4">
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
-            type="text"
-            placeholder="Nombre del producto"
-            onChange={handleChange}
-            name="name"
-            value={form.name}
-          />
-        </div>
-        {errors.e1 && <p>{errors.e1}</p>}
-        <div className="mb-4">
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="description"
-            type="text"
-            placeholder="Descripción"
-            onChange={handleChange}
-            name="description"
-            value={form.description}
-          />
-        </div>
-        {errors.e2 && <p>{errors.e2}</p>}
-        <div className="mb-4">
-          <input
-            className="shadow appearance-none border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline border-ra rounded-md"
-            id="price"
-            type="number"
-            onChange={handleChange}
-            name="price"
-            value={form.price}
-            placeholder="Precio"
-          />
-          {/* <p className="text-xs italic">Please choose a password.</p> */}
-        </div>
-        {errors.e3 && <p>{errors.e3}</p>}
-        <div className="mb-4">
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="stock"
-            type="number"
-            placeholder="Stock"
-            onChange={handleChange}
-            name="stock"
-            value={form.stock}
-          />
-        </div>
-        {errors.e5 && <p>{errors.e5}</p>}
-        <div className="mb-4">
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="image"
-            type="text"
-            placeholder="URL de imagen"
-            onChange={handleChange}
-            name="image"
-            value={form.image}
-          />
-        </div>
-        {errors.e4 && <p>{errors.e4}</p>}
-        <select
-          className="mb-4"
-          onChange={handleChange}
-          name="categoryId" 
-        >
-        <option selected disabled>Seleccione su categoria</option>
-        {
-          categories?.map((category) => {
-            const id = String(category.id)
-            return (
-              <option key={category.id}
-                value={id}
-              >
-                {category.name}
-              </option>
-            )})
-        }
-        </select>
-        {errors.e6 && <p>{errors.e6}</p>}
-        <div className="flex items-center justify-center">
-          <button
-            disabled={isFormValid}
-            className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px]"
-            onClick={handleClick}
-          >
-            Continuar
-          </button>
-        </div>
-      </form>
-      <p className="text-center text-gray-500 text-xs">Apify. All rights reserved.</p>
+    <div>
+      <NavBarSecundary />
+      <section className="text-center grid justify-center items-center">
+        <form>
+          <h1 className="font-semibold text-3x1">
+            Articulo en Venta
+          </h1>
+          <br />
+          <div className="mb-4">
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username"
+              type="text"
+              placeholder="Titulo"
+              onChange={handleChange}
+              name="name"
+              value={form.name}
+            />
+          </div>
+          {errors.e1 && <p>{errors.e1}</p>}
+          <div className="mb-4">
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="description"
+              type="text"
+              placeholder="Descripción"
+              onChange={handleChange}
+              name="description"
+              value={form.description}
+            />
+          </div>
+          {errors.e2 && <p>{errors.e2}</p>}
+          <div className="mb-4">
+            <input
+              className="shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-ra rounded-md"
+              id="price"
+              type="number"
+              onChange={handleChange}
+              name="price"
+              value={form.price}
+              placeholder="Precio"
+            />
+            {/* <p className="text-xs italic">Please choose a password.</p> */}
+          </div>
+          {errors.e3 && <p>{errors.e3}</p>}
+          <div className="mb-4">
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="stock"
+              type="number"
+              placeholder="Stock"
+              onChange={handleChange}
+              name="stock"
+              value={form.stock}
+            />
+          </div>
+          {errors.e5 && <p>{errors.e5}</p>}
+          <div className="mb-4">
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="image"
+              type="text"
+              placeholder="URL de imagen"
+              onChange={handleChange}
+              name="image"
+              value={form.image}
+            />
+          </div>
+          {errors.e4 && <p>{errors.e4}</p>}
+          <select className="mb-4" onChange={handleChange} name="categoryId">
+            <option selected disabled>
+              Seleccione su categoria
+            </option>
+            {categories?.map((category) => {
+              const id = String(category.id);
+              return (
+                <option key={category.id} value={id}>
+                  {category.name}
+                </option>
+              );
+            })}
+          </select>
+          {errors.e6 && <p>{errors.e6}</p>}
+          <div className="flex items-center justify-center">
+            <button
+              disabled={isFormValid}
+              className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px]"
+              onClick={handleClick}>
+              Continuar
+            </button>
+          </div>
+        </form>
+        <p className="text-center text-gray-500 text-xs mt-52">
+          Apify. All rights reserved.
+        </p>
+      </section>
     </div>
   );
 }
