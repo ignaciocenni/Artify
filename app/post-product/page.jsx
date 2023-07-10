@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import axios from "axios";
-
+import { useSelector } from "react-redux";
+import  validate  from "./validate";
 const postProduct = async (form) => {
   try {
     const response = await axios.post("http://localhost:3000/api/products", form);
@@ -11,6 +12,8 @@ const postProduct = async (form) => {
     console.log(error.message);
   }
 };
+
+
 export default function Page() {
   const [form, setForm] = useState({
     name: "",
@@ -19,8 +22,16 @@ export default function Page() {
     stock: "",
     image: "",
     categoryId: "",
-    userId: "",
+    userId: "5bdbf1b3-bec2-42d8-bc52-10a056af8adc",
   });
+  
+  const [errors, setErrors] = useState({});
+
+  const categories = useSelector((state) => state.valores.categories)
+
+ 
+  console.log(form)
+
   const handleClick = () => {
     event.preventDefault();
     postProduct(form);
@@ -33,12 +44,15 @@ export default function Page() {
     let parsedValue = value;
     if (name === "price") {
       parsedValue = parseFloat(value);
-    } else if (name === "stock" || name === "categoryId" || name === "userId") {
+    } else if (name === "stock" || name === "categoryId") {
       parsedValue = parseInt(value, 10);
     }
 
+    setErrors(validate({ ...form, [name]: parsedValue }));
     setForm({ ...form, [name]: parsedValue });
+    
   };
+  const isFormValid = Object.keys(errors).length > 0 || Object.values(form).some(value => value === '');
 
   return (
     <div className=" text-center h-[100vh] grid justify-center items-center">
@@ -56,6 +70,7 @@ export default function Page() {
             value={form.name}
           />
         </div>
+        {errors.e1 && <p>{errors.e1}</p>}
         <div className="mb-4">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -67,6 +82,7 @@ export default function Page() {
             value={form.description}
           />
         </div>
+        {errors.e2 && <p>{errors.e2}</p>}
         <div className="mb-4">
           <input
             className="shadow appearance-none border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline border-ra rounded-md"
@@ -79,6 +95,7 @@ export default function Page() {
           />
           {/* <p className="text-xs italic">Please choose a password.</p> */}
         </div>
+        {errors.e3 && <p>{errors.e3}</p>}
         <div className="mb-4">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -90,6 +107,7 @@ export default function Page() {
             value={form.stock}
           />
         </div>
+        {errors.e5 && <p>{errors.e5}</p>}
         <div className="mb-4">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -101,30 +119,29 @@ export default function Page() {
             value={form.image}
           />
         </div>
-        <div className="mb-4">
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="userId"
-            type="nummber"
-            placeholder="Id relacionado al usuario"
-            onChange={handleChange}
-            name="userId"
-            value={form.userId}
-          />
-        </div>
-        <div className="mb-4">
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="categoryId"
-            type="number"
-            placeholder="Id relacionado a la categoria"
-            onChange={handleChange}
-            name="categoryId"
-            value={form.categoryId}
-          />
-        </div>
+        {errors.e4 && <p>{errors.e4}</p>}
+        <select
+          className="mb-4"
+          onChange={handleChange}
+          name="categoryId" 
+        >
+        <option selected disabled>Seleccione su categoria</option>
+        {
+          categories?.map((category) => {
+            const id = String(category.id)
+            return (
+              <option key={category.id}
+                value={id}
+              >
+                {category.name}
+              </option>
+            )})
+        }
+        </select>
+        {errors.e6 && <p>{errors.e6}</p>}
         <div className="flex items-center justify-center">
           <button
+            disabled={isFormValid}
             className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px]"
             onClick={handleClick}
           >
