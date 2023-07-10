@@ -17,7 +17,7 @@ export default function SearchBar() {
       <input
         placeholder="ingrese aquí.."
         onChange={handlerValue}
-        className="text-black px-3 w-60 h-11 rounded-full bg-[#F3E8FF] focus:outline-none "
+        className="text-black px-3 w-60 h-11 rounded-xl bg-[var(--primary)] focus:outline-none "
         type="text"
       />
       {/* <button
