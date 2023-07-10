@@ -4,9 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import CategoryFilter from "./Filters/CategoryFilter";
 import ProvinceFilter from "./Filters/ProvinceFilter";
-
-
-
+import PriceFilter from "./Filters/PriceFilter";
 
 export default function Filters() {
   const dispatch = useDispatch();
@@ -16,7 +14,6 @@ export default function Filters() {
     min: "",
     category: [],
   });
-
 
   const handlerImput = (event) => {
     const property = event.target.name;
@@ -29,48 +26,14 @@ export default function Filters() {
     dispatch(price([min, max]));
   };
 
-
   return (
-    <div className="flex flex-col items-start w-[25%] py-2 px-5 w">
-      <div className="gap-1 items-start">
+    <div className="flex flex-col items-start w-[25%]">
+      <div className="flex flex-col gap-3 items-start">
         <h1 className="text-2xl font-semibold">Filtros</h1>
         <ProvinceFilter />
-        <div className="flex flex-row justify-between relative items-center">
-          <input
-            className="p-2 w-28 h-9 mt-6 rounded-md"
-            name="min"
-            type="number"
-            pattern="[0-9]*"
-            placeholder="Min."
-            value={filters.min}
-            onChange={handlerImput}
-            style={{ borderRadius: "4px" }}
-          />
-          <h1 className="mt-6 font-thin"> a </h1>
-          <input
-            className="p-2 w-28 h-9 mt-6 rounded-md "
-            name="max"
-            type="number"
-            pattern="[0-9]*"
-            placeholder="Max."
-            value={filters.max}
-            onChange={handlerImput}
-            style={{ borderRadius: "4px" }}
-          />
-        </div>
-        <div className="flex justify-center items-center content-center">
-          <button
-            className=" mt-4 overflow-hidden hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-xl text-xs font-bold px-6 h-11"
-            onClick={handleBuscar}
-          >
-            Aplicar
-          </button>
-        </div>
+        <CategoryFilter />
+        <PriceFilter/>
       </div>
-      <br />
-
-      <CategoryFilter />
-
     </div>
   );
 }

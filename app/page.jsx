@@ -11,27 +11,27 @@ import SearchBar from "@/components/SearchBar";
 export default function Home() {
   const [error, setError] = useState(null);
   const products = useSelector((state) => state.valores.products);
-  const dispacht = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    async function allInfo() {
+    async function AllInfo() {
       const categoriesResponse = await useFetch(
         "http://localhost:3000/api/category"
       );
       const serverresponse = await useFetch(
         "http://localhost:3000/api/products"
       );
-      dispacht(GET_INFO(serverresponse));
-      dispacht(GET_CATEGORIES(categoriesResponse));
+      dispatch(GET_INFO(serverresponse));
+      dispatch(GET_CATEGORIES(categoriesResponse));
     }
-    allInfo();
-  }, []);
+    AllInfo();
+  }, [dispatch]);
 
   return (
-    <div className="z-10">
+    <div>
       <NavBar />
-      <div className="flex items-start py-2 px-5">
-        <div className="flex flex-col gap-5">
+      <div className="flex py-2 px-5">
+        <div className="flex flex-col gap-6 w-[25%] ">
           <SearchBar/>
           <Filters />
         </div>
