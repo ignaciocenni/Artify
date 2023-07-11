@@ -40,13 +40,13 @@ export default function CategoryFilter() {
         <div className="gap-1 items-start">
             <div>
                 <button
-                    className=" py-2 relative flex justify-center items-center bg-white  focus:outline-none  text-gray-600 rounded focus:ring ring-gray-200 group"
+                    className="bg-[var(--primary)] py-1 relative flex justify-center items-center focus:outline-none  text-gray-600 rounded-xl focus:ring ring-gray-200"
                     onClick={handleDropdownToggle}
                 >
                     <p className="px-4">{stateCategory.stateCategory} </p>
                     <span className=" p-2">
                         <svg
-                            className="w-5 h-5"
+                            className="w-5 h-5" 
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
