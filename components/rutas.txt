@@ -1,0 +1,11 @@
+http://localhost:3000/api/product  //esta ruta nos trae todos los productos
+-
++array de comentarios 
+-
++
+
+http://localhost:3000/api/product //esta ruta modifica el productos
+
++
+-
++
