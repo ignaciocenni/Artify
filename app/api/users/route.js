@@ -11,7 +11,7 @@ export async function GET() {
 }
 
 export async function POST(request) {
-  const { name, password, lastName, email, rol, provinceId } =
+  const { name, password, lastName, email, rol, provinceId, aboutMe } =
     await request.json();
 
   try {
@@ -21,7 +21,8 @@ export async function POST(request) {
       lastName,
       email,
       rol,
-      provinceId
+      provinceId,
+      aboutMe
     );
     return NextResponse.json(newUser, { status: 200 });
   } catch (error) {

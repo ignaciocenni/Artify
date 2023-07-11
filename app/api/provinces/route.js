@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { allProvinces, postAllProvinces } from "./controllers";
+import { allProvinces } from "./controllers";
 
 export async function GET() {
   try {
