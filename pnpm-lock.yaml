@@ -11,6 +11,9 @@ dependencies:
   '@reduxjs/toolkit':
     specifier: ^1.9.5
     version: 1.9.5(react-redux@8.1.1)(react@18.2.0)
+  '@types/mercadopago':
+    specifier: ^1.5.8
+    version: 1.5.8
   autoprefixer:
     specifier: 10.4.14
     version: 10.4.14(postcss@8.4.24)
@@ -347,6 +350,10 @@ packages:
 
   /@types/json5@0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: false
+
+  /@types/mercadopago@1.5.8:
+    resolution: {integrity: sha512-tamrRo4Z5IfLmWXDm72l7egxzQzhM5sJJtSH7n1z4EJsS71T0PddybGMZmMJp5GRiNJhbc9Ts6ZxIJ2jfxzM9Q==}
     dev: false
 
   /@types/prop-types@15.7.5:
