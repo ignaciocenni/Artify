@@ -18,6 +18,16 @@ const deleteReview = async (reviewId) => {
 
 const updateReview = async (reviewId, comment, rating) => {
   if (!comment && !rating) throw new Error("Missing arguments!");
+
+  // Validates:
+  // Comments
+  if (comment.length <= 10)
+    throw new Error("The comment must have at least 2 characters.");
+
+  // Rating
+  if (rating < 1 || rating > 5)
+    throw new Error("The rating must be from 0 to 5");
+
   const searchedReview = await prisma.review.findFirst({
     where: {
       id: +reviewId,

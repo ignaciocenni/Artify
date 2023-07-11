@@ -61,22 +61,44 @@ const getAllProducts = async (name) => {
   return response;
 };
 
-const addProduct = async (name, description, price, stock, image, userId, categoryId) => {
-  if (!name || !description || !price || !stock || !image || !userId || !categoryId)
+const addProduct = async (
+  name,
+  description,
+  price,
+  stock,
+  image,
+  userId,
+  categoryId
+) => {
+  if (
+    !name ||
+    !description ||
+    !price ||
+    !stock ||
+    !image ||
+    !userId ||
+    !categoryId
+  )
     throw new Error("Missing arguments");
-  const nameRegex = /^[a-zA-Z0-9\s.,áéíóúÁÉÍÓÚñÑ]*$/;
 
+  // Validates:
+  //Name
+  const nameRegex = /^[a-zA-Z0-9\s.,áéíóúÁÉÍÓÚñÑ]*$/;
   if (!nameRegex.test(name)) throw new Error("The must be a normal name...");
-  if (description.length <= 12) throw new Error("The description must be more of 12 letters.");
+
+  //Description
+  if (description.length <= 10 && !nameRegex.test(description))
+    throw new Error("The description must contain at least 10 characters.");
+
+  //Price
   if (price <= 0) throw new Error("Price cannot be less than or equal to $0");
 
-  // const imageRegex = /\.(jpg|jpeg|png)$/i;
-  // if (!imageRegex.test(image)) {
-  //   return NextResponse.json(
-  //     { error: "The image format must be valid." },
-  //     { status: 400 }
-  //   );
-  // }
+  //Stock
+  if (stock <= 0) throw new Error("Stock cannot be less than 0 units.");
+
+  //Image
+  ///...
+
   const newProduct = await prisma.Product.create({
     data: {
       name,
