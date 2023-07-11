@@ -25,8 +25,7 @@ export async function PUT(request, { params }) {
       password,
       lastName,
       image,
-      aboutMe,
-      interests
+      aboutMe
     );
     return NextResponse.json(user, { status: 200 });
   } catch (error) {
