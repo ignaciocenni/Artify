@@ -9,6 +9,7 @@ import Image from "next/image";
 import Heart from "@/components/Heart";
 import Stars from "@/components/Stars";
 import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 
 const getDetail = async (id) => {
   const response = await fetch(`http://localhost:3000/api/products/${id}`);
@@ -157,6 +158,7 @@ const Detail = async ({ params }) => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };
