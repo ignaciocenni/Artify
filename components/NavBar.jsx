@@ -2,10 +2,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { UserAuth } from "@/app/context/AuthContext";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { user, googleSignIn, logOut } = UserAuth();
+
+  const handlerSignIn = async() => {
+    try {
+      await googleSignIn()
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);

@@ -4,8 +4,21 @@ import { useState } from "react";
 import { validate } from "./validate";
 import Link from "next/link";
 import NavBarSecundary from "@/components/NavBarSecundary";
+import { UserAuth } from "../context/AuthContext";
+import Image from "next/image";
+import logoGoogle from "../../public/images/google-logo.png";
 
 export default function LoginPage() {
+  const { user, googleSignIn} = UserAuth();
+
+  const handlerSignIn = async () => {
+    try {
+      await googleSignIn();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -63,21 +76,31 @@ export default function LoginPage() {
             </button>
           </div>
 
-          <a
+          {/* <a
             className="inline-block align-baseline font-bold text-sm text-slate-500  hover:text-[var(--background-sec)] mt-2"
             href="#">
             Olvido su contraseña?
-          </a>
+          </a> */}
 
-            <Link href="/signin">
-              <button
-                className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-lg  text-white font-bold py-3 px-3 rounded-xl focus:outline-none focus:shadow-outline w-full"
-                type="submit"
-                onClick={handleCreateCount}>
-                Cuenta Nueva
-              </button>
-            </Link>
+          <h1 className="flex items-center justify-center gap-5 text-lg py-3 px-3 rounded-xl focus:outline-none focus:shadow-outline w-full">
+            o ingrese con
+          </h1>
 
+          <div className="flex items-center justify-center">
+            <button
+              className="border border-black gap-5 flex justify-center items-center hover:bg-[var(--background-sec)] text-lg font-bold py-3 px-3 rounded-xl focus:outline-none focus:shadow-outline w-full"
+              type="submit"
+              onClick={handleClick}>
+              <Image
+                src={logoGoogle}
+                width={20}
+                height={20}
+                alt="GoogleLogo"
+                className="absoulte top-10 bottom-10"
+              />
+              Continuar con Google
+            </button>
+          </div>
         </form>
 
         <p className="text-center text-gray-500 text-xs mt-56">
