@@ -18,6 +18,7 @@ const postUser = async (form) => {
 };
 export default function SignInPage() {
   const { user, googleSignIn, logOut } = UserAuth();
+  console.log(user)
 
   const handlerSignIn = async () => {
     try {

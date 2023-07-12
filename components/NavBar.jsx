@@ -17,7 +17,7 @@ const NavBar = () => {
       console.log(error)
     }
   }
-  
+  console.log(user)
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
