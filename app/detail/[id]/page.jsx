@@ -1,5 +1,5 @@
 import { GET as getProduct } from "../../api/products/[id]/route";
-import DetailContent from "@/components/DetailContent";
+import DetailContent from "../../../components/DetailContent";
 
 const dataFetching = async (id) => {
   try {
@@ -8,6 +8,7 @@ const dataFetching = async (id) => {
   } catch (error) {
     throw new Error(error.message);
   }
+
 };
 
 const Detail = async ({ params }) => {
