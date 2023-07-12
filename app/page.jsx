@@ -16,11 +16,12 @@ const dataFetching = async () => {
     return { error };
   }
 };
+
 export default async function Page() {
   const { products, categories, error, provinces } = await dataFetching();
   return (
-    <div>
-      <Home products={products} categories={categories} provinces={provinces} />
-    </div>
+      <div>
+         <Home products={products} categories={categories} provinces={provinces} />
+      </div>
   );
 }

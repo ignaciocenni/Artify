@@ -1,7 +1,6 @@
 "use client";
-import { useState } from "react";
-import { countrie } from "@/store/slice";
-
+import { useState} from "react";
+import { countrie } from "../../store/slice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ProvinceFilter() {
