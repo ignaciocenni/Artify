@@ -1,13 +1,16 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { search } from "../store/slice";
 
 export default function SearchBar() {
   const dispatch = useDispatch();
-
-  const handlerValue = async (event) => {
-    const res = await fetch(
-      `http://localhost:3000/api/products?name=${event.target.value}`
-    ).then((res) => res.json());
+  const products = useSelector((state) => state.valores.copyProducts);
+  const handlerValue = (event) => {
+    if (event.target.value === "") {
+      dispatch(search([...products]));
+    }
+    const res = products.filter((product) =>
+      product.name.toLowerCase().includes(event.target.value.toLowerCase())
+    );
     dispatch(search(res));
   };
 
