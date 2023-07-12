@@ -1,10 +1,10 @@
 "use client";
 import Filters from "../components/Filters";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/NavBar/NavBar";
 import Cards from "../components/Cards";
-import SearchBar from "@/components/SearchBar";
+import SearchBar from "../components/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_CATEGORIES, GET_PROVINCES, GET_INFO } from "@/store/slice";
+import { GET_CATEGORIES, GET_PROVINCES, GET_INFO } from "../store/slice";
 
 export default function Home({ products, categories, provinces }) {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export default function Home({ products, categories, provinces }) {
   allProducts.length ? allProducts : dispatch(GET_INFO(products));
   return (
     <>
-      <NavBar />
+     
       <div className="flex py-2 px-5">
         <div className="flex flex-col gap-6 w-[25%] ">
           <SearchBar />

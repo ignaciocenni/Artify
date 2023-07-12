@@ -1,5 +1,5 @@
 import { GET as getProduct } from "../../api/products/[id]/route";
-import DetailContent from "@/components/DetailContent";
+import DetailContent from "../../../components/DetailContent";
 
 const dataFetching = async (id) => {
   try {
