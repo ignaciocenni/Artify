@@ -20,7 +20,7 @@ export const Slice = createSlice({
       state.provinces = action.payload;
     },
     GET_CATEGORIES: (state, action) => {
-      state.categories = action.payload
+      state.categories = action.payload;
     },
     price: (state, { type, payload }) => {
       const price = [...state.products];
@@ -32,24 +32,23 @@ export const Slice = createSlice({
     },
     countrie: (state, action) => {
       const countrie = [...state.copyProducts];
-      const find = countrie.filter(
-        (element) => element.user.province.name === action.payload
-      );
-      console.log(find);
-      state.products = find;
-      state.provincesFilter= find;
+      const find = countrie.filter((element) => element.user.province.name === action.payload);
+      state.products = action.payload === "Todas" ? countrie : find;
+      state.provincesFilter = action.payload === "Todas" ? countrie : find;
     },
     category: (state, action) => {
       const category = [...state.provincesFilter];
-      state.products = action.payload === "allCategories"
-        ? category
-        : category.filter(value => value.category.name.includes(action.payload))
-      
+      state.products =
+        action.payload === "allCategories"
+          ? category
+          : category.filter((value) => value.category.name.includes(action.payload));
     },
     search: (state, { type, payload }) => {
+      console.log(payload);
       state.products = payload;
     },
   },
 });
 
-export const { GET_INFO, GET_CATEGORIES, GET_PROVINCES, countrie, price, category, search } = Slice.actions;
+export const { GET_INFO, GET_CATEGORIES, GET_PROVINCES, countrie, price, category, search } =
+  Slice.actions;
