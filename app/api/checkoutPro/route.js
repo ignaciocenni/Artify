@@ -7,28 +7,17 @@ mercadopago.configure({
 
 export async function POST(req) {
   const requestData = await req.json();
-  
-  if (!requestData || typeof requestData !== "object") {
-    return NextResponse.json("Invalid request data", { status: 400 });
-  }
-  
-  const { name, price, stock } = requestData;
-  
-  if (typeof name !== "string" || typeof price !== "number" || typeof stock !== "number") {
-    return NextResponse.json("Invalid request data", { status: 400 });
-  }
-
-  console.log(name, price, stock);    
-  const URL = "http://localhost:3000/api/productosmp";
+  const productos = requestData.map((ele)=>(
+    {
+    title: ele.name,
+    unit_price: Number(ele.price),
+    quantity: Number(ele.stock),
+    }
+  ))  
+  const URL = "http://localhost:3000/api/checkoutPro";
   try {
     const preference = {
-      items: [
-        {
-          title: name,
-          unit_price: Number(price),
-          quantity: Number(stock),
-        }
-      ],
+      items: productos,
       auto_return: "approved",
       back_urls: {
         "success": `${URL}`,
