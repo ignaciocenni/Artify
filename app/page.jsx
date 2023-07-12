@@ -1,12 +1,12 @@
 "use client";
 import Filters from "../components/Filters";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/NavBar/NavBar";
 import Cards from "../components/Cards";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_INFO, GET_CATEGORIES } from "@/store/slice";
+import { GET_INFO, GET_CATEGORIES } from "../store/slice";
 import { useEffect, useState } from "react";
-import useFetch from "@/components/fetch/useFetch";
-import SearchBar from "@/components/SearchBar";
+import useFetch from "../components/fetch/useFetch";
+import SearchBar from "../components/SearchBar";
 
 export default function Home() {
   const [error, setError] = useState(null);
@@ -29,7 +29,6 @@ export default function Home() {
 
   return (
     <div>
-      <NavBar />
       <div className="flex py-2 px-5">
         <div className="flex flex-col gap-6 w-[25%] ">
           <SearchBar/>
