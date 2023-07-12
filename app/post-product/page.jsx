@@ -6,7 +6,7 @@ import { GET_INFO, GET_CATEGORIES } from "../../store/slice";
 import validate from "./validate";
 import NavBarSecundary from "../../components/NavBarSecundary";
 import useFetch from "../../components/fetch/useFetch";
-
+import Link from "next/link";
 const postProduct = async (form) => {
   try {
     const response = await axios.post("http://localhost:3000/api/products", form);
@@ -161,6 +161,10 @@ export default function Page() {
               onClick={handleClick}>
               Continuar
             </button>
+            <div className="flex justify-evenly w-full">
+            <Link href="/upload-button"> Upload Button</Link>
+
+            </div>
           </div>
         </form>
         <p className="text-center text-gray-500 text-xs mt-52">
