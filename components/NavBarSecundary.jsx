@@ -9,11 +9,14 @@ export default function NavBarSecundary() {
         <Image src={logo} alt="logo" />
       </Link>
 
-      <Link href="/">
-        <button className="px-[25px] py-[15px] bg-neutral-950 rounded-lg flex-col justify-start items-start inline-flex">
-          <h1 className="text-white text-[12px] font-extrabold">Volver</h1>
+      <Link href="/signin">
+        <button
+          className="text-white text-xs font-extrabold px-4 py-5 bg-neutral-950 rounded-lg flex-col justify-start items-start inline-flex"
+          type="submit">
+          Cuenta Nueva
         </button>
       </Link>
+
     </nav>
   );
 }
