@@ -1,4 +1,4 @@
-import Home from "@/components/Home";
+import Home from "../components/Home";
 import { GET as getAllCategories } from "./api/category/route";
 import { GET as getAllProducts } from "./api/products/route";
 import { GET as getAllProvinces } from "./api/provinces/route";
