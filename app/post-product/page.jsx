@@ -2,10 +2,10 @@
 import { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { GET_INFO, GET_CATEGORIES } from "@/store/slice";
+import { GET_INFO, GET_CATEGORIES } from "../../store/slice";
 import validate from "./validate";
-import NavBarSecundary from "@/components/NavBarSecundary";
-import useFetch from "@/components/fetch/useFetch";
+import NavBarSecundary from "../../components/NavBarSecundary";
+import useFetch from "../../components/fetch/useFetch";
 
 const postProduct = async (form) => {
   try {

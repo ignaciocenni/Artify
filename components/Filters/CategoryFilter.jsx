@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { category } from "@/store/slice";
+import { useState} from "react";
+import { category } from "../../store/slice";
 
 //crear el action
 import { useDispatch, useSelector } from "react-redux";

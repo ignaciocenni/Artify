@@ -1,6 +1,6 @@
-import star from '@/public/images/star.svg';
-import starHalf from "@/public/images/star_half.svg";
-import starBorder from "@/public/images/star_border.svg";
+import star from '../public/images/star.svg';
+import starHalf from "../public/images/star_half.svg";
+import starBorder from "../public/images/star_border.svg";
 import Image from 'next/image';
 
 export default function Stars({ averange }) {

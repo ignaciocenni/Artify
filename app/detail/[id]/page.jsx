@@ -8,6 +8,7 @@ const dataFetching = async (id) => {
   } catch (error) {
     throw new Error(error.message);
   }
+
 };
 
 const Detail = async ({ params }) => {
