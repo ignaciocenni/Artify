@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import { getProduct, deleteProduct, updateProduct } from "./controllers";
 
-export async function GET(request, { params }) {
-  const { id } = params;
-
+export async function GET(id) {
   try {
     const response = await getProduct(id);
     return NextResponse.json(response, { status: 200 });
