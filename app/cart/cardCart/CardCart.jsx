@@ -1,22 +1,23 @@
 'use client'
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import numberConverte from './numberConverte'
 
 export default function Card({ id, image, name, price, stock }) {
     const [quantity, setQuantity] = useState(1)
-    const [restStock, setrestStock] = useState(stock - 1)
+    const [restStock, setrestStock] = useState(stock - quantity)
     const total = numberConverte(price * quantity)
+   
     const handlerPlus = () => {
         if (restStock > 0) {
             setQuantity(quantity + 1),
-            setrestStock(restStock - 1)
+                setrestStock(restStock - 1)
         }
     }
     const handlerRest = () => {
         if (quantity > 1) {
             setQuantity(quantity - 1),
-            setrestStock(restStock + 1)
+                setrestStock(restStock + 1)
         }
     }
     return (
@@ -39,12 +40,17 @@ export default function Card({ id, image, name, price, stock }) {
                     <p>Stock: {restStock} unidades.</p>
                 </div>
             </div>
-            <div className="w-max p-2 ">
-                <button className="border-2 inline-block p-2" onClick={handlerPlus} >+</button>
-                <button className="border-2 inline-block p-2">{quantity}</button>
-                <button className="border-2 inline-block p-2" onClick={handlerRest}>-</button>
-            </div>
-            <div>Total:{total}</div>
+            <div className="flex items-center">
+  <div className="w-max p-2 flex items-center">
+    <button className="border-2 inline-block p-2" onClick={handlerPlus}>+</button>
+    <button className="border-2 inline-block p-2">{quantity}</button>
+    <button className="border-2 inline-block p-2" onClick={handlerRest}>-</button>
+  </div>
+  <div className="ml-auto">
+    Total: {total}
+  </div>
+</div>
+
         </div>
     )
 }
