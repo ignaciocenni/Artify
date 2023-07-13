@@ -11,6 +11,7 @@ import Stars from "./Stars";
 import NavBar from "./NavBar/NavBar";
 import Footer from "./Footer";
 
+
 const DetailContent = async ({ data }) => {
   const amount = data.reviews
     .map((e) => e.rating)

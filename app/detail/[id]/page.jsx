@@ -1,6 +1,7 @@
 import { GET as getProduct } from "../../api/products/[id]/route";
 import DetailContent from "../../../components/DetailContent"
 
+
 const dataFetching = async (id) => {
   try {
     const data = await getProduct(id).then((data) => data.json());

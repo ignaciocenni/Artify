@@ -16,6 +16,7 @@
     "production:build": "npx prisma generate && npx prisma migrate deploy && next build"
   },
   "dependencies": {
+    "@mercadopago/sdk-react": "^0.0.12",
     "@prisma/client": "^4.16.2",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/mercadopago": "^1.5.8",
