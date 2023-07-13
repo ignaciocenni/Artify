@@ -11,7 +11,8 @@ const nextConfig = {
       "cristaljoyas.com",
       "via.placeholder.com",
       "example.com",
-      "lh3.googleusercontent.com"
+      "lh3.googleusercontent.com",
+      "uploadthing.com"
     ],
   },
 };

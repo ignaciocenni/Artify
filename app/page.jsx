@@ -1,27 +1,22 @@
+"use client";
 import Home from "../components/Home";
-import { GET as getAllCategories } from "./api/category/route";
-import { GET as getAllProducts } from "./api/products/route";
-import { GET as getAllProvinces } from "./api/provinces/route";
 
 const dataFetching = async () => {
-  try {
-    const products = await getAllProducts().then((products) => products.json());
-
-    const categories = await getAllCategories().then((categories) => categories.json());
-
-    const provinces = await getAllProvinces().then((provinces) => provinces.json());
-
-    return { products, categories, provinces };
-  } catch (error) {
-    return { error };
-  }
+  const products = await fetch("/api/products");
+  const categories = await fetch("/api/category");
+  const provinces = await fetch("/api/provinces");
+  return {
+    products: await products.json(),
+    categories: await categories.json(),
+    provinces: await provinces.json(),
+  };
 };
 
 export default async function Page() {
-  const { products, categories, error, provinces } = await dataFetching();
+  const { products, categories, provinces } = await dataFetching();
   return (
-      <div>
-         <Home products={products} categories={categories} provinces={provinces} />
-      </div>
+    <div>
+      <Home products={products} categories={categories} provinces={provinces} />
+    </div>
   );
 }
