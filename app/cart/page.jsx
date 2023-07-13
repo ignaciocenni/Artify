@@ -1,37 +1,19 @@
-import Image from "next/image"
-import Link from "next/link"
-import products from "./products"
-
-
-function Page() {
-  return (<div>
-    
-    {
-      products.map((produc)=>
-      <div key={produc.id}> 
-      <p >{produc.name}</p>
-      <p >{produc.price}</p>
-      <p >{produc.stock}</p>
-      <div className="relative h-[300px]">
-          <Image
-            id="id"
-            alt={`Imagen de perfil del usuario ${produc.id}`}
-            src={produc.image}
-            fill
-            sizes="100vw"
-            style={{
-              objectFit: "cover",
-            }}
-            className="rounded-3xl"
-          />
-      </div>
-      <p >{produc.category.name}</p>
-      </div>
-      
-      )
-    }
+import products from "./products";
+import Card from './CardCart'
+function Cart() {
+  return (
+    <div className="mx-auto w-4/5 md:w-3/5 lg:w-2/5 xl:w-1/3 p-4">
+      {products.map((product) => (
+        <Card
+        key={product.id}
+        id={product.id}
+        name={product.name}
+        price={product.price}
+        stock={product.stock}
+        />
+      ))}
     </div>
-  )
+  );
 }
 
-export default Page
+export default Cart;
