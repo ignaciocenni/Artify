@@ -5,7 +5,6 @@ const dataFetching = async () => {
   const products = await fetch("/api/products");
   const categories = await fetch("/api/category");
   const provinces = await fetch("/api/provinces");
-
   return {
     products: await products.json(),
     categories: await categories.json(),
