@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { validate } from "./validate";
 import Link from "next/link";
-import NavBarSecundary from "@/components/NavBarSecundary";
+import NavBarSecundary from "../../components/NavBarSecundary";
 
 export default function LoginPage() {
   const [form, setForm] = useState({

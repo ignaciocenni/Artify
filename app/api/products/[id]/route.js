@@ -3,7 +3,6 @@ import { getProduct, deleteProduct, updateProduct } from "./controllers";
 
 export async function GET(request, { params }) {
   const { id } = params;
-
   try {
     const response = await getProduct(id);
     return NextResponse.json(response, { status: 200 });

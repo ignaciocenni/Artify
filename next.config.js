@@ -10,7 +10,9 @@ const nextConfig = {
       "elmundoinfinito.com",
       "cristaljoyas.com",
       "via.placeholder.com",
-      "example.com"
+      "example.com",
+      "lh3.googleusercontent.com",
+      "uploadthing.com"
     ],
   },
 };

@@ -1,11 +1,9 @@
 import { NextResponse } from "next/server";
 import { addProduct, getAllProducts } from "./controllers";
 
-export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const name = searchParams.get("name");
+export async function GET() {
   try {
-    const response = await getAllProducts(name);
+    const response = await getAllProducts();
     return NextResponse.json(response, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 404 });

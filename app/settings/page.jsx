@@ -1,5 +1,5 @@
-import NavBarSecundary from "@/components/NavBarSecundary";
-import SlideBarSettings from "@/components/SlideBarSettings";
+import NavBarSecundary from "../../components/NavBarSecundary";
+import SlideBarSettings from "../../components/SlideBarSettings";
 
 export default function Settings() {
   return (

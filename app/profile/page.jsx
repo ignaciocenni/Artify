@@ -1,6 +1,6 @@
 "use client";
 import Cards from "../../components/Cards";
-import NavBar from "../../components/NavBar";
+import NavBar from "../../components/NavBar/NavBar";
 import Image from "next/image";
 import Link from "next/link";
 import { useSelector } from "react-redux";
@@ -9,7 +9,6 @@ export default function Profile() {
   const products = useSelector((state) => state.valores.products);
   return (
     <div className="z-10">
-      <NavBar />
       <div className="flex justify-center items-center w-full">
         <div className="flex w-2/4 justify-evenly">
           <div className="flex justify-center flex-col items-center">
