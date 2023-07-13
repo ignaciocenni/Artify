@@ -10,9 +10,9 @@ const validate = (form) => {
     errors.e3 = "Porfavor ingrese un monto valido";
   }
 
-  if (!/^https:\/\/.+$/.test(form.image)) {
-    errors.e4 = "Porfavor ingrese una URL valida";
-  }
+  // if (!/^https:\/\/.+$/.test(form.image)) {
+  //   errors.e4 = "Porfavor ingrese una URL valida";
+  // }
   if (form.stock >= 100000) {
     errors.e5 = "Porfavor ingrese una cantidad valida";
   }
