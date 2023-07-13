@@ -14,7 +14,6 @@ export default function Home({ products, categories, provinces }) {
   allProducts.length ? allProducts : dispatch(GET_INFO(products));
   return (
     <>
-      <NavBar />
       <div className="flex py-2 px-5">
         <div className="flex flex-col gap-6 w-[25%] ">
           <SearchBar />
