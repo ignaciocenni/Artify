@@ -48,7 +48,7 @@ export default function Page() {
 
   useEffect(() => {
     async function AllInfo() {
-      const categoriesResponse = await useFetch("/api/category");
+      const categoriesResponse = await fetch("/api/category");
       dispatch(GET_CATEGORIES(categoriesResponse));
     }
     AllInfo();
