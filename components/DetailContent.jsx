@@ -6,10 +6,11 @@ import user from "../public/images/me.png";
 import message from "../public/images/message.svg";
 import Link from "next/link";
 import Image from "next/image";
-import Heart from "../components/Heart";
-import Stars from "../components/Stars";
-import NavBar from "../components/NavBar/NavBar";
-import Footer from "../components/Footer";
+import Heart from "./Heart";
+import Stars from "./Stars";
+import NavBar from "./NavBar/NavBar";
+import Footer from "./Footer";
+
 
 const DetailContent = async ({ data }) => {
   const amount = data.reviews
@@ -18,7 +19,6 @@ const DetailContent = async ({ data }) => {
   const averange = amount / data.reviews.length;
   return (
     <div>
-      <NavBar />
       <div className="flex flex-col justify-center items-center content-center gap-14">
         <div className="flex items-start justify-center">
           <Link href={"/"}>
