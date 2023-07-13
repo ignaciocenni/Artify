@@ -1,5 +1,10 @@
+
 "use client";
-import DetailContent from "../../../components/DetailContent";
+
+
+
+import DetailContent from "../../../components/DetailContent"
+
 
 const dataFetching = async (id) => {
   let product = await fetch(`/api/products/${id}`);
