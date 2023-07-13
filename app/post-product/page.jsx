@@ -10,10 +10,7 @@ import Link from "next/link";
 import UploadButton from "../../components/buttons/UploadButton";
 const postProduct = async (form) => {
   try {
-    const response = await axios.post(
-      "http://localhost:3000/api/products",
-      form
-    );
+    const response = await axios.post("/api/products", form);
     console.log(response.data);
   } catch (error) {
     console.log(error.message);
@@ -51,9 +48,7 @@ export default function Page() {
 
   useEffect(() => {
     async function AllInfo() {
-      const categoriesResponse = await useFetch(
-        "http://localhost:3000/api/category"
-      );
+      const categoriesResponse = await useFetch("/api/category");
       dispatch(GET_CATEGORIES(categoriesResponse));
     }
     AllInfo();
@@ -82,9 +77,7 @@ export default function Page() {
     setErrors(validate({ ...form, [name]: parsedValue }));
     setForm({ ...form, [name]: parsedValue });
   };
-  const isFormValid =
-    Object.keys(errors).length > 0 ||
-    Object.values(form).some((value) => value === "");
+  const isFormValid = Object.keys(errors).length > 0 || Object.values(form).some((value) => value === "");
 
   return (
     <div>
@@ -169,15 +162,17 @@ export default function Page() {
           {errors.e6 && <p>{errors.e6}</p>}
           <div className="flex items-center justify-center">
             {isFormValid ? (
-              <button 
+              <button
                 className="bg-[var(--detail)] text-white font-bold py-2 px-4 rounded focus:outline-none  w-[250px] opacity-50  cursor-not-allowed"
-                onClick={handleClick}>
+                onClick={handleClick}
+              >
                 Continuar
               </button>
             ) : (
               <button
                 className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px] "
-                onClick={handleClick}>
+                onClick={handleClick}
+              >
                 Continuar
               </button>
             )}
@@ -186,9 +181,7 @@ export default function Page() {
             <UploadButton setForm={setForm} form={form} />
           </div>
         </form>
-        <p className="text-center text-gray-500 text-xs mt-52">
-          Apify. All rights reserved.
-        </p>
+        <p className="text-center text-gray-500 text-xs mt-52">Apify. All rights reserved.</p>
       </section>
     </div>
   );
