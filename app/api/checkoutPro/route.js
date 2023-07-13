@@ -14,6 +14,7 @@ export async function POST(req) {
     quantity: Number(ele.stock),
     }
   ))  
+  
   const URL = "http://localhost:3000/detail";
   try {
     const preference = {
@@ -27,7 +28,8 @@ export async function POST(req) {
       notification_url: `${URL}/api/notify`,
     };
     const response = await mercadopago.preferences.create(preference)
-    return NextResponse.json({ url: response.body.url }, { status: 200 });
+    console.log(response);
+    return NextResponse.json({ url: response.body.init_point }, { status: 200 });
   } catch (error) {
     return NextResponse.json("entra en catch", { status: 400 });
   }
