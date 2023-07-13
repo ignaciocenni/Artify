@@ -1,14 +1,10 @@
-import { GET as getProduct } from "../../api/products/[id]/route";
+"use client";
 import DetailContent from "../../../components/DetailContent";
 
 const dataFetching = async (id) => {
-  try {
-    const data = await getProduct(id).then((data) => data.json());
-    return data;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-
+  let product = await fetch(`/api/products/${id}`);
+  product = await product.json();
+  return product;
 };
 
 const Detail = async ({ params }) => {
