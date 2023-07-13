@@ -6,7 +6,7 @@ import { useState } from "react";
 import ButtonSession from "./ButtonSession";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
-
+import Cart from "./Cart";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -39,6 +39,11 @@ const NavBar = () => {
               <h1 className="">+ Crear publicación</h1>
             </button>
           </Link>
+        </div>
+        <div className="flex content-center items-center gap-5 ">
+        <Link href="/cart">
+        <Cart />
+        </Link >
         </div>
         <div className="flex gap-5">
           <ImageLogin />

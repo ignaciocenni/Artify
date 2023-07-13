@@ -9,7 +9,7 @@ import SignInButton from "../../components/buttons/SignInButton";
 
 const postUser = async (form) => {
   try {
-    const response = await axios.post("http://localhost:3000/api/users", form);
+    const response = await axios.post("/api/users", form);
     console.log(response.data);
   } catch (error) {
     console.log(error.message);
@@ -80,9 +80,7 @@ export default function SignInPage() {
           <SignInButton />
         </form>
       </div>
-      <p className="mt-56 text-center text-gray-500 text-xs">
-        Apify. All rights reserved.
-      </p>
+      <p className="mt-56 text-center text-gray-500 text-xs">Apify. All rights reserved.</p>
     </div>
   );
 }
