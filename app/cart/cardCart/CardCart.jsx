@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import numberConverte from "./numberConverte";
 
-export default function Card({ id, image, name, price, stock }) {
+export default function CardCart({ id, image, name, price, stock }) {
   const [quantity, setQuantity] = useState(1);
   const [restStock, setrestStock] = useState(stock - quantity);
   const total = numberConverte(price * quantity);
