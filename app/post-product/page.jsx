@@ -1,11 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
-import { GET_CATEGORIES } from "../../store/slice";
 import validate from "./validate";
-
 import UploadButton from "../../components/buttons/UploadButton";
+
 const postProduct = async (form) => {
   try {
     const response = await axios.post("/api/products", form);
@@ -37,24 +36,10 @@ export default function Page() {
     categoryId: "",
     userId: "5bdbf1b3-bec2-42d8-bc52-10a056af8adc",
   });
-
+  const categories = useSelector((state) => state.valores.categories);
   const [errors, setErrors] = useState({});
 
-  const categories = useSelector((state) => state.valores.categories);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    async function AllInfo() {
-      const categoriesResponse = await fetch("/api/category");
-      dispatch(GET_CATEGORIES(categoriesResponse));
-    }
-    AllInfo();
-  }, [dispatch]);
-
-  console.log(form);
-
-  const handleClick = () => {
+  const handleClick = (event) => {
     event.preventDefault();
     postProduct({ ...form, ...images });
     console.log("Producto creado con exito");
