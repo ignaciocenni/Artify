@@ -1,16 +1,17 @@
 "use client";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import validate from "./validate";
 import UploadButton from "../../components/buttons/UploadButton";
 
-const postProduct = async (form) => {
+const postProduct = async (product) => {
   try {
-    const response = await axios.post("/api/products", form);
-    console.log(response.data);
+    await axios.post("/api/products", product);
+    return { created: true };
   } catch (error) {
-    console.log(error.message);
+    return { created: false, error: error.message };
   }
 };
 
@@ -39,10 +40,14 @@ export default function Page() {
   const categories = useSelector((state) => state.valores.categories);
   const [errors, setErrors] = useState({});
 
-  const handleClick = (event) => {
+  const router = useRouter();
+  const handleClick = async (event) => {
     event.preventDefault();
-    postProduct({ ...form, ...images });
-    console.log("Producto creado con exito");
+    const product = { ...form, ...images };
+    const response = await postProduct(product);
+    if (response.created) {
+      router.push("/");
+    } else alert(response.error);
   };
 
   const handleChange = (event) => {
