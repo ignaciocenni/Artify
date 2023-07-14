@@ -5,6 +5,7 @@ import SessionProvider from "../components/SessionProvider";
 import Providers from "../store/provider";
 import { getAllCategories } from "../app/api/category/controllers";
 import { getAllProvinces } from "../app/api/provinces/controllers";
+import { getAllProducts } from "../app/api/products/controllers";
 import Preloader from "../components/Preloader";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,9 +17,11 @@ export const metadata = {
 const dataFetching = async () => {
   const categories = await getAllCategories();
   const provinces = await getAllProvinces();
+  const products = await getAllProducts();
   return {
     categories,
     provinces,
+    products,
   };
 };
 

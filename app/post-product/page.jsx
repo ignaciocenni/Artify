@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import validate from "./validate";
 import UploadButton from "../../components/buttons/UploadButton";
+import { GET_INFO } from "../../store/slice";
 
 const postProduct = async (product) => {
   try {
@@ -41,12 +42,15 @@ export default function Page() {
   const [errors, setErrors] = useState({});
 
   const router = useRouter();
+  const dispatch = useDispatch();
   const handleClick = async (event) => {
     event.preventDefault();
     const product = { ...form, ...images };
     const response = await postProduct(product);
     if (response.created) {
-      const { res, created } = response;
+      const { res } = response;
+      const products = await (await axios.get("api/products")).data;
+      dispatch(GET_INFO(products));
       router.push(`/detail/${res.id}`);
     } else alert(response.error);
   };

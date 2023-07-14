@@ -1,11 +1,17 @@
 "use client";
 import { useDispatch } from "react-redux";
-import { GET_PROVINCES, GET_CATEGORIES } from "../store/slice";
+import { GET_PROVINCES, GET_CATEGORIES, GET_INFO } from "../store/slice";
+import { useRef } from "react";
 
 export default function Preloader({ data }) {
-  const { categories, provinces } = data;
+  const { categories, provinces, products } = data;
   const dispatch = useDispatch();
-  dispatch(GET_CATEGORIES(categories));
-  dispatch(GET_PROVINCES(provinces));
+  const loaded = useRef(false);
+  if (!loaded.current) {
+    dispatch(GET_CATEGORIES(categories));
+    dispatch(GET_PROVINCES(provinces));
+    dispatch(GET_INFO(products));
+    loaded.current = true;
+  }
   return null;
 }
