@@ -8,8 +8,8 @@ import UploadButton from "../../components/buttons/UploadButton";
 
 const postProduct = async (product) => {
   try {
-    await axios.post("/api/products", product);
-    return { created: true };
+    const res = (await axios.post("/api/products", product)).data;
+    return { created: true, res };
   } catch (error) {
     return { created: false, error: error.message };
   }
@@ -46,7 +46,8 @@ export default function Page() {
     const product = { ...form, ...images };
     const response = await postProduct(product);
     if (response.created) {
-      router.push("/");
+      const { res, created } = response;
+      router.push(`/detail/${res.id}`);
     } else alert(response.error);
   };
 
