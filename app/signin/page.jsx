@@ -34,7 +34,7 @@ export default function SignInPage() {
 
   return (
     <div className=" text-center grid justify-center items-center mt-10">
-      <form className="w-96 flex flex-col gap-5" on onSubmit={onSubmit}>
+      <form className="w-96 flex flex-col gap-5" onSubmit={onSubmit}>
         <h1 className="font-semibold text-3xl mb-5">Crear cuenta</h1>
         <InputField
           id="username"
