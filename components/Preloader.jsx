@@ -1,7 +1,7 @@
 "use client";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GET_PROVINCES, GET_CATEGORIES, GET_INFO, multiplied, totalPrices } from "../store/slice";
-import {useRef } from "react";
+import { useRef } from "react";
 
 export default function Preloader({ data }) {
   const { categories, provinces, AllProducts } = data;
@@ -14,18 +14,16 @@ export default function Preloader({ data }) {
     loaded.current = true;
   }
 
-      const products = localStorage.getItem("products");
-      console.log(products);
-      const totalPrice = products.map((product) =>{
-        return product.quantity * product.unit_price
-      })
-      const quantityProducts= products.map((product) =>{
-        return product.quantity
-      })
-      dispatch(multiplied(quantityProducts))
-      dispatch(totalPrices(totalPrice))
-  
+  let products = JSON.parse(localStorage.getItem("products") || []);
 
+  const totalPrice = products.map((product) => {
+    return product.quantity * product.unit_price;
+  });
+  const quantityProducts = products.map((product) => {
+    return product.quantity;
+  });
+  dispatch(multiplied(quantityProducts));
+  dispatch(totalPrices(totalPrice));
 
   return null;
 }

@@ -7,35 +7,22 @@ import ButtonSession from "./ButtonSession";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import CartButton from "./CartButton";
+import { useSelector } from "react-redux";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-  
 
-  const amount = products.map((product) => {
-    return product.quantity;
-  });
+  const product = useSelector((state) => state.valores.cartQuantity);
 
-  const totalAmount = amount.reduce(
-    (accumulator, currentValue) => accumulator + currentValue,
-    0
-  );
-  console.log(totalAmount);
   return (
     <div className="flex justify-center  items-center h-[100px] w-full pt-2.5">
       <nav className="flex py-5 justify-evenly w-1/2 h-[90px] ">
         <div className="flex content-center items-center ">
           <Link href="/">
-            <Image
-              className="pr-2 h-2/4"
-              src="/images/logo.svg"
-              width={65.31}
-              height={40}
-              alt="logo"
-            />
+            <Image className="pr-2 h-2/4" src="/images/logo.svg" width={65.31} height={40} alt="logo" />
           </Link>
           <button className="inline-block align-baseline hover:text-[var(--background-sec)] mt-2 text-[var(--detail)] text-xs font-extrabold ">
             <Link href="/">
@@ -52,22 +39,14 @@ const NavBar = () => {
         </div>
         <div className="flex content-center items-center gap-5 ">
           <Link href="/cart">
-            <CartButton cartUpdated={cartUpdated} products={products} />
+            <CartButton />
           </Link>
         </div>
         <div className="flex gap-5">
           <ImageLogin />
           <div className="relative flex justify-evenly ">
-            <button
-              onClick={toggleDropdown}
-              className="rounded  focus:outline-none focus:ring"
-            >
-              <Image
-                src="/images/menuButton.svg"
-                width={40}
-                height={40}
-                alt="menu"
-              />
+            <button onClick={toggleDropdown} className="rounded  focus:outline-none focus:ring">
+              <Image src="/images/menuButton.svg" width={40} height={40} alt="menu" />
             </button>
           </div>
         </div>
@@ -78,12 +57,7 @@ const NavBar = () => {
               <LoginButton />
               <li className="px-4 py-2 hover:bg-gray-100">
                 <Link className="flex" href="/">
-                  <Image
-                    src="/images/lupaImage.svg"
-                    width={20}
-                    height={20}
-                    alt="icon"
-                  />
+                  <Image src="/images/lupaImage.svg" width={20} height={20} alt="icon" />
                   <p className="px-7">Explorar</p>
                 </Link>
               </li>
