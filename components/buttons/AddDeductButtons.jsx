@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 
 const AddDeductButtons = ({ data }) => {
   const product = {
+    id: data.id,
+    image: data.image,
     title: data.name,
     unit_price: data.price,
     quantity: 1,
     stock: data.stock,
   };
+ 
   const initializeState = () => {
     const storedProducts = JSON.parse(localStorage.getItem("products")) || [];
     const existingProduct = storedProducts.find(p => p.title === product.title);
