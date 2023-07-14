@@ -1,44 +1,142 @@
-import { mailOptions, transporter } from "../../../components/config/nodemailer";
+import { NextResponse } from "next/server";
+import { transporter } from "../../../components/config/nodemailer";
 
 const CONTACT_MESSAGE_FIELDS = {
   name: "Name",
   email: "Email",
-  subject: "Subject",
-  message: "Message",
+  
 };
-    
+
+
 const generateEmailContent = (data) => {
   const stringData = Object.entries(data).reduce(
     (str, [key, val]) =>
       (str += `${CONTACT_MESSAGE_FIELDS[key]}: \n${val} \n \n`),
     ""
   );
-  const htmlData = Object.entries(data).reduce((str, [key, val]) => {
-    return (str += `<h3 class="form-heading" align="left">${CONTACT_MESSAGE_FIELDS[key]}</h3><p class="form-answer" align="left">${val}</p>`);
-  }, "");
 
   return {
     text: stringData,
-    html: `<!DOCTYPE html><html> <head> <title></title> <meta charset="utf-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta http-equiv="X-UA-Compatible" content="IE=edge"/> <style type="text/css"> body, table, td, a{-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}table{border-collapse: collapse !important;}body{height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important;}@media screen and (max-width: 525px){.wrapper{width: 100% !important; max-width: 100% !important;}.responsive-table{width: 100% !important;}.padding{padding: 10px 5% 15px 5% !important;}.section-padding{padding: 0 15px 50px 15px !important;}}.form-container{margin-bottom: 24px; padding: 20px; border: 1px dashed #ccc;}.form-heading{color: #2a2a2a; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-weight: 400; text-align: left; line-height: 20px; font-size: 18px; margin: 0 0 8px; padding: 0;}.form-answer{color: #2a2a2a; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-weight: 300; text-align: left; line-height: 20px; font-size: 16px; margin: 0 0 24px; padding: 0;}div[style*="margin: 16px 0;"]{margin: 0 !important;}</style> </head> <body style="margin: 0 !important; padding: 0 !important; background: #fff"> <div style=" display: none; font-size: 1px; color: #fefefe; line-height: 1px;  max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; " ></div><table border="0" cellpadding="0" cellspacing="0" width="100%"> <tr> <td bgcolor="#ffffff" align="center" style="padding: 10px 15px 30px 15px" class="section-padding" > <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px" class="responsive-table" > <tr> <td> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tr> <td> <table width="100%" border="0" cellspacing="0" cellpadding="0" > <tr> <td style=" padding: 0 0 0 0; font-size: 16px; line-height: 25px; color: #232323; " class="padding message-content" > <h2>New Contact Message</h2> <div class="form-container">${htmlData}</div></td></tr></table> </td></tr></table> </td></tr></table> </td></tr></table> </body></html>`,
+    html: `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <style>
+            p, a, h1, h2, h3, h4, h5, h6 {font-family: 'Roboto', sans-serif !important;}
+            h1{ font-size: 30px !important;}
+            h2{ font-size: 25px !important;}
+            h3{ font-size: 18px !important;}
+            h4{ font-size: 16px !important;}
+            p, a{font-size: 15px !important;}
+    
+            .claseBoton{
+                width: 30%;
+                    background-color: #fcae3b;
+                    border: 2px solid #fcae3b;
+                    color: black; 
+                    padding: 16px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    font-weight: bold;
+                    display: inline-block;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    transition-duration: 0.4s;
+                    cursor: pointer;
+            }
+            .claseBoton:hover{
+                background-color: #000000;
+                color: #ffffff;
+            }
+            .imag{
+                width: 20px;
+                height: 20px;
+            }
+            .contA{
+                margin: 0px 5px 0 5px;
+            }
+            .afooter{
+                color: #ffffff !important; 
+                text-decoration: none;
+                font-size: 13px !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="width: 100%; background-color: #e3e3e3;">
+            <div style="padding: 20px 10px 20px 10px;">
+                <!-- Imagen inicial -->
+                <div style="background-color: #000000; padding: 10px 0px 10px 0px; width: 100%; text-align: center;">
+                    <img src="/public/images/pretwor.png" alt="" style="width: 200px; height: 60px;">
+                </div>
+                <!-- Imagen inicial -->
+    
+                <!-- Contenido principal -->
+                <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
+                    <h1>PINCHE CALIENTE</h1>
+                    <img src="https://static.wikia.nocookie.net/muppet/images/6/6a/Zink-MikeRuiz-MissPiggyAndTheSerpent-%282005%29.jpg/revision/latest?cb=20120409231301" style="width:100%" >
+                    
+    
+                    <!-- Gracias -->
+                    <p>Gracias por tu tiempo.🍆💦💦</p>
+                    <p style="margin-bottom: 50px;"><i>Atentamente:</i><br>Equipo Pretwor</p>
+    
+                    <!-- Botón -->
+                    <a class="claseBoton" href="https://www.pretwor.com/">Pretwor</a>
+                </div>
+                <!-- Contenido principal -->
+    
+                <!-- Footer -->
+                <div style="background-color: #282828; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                    <!-- Redes sociales -->
+                    <a href="https://www.facebook.com/pretwor" class="contA"><img src="/public/images/fb.png" class="imag" /></a>
+                    <a href="https://www.instagram.com/pretwor/" class="contA"><img src="/public/images/ig.png" class="imag" /></a>
+                    <a href="https://wa.me/573224294332" class="contA"><img src="/public/images/wapp.png" class="imag" /></a>
+                    <a href="mailto:contacto@pretwor.com" class="contA"><img src="/public/images/em.png" class="imag" /></a>
+                    <!-- Redes sociales -->
+    
+                    <h4>Soporte</h4>
+                    <p style="font-size: 13px; padding: 0px 20px 0px 20px;">
+                        Comunícate con nosotros por los siguientes medios:<br>
+                        Correo: <a class="afooter" href="mailto:proyectos@pretwor.com">proyectos@pretwor.com</a><br>
+                        Whatsapp: <a class="afooter" href="https://wa.me/573224294332">+57 322 429 4332</a><br>
+                    </p>
+                    <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                        © 2022 Pretwor, todos los derechos reservados.
+                    </p>
+                </div>
+                <!-- Footer -->
+    
+    
+    
+            </div>
+        </div>
+    </body>
+    </html>`,
   };
 };
 
-const handler = async (req, res) => {
-   const data =req.body
+export async function POST(req) {
+  const data = await req.json();
 
-    try {
-      await transporter.sendMail({
-        ...mailOptions,
-        ...generateEmailContent(data),
-        subject: data.subject,
-      });
-
-      return res.status(200).json({ success: true });
-    } catch (err) {
-      console.log(err);
-      return res.status(400).json({ message: err.message });
-    }
+  const mailOptions = {
+    from: "artifypf@gmail.com",
+    to: data.email,
+    subject: "EL PACK DE SOFIA 🔥👅",
   };
- 
+  try {
+    await transporter.sendMail({
+      ...mailOptions,
+      ...generateEmailContent(data),
+      
 
-export default handler;
+    });
+    return NextResponse.json({ status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 404 });
+
+  }
+}
