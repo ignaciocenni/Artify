@@ -1,23 +1,17 @@
 import Home from "../components/Home";
 import { getAllProducts } from "../app/api/products/controllers";
-import { getAllCategories } from "../app/api/category/controllers";
-import { getAllProvinces } from "../app/api/provinces/controllers";
+import store from "../store/store";
+
 const dataFetching = async () => {
   const products = await getAllProducts();
-  const categories = await getAllCategories();
-  const provinces = await getAllProvinces();
-  return {
-    products,
-    categories,
-    provinces,
-  };
+  return products;
 };
 
 export default async function Page() {
-  const { products, categories, provinces } = await dataFetching();
+  const products = await dataFetching();
   return (
     <div>
-      <Home products={products} categories={categories} provinces={provinces} />
+      <Home products={products} />
     </div>
   );
 }
