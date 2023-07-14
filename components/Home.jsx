@@ -1,6 +1,5 @@
 "use client";
 import Filters from "../components/Filters";
-import NavBar from "../components/NavBar/NavBar";
 import Cards from "../components/Cards";
 import SearchBar from "../components/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
