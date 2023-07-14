@@ -2,34 +2,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import ImageLogin from "./ImageLogin";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ButtonSession from "./ButtonSession";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import CartButton from "./CartButton";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [cartUpdated, setCartUpdated] = useState(false);
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    const handleStorageChange = (event) => {
-      if (event.key === "products") {
-        setCartUpdated(!cartUpdated);
-      }
-    };
-    const localStorageListener = () => {
-      window.addEventListener("storage", handleStorageChange);
-      return () => {
-        window.removeEventListener("storage", handleStorageChange);
-      };
-    };
-    localStorageListener();
-    const productsLocalStorage = () => {
-      const cartProducts = JSON.parse(window.localStorage.getItem("products")) || [];
-      setProducts(cartProducts);
-    };
-    productsLocalStorage();
-  }, [cartUpdated]);
+  
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
