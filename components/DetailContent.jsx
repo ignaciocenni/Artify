@@ -19,7 +19,7 @@ const DetailContent = ({ data }) => {
   const { reviews, image, category, price, name, user, description } = data;
 
   const amount = reviews.reduce((accumulator, currentValue) => accumulator + currentValue.rating, 0);
-  const average = amount / reviews.length;
+  const averange = amount / reviews.length;
 
   const [questions, setQuestions] = useState([]);
 
@@ -51,7 +51,7 @@ const DetailContent = ({ data }) => {
             </div>
 
             <div className="flex content-center items-center gap-1">
-              <Stars average={average} />
+              <Stars averange={averange} />
             </div>
 
             <div className="flex items-center gap-2">
