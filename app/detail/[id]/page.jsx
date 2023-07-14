@@ -1,4 +1,3 @@
-"use-client"
 import DetailContent from "../../../components/DetailContent";
 import { getProduct } from "../../api/products/[id]/controllers";
 const dataFetching = async (id) => {

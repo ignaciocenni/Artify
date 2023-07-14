@@ -1,4 +1,4 @@
-"use-client"
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import close from "../public/images/close.svg";
@@ -16,10 +16,7 @@ import { useState } from "react";
 const DetailContent = ({ data }) => {
   const { reviews, image, category, price, name, user, description } = data;
 
-  const amount = reviews.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.rating,
-    0
-  );
+  const amount = reviews.reduce((accumulator, currentValue) => accumulator + currentValue.rating, 0);
   const average = amount / reviews.length;
 
   const [questions, setQuestions] = useState([]);
@@ -38,13 +35,7 @@ const DetailContent = ({ data }) => {
       <div className="flex flex-col justify-center items-center content-center gap-14">
         <div className="flex items-start justify-center">
           <Link href={"/"}>
-            <Image
-              className="relative top-2 left-2"
-              src={close}
-              alt="close"
-              width={50}
-              height={50}
-            />
+            <Image className="relative top-2 left-2" src={close} alt="close" width={50} height={50} />
           </Link>
 
           <ImageSlider image={image} />
