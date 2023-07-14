@@ -1,5 +1,8 @@
+
 import DetailContent from "../../../components/DetailContent";
 import { getProduct } from "../../api/products/[id]/controllers";
+import DetailContent from "../../../components/DetailContent";
+
 const dataFetching = async (id) => {
   let product = getProduct(id);
   return product;

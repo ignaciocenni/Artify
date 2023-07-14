@@ -7,26 +7,26 @@ mercadopago.configure({
 
 export async function POST(req) {
   const requestData = await req.json();
-  const productos = requestData.map((ele)=>(
-    {
+  const products = requestData.map((ele) => ({
     title: ele.name,
     unit_price: Number(ele.price),
     quantity: Number(ele.stock),
-    }
-  ))  
-  const URL = "http://localhost:3000/detail";
+  }));
+
+  const URL = "/detail";
+
   try {
     const preference = {
-      items: productos,
+      items: products,
       auto_return: "approved",
       back_urls: {
-        "success": `${URL}`,
-        "failure": `${URL}`,
-        "pending": `${URL}`
+        success: `${URL}`,
+        failure: `${URL}`,
+        pending: `${URL}`,
       },
-      notification_url: `${URL}/api/notify`,
+      notification_url: `/api/notify`,
     };
-    const response = await mercadopago.preferences.create(preference)
+    const response = await mercadopago.preferences.create(preference);
     return NextResponse.json({ id: response.body.id }, { status: 200 });
   } catch (error) {
     return NextResponse.json("entra en catch", { status: 400 });
