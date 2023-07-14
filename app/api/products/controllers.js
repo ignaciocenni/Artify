@@ -9,8 +9,14 @@ const getAllProducts = async (name) => {
           mode: "insensitive",
         },
       },
-      include: {
-        reviews: true,
+      select: {
+        id: true,
+        name: true,
+        price: true,
+        image: true,
+        userId: true,
+        user: true,
+        category: true,
         user: {
           select: {
             name: true,
@@ -35,8 +41,14 @@ const getAllProducts = async (name) => {
     return response;
   }
   const response = await prisma.Product.findMany({
-    include: {
-      reviews: true,
+    select: {
+      id: true,
+      name: true,
+      price: true,
+      image: true,
+      userId: true,
+      user: true,
+      category: true,
       user: {
         select: {
           name: true,
@@ -61,25 +73,8 @@ const getAllProducts = async (name) => {
   return response;
 };
 
-const addProduct = async (
-  name,
-  description,
-  price,
-  stock,
-  image,
-  userId,
-  categoryId
-) => {
-  if (
-    !name ||
-    !description ||
-    !price ||
-    !stock ||
-    !image ||
-    !userId ||
-    !categoryId
-  )
-    throw new Error("Missing arguments");
+const addProduct = async (name, description, price, stock, image, userId, categoryId) => {
+  if (!name || !description || !price || !stock || !image || !userId || !categoryId) throw new Error("Missing arguments");
 
   // Validates:
   //Name
@@ -87,8 +82,7 @@ const addProduct = async (
   if (!nameRegex.test(name)) throw new Error("The must be a normal name...");
 
   //Description
-  if (description.length <= 10 && !nameRegex.test(description))
-    throw new Error("The description must contain at least 10 characters.");
+  if (description.length <= 10 && !nameRegex.test(description)) throw new Error("The description must contain at least 10 characters.");
 
   //Price
   if (price <= 0) throw new Error("Price cannot be less than or equal to $0");
