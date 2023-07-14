@@ -10,7 +10,7 @@ import Heart from "./Heart";
 import Stars from "./Stars";
 import NavBar from "./NavBar/NavBar";
 import Footer from "./Footer";
-
+import AddDeductButtons from "../components/buttons/AddDeductButtons"
 
 const DetailContent = async ({ data }) => {
   const amount = data.reviews
@@ -103,6 +103,9 @@ const DetailContent = async ({ data }) => {
             <button className="hover:bg-[var(--background-sec)] hover:text-black w-[100%] text-white bg-[var(--detail)] py-5 px-64 rounded-lg flex content-center items-center gap-5 shadow-xl">
               <h1 className="text-xs font-extrabold">Comprar Ahora</h1>
             </button>
+            <AddDeductButtons data={data}/>
+          </div>
+          <div>
           </div>
         </div>
 
