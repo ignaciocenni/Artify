@@ -1,23 +1,23 @@
-import Home from "../components/Home";
-import { getAllProducts } from "../app/api/products/controllers";
-import { getAllCategories } from "../app/api/category/controllers";
-import { getAllProvinces } from "../app/api/provinces/controllers";
-const dataFetching = async () => {
-  const products = await getAllProducts();
-  const categories = await getAllCategories();
-  const provinces = await getAllProvinces();
-  return {
-    products,
-    categories,
-    provinces,
-  };
-};
+"use client";
+import Filters from "../components/Filters";
+import Cards from "../components/Cards";
+import SearchBar from "../components/SearchBar";
+import { useDispatch, useSelector } from "react-redux";
+import { GET_INFO } from "../store/slice";
 
-export default async function Page() {
-  const { products, categories, provinces } = await dataFetching();
+export default function Home() {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.valores.products);
+
   return (
-    <div>
-      <Home products={products} categories={categories} provinces={provinces} />
-    </div>
+    <>
+      <div className="flex py-2 px-5">
+        <div className="flex flex-col gap-6 w-[25%] ">
+          <SearchBar />
+          <Filters />
+        </div>
+        <Cards products={products} />
+      </div>
+    </>
   );
 }
