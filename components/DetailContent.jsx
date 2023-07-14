@@ -11,6 +11,8 @@ import AddQuestion from "./DetailComponents/AddQuestion";
 import SellerInfo from "./DetailComponents/SellerInfo";
 import BuyNowButton from "./buttons/BuyNowButton";
 import Footer from "./Footer";
+import AddDeductButtons from "../components/buttons/AddDeductButtons"
+
 import { useState } from "react";
 
 const DetailContent = ({ data }) => {
@@ -66,7 +68,9 @@ const DetailContent = ({ data }) => {
             </div>
 
             <SellerInfo user={user} />
-
+            <AddDeductButtons data={data}/>
+          </div>
+          <div>
             <BuyNowButton />
           </div>
         </div>

@@ -11,10 +11,9 @@ export async function POST(req) {
     title: ele.name,
     unit_price: Number(ele.price),
     quantity: Number(ele.stock),
-  }));
 
+    }))  
   const URL = "/detail";
-
   try {
     const preference = {
       items: products,
@@ -26,8 +25,10 @@ export async function POST(req) {
       },
       notification_url: `/api/notify`,
     };
-    const response = await mercadopago.preferences.create(preference);
-    return NextResponse.json({ id: response.body.id }, { status: 200 });
+
+    const response = await mercadopago.preferences.create(preference)
+    console.log(response)
+    return NextResponse.json({ url: response.body.init_point }, { status: 200 });
   } catch (error) {
     return NextResponse.json("entra en catch", { status: 400 });
   }
