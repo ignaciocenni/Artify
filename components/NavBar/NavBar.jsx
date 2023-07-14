@@ -6,7 +6,7 @@ import { useState } from "react";
 import ButtonSession from "./ButtonSession";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
-import Cart from "./Cart";
+import Cart from "./CartButton";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
