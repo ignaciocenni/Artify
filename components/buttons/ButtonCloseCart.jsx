@@ -2,7 +2,9 @@ import { useDispatch } from "react-redux";
 import { multiplied } from "../../store/slice";
 
 export default function ButtonCloseCart({id,setProducts}) {
+
   const dispatch = useDispatch();
+
   const cartList = JSON.parse(localStorage.getItem("products"));
   
   const handlerClick = async (id) => {
@@ -10,6 +12,7 @@ export default function ButtonCloseCart({id,setProducts}) {
   const newCartList = cartList.filter(item=>item.id != id)
   localStorage.setItem("products", JSON.stringify(newCartList));
   setProducts(newCartList)
+
   const newList = await JSON.parse(localStorage.getItem("products"));
   if(newCartList.length === 0){
     dispatch(multiplied([]))
@@ -17,8 +20,7 @@ export default function ButtonCloseCart({id,setProducts}) {
   const quantityProducts = newList.map((product) => product.quantity);
   
   dispatch(multiplied(quantityProducts))
-  console.log(quantityProducts);
-  //console.log(JSON.parse(localStorage.getItem("products")))
+  
 }
  
     return (
