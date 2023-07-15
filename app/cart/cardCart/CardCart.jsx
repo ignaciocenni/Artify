@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { multiplied, totalPrices } from "../../../store/slice";
 import numberConverte from "./numberConverte";
 
 export default function CardCart({ id, image, name, price, stock, quantity }) {
-
   const initializeState = () => {
     const storedProducts = JSON.parse(localStorage.getItem("products")) || [];
-    const existingProduct = storedProducts.find(p => p.title === name);
+    const existingProduct = storedProducts.find((p) => p.title === name);
 
     if (existingProduct) {
       return {
@@ -24,7 +25,18 @@ export default function CardCart({ id, image, name, price, stock, quantity }) {
 
   const [arrProduct, setArrProduct] = useState([]);
   const [currentQuantity, setCurrentQuantity] = useState(1);
-  console.log(arrProduct);
+
+  const dispatch = useDispatch();
+
+  const totalPrice = arrProduct.map((product) => {
+    return product.quantity * product.unit_price;
+  });
+  const quantityProducts = arrProduct.map((product) => {
+    return product.quantity;
+  });
+  dispatch(multiplied(quantityProducts));
+  dispatch(totalPrices(totalPrice));
+
   useEffect(() => {
     const { arrProduct, currentQuantity } = initializeState();
     setArrProduct(arrProduct);
@@ -33,32 +45,29 @@ export default function CardCart({ id, image, name, price, stock, quantity }) {
 
   const handleAddProduct = () => {
     if (currentQuantity + 1 > stock) {
-      return; 
+      return;
     }
 
-    const existingProduct = arrProduct.find(p => p.title === name);
+    const existingProduct = arrProduct.find((p) => p.title === name);
 
     if (existingProduct) {
       existingProduct.quantity += 1;
-      existingProduct.multiplied = price * (currentQuantity + 1)
+      existingProduct.multiplied = price * (currentQuantity + 1);
       setCurrentQuantity(existingProduct.quantity);
       localStorage.setItem("products", JSON.stringify(arrProduct));
     } else {
       const updatedProduct = { ...product };
       updatedProduct.quantity = currentQuantity + 1;
-      setArrProduct(prevArrProduct => [...prevArrProduct, updatedProduct]);
-      localStorage.setItem(
-        "products",
-        JSON.stringify([...arrProduct, updatedProduct])
-      );
+      setArrProduct((prevArrProduct) => [...prevArrProduct, updatedProduct]);
+      localStorage.setItem("products", JSON.stringify([...arrProduct, updatedProduct]));
       setCurrentQuantity(updatedProduct.quantity);
     }
   };
 
   const handleDeductProduct = () => {
     if (currentQuantity > 1) {
-      setCurrentQuantity(prevQuantity => prevQuantity - 1);
-      const existingProduct = arrProduct.find(p => p.title === name);
+      setCurrentQuantity((prevQuantity) => prevQuantity - 1);
+      const existingProduct = arrProduct.find((p) => p.title === name);
 
       if (existingProduct) {
         existingProduct.quantity -= 1;
@@ -66,7 +75,7 @@ export default function CardCart({ id, image, name, price, stock, quantity }) {
       }
     }
   };
- 
+
   return (
     <div className="flex py-4 mb-4 border-b-gray-00 border-b-2 gap-2 justify-between ">
       <div className="flex gap-2">
@@ -87,16 +96,16 @@ export default function CardCart({ id, image, name, price, stock, quantity }) {
           <div className="w-max flex items-center text-white ">
             <button
               className="px-3  py-1 rounded-l-lg hover:bg-[var(--background-sec)] hover:text-black text-white font-bold bg-[var(--detail)]  flex content-center items-center shadow-xl transition-colors "
-              onClick={handleDeductProduct}>
+              onClick={handleDeductProduct}
+            >
               -
             </button>
 
-            <div className="inline-block w-max  py-1 bg-[var(--detail)] text-white px-3">
-              {currentQuantity}
-            </div>
+            <div className="inline-block w-max  py-1 bg-[var(--detail)] text-white px-3">{currentQuantity}</div>
             <button
               className="px-3  py-1 rounded-r-lg hover:bg-[var(--background-sec)] hover:text-black text-white font-bold bg-[var(--detail)]  flex content-center items-center shadow-xl transition-colors "
-              onClick={handleAddProduct}>
+              onClick={handleAddProduct}
+            >
               +
             </button>
           </div>
@@ -109,7 +118,7 @@ export default function CardCart({ id, image, name, price, stock, quantity }) {
       </div>
 
       <div className="flex items-end">
-        <h1 className=" ml-auto text-xl font-medium" >${quantity * price}</h1>
+        <h1 className=" ml-auto text-xl font-medium">${quantity * price}</h1>
       </div>
     </div>
   );
