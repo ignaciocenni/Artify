@@ -9,7 +9,7 @@ import ImageSlider from "./DetailComponents/ImageSlider";
 import LatestReviews from "./DetailComponents/LatestReviews";
 import AddQuestion from "./DetailComponents/AddQuestion";
 import SellerInfo from "./DetailComponents/SellerInfo";
-import BuyNowButton from "./buttons/BuyNowButton";
+import BuyNowButton from "./buttons/BuyAndDetail";
 import Footer from "./Footer";
 import AddDeductButtons from "../components/buttons/AddDeductButtons"
 

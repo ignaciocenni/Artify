@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import BuyNowButton from "../components/buttons/BuyNowButton";
+import BuyNowButton from "./buttons/BuyAndDetail";
 import CardCart from "../app/cart/cardCart/CardCart";
 import { useSelector } from "react-redux";
 export default function CartComponent() {
