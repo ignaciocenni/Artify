@@ -24,6 +24,7 @@ export default function CartComponent() {
               price={product.unit_price}
               stock={product.stock}
               quantity={product.quantity}
+              setProducts={setProducts}
             />
           ))}
       </div>
