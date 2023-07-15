@@ -1,10 +1,11 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import NavBar from "../components/NavBar/NavBar";
-import ProviderGoogle from "../components/ProviderGoogle";
+import SessionProvider from "../components/SessionProvider";
 import Providers from "../store/provider";
 import { getAllCategories } from "../app/api/category/controllers";
 import { getAllProvinces } from "../app/api/provinces/controllers";
+import { getAllProducts } from "../app/api/products/controllers";
 import Preloader from "../components/Preloader";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,9 +17,11 @@ export const metadata = {
 const dataFetching = async () => {
   const categories = await getAllCategories();
   const provinces = await getAllProvinces();
+  const AllProducts = await getAllProducts();
   return {
     categories,
     provinces,
+    AllProducts,
   };
 };
 
@@ -27,13 +30,13 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <Providers>
+        <SessionProvider>
         <Preloader data={data} />
-        <ProviderGoogle>
           <body className={inter.className}>
             <NavBar />
             {children}
           </body>
-        </ProviderGoogle>
+        </SessionProvider>
       </Providers>
     </html>
   );
