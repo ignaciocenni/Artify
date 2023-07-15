@@ -1,11 +1,11 @@
 
 export default function ButtonCloseCart({id,setProducts}) {
+  
   const cartList = JSON.parse(localStorage.getItem("products"));
   const handlerClick = (id)=>{
   const newCartList = cartList.filter(item=>item.id != id)
   localStorage.setItem("products", JSON.stringify(newCartList));
   setProducts(newCartList)
-  console.log(JSON.parse(localStorage.getItem("products")))
 }
  
     return (

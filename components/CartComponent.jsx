@@ -14,7 +14,7 @@ export default function CartComponent() {
     <div className="flex mx-auto w-full md:w-3/5 lg:w-2/5 xl:w-1/3 items-start justify-center gap-10">
       <div className="flex flex-col p-4 bg-[var(--primary)] rounded-2xl shadow-md shadow-gray-600">
         <h1 className="text-2xl font-medium pb-2  ">Productos</h1>
-        {products.length &&
+        {products.length == 0? '':
           products.map((product) => (
             <CardCart
               key={product.id}
