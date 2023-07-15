@@ -17,11 +17,11 @@ export const metadata = {
 const dataFetching = async () => {
   const categories = await getAllCategories();
   const provinces = await getAllProvinces();
-  const products = await getAllProducts();
+  const AllProducts = await getAllProducts();
   return {
     categories,
     provinces,
-    products,
+    AllProducts,
   };
 };
 
