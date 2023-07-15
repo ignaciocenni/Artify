@@ -8,7 +8,7 @@ import ButtonCloseCart from '../../../components/buttons/ButtonCloseCart'
 
 export default function CardCart({ id, image, name, price, stock, quantity,setProducts }) {
   const initializeState = () => {
-    const storedProducts = JSON.parse(localStorage.getItem("products")) || [];
+    const storedProducts =  JSON.parse(localStorage.getItem("products")) || [];
     const existingProduct = storedProducts.find((p) => p.title === name);
 
     if (existingProduct) {
@@ -29,10 +29,10 @@ export default function CardCart({ id, image, name, price, stock, quantity,setPr
 
   const dispatch = useDispatch();
 
-  const totalPrice = arrProduct.map((product) => {
+  const totalPrice = arrProduct?.map((product) => {
     return product.quantity * product.unit_price;
   });
-  const quantityProducts = arrProduct.map((product) => {
+  const quantityProducts = arrProduct?.map((product) => {
     return product.quantity;
   });
   dispatch(multiplied(quantityProducts));
@@ -55,24 +55,26 @@ export default function CardCart({ id, image, name, price, stock, quantity,setPr
       existingProduct.quantity += 1;
       existingProduct.multiplied = price * (currentQuantity + 1);
       setCurrentQuantity(existingProduct.quantity);
-      localStorage.setItem("products", JSON.stringify(arrProduct));
+       localStorage.setItem("products", JSON.stringify(arrProduct));
+      
     } else {
       const updatedProduct = { ...product };
       updatedProduct.quantity = currentQuantity + 1;
       setArrProduct((prevArrProduct) => [...prevArrProduct, updatedProduct]);
-      localStorage.setItem("products", JSON.stringify([...arrProduct, updatedProduct]));
+       localStorage.setItem("products", JSON.stringify([...arrProduct, updatedProduct]));
       setCurrentQuantity(updatedProduct.quantity);
     }
   };
 
-  const handleDeductProduct = () => {
+  const handleDeductProduct =  () => {
     if (currentQuantity > 1) {
       setCurrentQuantity((prevQuantity) => prevQuantity - 1);
       const existingProduct = arrProduct.find((p) => p.title === name);
 
       if (existingProduct) {
+
         existingProduct.quantity -= 1;
-        localStorage.setItem("products", JSON.stringify(arrProduct));
+         localStorage.setItem("products", JSON.stringify(arrProduct));
       }
     }
   };
