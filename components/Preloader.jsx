@@ -13,8 +13,7 @@ export default function Preloader({ data }) {
     dispatch(GET_INFO(AllProducts));
     loaded.current = true;
   }
-
-  let products = !localStorage.getItem ? JSON.parse(localStorage.getItem("products") || []) : [];
+  let products = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("products") || []) : [];
 
   const totalPrice = products.map((product) => {
     return product.quantity * product.unit_price;
