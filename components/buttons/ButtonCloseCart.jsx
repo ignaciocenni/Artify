@@ -1,11 +1,24 @@
+import { useDispatch } from "react-redux";
+import { multiplied } from "../../store/slice";
 
 export default function ButtonCloseCart({id,setProducts}) {
+  const dispatch = useDispatch();
   const cartList = JSON.parse(localStorage.getItem("products"));
-  const handlerClick = (id)=>{
+  
+  const handlerClick = async (id) => {
+
   const newCartList = cartList.filter(item=>item.id != id)
   localStorage.setItem("products", JSON.stringify(newCartList));
   setProducts(newCartList)
-  console.log(JSON.parse(localStorage.getItem("products")))
+  const newList = await JSON.parse(localStorage.getItem("products"));
+  if(newCartList.length === 0){
+    dispatch(multiplied([]))
+  }
+  const quantityProducts = newList.map((product) => product.quantity);
+  
+  dispatch(multiplied(quantityProducts))
+  console.log(quantityProducts);
+  //console.log(JSON.parse(localStorage.getItem("products")))
 }
  
     return (
