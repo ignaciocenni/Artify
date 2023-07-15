@@ -47,10 +47,10 @@ export const Slice = createSlice({
       state.products = payload;
     },
     multiplied: (state, { type, payload }) => {
-      state.cartQuantity = payload.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+      state.cartQuantity = payload?.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     },
     totalPrices: (state, { type, payload }) => {
-      state.totalPrice = payload.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+      state.totalPrice = payload?.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     },
   },
 });
