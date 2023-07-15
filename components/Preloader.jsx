@@ -14,7 +14,7 @@ export default function Preloader({ data }) {
     loaded.current = true;
   }
 
-  let products = JSON.parse(localStorage.getItem("products") || []);
+  let products = !localStorage.getItem ? JSON.parse(localStorage.getItem("products") || []) : [];
 
   const totalPrice = products.map((product) => {
     return product.quantity * product.unit_price;
