@@ -6,13 +6,16 @@ import { useState } from "react";
 import ButtonSession from "./ButtonSession";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
-import Cart from "./CartButton";
+import CartButton from "./CartButton";
+import { useSelector } from "react-redux";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+  const product = useSelector((state) => state.valores.cartQuantity);
 
   return (
     <div className="flex justify-center  items-center h-[100px] w-full pt-2.5">
@@ -36,7 +39,7 @@ const NavBar = () => {
         </div>
         <div className="flex content-center items-center gap-5 ">
           <Link href="/cart">
-            <Cart />
+            <CartButton />
           </Link>
         </div>
         <div className="flex gap-5">

@@ -8,6 +8,8 @@ export const Slice = createSlice({
     provinces: [],
     provincesFilter: [],
     categories: [],
+    cartQuantity: 0,
+    totalPrice: 0,
   },
 
   reducers: {
@@ -39,16 +41,18 @@ export const Slice = createSlice({
     category: (state, action) => {
       const category = [...state.provincesFilter];
       state.products =
-        action.payload === "allCategories"
-          ? category
-          : category.filter((value) => value.category.name.includes(action.payload));
+        action.payload === "allCategories" ? category : category.filter((value) => value.category.name.includes(action.payload));
     },
     search: (state, { type, payload }) => {
-      console.log(payload);
       state.products = payload;
+    },
+    multiplied: (state, { type, payload }) => {
+      state.cartQuantity = payload.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    },
+    totalPrices: (state, { type, payload }) => {
+      state.totalPrice = payload.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     },
   },
 });
 
-export const { GET_INFO, GET_CATEGORIES, GET_PROVINCES, countrie, price, category, search } =
-  Slice.actions;
+export const { GET_INFO, GET_CATEGORIES, GET_PROVINCES, countrie, price, category, search, multiplied, totalPrices } = Slice.actions;

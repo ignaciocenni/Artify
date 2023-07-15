@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { multiplied, totalPrices } from "../../store/slice";
 
 const AddDeductButtons = ({ data }) => {
   const product = {
+    id: data.id,
+    image: data.image,
     title: data.name,
     unit_price: data.price,
     quantity: 1,
     stock: data.stock,
   };
+
   const initializeState = () => {
     const storedProducts = JSON.parse(localStorage.getItem("products")) || [];
-    const existingProduct = storedProducts.find(p => p.title === product.title);
+    const existingProduct = storedProducts.find((p) => p.title === product.title);
 
     if (existingProduct) {
       return {
@@ -23,9 +28,18 @@ const AddDeductButtons = ({ data }) => {
       };
     }
   };
-
+  const dispatch = useDispatch();
   const [arrProduct, setArrProduct] = useState([]);
   const [currentQuantity, setCurrentQuantity] = useState(1);
+
+  const totalPrice = arrProduct.map((product) => {
+    return product.quantity * product.unit_price;
+  });
+  const quantityProducts = arrProduct.map((product) => {
+    return product.quantity;
+  });
+  dispatch(multiplied(quantityProducts));
+  dispatch(totalPrices(totalPrice));
 
   useEffect(() => {
     const { arrProduct, currentQuantity } = initializeState();
@@ -35,10 +49,10 @@ const AddDeductButtons = ({ data }) => {
 
   const handleAddProduct = () => {
     if (currentQuantity + 1 > product.stock) {
-      return; 
+      return;
     }
 
-    const existingProduct = arrProduct.find(p => p.title === product.title);
+    const existingProduct = arrProduct.find((p) => p.title === product.title);
 
     if (existingProduct) {
       existingProduct.quantity += 1;
@@ -47,19 +61,16 @@ const AddDeductButtons = ({ data }) => {
     } else {
       const updatedProduct = { ...product };
       updatedProduct.quantity = currentQuantity + 1;
-      setArrProduct(prevArrProduct => [...prevArrProduct, updatedProduct]);
-      localStorage.setItem(
-        "products",
-        JSON.stringify([...arrProduct, updatedProduct])
-      );
+      setArrProduct((prevArrProduct) => [...prevArrProduct, updatedProduct]);
+      localStorage.setItem("products", JSON.stringify([...arrProduct, updatedProduct]));
       setCurrentQuantity(updatedProduct.quantity);
     }
   };
 
   const handleDeductProduct = () => {
     if (currentQuantity > 1) {
-      setCurrentQuantity(prevQuantity => prevQuantity - 1);
-      const existingProduct = arrProduct.find(p => p.title === product.title);
+      setCurrentQuantity((prevQuantity) => prevQuantity - 1);
+      const existingProduct = arrProduct.find((p) => p.title === product.title);
 
       if (existingProduct) {
         existingProduct.quantity -= 1;
@@ -89,7 +100,7 @@ const AddDeductButtons = ({ data }) => {
         <h1 className="text-xs font-extrabold">Restar producto</h1>
       </button>
       <div>
-      <button onClick={handleClearProducts}>Deshacer Products</button>
+        <button onClick={handleClearProducts}>Deshacer Products</button>
       </div>
     </div>
   );
