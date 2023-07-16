@@ -1,15 +1,19 @@
-"use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { multiplied, totalPrices } from "../../../store/slice";
+import { localProducts } from "../../../store/slice";
 import numberConverte from "./numberConverte";
-import ButtonCloseCart from '../../../components/buttons/ButtonCloseCart'
+import ButtonCloseCart from "../../../components/buttons/ButtonCloseCart";
 
-export default function CardCart({ id, image, name, price, stock, quantity,setProducts }) {
+export default function CardCart({ id, image, name, price, stock, quantity, setProducts }) {
+  const dispatch = useDispatch();
+  const updateCart = (updatedArrProduct) => {
+    dispatch(localProducts(updatedArrProduct));
+  };
+
   const initializeState = () => {
-    const storedProducts =  JSON.parse(localStorage.getItem("products")) || [];
-    const existingProduct = storedProducts.find((p) => p.title === name);
+    const storedProducts = JSON.parse(localStorage.getItem("products")) || [];
+    const existingProduct = storedProducts.find((p) => p.id === id);
 
     if (existingProduct) {
       return {
@@ -19,24 +23,13 @@ export default function CardCart({ id, image, name, price, stock, quantity,setPr
     } else {
       return {
         arrProduct: storedProducts,
-        currentQuantity: product.quantity,
+        currentQuantity: quantity, 
       };
     }
   };
 
   const [arrProduct, setArrProduct] = useState([]);
   const [currentQuantity, setCurrentQuantity] = useState(1);
-
-  const dispatch = useDispatch();
-
-  const totalPrice = arrProduct?.map((product) => {
-    return product.quantity * product.unit_price;
-  });
-  const quantityProducts = arrProduct?.map((product) => {
-    return product.quantity;
-  });
-  dispatch(multiplied(quantityProducts));
-  dispatch(totalPrices(totalPrice));
 
   useEffect(() => {
     const { arrProduct, currentQuantity } = initializeState();
@@ -45,43 +38,41 @@ export default function CardCart({ id, image, name, price, stock, quantity,setPr
   }, [quantity]);
 
   const handleAddProduct = () => {
-    if (currentQuantity + 1 > stock) {
-      return;
-    }
-
-    const existingProduct = arrProduct.find((p) => p.title === name);
-
-    if (existingProduct) {
-      existingProduct.quantity += 1;
-      existingProduct.multiplied = price * (currentQuantity + 1);
-      setCurrentQuantity(existingProduct.quantity);
-       localStorage.setItem("products", JSON.stringify(arrProduct));
-      
-    } else {
-      const updatedProduct = { ...product };
-      updatedProduct.quantity = currentQuantity + 1;
-      setArrProduct((prevArrProduct) => [...prevArrProduct, updatedProduct]);
-       localStorage.setItem("products", JSON.stringify([...arrProduct, updatedProduct]));
-      setCurrentQuantity(updatedProduct.quantity);
+    if (currentQuantity + 1 <= stock) {
+      const updatedArrProduct = JSON.parse(localStorage.getItem("products")) || [];
+  
+      const updatedProduct = updatedArrProduct.find((p) => p.id === id);
+      if (updatedProduct) {
+        updatedProduct.quantity += 1;
+      }
+  
+      setArrProduct(updatedArrProduct);
+      setCurrentQuantity((prevQuantity) => prevQuantity + 1);
+  
+      localStorage.setItem("products", JSON.stringify(updatedArrProduct));
+      updateCart(updatedArrProduct);
     }
   };
-
-  const handleDeductProduct =  () => {
+  const handleDeductProduct = () => {
     if (currentQuantity > 1) {
-      setCurrentQuantity((prevQuantity) => prevQuantity - 1);
-      const existingProduct = arrProduct.find((p) => p.title === name);
+      const updatedArrProduct = JSON.parse(localStorage.getItem("products")) || [];
 
-      if (existingProduct) {
-
-        existingProduct.quantity -= 1;
-         localStorage.setItem("products", JSON.stringify(arrProduct));
+      const updatedProduct = updatedArrProduct.find((p) => p.id === id);
+      if (updatedProduct) {
+        updatedProduct.quantity -= 1;
       }
+
+      setArrProduct(updatedArrProduct);
+      setCurrentQuantity((prevQuantity) => prevQuantity - 1);
+
+      localStorage.setItem("products", JSON.stringify(updatedArrProduct));
+      updateCart(updatedArrProduct);
     }
   };
 
   return (
     <div className="flex py-4 mb-4 border-b-gray-00 border-b-2 gap-2 justify-between ">
-      <ButtonCloseCart id={id} setProducts={setProducts}/>
+      <ButtonCloseCart id={id} setProducts={setProducts} />
       <div className="flex gap-2">
         <div className="flex flex-col gap-4">
           <div className="relative h-24 w-24 mr-4">
@@ -117,7 +108,9 @@ export default function CardCart({ id, image, name, price, stock, quantity,setPr
         <div className="flex flex-col items-start">
           <p className="font-medium text-xl">{name}</p>
           <p>${price} ARS</p>
-          <p>{stock - currentQuantity} unidades disponibles</p>
+          <p>
+            {stock - currentQuantity} {stock - currentQuantity === 1 ? `unidad disponible` : `unidades disponibles`}
+          </p>
         </div>
       </div>
 
