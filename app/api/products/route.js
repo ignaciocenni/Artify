@@ -11,12 +11,12 @@ export async function GET() {
 }
 
 export async function POST(req) {
-  const { name, description, price, stock, image, userEmail, categoryId } = await req.json();
-
+  const { name, description, price, stock, image, userEmail, categoryId, authName, authImage } = await req.json();
   try {
-    const newProduct = await addProduct(name, description, price, stock, image, userEmail, categoryId);
+    const newProduct = await addProduct(name, description, price, stock, image, userEmail, categoryId, authName, authImage);
     return NextResponse.json(newProduct, { status: 200 });
   } catch (error) {
+    console.log(error.message);
     return NextResponse.json({ error: error.message }, { status: 404 });
   }
 }
