@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import BuyNowButton from "./buttons/BuyAndDetail";
+import BuyAndDetail from "./buttons/BuyAndDetail";
 import CardCart from "../app/cart/cardCart/CardCart";
 import { useSelector } from "react-redux";
 export default function CartComponent() {
@@ -32,7 +32,7 @@ export default function CartComponent() {
       </div>
       <div className="flex flex-col p-4 bg-[var(--primary)] rounded-2xl shadow-md shadow-gray-600">
         <h1 className="font-bold">${total}</h1>
-        <BuyNowButton />
+        <BuyAndDetail />
       </div>
     </div>
   );
