@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import BuyNowButton from "./buttons/BuyAndDetail";
 import CardCart from "../app/cart/cardCart/CardCart";
 import { useSelector } from "react-redux";
+import numberConverte from "../app/cart/cardCart/numberConverte";
 export default function CartComponent() {
  const total = useSelector((state) => state.valores.totalPrice)
   const [products, setProducts] = useState([]);
@@ -31,7 +32,7 @@ export default function CartComponent() {
           ))}
       </div>
       <div className="flex flex-col p-4 bg-[var(--primary)] rounded-2xl shadow-md shadow-gray-600">
-        <h1 className="font-bold">${total}</h1>
+        <h1 className="font-bold">${numberConverte(total)}</h1>
         <BuyNowButton />
       </div>
     </div>

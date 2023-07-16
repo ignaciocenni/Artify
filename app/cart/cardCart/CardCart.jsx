@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -8,14 +7,13 @@ import ButtonCloseCart from "../../../components/buttons/ButtonCloseCart";
 
 export default function CardCart({ id, image, name, price, stock, quantity, setProducts }) {
   const dispatch = useDispatch();
-  const updateCart = () => {
-    const currentProducts = JSON.parse(localStorage.getItem("products")) || [];
-    dispatch(localProducts(currentProducts));
+  const updateCart = (updatedArrProduct) => {
+    dispatch(localProducts(updatedArrProduct));
   };
 
   const initializeState = () => {
     const storedProducts = JSON.parse(localStorage.getItem("products")) || [];
-    const existingProduct = storedProducts.find((p) => p.title === name);
+    const existingProduct = storedProducts.find((p) => p.id === id);
 
     if (existingProduct) {
       return {
@@ -25,7 +23,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
     } else {
       return {
         arrProduct: storedProducts,
-        currentQuantity: product.quantity,
+        currentQuantity: quantity, 
       };
     }
   };
@@ -40,38 +38,36 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
   }, [quantity]);
 
   const handleAddProduct = () => {
-    if (currentQuantity + 1 > stock) {
-      return;
+    if (currentQuantity + 1 <= stock) {
+      const updatedArrProduct = JSON.parse(localStorage.getItem("products")) || [];
+  
+      const updatedProduct = updatedArrProduct.find((p) => p.id === id);
+      if (updatedProduct) {
+        updatedProduct.quantity += 1;
+      }
+  
+      setArrProduct(updatedArrProduct);
+      setCurrentQuantity((prevQuantity) => prevQuantity + 1);
+  
+      localStorage.setItem("products", JSON.stringify(updatedArrProduct));
+      updateCart(updatedArrProduct);
     }
-
-    const existingProduct = arrProduct.find((p) => p.title === name);
-
-    if (existingProduct) {
-      existingProduct.quantity += 1;
-      existingProduct.multiplied = price * (currentQuantity + 1);
-      setCurrentQuantity(existingProduct.quantity);
-      localStorage.setItem("products", JSON.stringify(arrProduct));
-    } else {
-      const updatedProduct = { ...product };
-      updatedProduct.quantity = currentQuantity + 1;
-      setArrProduct((prevArrProduct) => [...prevArrProduct, updatedProduct]);
-      localStorage.setItem("products", JSON.stringify([...arrProduct, updatedProduct]));
-      setCurrentQuantity(updatedProduct.quantity);
-    }
-    updateCart();
   };
-
   const handleDeductProduct = () => {
     if (currentQuantity > 1) {
-      setCurrentQuantity((prevQuantity) => prevQuantity - 1);
-      const existingProduct = arrProduct.find((p) => p.title === name);
+      const updatedArrProduct = JSON.parse(localStorage.getItem("products")) || [];
 
-      if (existingProduct) {
-        existingProduct.quantity -= 1;
-        localStorage.setItem("products", JSON.stringify(arrProduct));
+      const updatedProduct = updatedArrProduct.find((p) => p.id === id);
+      if (updatedProduct) {
+        updatedProduct.quantity -= 1;
       }
+
+      setArrProduct(updatedArrProduct);
+      setCurrentQuantity((prevQuantity) => prevQuantity - 1);
+
+      localStorage.setItem("products", JSON.stringify(updatedArrProduct));
+      updateCart(updatedArrProduct);
     }
-    updateCart();
   };
 
   return (
