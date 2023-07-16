@@ -73,8 +73,8 @@ const getAllProducts = async (name) => {
   return response;
 };
 
-const addProduct = async (name, description, price, stock, image, userId, categoryId) => {
-  if (!name || !description || !price || !stock || !image || !userId || !categoryId) throw new Error("Missing arguments");
+const addProduct = async (name, description, price, stock, image, userEmail, categoryId) => {
+  if (!name || !description || !price || !stock || !image || !userEmail || !categoryId) throw new Error("Missing arguments");
 
   // Validates:
   //Name
@@ -90,8 +90,11 @@ const addProduct = async (name, description, price, stock, image, userId, catego
   //Stock
   if (stock <= 0) throw new Error("Stock cannot be less than 0 units.");
 
-  //Image
-  ///...
+  const user = await prisma.user.findFirst({
+    where: {
+      email: userEmail,
+    },
+  });
 
   const newProduct = await prisma.Product.create({
     data: {
@@ -100,7 +103,7 @@ const addProduct = async (name, description, price, stock, image, userId, catego
       price,
       stock,
       image,
-      userId,
+      userId: user.id,
       categoryId,
     },
   });
