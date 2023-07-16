@@ -8,7 +8,7 @@ const AddDeductButtons = ({ data }) => {
     image: data.image,
     title: data.name,
     unit_price: data.price,
-    quantity: 1,
+    quantity: 0,
     stock: data.stock,
   };
 
@@ -68,7 +68,7 @@ const AddDeductButtons = ({ data }) => {
   };
 
   const handleDeductProduct = () => {
-    if (currentQuantity > 1) {
+    if (currentQuantity > 0) {
       setCurrentQuantity((prevQuantity) => prevQuantity - 1);
       const existingProduct = arrProduct.find((p) => p.title === product.title);
 
@@ -91,7 +91,7 @@ const AddDeductButtons = ({ data }) => {
       >
         <h1 className="text-xs font-extrabold">Sumar producto</h1>
       </button>
-      <p>Quantity: {currentQuantity}</p>
+      <p>Quantity: {currentQuantity>0&&currentQuantity}</p>
       <p>Stock: {product.stock - currentQuantity}</p>
       <button
         onClick={handleDeductProduct}
