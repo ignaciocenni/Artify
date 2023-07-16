@@ -1,11 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
+import { signIn } from "next-auth/react";
 import { validate } from "./validate";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import NavBarSecundary from "../../components/NavBarSecundary";
+import SignInButton from "../../components/buttons/SignInButton";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -15,19 +19,22 @@ export default function LoginPage() {
     password: "",
   });
 
-  const handleClick = () => {
-    alert("login");
+  const handleClick = async (e) => {
+    e.preventDefault();
+    const { email, password } = form;
+    await signIn("credentials", { email, password });
+    if (localStorage) {
+      const path = JSON.parse(localStorage.getItem("path"));
+      router.push(`${path}`);
+    }
   };
-  const handleCreateCount = () => {
-    alert("redirecciona a sign in");
-  };
+
   const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
 
   return (
     <div>
-      <NavBarSecundary />
       <div className=" text-center grid justify-center items-center mt-10">
         <form className="w-96 flex flex-col gap-5">
           <h1 className="font-semibold text-3xl mb-5">Iniciar Sesión</h1>
@@ -57,32 +64,29 @@ export default function LoginPage() {
           <div className="flex items-center justify-center">
             <button
               className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-lg  text-white font-bold py-3 px-3 rounded-xl focus:outline-none focus:shadow-outline w-full"
-              type="submit"
-              onClick={handleClick}>
+              type="button"
+              onClick={handleClick}
+            >
               Continuar
             </button>
           </div>
 
-          <a
-            className="inline-block align-baseline font-bold text-sm text-slate-500  hover:text-[var(--background-sec)] mt-2"
-            href="#">
+          <a className="inline-block align-baseline font-bold text-sm text-slate-500  hover:text-[var(--background-sec)] mt-2" href="#">
             Olvido su contraseña?
           </a>
-
-            <Link href="/signin">
-              <button
-                className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-lg  text-white font-bold py-3 px-3 rounded-xl focus:outline-none focus:shadow-outline w-full"
-                type="submit"
-                onClick={handleCreateCount}>
-                Cuenta Nueva
-              </button>
-            </Link>
-
+          <hr />
+          <SignInButton />
+          <Link href="/signin">
+            <button
+              className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-lg  text-white font-bold py-3 px-3 rounded-xl focus:outline-none focus:shadow-outline w-full"
+              type="submit"
+            >
+              Cuenta Nueva
+            </button>
+          </Link>
         </form>
 
-        <p className="text-center text-gray-500 text-xs mt-56">
-          Apify. All rights reserved.
-        </p>
+        <p className="text-center text-gray-500 text-xs mt-56">Apify. All rights reserved.</p>
       </div>
     </div>
   );
