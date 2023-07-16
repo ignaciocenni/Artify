@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
+import BuyAndDetail from "./buttons/BuyAndDetail";
+
 import { useSession } from "next-auth/react";
-import BuyNowButton from "./buttons/BuyAndDetail";
+
 import CardCart from "../app/cart/cardCart/CardCart";
 import { useSelector } from "react-redux";
 
@@ -38,10 +41,8 @@ export default function CartComponent() {
             ))}
       </div>
       <div className="flex flex-col p-4 bg-[var(--primary)] rounded-2xl shadow-md shadow-gray-600">
-
         <h1 className="font-bold">${numberConverte(total)}</h1>
-        {user.data ? <BuyNowButton /> : "Inicia sesion para comprar!"}
-
+        {user.data ? <BuyAndDetail /> : "Inicia sesion para comprar!"}
       </div>
     </div>
   );

@@ -1,33 +1,33 @@
-import { useRouter } from "next/navigation";
+"use client"
 import axios from "axios";
-import Link from "next/link";
 import { useState } from "react";
-const postProductsMP = async (products) => {
+import MpButton from "../../components/mercadoPagoButton/MpButton"
+const postProductsMP = async (productsClean) => {
 
   try {
-    const res = (await axios.post("/api/checkoutPro", products)).data;
-    return res.url
+    const res = (await axios.post("/api/checkoutPro", productsClean));
+    const  {id} = res.data 
+    return id
   } catch (error) {
     return {error: error.message };
   }
 };
 const BuyNowButton = () =>{
-  const [url, setUrl] = useState("")
+  const [id, setId] = useState("")
   const products = JSON.parse(localStorage.getItem("products")) || []
   const productsClean = products.map((product) => {
     return {
+      id: product.id,
+      description: product.description,
       name: product.title,
       price: product.unit_price,
       stock: product.quantity
     }
   })
- //const router = useRouter()
   const handleClick = async (event) => {
     event.preventDefault();
     const response = await postProductsMP(productsClean);
-    setUrl(response)
-    console.log(response);
-    //router.push(`${response}`);
+    setId(response)
   };
   return(
     <div>
@@ -36,12 +36,7 @@ const BuyNowButton = () =>{
       className="hover:bg-[var(--background-sec)] hover:text-black w-full text-white bg-[var(--detail)] py-5 justify-center rounded-lg flex content-center items-center gap-5 shadow-xl">
         <h1 className="text-xs font-extrabold">Detalles de compra</h1>
       </button>
-      {url && <Link href={url}>
-      <button 
-      className="hover:bg-[var(--background-sec)] hover:text-black w-full text-white bg-[var(--detail)] py-5 justify-center rounded-lg flex content-center items-center gap-5 shadow-xl">
-        <h1 className="text-xs font-extrabold">Comprar Ahora</h1>
-      </button>
-      </Link>}
+       {id && <MpButton id={id}/>}   
     </div>
     );
 }
