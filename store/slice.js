@@ -55,4 +55,5 @@ export const Slice = createSlice({
   },
 });
 
-export const { GET_INFO, GET_CATEGORIES, GET_PROVINCES, countrie, price, category, search, multiplied, totalPrices } = Slice.actions;
+export const { GET_INFO, GET_CATEGORIES, GET_PROVINCES, countrie, price, category, search, multiplied, totalPrices, setPath } =
+  Slice.actions;
