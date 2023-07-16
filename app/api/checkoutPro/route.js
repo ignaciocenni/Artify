@@ -20,7 +20,7 @@ export async function POST(req) {
       items:products,
       auto_return: "approved",
       back_urls: {
-        success: `${URL}/post-product`,
+        success: `${URL}/purchase-status`,
         failure: `${URL}/profile`,
         pending: `${URL}`,
       },
