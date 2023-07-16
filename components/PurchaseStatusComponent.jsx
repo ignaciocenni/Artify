@@ -8,6 +8,7 @@ export default function PurchaseStatusComponent () {
     const searchParams = useSearchParams()
     const status = searchParams.get('status')
     
+    
     return(
         <div>
             {/* {session && session.user ? null :} */}
