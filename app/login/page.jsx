@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { validate } from "./validate";
 import { useRouter } from "next/navigation";
@@ -19,14 +19,9 @@ export default function LoginPage() {
     password: "",
   });
 
-  const handleClick = async (e) => {
-    e.preventDefault();
+  const handleClick = () => {
     const { email, password } = form;
-    await signIn("credentials", { email, password });
-    if (localStorage) {
-      const path = JSON.parse(localStorage.getItem("path"));
-      router.push(`${path}`);
-    }
+    signIn("credentials", { email, password });
   };
 
   const handleChange = (event) => {
