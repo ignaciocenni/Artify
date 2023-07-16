@@ -15,7 +15,8 @@ const SignInButton = () => {
   };
 
   if (session && session.user) {
-    return router.push("/");
+    let path = localStorage.getItem("path");
+    return router.push(path);
   }
   return (
     <div className="flex items-center justify-center">
