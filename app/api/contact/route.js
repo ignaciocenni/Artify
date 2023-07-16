@@ -20,10 +20,9 @@ const generateEmailContent = (data) => {
   if (data.type === "welcome") {
     template = emailWelcome(data);
   } else if (data.type === "purchase") {
-    template = emailPurchaseDone();
+    template = emailPurchaseDone(data);
   } else if (data.rol === "compra realizada") {
   }
-
   return {
     text: stringData,
     html: template.html,
