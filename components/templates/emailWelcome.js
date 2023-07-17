@@ -29,7 +29,7 @@ export const emailWelcome = (data) => {
 <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
 Asunto: ¡Bienvenido a nuestra tienda de artesanías!</p>
 <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
-Estimado/a ${name},<br>
+Estimado/a : ${name},<br>
 </p></td></tr><tr>
 <td align="left" bgcolor="#f3e8ff" style="padding:0;Margin:0;padding-top:15px"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px"><br></p>
 <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">¡Bienvenido/a a Artify!</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px;margin-left:40px">Nos complace darte la bienvenida a nuestra tienda en línea, donde podrás</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">descubrir una amplia selección de hermosas artesanías hechas a mano con amor y&nbsp;&nbsp;educación.</p>
