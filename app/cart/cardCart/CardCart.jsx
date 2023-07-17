@@ -1,12 +1,14 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { localProducts } from "../../../store/slice";
 import numberConverte from "./numberConverte";
 import ButtonCloseCart from "../../../components/buttons/ButtonCloseCart";
 
 export default function CardCart({ id, image, name, price, stock, quantity, setProducts }) {
   const dispatch = useDispatch();
+  const total = useSelector((state) => state.valores.totalPrice);
+
   const updateCart = (updatedArrProduct) => {
     dispatch(localProducts(updatedArrProduct));
   };
@@ -51,6 +53,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
   
       localStorage.setItem("products", JSON.stringify(updatedArrProduct));
       updateCart(updatedArrProduct);
+      dispatch(localProducts(updatedArrProduct));
     }
   };
   const handleDeductProduct = () => {
@@ -67,6 +70,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
 
       localStorage.setItem("products", JSON.stringify(updatedArrProduct));
       updateCart(updatedArrProduct);
+      dispatch(localProducts(updatedArrProduct));
     }
   };
 
