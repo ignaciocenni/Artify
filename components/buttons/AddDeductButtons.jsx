@@ -79,20 +79,26 @@ const AddDeductButtons = ({ data }) => {
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center w-full bg-[var(--primary)] rounded-xl justify-around">
       <button
         onClick={handleAddProduct}
-        className="hover:bg-[var(--background-sec)] hover:text-black w-[100%] text-white bg-[var(--detail)] py-5  rounded-lg flex content-center items-center gap-5 shadow-xl"
+        className="hover:bg-[var(--background-sec)] hover:text-black  text-white bg-[var(--detail)] py-5  rounded-lg flex content-center items-center gap-5 shadow-xl"
       >
-        <h1 className="text-xs font-extrabold">Sumar producto</h1>
+        <h1 className="text-xs font-extrabold px-2">Añadir producto</h1>
       </button>
-      <p>Quantity: {currentQuantity > 0 && currentQuantity}</p>
-      <p>Stock: {product.stock - currentQuantity}</p>
+      <div className="flex flex-col">
+      <p className="text-center">Cantidad</p>
+      <p className="text-center"> {currentQuantity}</p>
+      </div>
+      <div className="flex flex-col">
+      <p className="text-center w-18">Stock</p>
+      <p className="text-center w-18">{product.stock - currentQuantity}</p>
+      </div>
       <button
         onClick={handleDeductProduct}
-        className="hover:bg-[var(--background-sec)] hover:text-black w-[100%] text-white bg-[var(--detail)] py-5  rounded-lg flex content-center items-center gap-5 shadow-xl"
+        className="hover:bg-[var(--background-sec)] hover:text-black  text-white bg-[var(--detail)] py-5  rounded-lg flex content-center items-center gap-5 shadow-xl"
       >
-        <h1 className="text-xs font-extrabold">Restar producto</h1>
+        <h1 className="text-xs font-extrabold px-2">Quitar producto</h1>
       </button>
     </div>
   );

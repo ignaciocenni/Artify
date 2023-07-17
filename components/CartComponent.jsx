@@ -37,7 +37,10 @@ export default function CartComponent() {
             ))}
       </div>
       <div className="flex flex-col p-4 bg-[var(--primary)] rounded-2xl shadow-md shadow-gray-600">
+
         <h1 className="font-bold">${total}</h1>
+
+
         {user.data ? <BuyAndDetail /> : "Inicia sesion para comprar!"}
       </div>
     </div>
