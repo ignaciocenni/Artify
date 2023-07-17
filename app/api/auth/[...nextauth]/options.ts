@@ -28,9 +28,6 @@ export const options = {
           type: "password",
           placeholder: "password",
         },
-        path: {
-          type: "text",
-        },
       },
       async authorize(credentials) {
         const user = await prisma.user.findFirst({
@@ -46,4 +43,5 @@ export const options = {
       },
     }),
   ],
+  callbacks: {},
 };

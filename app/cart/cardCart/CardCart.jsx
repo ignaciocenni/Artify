@@ -25,7 +25,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
     } else {
       return {
         arrProduct: storedProducts,
-        currentQuantity: quantity, 
+        currentQuantity: quantity,
       };
     }
   };
@@ -42,17 +42,18 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
   const handleAddProduct = () => {
     if (currentQuantity + 1 <= stock) {
       const updatedArrProduct = JSON.parse(localStorage.getItem("products")) || [];
-  
+
       const updatedProduct = updatedArrProduct.find((p) => p.id === id);
       if (updatedProduct) {
         updatedProduct.quantity += 1;
       }
-  
+
       setArrProduct(updatedArrProduct);
       setCurrentQuantity((prevQuantity) => prevQuantity + 1);
-  
+
       localStorage.setItem("products", JSON.stringify(updatedArrProduct));
       updateCart(updatedArrProduct);
+      console.log(updatedArrProduct);
       dispatch(localProducts(updatedArrProduct));
     }
   };
@@ -70,6 +71,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
 
       localStorage.setItem("products", JSON.stringify(updatedArrProduct));
       updateCart(updatedArrProduct);
+      console.log(updatedArrProduct);
       dispatch(localProducts(updatedArrProduct));
     }
   };

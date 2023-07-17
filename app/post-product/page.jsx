@@ -36,11 +36,11 @@ export default function Page() {
     stock: "",
     image: "",
     categoryId: "",
-    userEmail: data?.data.user.email,
-    authName: data.data.user.name,
-    authImage: data.data.user.image,
+    userEmail: data?.data?.user?.email || null,
+    authName: data?.data?.user?.name || null,
+    authImage: data?.data?.user?.image || null,
   });
-  console.log(data.data.user.image);
+
   const categories = useSelector((state) => state.valores.categories);
   const [errors, setErrors] = useState({});
 

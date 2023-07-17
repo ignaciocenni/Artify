@@ -57,16 +57,25 @@ export const Slice = createSlice({
       let totalPrice = 0;
       let totalProducts = 0;
       payload.map((product) => {
-        totalPrice += product.multiplied;
+        totalPrice += product.quantity * product.unit_price;
         totalProducts += product.quantity;
       });
-      state.totalPrice = totalPrice;
+      state.totalPrice = totalPrice.toFixed(2);
       state.cartQuantity = totalProducts;
     },
   },
 });
 
-
-export const { GET_INFO, GET_CATEGORIES, GET_PROVINCES, countrie, price, category, search, multiplied, totalPrices, setPath, localProducts  } =
-
-  Slice.actions;
+export const {
+  GET_INFO,
+  GET_CATEGORIES,
+  GET_PROVINCES,
+  countrie,
+  price,
+  category,
+  search,
+  multiplied,
+  totalPrices,
+  setPath,
+  localProducts,
+} = Slice.actions;
