@@ -1,5 +1,8 @@
-export const emailPurchaseDone = () => {
-  // const {name,products,totalPrice} = data
+import logo from "../../public/images/logo.jpg"
+
+export const emailPurchaseDone = (data) => {
+  const {name,status} = data
+  
   return {
     html:` <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -133,7 +136,10 @@ export const emailPurchaseDone = () => {
     <td valign="top" align="center" style="padding:0;Margin:0;width:560px">
     <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
     <tr>
-    <td align="center" style="padding:0;Margin:0;font-size:0px"><a href="https://artify-two.vercel.app/" target="_blank" style="mso-line-height-rule:exactly;text-decoration:none;color:#677D9E;font-size:14px"><img src="https://utfs.io/f/31e57e1e-c408-4f60-a116-c09c058732b2_artfy.svg" alt="Artify logo" title="Artify logo" width="134" style="display:block;font-size:14px;border:0;outline:none;text-decoration:none"></a></td>
+    <td align="center" style="padding:0;Margin:0;font-size:0px">
+    <a href="https://artify-two.vercel.app/" target="_blank" style="mso-line-height-rule:exactly;text-decoration:none;color:#677D9E;font-size:14px">
+
+    <img src="https://utfs.io/f/31e57e1e-c408-4f60-a116-c09c058732b2_artfy.svg" alt="Artify logo" title="Artify" width="134px" style="display:block;font-size:14px;border:0;outline:none;text-decoration:none"></a></td>
     </tr>
     </table></td>
     </tr>
@@ -153,18 +159,39 @@ export const emailPurchaseDone = () => {
     <td valign="top" align="center" style="padding:0;Margin:0;width:540px">
     <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
     <tr>
-    <td align="left" bgcolor="#f3e8ff" style="padding:0;Margin:0"><h1 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:30px;font-style:normal;font-weight:normal;line-height:36px;color:#666666"><strong>¡Gracias por tu pedido!</strong></h1></td>
+    <td align="left" bgcolor="#f3e8ff" style="padding:0;Margin:0">
+    <h1 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:30px;font-style:normal;font-weight:normal;line-height:36px;color:#666666"><strong>¡Gracias por tu pedido!</strong></h1>
+    </td>
     </tr>
     <tr>
-    <td align="left" bgcolor="#f3e8ff" style="padding:0;Margin:0;padding-top:15px"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Asunto: Confirmación de compra&nbsp;</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Estimado/a $[name],<br></p></td>
+    <td align="left" bgcolor="#f3e8ff" style="padding:0;Margin:0;padding-top:15px"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Asunto: Detalle de compra&nbsp;</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Estimado/a : ${name},
+    <br>
+    </p>
+    </td>
     </tr>
     <tr>
-    <td align="left" bgcolor="#f3e8ff" style="padding:0;Margin:0;padding-top:15px"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px"><br></p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">¡Gracias por elegir nuestra tienda en línea! Nos complace confirmar que tu compra ha sido realizada con éxito. Queremos brindarte todos los detalles necesarios sobre tu pedido para que estés informado/a en todo momento.</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">&nbsp;</p><h2 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:24px;font-style:normal;font-weight:normal;line-height:29px;color:#333333"><strong>Detalles del pedido✨</strong></h2>
-    <ul style="font-family:arial, 'helvetica neue', helvetica, sans-serif;padding:0px 0px 0px 40px;margin:15px 0px">
-    <li style="color:#333333;margin:0px 0px 15px">[Nombre del producto 1] ✔️</li>
-    <li style="color:#333333;margin:0px 0px 15px">[Nombre del producto 2] ✔️</li>
-    <li style="color:#333333;margin:0px 0px 15px">[Nombre del producto 3] ✔️</li>
-    </ul><h2 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:24px;font-style:normal;font-weight:normal;line-height:29px;color:#333333">Método de pago:</h2><h2 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:24px;font-style:normal;font-weight:normal;line-height:29px;color:#333333">Tipo de pago: Mercado Pago</h2><h2 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:24px;font-style:normal;font-weight:normal;line-height:29px;color:#333333">Total pagado: 💲$[totalPrice]</h2><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Si tienes alguna pregunta o consulta sobre tu pedido, no dudes en contactarnos. Estamos aquí para ayudarte en todo momento.</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Agradecemos tu confianza en nuestra tienda y esperamos que disfrutes de tus nuevo/s producto/s. Te enviaremos un correo electrónico adicional una vez que tu pedido haya sido enviado, con el número de seguimiento para que puedas rastrear el envío.</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">¡Gracias nuevamente por tu compra!🙏</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Saludos cordiales👋</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Artify&nbsp;&nbsp;✉️artifypf@gmail.com</p></td>
+    <td align="left" bgcolor="#f3e8ff" style="padding:0;Margin:0;padding-top:15px"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
+    <br>
+    </p>
+    <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">¡Gracias por elegir nuestra tienda en línea! Queremos brindarte todos los detalles necesarios sobre tu pedido para que estés informado/a en todo momento.</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">&nbsp;</p><h2 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:24px;font-style:normal;font-weight:normal;line-height:29px;color:#333333">
+    <strong>
+    Detalles del pedido✨</strong>
+    </h2>  
+    <br>  
+    <h2 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:24px;font-style:normal;font-weight:normal;line-height:29px;color:#333333">
+    Método de pago: Mercado Pago</h2>
+    <h2 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:24px;font-style:normal;font-weight:normal;line-height:29px;color:#333333">
+    Estado de tu pago: ${status}</h2>
+    <br>
+    <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
+    Si tienes alguna pregunta o consulta sobre tu pedido, no dudes en contactarnos. Estamos aquí para ayudarte en todo momento.</p>
+    <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
+    Agradecemos tu confianza en nuestra tienda y esperamos que disfrutes de tus nuevo/s producto/s. </p>
+    <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
+    ¡Gracias nuevamente por tu compra!🙏</p>
+    <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
+    Saludos cordiales👋</p>
+    <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Artify&nbsp;&nbsp;✉️artifypf@gmail.com</p></td>
     </tr>
     <tr>
     <td align="left" bgcolor="#f3e8ff" style="padding:0;Margin:0;padding-top:15px"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#999999;font-size:14px">&nbsp;</p></td>

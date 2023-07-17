@@ -52,7 +52,21 @@ export const Slice = createSlice({
     totalPrices: (state, { type, payload }) => {
       state.totalPrice = payload?.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     },
+    //quantity  , multiplied
+    localProducts: (state, { type, payload }) => {
+      let totalPrice = 0;
+      let totalProducts = 0;
+      payload.map((product) => {
+        totalPrice += product.multiplied;
+        totalProducts += product.quantity;
+      });
+      state.totalPrice = totalPrice;
+      state.cartQuantity = totalProducts;
+    },
   },
 });
 
-export const { GET_INFO, GET_CATEGORIES, GET_PROVINCES, countrie, price, category, search, multiplied, totalPrices } = Slice.actions;
+
+export const { GET_INFO, GET_CATEGORIES, GET_PROVINCES, countrie, price, category, search, multiplied, totalPrices, setPath, localProducts  } =
+
+  Slice.actions;
