@@ -6,7 +6,7 @@ import axios from "axios";
 import validate from "./validate";
 import UploadButton from "../../components/buttons/UploadButton";
 import { GET_INFO } from "../../store/slice";
-
+import { useSession } from "next-auth/react";
 const postProduct = async (product) => {
   try {
     const res = (await axios.post("/api/products", product)).data;
@@ -28,7 +28,7 @@ export default function Page() {
       <p className="mt-2">{images.length} files</p>
     </>
   ) : null;
-
+  const data = useSession();
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -36,8 +36,11 @@ export default function Page() {
     stock: "",
     image: "",
     categoryId: "",
-    userId: "5bdbf1b3-bec2-42d8-bc52-10a056af8adc",
+    userEmail: data?.data?.user?.email || null,
+    authName: data?.data?.user?.name || null,
+    authImage: data?.data?.user?.image || null,
   });
+
   const categories = useSelector((state) => state.valores.categories);
   const [errors, setErrors] = useState({});
 

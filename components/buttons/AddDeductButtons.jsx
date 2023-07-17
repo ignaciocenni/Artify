@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { multiplied, totalPrices } from "../../store/slice";
+import { localProducts } from "../../store/slice";
 
 const AddDeductButtons = ({ data }) => {
+  const dispatch = useDispatch();
+  const updateCart = () => {
+    const currentProducts = JSON.parse(localStorage.getItem("products")) || [];
+    dispatch(localProducts(currentProducts));
+  };
+
   const product = {
     id: data.id,
     image: data.image,
@@ -28,24 +34,14 @@ const AddDeductButtons = ({ data }) => {
       };
     }
   };
-  const dispatch = useDispatch();
-  const [arrProduct, setArrProduct] = useState([]);
-  const [currentQuantity, setCurrentQuantity] = useState(1);
-
-  const totalPrice = arrProduct.map((product) => {
-    return product.quantity * product.unit_price;
-  });
-  const quantityProducts = arrProduct.map((product) => {
-    return product.quantity;
-  });
-  dispatch(multiplied(quantityProducts));
-  dispatch(totalPrices(totalPrice));
-
   useEffect(() => {
     const { arrProduct, currentQuantity } = initializeState();
     setArrProduct(arrProduct);
     setCurrentQuantity(currentQuantity);
   }, [product.title]);
+
+  const [arrProduct, setArrProduct] = useState([]);
+  const [currentQuantity, setCurrentQuantity] = useState(1);
 
   const handleAddProduct = () => {
     if (currentQuantity + 1 > product.stock) {
@@ -58,12 +54,14 @@ const AddDeductButtons = ({ data }) => {
       existingProduct.quantity += 1;
       setCurrentQuantity(existingProduct.quantity);
       localStorage.setItem("products", JSON.stringify(arrProduct));
+      updateCart();
     } else {
       const updatedProduct = { ...product };
       updatedProduct.quantity = currentQuantity + 1;
       setArrProduct((prevArrProduct) => [...prevArrProduct, updatedProduct]);
       localStorage.setItem("products", JSON.stringify([...arrProduct, updatedProduct]));
       setCurrentQuantity(updatedProduct.quantity);
+      updateCart();
     }
   };
 
@@ -75,33 +73,33 @@ const AddDeductButtons = ({ data }) => {
       if (existingProduct) {
         existingProduct.quantity -= 1;
         localStorage.setItem("products", JSON.stringify(arrProduct));
+        updateCart();
       }
     }
   };
-  const handleClearProducts = () => {
-    localStorage.removeItem("products");
-    setArrProduct([]);
-    setCurrentQuantity(product.quantity);
-  };
+
   return (
-    <div className="flex items-center">
+    <div className="flex items-center w-full bg-[var(--primary)] rounded-xl justify-around">
       <button
         onClick={handleAddProduct}
-        className="hover:bg-[var(--background-sec)] hover:text-black w-[100%] text-white bg-[var(--detail)] py-5  rounded-lg flex content-center items-center gap-5 shadow-xl"
+        className="hover:bg-[var(--background-sec)] hover:text-black  text-white bg-[var(--detail)] py-5  rounded-lg flex content-center items-center gap-5 shadow-xl"
       >
-        <h1 className="text-xs font-extrabold">Sumar producto</h1>
+        <h1 className="text-xs font-extrabold px-2">Añadir producto</h1>
       </button>
-      <p>Quantity: {currentQuantity>0&&currentQuantity}</p>
-      <p>Stock: {product.stock - currentQuantity}</p>
+      <div className="flex flex-col">
+      <p className="text-center">Cantidad</p>
+      <p className="text-center"> {currentQuantity}</p>
+      </div>
+      <div className="flex flex-col">
+      <p className="text-center w-18">Stock</p>
+      <p className="text-center w-18">{product.stock - currentQuantity}</p>
+      </div>
       <button
         onClick={handleDeductProduct}
-        className="hover:bg-[var(--background-sec)] hover:text-black w-[100%] text-white bg-[var(--detail)] py-5  rounded-lg flex content-center items-center gap-5 shadow-xl"
+        className="hover:bg-[var(--background-sec)] hover:text-black  text-white bg-[var(--detail)] py-5  rounded-lg flex content-center items-center gap-5 shadow-xl"
       >
-        <h1 className="text-xs font-extrabold">Restar producto</h1>
+        <h1 className="text-xs font-extrabold px-2">Quitar producto</h1>
       </button>
-      <div>
-        <button onClick={handleClearProducts}>Deshacer Products</button>
-      </div>
     </div>
   );
 };
