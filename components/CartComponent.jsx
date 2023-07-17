@@ -41,7 +41,7 @@ export default function CartComponent() {
             ))}
       </div>
       <div className="flex flex-col p-4 bg-[var(--primary)] rounded-2xl shadow-md shadow-gray-600">
-        <h1 className="font-bold">${numberConverte(total)}</h1>
+        <h1 className="font-bold w-80">${numberConverte(total)}</h1>
         {user.data ? <BuyAndDetail /> : "Inicia sesion para comprar!"}
       </div>
     </div>
