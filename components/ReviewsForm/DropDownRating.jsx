@@ -18,7 +18,7 @@ export default function DropDownRating({setForm}) {
     setIsDropdownOpen(false);
     setForm((prevForm) => ({
       ...prevForm,
-      rating: numStars,  
+      rating: +numStars,  
     }));
   };
 

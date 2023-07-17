@@ -1,5 +1,9 @@
 import { useState } from "react";
 import DropDownRating from "./DropDownRating";
+import axios from "axios";
+
+
+
 
 export default function ReviewsForm({ id }) {
   const [form, setForm] = useState({
@@ -7,9 +11,22 @@ export default function ReviewsForm({ id }) {
     rating: 0,
     productId: id,
   });
+  const postReviews = async (id,form ) => {
+    const url = `http://localhost:3000/api/products/${id}/reviews`;
+  
+    try {
+      const response = await axios.post(url, form);
+      console.error('funciono');
+      return response.data;
+    } catch (error) {
+      console.error('Error en la solicitud POST:', error);
+      throw error;
+    }
+  };
 
-  const handlerOnClick = (event) => {
-    event.preventDefault();
+  const handlerOnClick = () => {
+    postReviews(id,form )
+    console.log(form);
   };
   const handlerChange = (event) => {
     let value = event.target.value;
@@ -39,10 +56,10 @@ export default function ReviewsForm({ id }) {
       <div className="mt-auto">
         <button
           onClick={handlerOnClick}
-          type="submit"
-          className="submit bg-black text-white font-bold rounded-md p-4 md:p-10 text-lg md:text-16 transform transition-all hover:bg-black-dark"
-        >
-          Comentar
+          type="button"
+          className="hover:bg-[var(--background-sec)] hover:text-black w-full text-white bg-[var(--detail)] py-5 justify-center rounded-lg flex content-center items-center gap-5 shadow-xl">
+
+          <h1 className="text-xs font-extrabold">Comentar</h1>
         </button>
       </div>
     </form>
