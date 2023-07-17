@@ -3,7 +3,6 @@ import { useState } from "react";
 import { validate } from "./validate";
 import { useRouter } from "next/navigation";
 import { sendContactForm } from "../../components/lib/api";
-import SignInButton from "../../components/buttons/SignInButton";
 import SubmitButton from "../../components/buttons/SubmitButton";
 import InputField from "../../components/inputs/InputField";
 import postUser from "../../components/utils/postUser";
@@ -14,6 +13,7 @@ export default function SignInPage() {
     password: "",
     name: "",
     rol: "USER",
+    type:"welcome"
   });
 
   const [errors, setErrors] = useState({
@@ -25,7 +25,7 @@ export default function SignInPage() {
     event.preventDefault();
     const user = await postUser(form).then(() => (user ? router.push("/login") : ""));
     await sendContactForm(form);
-    console.log(user);
+    
   };
 
   const handleChange = (event) => {
