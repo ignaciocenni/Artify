@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { multiplied, totalPrices } from "../../../store/slice";
 import numberConverte from "./numberConverte";
+import ButtonCloseCart from '../../../components/buttons/ButtonCloseCart'
 
-export default function CardCart({ id, image, name, price, stock, quantity }) {
+export default function CardCart({ id, image, name, price, stock, quantity,setProducts }) {
   const initializeState = () => {
-    const storedProducts = JSON.parse(localStorage.getItem("products")) || [];
+    const storedProducts =  JSON.parse(localStorage.getItem("products")) || [];
     const existingProduct = storedProducts.find((p) => p.title === name);
 
     if (existingProduct) {
@@ -28,10 +29,10 @@ export default function CardCart({ id, image, name, price, stock, quantity }) {
 
   const dispatch = useDispatch();
 
-  const totalPrice = arrProduct.map((product) => {
+  const totalPrice = arrProduct?.map((product) => {
     return product.quantity * product.unit_price;
   });
-  const quantityProducts = arrProduct.map((product) => {
+  const quantityProducts = arrProduct?.map((product) => {
     return product.quantity;
   });
   dispatch(multiplied(quantityProducts));
@@ -54,30 +55,33 @@ export default function CardCart({ id, image, name, price, stock, quantity }) {
       existingProduct.quantity += 1;
       existingProduct.multiplied = price * (currentQuantity + 1);
       setCurrentQuantity(existingProduct.quantity);
-      localStorage.setItem("products", JSON.stringify(arrProduct));
+       localStorage.setItem("products", JSON.stringify(arrProduct));
+      
     } else {
       const updatedProduct = { ...product };
       updatedProduct.quantity = currentQuantity + 1;
       setArrProduct((prevArrProduct) => [...prevArrProduct, updatedProduct]);
-      localStorage.setItem("products", JSON.stringify([...arrProduct, updatedProduct]));
+       localStorage.setItem("products", JSON.stringify([...arrProduct, updatedProduct]));
       setCurrentQuantity(updatedProduct.quantity);
     }
   };
 
-  const handleDeductProduct = () => {
+  const handleDeductProduct =  () => {
     if (currentQuantity > 1) {
       setCurrentQuantity((prevQuantity) => prevQuantity - 1);
       const existingProduct = arrProduct.find((p) => p.title === name);
 
       if (existingProduct) {
+
         existingProduct.quantity -= 1;
-        localStorage.setItem("products", JSON.stringify(arrProduct));
+         localStorage.setItem("products", JSON.stringify(arrProduct));
       }
     }
   };
 
   return (
     <div className="flex py-4 mb-4 border-b-gray-00 border-b-2 gap-2 justify-between ">
+      <ButtonCloseCart id={id} setProducts={setProducts}/>
       <div className="flex gap-2">
         <div className="flex flex-col gap-4">
           <div className="relative h-24 w-24 mr-4">
@@ -118,7 +122,7 @@ export default function CardCart({ id, image, name, price, stock, quantity }) {
       </div>
 
       <div className="flex items-end">
-        <h1 className=" ml-auto text-xl font-medium">${quantity * price}</h1>
+        <h1 className=" ml-auto text-xl font-medium">${numberConverte(currentQuantity * price)}</h1>
       </div>
     </div>
   );

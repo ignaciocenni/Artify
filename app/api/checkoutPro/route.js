@@ -13,7 +13,7 @@ export async function POST(req) {
     quantity: Number(ele.stock),
 
     }))  
-  const URL = "/detail";
+  const URL = "http://localhost:3000/";
   try {
     const preference = {
       items: products,
