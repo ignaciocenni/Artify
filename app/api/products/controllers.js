@@ -55,11 +55,6 @@ const getAllProducts = async (name) => {
           lastName: true,
           email: true,
           image: true,
-          province: {
-            select: {
-              name: true,
-            },
-          },
         },
       },
       category: {
