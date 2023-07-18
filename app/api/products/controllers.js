@@ -49,17 +49,13 @@ const getAllProducts = async (name) => {
       userId: true,
       user: true,
       category: true,
+      province: true,
       user: {
         select: {
           name: true,
           lastName: true,
           email: true,
           image: true,
-          province: {
-            select: {
-              name: true,
-            },
-          },
         },
       },
       category: {

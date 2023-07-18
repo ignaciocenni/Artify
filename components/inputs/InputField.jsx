@@ -1,4 +1,4 @@
-const InputField = ({ id, type, placeholder, onChange, name, value, error }) => {
+const InputField = ({ id, type, placeholder, onChange, name, value, errors }) => {
   return (
     <div className="mb-4">
       <input
@@ -10,7 +10,7 @@ const InputField = ({ id, type, placeholder, onChange, name, value, error }) => 
         name={name}
         value={value}
       />
-      {error && <p>{error}</p>}
+      {errors && <p>{errors}</p>}
     </div>
   );
 };

@@ -1,30 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
-import { validate } from "./validate";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
-import NavBarSecundary from "../../components/NavBarSecundary";
 import SignInButton from "../../components/buttons/SignInButton";
 
-export default function LoginPage() {
-  const router = useRouter();
+export default function LoginPage({ searchParams }) {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+  const [credentialsError, setCredentialError] = useState("");
   const [errors, setErrors] = useState({
     email: "",
     password: "",
   });
+  useEffect(() => {
+    if (searchParams) {
+      const { error } = searchParams;
+      const errorName = error?.split(" ")[1];
 
-  const handleClick = () => {
+      if (errorName === "password!") {
+        setCredentialError("Contraseña incorrecta");
+      }
+      if (errorName === "email!") {
+        setCredentialError("Email incorrecto");
+      }
+    }
+  }, [searchParams]);
+
+  const handleClick = async () => {
     const { email, password } = form;
-    signIn("credentials", { email, password });
+    await signIn("credentials", { email, password });
   };
 
   const handleChange = (event) => {
+    setErrors({ ...errors, [event.target.name]: "" });
+    setCredentialError("");
     setForm({ ...form, [event.target.name]: event.target.value });
   };
 
@@ -43,6 +55,7 @@ export default function LoginPage() {
               name="email"
               value={form.email}
             />
+            {errors.email && <p className=" text-red-700">{errors.email}</p>}
           </div>
           <div className="mb-6">
             <input
@@ -54,8 +67,9 @@ export default function LoginPage() {
               value={form.password}
               placeholder="Contraseña"
             />
-            {/* <p className="text-xs italic">Please choose a password.</p> */}
+            {errors.password && <p className=" text-red-700">{errors.password}</p>}
           </div>
+          {credentialsError && <p className=" text-red-700">{credentialsError}</p>}
           <div className="flex items-center justify-center">
             <button
               className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-lg  text-white font-bold py-3 px-3 rounded-xl focus:outline-none focus:shadow-outline w-full"

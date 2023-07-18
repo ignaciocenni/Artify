@@ -1,6 +1,7 @@
 import GoogleProvider from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import prisma from "../../db/client";
+import { error } from "console";
 export const options = {
   providers: [
     GoogleProvider({
@@ -35,13 +36,16 @@ export const options = {
             email: credentials.email,
           },
         });
-        //caso de mail incorrecto
-        if (credentials.email === user.email && credentials.password === user.password) {
+        if (!user) throw new Error("Incorrect email!");
+        if (credentials.password === user.password) {
           console.log("success");
           return user;
-        } else return null;
+        } else throw new Error("Incorrect password!");
       },
     }),
   ],
-  callbacks: {},
+  pages: {
+    signIn: "/login",
+    error: "/login",
+  },
 };

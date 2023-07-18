@@ -20,8 +20,8 @@ const data = useSession();
   const status = searchParams.get("status");
 
   const form = {
-      email: data.data.user.email,
-      name: data.data.user.name,
+      email: data?.data?.user.email,
+      name: data?.data?.user.name,
       status: status,
       type:"purchase"
   }
@@ -29,12 +29,15 @@ const data = useSession();
       await sendContactForm(form);
   };
   sendEmail()
-
+  console.log(status);
   return (
     <div >
-      {status === "approved" ? (
         <div className="flex justify-center items-center pt-40">
-          <p className="pr-8">Su compra fue realizada con exito ! ✔👍 </p>
+          <p className="pr-8">
+            {status === "approved" && "Su compra fue realizada con exito ! ✔👍"}
+            {status === "in_process" && "Su pago esta siendo procesado, se le avisara por email cuando este listo"}
+            {status === "rejected" && "Su pago fue rechazado, por favor intente nuevamente con otro medio de pago, muchas gracias"}
+            </p>
           <Link href={"/"}>
             <button  
               className=" mt-4 overflow-hidden hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-xl text-xs font-bold px-6 h-11"
@@ -43,18 +46,6 @@ const data = useSession();
             </button>
           </Link>
         </div>
-      ) : (
-        <div className="flex justify-center items-center pt-40">
-          <p className="pr-8">Su compra fue rechazada</p>
-          <Link href={"/"}>
-            <button 
-              className=" mt-4 overflow-hidden hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-xl text-xs font-bold px-6 h-11"
-            >
-              Volver al inicio
-            </button>
-          </Link>
-        </div>
-      )}
     </div>
   );
 }
