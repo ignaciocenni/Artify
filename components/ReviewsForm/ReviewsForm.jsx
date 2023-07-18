@@ -12,21 +12,23 @@ export default function ReviewsForm({ id }) {
     productId: id,
   });
   const postReviews = async (id,form ) => {
-    const url = `http://localhost:3000/api/products/${id}/reviews`;
+    const url = `/api/products/${id}/reviews`;
   
     try {
       const response = await axios.post(url, form);
-      console.error('funciono');
       return response.data;
     } catch (error) {
-      console.error('Error en la solicitud POST:', error);
       throw error;
     }
   };
 
   const handlerOnClick = () => {
     postReviews(id,form )
-    console.log(form);
+    setForm({
+      ...form,
+      comment: "",
+      rating: 0
+      });
   };
   const handlerChange = (event) => {
     let value = event.target.value;
