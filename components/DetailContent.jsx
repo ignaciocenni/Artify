@@ -12,11 +12,12 @@ import SellerInfo from "./DetailComponents/SellerInfo";
 import BuyNowButton from "./buttons/BuyAndDetail";
 import Footer from "./Footer";
 import AddDeductButtons from "../components/buttons/AddDeductButtons";
+import ReviewsForm from './ReviewsForm/ReviewsForm'
 
 import { useState } from "react";
 
 const DetailContent = ({ data }) => {
-  const { reviews, image, category, price, name, user, description } = data;
+  const { reviews, image, category, price, name, user, description,id } = data;
 
   const amount = reviews.reduce(
     (accumulator, currentValue) => accumulator + currentValue.rating,
@@ -81,6 +82,9 @@ const DetailContent = ({ data }) => {
           <div>
             <BuyNowButton />
           </div>
+        </div>
+        <div>
+          <ReviewsForm id={id}/>
         </div>
 
         <div className="flex flex-col items-start gap-3 px-5 w-[1000px]">

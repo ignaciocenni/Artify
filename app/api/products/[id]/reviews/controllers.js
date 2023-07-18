@@ -10,13 +10,13 @@ const getAllReviews = async (id) => {
   return allReviews;
 };
 
-const addReview = async (comment, rating, productId, id) => {
-  if (!comment || !rating || !productId) throw new Error("Faltan Argumentos!");
+const addReview = async (comment, rating, id) => {
+  if (!comment || !rating ) throw new Error("Faltan Argumentos!");
 
   // Validates:
   // Comments
-  if (comment.length <= 10)
-    throw new Error("The comment must have at least 2 characters.");
+  if (comment.length <= 5)
+    throw new Error("The comment must have at least 5 characters.");
 
   // Rating
   if (rating < 1 || rating > 5)
