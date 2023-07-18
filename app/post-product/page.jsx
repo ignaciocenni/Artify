@@ -9,7 +9,6 @@ import UploadButton from "../../components/buttons/UploadButton";
 import { GET_INFO } from "../../store/slice";
 import ImageSlider from "../../components/DetailComponents/ImageSlider";
 import logo from "../../public/images/logo.svg";
-import CategoryLabel from "../../components/DetailComponents/CategoryLabel";
 import Heart from "../../components/Heart";
 import Stars from "../../components/Stars";
 import ProvinceFilter from "../../components/Filters/ProvinceFilter";
@@ -30,14 +29,7 @@ export default function Page() {
     fileKey: "",
   });
 
-  const title = images.length ? (
-    <>
-      <p>Carga completa</p>
-      <p className="mt-2">{images.length} files</p>
-    </>
-  ) : null;
-
-  const data = useSession()
+  const data = useSession();
 
   const [form, setForm] = useState({
     name: "",
@@ -49,7 +41,7 @@ export default function Page() {
     city: "",
     userEmail: data?.user?.email || null,
     authName: data?.user?.name || null,
-    authImage:data?.user?.image || null,
+    authImage: data?.user?.image || null,
   });
 
   const categories = useSelector((state) => state.valores.categories);
@@ -84,44 +76,36 @@ export default function Page() {
     setErrors(validate({ ...form, [name]: parsedValue }));
     setForm({ ...form, [name]: parsedValue });
   };
-  const isFormValid =
-    Object.keys(errors).length > 0 ||
-    Object.values(form).some((value) => value === "");
+  const isFormValid = Object.keys(errors).length > 0 || Object.values(form).some((value) => value === "");
 
   return (
     <>
       <div className="flex gap-8 justify-center pb-20">
         <div>
-          <ImageSlider image={form.image ? form.image : logo} />
+          <ImageSlider image={form.image[0] ? form.image[0] : logo} />
         </div>
         <section className="text-center grid justify-center items-center">
           <form>
-            <h1 className="font-semibold text-3xl py-5">
-              Previsualización del articulo a publicar
-            </h1>
+            <h1 className="font-semibold text-3xl py-5">Previsualización del articulo a publicar</h1>
             <div className="flex flex-col items-start w-64">
               <select
                 className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[var(--background-sec)] text-center font-semibold "
                 onChange={handleChange}
-                name="categoryId">
+                name="categoryId"
+              >
                 <option selected disabled>
                   Seleccione su categoria
                 </option>
                 {categories?.map((category) => {
                   const id = String(category.id);
                   return (
-                    <option
-                      key={category.id}
-                      value={id}
-                      className="text-center font-semibold rounded-2xl">
+                    <option key={category.id} value={id} className="text-center font-semibold rounded-2xl">
                       {category.name}
                     </option>
                   );
                 })}
               </select>
-              {errors.categoryId && (
-                <p className="text-red-700 font-medium text-xs">{errors.categoryId}</p>
-              )}
+              {errors.categoryId && <p className="text-red-700 font-medium text-xs">{errors.categoryId}</p>}
             </div>
 
             <br />
@@ -137,9 +121,7 @@ export default function Page() {
               />
               <Heart />
             </div>
-            {errors.name && (
-              <p className="text-red-700 font-medium text-xs">{errors.name}</p>
-            )}
+            {errors.name && <p className="text-red-700 font-medium text-xs">{errors.name}</p>}
             <div className="flex content-center items-center py-2">
               <Stars />
             </div>
@@ -155,18 +137,14 @@ export default function Page() {
                   value={form.price}
                 />
               </div>
-              {errors.price && (
-                <p className="text-red-700 font-medium text-xs">{errors.price}</p>
-              )}
+              {errors.price && <p className="text-red-700 font-medium text-xs">{errors.price}</p>}
             </div>
             <div className="flex flex-col items-start py-5 ">
               <div className="flex items-center gap-3">
                 <h1 className="text-sm font-light">Publicado hoy en</h1>
                 <ProvinceFilter />
               </div>
-              {errors.city && (
-                <p className="text-red-700 font-medium text-xs">{errors.city}</p>
-              )}
+              {errors.city && <p className="text-red-700 font-medium text-xs">{errors.city}</p>}
             </div>
             <div className="flex flex-col items-start mb-4 gap-2">
               <h1 className="font-medium text-xl">Descripción del vendedor</h1>
@@ -178,9 +156,7 @@ export default function Page() {
                 name="description"
                 value={form.description}
               />
-              {errors.description && (
-                <p className="text-red-700 font-medium text-xs">{errors.description}</p>
-              )}
+              {errors.description && <p className="text-red-700 font-medium text-xs">{errors.description}</p>}
             </div>
 
             <div className="flex flex-col items-start mb-4 gap-2">
@@ -193,9 +169,7 @@ export default function Page() {
                 name="stock"
                 value={form.stock}
               />
-              {errors.stock && (
-                <p className="text-red-700 font-medium text-xs">{errors.stock}</p>
-              )}
+              {errors.stock && <p className="text-red-700 font-medium text-xs">{errors.stock}</p>}
             </div>
 
             <UploadButton setForm={setForm} form={form} />
@@ -204,13 +178,15 @@ export default function Page() {
               {isFormValid ? (
                 <button
                   className="bg-[var(--detail)] text-white font-bold py-2 px-4 rounded focus:outline-none  w-[250px] opacity-50  cursor-not-allowed"
-                  onClick={handleClick}>
+                  onClick={handleClick}
+                >
                   Continuar
                 </button>
               ) : (
                 <button
                   className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px] "
-                  onClick={handleClick}>
+                  onClick={handleClick}
+                >
                   Continuar
                 </button>
               )}

@@ -12,7 +12,8 @@ const nextConfig = {
       "via.placeholder.com",
       "example.com",
       "lh3.googleusercontent.com",
-      "uploadthing.com"
+      "uploadthing.com",
+      "utfs.io",
     ],
   },
 };

@@ -7,6 +7,11 @@ const getProduct = async (id) => {
     },
     include: {
       reviews: true,
+      province: {
+        select: {
+          name: true,
+        },
+      },
       category: {
         select: {
           name: true,
@@ -18,11 +23,6 @@ const getProduct = async (id) => {
           name: true,
           lastName: true,
           image: true,
-          // province: {
-          //   select: {
-          //     name: true,
-          //   },
-          // },
         },
       },
     },
