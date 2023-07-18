@@ -9,7 +9,9 @@ import LogoutButton from "./LogoutButton";
 import CartButton from "./CartButton";
 import { useSelector } from "react-redux";
 import SearchBar from "../SearchBar";
+import { usePathname } from "next/navigation";
 const NavBar = () => {
+  const path = usePathname()
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -19,7 +21,9 @@ const NavBar = () => {
   const product = useSelector((state) => state.valores.cartQuantity);
 
   return (
-    <nav className="flex justify-between items-center py-3 px-8 mb-4 shadow-md">
+    <>
+    {path !== "/purchase-status" && 
+      <nav className="flex justify-between items-center py-3 px-8 mb-4 shadow-md">
       <div className="flex content-center items-center ">
         <Image
           className="pr-2 h-2/4"
@@ -85,7 +89,8 @@ const NavBar = () => {
           </ul>
         </div>
       )}
-    </nav>
+    </nav>}
+    </>
   );
 };
 

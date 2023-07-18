@@ -21,8 +21,8 @@ export async function POST(req) {
       auto_return: "approved",
       back_urls: {
         success: `${URL}/purchase-status`,
-        failure: `${URL}/profile`,
-        pending: `${URL}`,
+        failure: `${URL}/purchase-status`,
+        pending: `${URL}/purchase-status`,
       },
     };
 
