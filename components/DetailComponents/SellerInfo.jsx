@@ -13,12 +13,12 @@ const SellerInfo = ({ user }) => {
           <div className="flex flex-row items-center gap-3 justify-center">
             <Image
               className="rounded-full"
-              src={user.image}
+              src={user?.image}
               alt="imagen publicacion"
               width={40}
               height={40}
             />
-            <h1 className="font-medium hover:underline">{user.name}</h1>
+            <h1 className="font-medium hover:underline">{user?.name}</h1>
           </div>
         </Link>
 

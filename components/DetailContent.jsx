@@ -12,17 +12,18 @@ import SellerInfo from "./DetailComponents/SellerInfo";
 import BuyNowButton from "./buttons/BuyAndDetail";
 import Footer from "./Footer";
 import AddDeductButtons from "../components/buttons/AddDeductButtons";
+import ReviewsForm from './ReviewsForm/ReviewsForm'
 
 import { useState } from "react";
 
 const DetailContent = ({ data }) => {
-  const { reviews, image, category, price, name, user, description } = data;
+  const { reviews, image, category, price, name, user, description,id } = data;
 
-  const amount = reviews.reduce(
+  const amount = reviews?.reduce(
     (accumulator, currentValue) => accumulator + currentValue.rating,
     0
   );
-  const averange = amount / reviews.length;
+  const averange = amount / reviews?.length;
 
   const [questions, setQuestions] = useState([]);
 
@@ -68,7 +69,7 @@ const DetailContent = ({ data }) => {
             </div>
 
             <div className="flex items-center gap-2">
-              <h1 className="text-sm font-light">{`Publicado hoy en ${user.province.name}`}</h1>
+              <h1 className="text-sm font-light">{`Publicado hoy en ${user?.province.name}`}</h1>
             </div>
 
             <div className="flex flex-col py-3 gap-2 my-0 px-0 w-[524px] h-[363px]">
@@ -81,6 +82,9 @@ const DetailContent = ({ data }) => {
           <div>
             <BuyNowButton />
           </div>
+        </div>
+        <div>
+          <ReviewsForm id={id}/>
         </div>
 
         <div className="flex flex-col items-start gap-3 px-5 w-[1000px]">
