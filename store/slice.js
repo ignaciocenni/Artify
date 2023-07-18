@@ -34,7 +34,8 @@ export const Slice = createSlice({
     },
     countrie: (state, action) => {
       const countrie = [...state.copyProducts];
-      const find = countrie.filter((element) => element.user.province.name === action.payload);
+      const find = countrie.filter((element) => element.province.name === action.payload);
+
       state.products = action.payload === "Todas" ? countrie : find;
       state.provincesFilter = action.payload === "Todas" ? countrie : find;
     },
