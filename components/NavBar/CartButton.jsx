@@ -2,8 +2,6 @@
 import Image from "next/image";
 import cart from "../../public/images/cart.svg";
 import { useSelector } from "react-redux";
-import { Suspense } from "react";
-import Loading from "../../app/loading";
 
 export default function CartButton() {
   const quantity = useSelector((state) => state.valores.cartQuantity);
