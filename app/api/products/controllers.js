@@ -17,6 +17,7 @@ const getAllProducts = async (name) => {
         userId: true,
         user: true,
         category: true,
+        stock:true,
         user: {
           select: {
             name: true,
@@ -50,6 +51,7 @@ const getAllProducts = async (name) => {
       user: true,
       category: true,
       province: true,
+      stock:true,
       user: {
         select: {
           name: true,

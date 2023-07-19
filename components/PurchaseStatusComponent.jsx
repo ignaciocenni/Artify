@@ -3,16 +3,49 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { multiplied } from "../store/slice";
+import axios from "axios";
 
 export default function PurchaseStatusComponent() {
+const productsDB = useSelector((state) => state.valores.products)
 const data = useSession();
  const dispatch = useDispatch()
+const productsLS = JSON.parse(localStorage.getItem("products")) || [];
+const updatedProducts = productsDB.reduce((acc, productDB) => {
+  const matchingProduct = productsLS.find((productLS) => productLS.id === productDB.id);
+  if (matchingProduct) {
+    const updatedStock = productDB.stock - matchingProduct.quantity;
+    return [...acc, { id: productDB.id, stock: updatedStock >= 0 ? updatedStock : 0 }];
+  }
+  return acc;
+}, []);
+
+
+
  useEffect(() => {
     if(status === "approved"){
-        localStorage.removeItem("products")
-        dispatch(multiplied([]))
+      updatedProducts.forEach((product) => {
+        const url = `http://localhost:3000/api/products/${product.id}`;
+        const data = { stock: product.stock };
+  
+        axios.put(url, data)
+          .then((response) => {
+            // Manejar la respuesta de la solicitud PUT exitosa si es necesario
+            console.log('Solicitud PUT exitosa:', response.data);
+          })
+          .catch((error) => {
+            // Manejar errores en la solicitud PUT si es necesario
+            console.error('Error en la solicitud PUT:', error);
+          });
+      });
+  
+        // localStorage.removeItem("products")
+        // dispatch(multiplied([]))
+    }else if(status === "in_process"){
+      
+      localStorage.removeItem("products")
+      dispatch(multiplied([]))
     }
  }, [])
  
@@ -29,7 +62,7 @@ const data = useSession();
       await sendContactForm(form);
   };
   sendEmail()
-  console.log(status);
+  
   return (
     <div >
         <div className="flex justify-center items-center pt-40">
@@ -49,3 +82,4 @@ const data = useSession();
     </div>
   );
 }
+
