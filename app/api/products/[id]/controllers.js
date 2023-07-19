@@ -31,7 +31,9 @@ const getProduct = async (id) => {
   return searchedUser;
 };
 
+
 const updateProduct = async (id, name, description, price, stock, image, status, province) => {
+
   // Validates:
   //Name
   const nameRegex = /^[a-zA-Z0-9\s.,áéíóúÁÉÍÓÚñÑ]*$/;
@@ -44,8 +46,10 @@ const updateProduct = async (id, name, description, price, stock, image, status,
   // Price
   if (price <= 0) throw new Error("Price cannot be less than or equal to $0");
 
+
   // Stock
   if (stock <= 0) throw new Error("Stock cannot be less than 0 units.");
+
 
   //Image
 

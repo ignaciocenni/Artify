@@ -1,15 +1,24 @@
 import prisma from "../db/client";
 
-const allUsers = async () => {
+const getAllUsers = async () => {
   const response = await prisma.User.findMany({
-    include: {
-      products: true,
+    select: {
+      id: true,
+      name: true,
+      lastName: true,
+      email: true,
+      image: true,
+      aboutMe: true,
+      rol: true,
+      socials: true,
+      sellerSales: true,
     },
   });
 
   if (!response.length) throw new Error("Users not found");
   return response;
 };
+
 
 const addUser = async (name, password, lastName, email) => {
   if (!name || !email || !password || !lastName) throw new Error("Missing arguments");
@@ -41,4 +50,4 @@ const addUser = async (name, password, lastName, email) => {
   return newUser;
 };
 
-export { allUsers, addUser };
+export { getAllUsers, addUser };

@@ -56,7 +56,8 @@ export default function SignInPage() {
           onChange={handleChange}
           name="email"
           value={form.email}
-          errors={errors.email} />
+          errors={errors.email} 
+            />
 
         <InputField
           id="username"

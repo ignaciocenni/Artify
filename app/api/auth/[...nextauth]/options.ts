@@ -1,10 +1,17 @@
-import GoogleProvider from "next-auth/providers/google";
+import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import prisma from "../../db/client";
-import { error } from "console";
 export const options = {
   providers: [
     GoogleProvider({
+      profile(profile: GoogleProfile) {
+        return {
+          ...profile,
+          rol: "USER",
+          image: profile.picture,
+          id: profile.sub,
+        };
+      },
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
       authorization: {
@@ -44,8 +51,19 @@ export const options = {
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) token.role = user.rol;
+      return token;
+    },
+    async session({ session, token }) {
+      if (session?.user) session.user.role = token.role;
+      return session;
+    },
+  },
   pages: {
     signIn: "/login",
     error: "/login",
+    signOut: "/",
   },
 };
