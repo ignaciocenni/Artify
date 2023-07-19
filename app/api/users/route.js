@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { allUsers, addUser } from "./controllers";
+import { getAllUsers, addUser } from "./controllers";
 
 export async function GET() {
   try {
-    const response = await allUsers();
+    const response = await getAllUsers();
     return NextResponse.json(response, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 404 });
