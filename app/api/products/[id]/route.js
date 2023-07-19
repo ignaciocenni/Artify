@@ -14,7 +14,6 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
   const { id } = params;
   const { name, description, price, stock, image } = await request.json();
-
   try {
     const response = await updateProduct(id, name, description, price, stock, image);
     return NextResponse.json(response, { status: 200 });
