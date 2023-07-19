@@ -39,7 +39,7 @@ const ButtonSession = () => {
           </Link>
         </li>
         <li className="px-4 py-2 hover:bg-gray-100">
-          <Link className="flex" href="/settings">
+          <Link className="flex" href="/dashboard">
             <Image
               src="/images/controlPanelImage.svg"
               width={20}

@@ -4,6 +4,7 @@ export const Slice = createSlice({
   name: "valores",
   initialState: {
     products: [],
+    users: [],
     copyProducts: [],
     provinces: [],
     provincesFilter: [],
@@ -24,6 +25,9 @@ export const Slice = createSlice({
     GET_CATEGORIES: (state, action) => {
       state.categories = action.payload;
     },
+    getUsers: (state, action) => {
+      state.users = action.payload;
+    },
     price: (state, { type, payload }) => {
       const price = [...state.products];
       const find = price.filter(function (num) {
@@ -34,7 +38,8 @@ export const Slice = createSlice({
     },
     countrie: (state, action) => {
       const countrie = [...state.copyProducts];
-      const find = countrie.filter((element) => element.user.province.name === action.payload);
+      const find = countrie.filter((element) => element.province.name === action.payload);
+
       state.products = action.payload === "Todas" ? countrie : find;
       state.provincesFilter = action.payload === "Todas" ? countrie : find;
     },
@@ -78,4 +83,5 @@ export const {
   totalPrices,
   setPath,
   localProducts,
+  getUsers
 } = Slice.actions;

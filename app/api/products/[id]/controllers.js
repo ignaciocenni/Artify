@@ -7,6 +7,11 @@ const getProduct = async (id) => {
     },
     include: {
       reviews: true,
+      province: {
+        select: {
+          name: true,
+        },
+      },
       category: {
         select: {
           name: true,
@@ -18,11 +23,6 @@ const getProduct = async (id) => {
           name: true,
           lastName: true,
           image: true,
-          // province: {
-          //   select: {
-          //     name: true,
-          //   },
-          // },
         },
       },
     },
@@ -32,7 +32,6 @@ const getProduct = async (id) => {
 };
 
 const updateProduct = async (id, name, description, price, stock, image) => {
-  if (!id && !name && !description && !price && !stock && !image) throw new Error("Missing argument");
 
   // Validates:
   //Name
@@ -44,9 +43,6 @@ const updateProduct = async (id, name, description, price, stock, image) => {
 
   //Price
   if (price <= 0) throw new Error("Price cannot be less than or equal to $0");
-
-  //Stock
-  if (stock <= 0) throw new Error("Stock cannot be less than 0 units.");
 
   //Image
   ///...

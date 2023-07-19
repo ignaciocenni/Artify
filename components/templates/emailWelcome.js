@@ -1,70 +1,1372 @@
 export const emailWelcome = (data) => {
   const { name, email } = data;
   return {
-    html: `
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office"><head><meta charset="UTF-8"><meta content="width=device-width, initial-scale=1" name="viewport"><meta name="x-apple-disable-message-reformatting"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta content="telephone=no" name="format-detection"><title>New email template 2023-07-14</title><!--[if (mso 16)]><style type="text/css"> a {text-decoration: none;} </style><![endif]--><!--[if gte mso 9]><style>sup { font-size: 100% !important; }</style><![endif]--><!--[if gte mso 9]><xml> <o:OfficeDocumentSettings> <o:AllowPNG></o:AllowPNG> <o:PixelsPerInch>96</o:PixelsPerInch> </o:OfficeDocumentSettings> </xml><![endif]--><style type="text/css">.rollover:hover .rollover-first { max-height:0px!important; display:none!important; } .rollover:hover .rollover-second { max-height:none!important; display:inline-block!important; } .rollover div { font-size:0px; } u ~ div img + div > div { display:none; } #outlook a { padding:0; } span.MsoHyperlink,span.MsoHyperlinkFollowed { color:inherit; mso-style-priority:99; } a.es-button { mso-style-priority:100!important; text-decoration:none!important; } a[x-apple-data-detectors] { color:inherit!important; text-decoration:none!important; font-size:inherit!important; font-family:inherit!important; font-weight:inherit!important; line-height:inherit!important; } .es-desk-hidden { display:none; float:left; overflow:hidden; width:0; max-height:0; line-height:0; mso-hide:all; } .es-header-body a:hover { color:#677d9e!important; } .es-content-body a:hover { color:#3e8eb8!important; } .es-footer-body a:hover { color:#999999!important; } .es-infoblock a:hover { color:#cccccc!important; } .es-button-border:hover > a.es-button { color:#ffffff!important; }@media only screen and (max-width:600px) {*[class="gmail-fix"] { display:none!important } p, a { line-height:150%!important } h1, h1 a { line-height:120%!important } h2, h2 a { line-height:120%!important } h3, h3 a { line-height:120%!important } h4, h4 a { line-height:120%!important } h5, h5 a { line-height:120%!important } h6, h6 a { line-height:120%!important } .es-header-body p { } .es-content-body p { } .es-footer-body p { } .es-infoblock p { } h1 { font-size:30px!important; text-align:left } h2 { font-size:26px!important; text-align:left } h3 { font-size:20px!important; text-align:left } h4 { font-size:24px!important; text-align:left } h5 { font-size:20px!important; text-align:left } h6 { font-size:16px!important; text-align:left } .es-header-body h1 a, .es-content-body h1 a, .es-footer-body h1 a { font-size:30px!important } .es-header-body h2 a, .es-content-body h2 a, .es-footer-body h2 a { font-size:26px!important } .es-header-body h3 a, .es-content-body h3 a, .es-footer-body h3 a { font-size:20px!important } .es-header-body h4 a, .es-content-body h4 a, .es-footer-body h4 a { font-size:24px!important } .es-header-body h5 a, .es-content-body h5 a, .es-footer-body h5 a { font-size:20px!important } .es-header-body h6 a, .es-content-body h6 a, .es-footer-body h6 a { font-size:16px!important } .es-menu td a { font-size:14px!important } .es-header-body p, .es-header-body a { font-size:14px!important } .es-content-body p, .es-content-body a { font-size:16px!important } .es-footer-body p, .es-footer-body a { font-size:14px!important } .es-infoblock p, .es-infoblock a { font-size:12px!important } .es-m-txt-c, .es-m-txt-c h1, .es-m-txt-c h2, .es-m-txt-c h3, .es-m-txt-c h4, .es-m-txt-c h5, .es-m-txt-c h6 { text-align:center!important } .es-m-txt-r, .es-m-txt-r h1, .es-m-txt-r h2, .es-m-txt-r h3, .es-m-txt-r h4, .es-m-txt-r h5, .es-m-txt-r h6 { text-align:right!important } .es-m-txt-j, .es-m-txt-j h1, .es-m-txt-j h2, .es-m-txt-j h3, .es-m-txt-j h4, .es-m-txt-j h5, .es-m-txt-j h6 { text-align:justify!important } .es-m-txt-l, .es-m-txt-l h1, .es-m-txt-l h2, .es-m-txt-l h3, .es-m-txt-l h4, .es-m-txt-l h5, .es-m-txt-l h6 { text-align:left!important } .es-m-txt-r img, .es-m-txt-c img, .es-m-txt-l img, .es-m-txt-r .rollover:hover .rollover-second, .es-m-txt-c .rollover:hover .rollover-second, .es-m-txt-l .rollover:hover .rollover-second { display:inline!important } .es-m-txt-r .rollover div, .es-m-txt-c .rollover div, .es-m-txt-l .rollover div { line-height:0!important; font-size:0!important } .es-spacer { display:inline-table } a.es-button, button.es-button { font-size:20px!important } .es-m-fw, .es-m-fw.es-fw, .es-m-fw .es-button { display:block!important } .es-m-il, .es-m-il .es-button, .es-social, .es-social td, .es-menu { display:inline-block!important } .es-adaptive table, .es-left, .es-right { width:100%!important } .es-content table, .es-header table, .es-footer table, .es-content, .es-footer, .es-header { width:100%!important; max-width:600px!important } .adapt-img { width:100%!important; height:auto!important } .es-mobile-hidden, .es-hidden { display:none!important } .es-desk-hidden { width:auto!important; overflow:visible!important; float:none!important; max-height:inherit!important; line-height:inherit!important } tr.es-desk-hidden { display:table-row!important } table.es-desk-hidden { display:table!important } td.es-desk-menu-hidden { display:table-cell!important } .es-menu td { width:1%!important } table.es-table-not-adapt, .esd-block-html table { width:auto!important } .es-social td { padding-bottom:10px } .h-auto { height:auto!important } h1 a { text-align:left } h2 a { text-align:left } h3 a { text-align:left } a.es-button, button.es-button { display:inline-block!important } .es-button-border { display:inline-block!important } }</style></head>
-<body style="width:100%;height:100%;padding:0;Margin:0"><div class="es-wrapper-color" style="background-color:#EFEFEF"><!--[if gte mso 9]><v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t"> <v:fill type="tile" color="#efefef"></v:fill> </v:background><![endif]--><table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top;background-color:#EFEFEF">
-<tr>
-<td valign="top" style="padding:0;Margin:0"><table cellpadding="0" cellspacing="0" class="es-header" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:100%;table-layout:fixed !important;background-color:transparent;background-repeat:repeat;background-position:center top">
-<tr class="es-visible-simple-html-only">
-<td class="es-stripe-html" align="center" style="padding:0;Margin:0"><table class="es-header-body" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;background-color:#E6EBEF;width:600px"><tr><td align="left" bgcolor="#C4B5FD" style="padding:20px;Margin:0;background-color:#C4B5FD;border-radius:30px 30px 0 0">
-<table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tr><td valign="top" align="center" style="padding:0;Margin:0;width:560px">
-<table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-<tr>
-<td align="center" style="padding:0;Margin:0;font-size:0px">
-<a href="https://artify-two.vercel.app/" target="_blank" style="mso-line-height-rule:exactly;text-decoration:none;color:#677D9E;font-size:14px">
-<img src="https://utfs.io/f/31e57e1e-c408-4f60-a116-c09c058732b2_artfy.svg" alt="Artify logo" title="Artify logo" width="134" style="display:block;font-size:14px;border:0;outline:none;text-decoration:none">
-</a>
-</td>
-</tr></table></td></tr></table></td></tr></table></td>
-</tr></table><table class="es-content" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:100%;table-layout:fixed !important"><tr class="es-visible-simple-html-only">
-<td class="es-stripe-html" align="center" style="padding:0;Margin:0"><table class="es-content-body" cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:600px"><tr><td align="left" bgcolor="#C4B5FD" style="Margin:0;padding-top:40px;padding-right:30px;padding-bottom:40px;padding-left:30px;background-color:#C4B5FD"><table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-<tr>
-<td valign="top" align="center" style="padding:0;Margin:0;width:540px"><table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tr><td align="left" bgcolor="#f3e8ff" style="padding:0;Margin:0">
-<h1 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:30px;font-style:normal;font-weight:normal;line-height:36px;color:#666666">
-<strong>¡Bienvenido a Artify!</strong>
-</h1>
-</td></tr><tr>
-<td align="left" bgcolor="#f3e8ff" style="padding:0;Margin:0;padding-top:15px">
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
-Asunto: ¡Bienvenido a nuestra tienda de artesanías!</p>
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
-Estimado/a : ${name},<br>
-</p></td></tr><tr>
-<td align="left" bgcolor="#f3e8ff" style="padding:0;Margin:0;padding-top:15px"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px"><br></p>
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">¡Bienvenido/a a Artify!</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px;margin-left:40px">Nos complace darte la bienvenida a nuestra tienda en línea, donde podrás</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">descubrir una amplia selección de hermosas artesanías hechas a mano con amor y&nbsp;&nbsp;educación.</p>
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px;margin-left:40px">
-En Artify nos enorgullece ofrecerte productos únicos y auténticos que reflejan</p>
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
-&nbsp;la habilidad y creatividad de talentosos artesanos. Queremos que te sumerjas en una experiencia de compra excepcional, llena de belleza, calidad y atención al detalle. como también publicar tus artesanías si deseas</p>
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">&nbsp;</p>
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px;margin-left:80px">
-&nbsp;&nbsp;&nbsp;&nbsp;Gracias por elegir Artify como tu destino para las artesanías&nbsp;</p>
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
-más hermosas y auténticas! Esperamos que disfrutes de tu experiencia de compra y encuentres tesoros que llenen de encanto y personalidad tus espacios y momentos especiales.</p>
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
-Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
-Estamos aquí para ayudarte en todo momento.</p>
-</td></tr><tr><td align="left" bgcolor="#f3e8ff" style="padding:0;Margin:0;padding-top:15px">
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#999999;font-size:14px">
-&nbsp;</p>
-</td></tr><tr>
-<td align="left" bgcolor="#f3e8ff" style="padding:0;Margin:0;padding-top:25px"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
-¡Gracias nuevamente!🙏</p>
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
-Saludos cordiales👋</p>
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">
-Artify&nbsp;&nbsp;✉️artifypf@gmail.com</p>
-</td></tr></table></td></tr></table></td></tr></table></td>
-</tr></table><table cellpadding="0" cellspacing="0" class="es-footer" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:100%;table-layout:fixed !important;background-color:transparent;background-repeat:repeat;background-position:center top"><tr class="es-visible-simple-html-only">
-<td class="es-stripe-html" align="center" style="padding:0;Margin:0"><table class="es-footer-body" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;background-color:#E6EBEF;width:600px"><tr><td align="left" bgcolor="#C4B5FD" style="Margin:0;padding-top:20px;padding-right:20px;padding-bottom:20px;padding-left:20px;background-color:#C4B5FD;border-radius:0 0 50px 50px"><table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tr><td valign="top" align="center" style="padding:0;Margin:0;width:560px"><table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tr><td esdev-links-color="#333333" align="center" class="es-m-txt-c" style="padding:0;Margin:0">
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:20px;letter-spacing:0;color:#999999;font-size:13px">
-¡Gracias nuevamente por tu compra!</p>
-<p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:20px;letter-spacing:0;color:#999999;font-size:13px">
-© ARTIFY Todos los derechos reservados, 2023</p>
-</td></tr><tr><td align="center" style="padding:0;Margin:0;padding-top:15px;font-size:0"><table class="es-table-not-adapt es-social" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tr><td valign="top" align="center" style="padding:0;Margin:0;padding-right:10px"><img title="Facebook" src="https://qnyqbc.stripocdn.email/content/assets/img/social-icons/square-white/facebook-square-white.png" alt="Fb" width="32" style="display:block;font-size:14px;border:0;outline:none;text-decoration:none"></td>
-<td valign="top" align="center" style="padding:0;Margin:0;padding-right:10px"><img title="Twitter" src="https://qnyqbc.stripocdn.email/content/assets/img/social-icons/square-white/twitter-square-white.png" alt="Tw" width="32" style="display:block;font-size:14px;border:0;outline:none;text-decoration:none"></td><td valign="top" align="center" style="padding:0;Margin:0;padding-right:10px"><img title="Instagram" src="https://qnyqbc.stripocdn.email/content/assets/img/social-icons/square-white/instagram-square-white.png" alt="Inst" width="32" style="display:block;font-size:14px;border:0;outline:none;text-decoration:none"></td><td valign="top" align="center" style="padding:0;Margin:0;padding-right:10px"><img title="Youtube" src="https://qnyqbc.stripocdn.email/content/assets/img/social-icons/square-white/youtube-square-white.png" alt="Yt" width="32" style="display:block;font-size:14px;border:0;outline:none;text-decoration:none"></td>
-</tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr></table></div></body></html>`,
+    html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+                                          <html
+                                            xmlns="http://www.w3.org/1999/xhtml"
+                                            xmlns:o="urn:schemas-microsoft-com:office:office"
+                                            style="padding: 0; margin: 0"
+                                          >
+                                            <head>
+                                              <meta charset="UTF-8" />
+                                              <meta
+                                                content="width=device-width, initial-scale=1"
+                                                name="viewport"
+                                              />
+                                              <meta
+                                                name="x-apple-disable-message-reformatting"
+                                              />
+                                              <meta
+                                                http-equiv="X-UA-Compatible"
+                                                content="IE=edge"
+                                              />
+                                              <meta
+                                                content="telephone=no"
+                                                name="format-detection"
+                                              />
+                                              <title>New message 2</title>
+                                              <!--[if (mso 16)
+                                                ]><style type="text/css">
+                                                  a {
+                                                    text-decoration: none;
+                                                  }
+                                                </style><!
+                                              [endif]-->
+                                              <!--[if gte mso 9
+                                                ]><style>
+                                                  sup {
+                                                    font-size: 100% !important;
+                                                  }
+                                                </style><!
+                                              [endif]-->
+                                              <!--[if !mso]><!-- -->
+                                              <link
+                                                href="https://fonts.googleapis.com/css?family=Montserrat:500,800"
+                                                rel="stylesheet"
+                                              />
+                                              <!--<![endif]-->
+                                              <!--[if gte mso 9]>
+                                                <xml>
+                                                  <o:OfficeDocumentSettings>
+                                                    <o:AllowPNG></o:AllowPNG>
+                                                    <o:PixelsPerInch
+                                                      >96</o:PixelsPerInch
+                                                    >
+                                                  </o:OfficeDocumentSettings>
+                                                </xml>
+                                              <![endif]-->
+                                              <style type="text/css">
+                                                #outlook a {
+                                                  padding: 0;
+                                                }
+                                                .ExternalClass {
+                                                  width: 100%;
+                                                }
+                                                .ExternalClass,
+                                                .ExternalClass p,
+                                                .ExternalClass span,
+                                                .ExternalClass font,
+                                                .ExternalClass td,
+                                                .ExternalClass div {
+                                                  line-height: 100%;
+                                                }
+                                                .es-button {
+                                                  mso-style-priority: 100 !important;
+                                                  text-decoration: none !important;
+                                                }
+                                                a[x-apple-data-detectors] {
+                                                  color: inherit !important;
+                                                  text-decoration: none !important;
+                                                  font-size: inherit !important;
+                                                  font-family: inherit !important;
+                                                  font-weight: inherit !important;
+                                                  line-height: inherit !important;
+                                                }
+                                                .es-desk-hidden {
+                                                  display: none;
+                                                  float: left;
+                                                  overflow: hidden;
+                                                  width: 0;
+                                                  max-height: 0;
+                                                  line-height: 0;
+                                                  mso-hide: all;
+                                                }
+                                                a.es-button:hover {
+                                                  border-color: #2cb543 !important;
+                                                  background: #2cb543 !important;
+                                                }
+                                                a.es-secondary:hover {
+                                                  border-color: #ffffff !important;
+                                                  background: #ffffff !important;
+                                                }
+                                                @media only screen and (max-width: 600px) {
+                                                  p,
+                                                  ul li,
+                                                  ol li,
+                                                  a {
+                                                    line-height: 150% !important;
+                                                  }
+                                                  h1,
+                                                  h2,
+                                                  h3,
+                                                  h1 a,
+                                                  h2 a,
+                                                  h3 a {
+                                                    line-height: 120% !important;
+                                                  }
+                                                  h1 {
+                                                    font-size: 30px !important;
+                                                    text-align: center;
+                                                  }
+                                                  h2 {
+                                                    font-size: 26px !important;
+                                                    text-align: center;
+                                                  }
+                                                  h3 {
+                                                    font-size: 20px !important;
+                                                    text-align: center;
+                                                  }
+                                                  u + #body {
+                                                    width: 100vw !important;
+                                                  }
+                                                  .es-header-body h1 a,
+                                                  .es-content-body h1 a,
+                                                  .es-footer-body h1 a {
+                                                    font-size: 30px !important;
+                                                  }
+                                                  .es-header-body h2 a,
+                                                  .es-content-body h2 a,
+                                                  .es-footer-body h2 a {
+                                                    font-size: 26px !important;
+                                                  }
+                                                  .es-header-body h3 a,
+                                                  .es-content-body h3 a,
+                                                  .es-footer-body h3 a {
+                                                    font-size: 20px !important;
+                                                  }
+                                                  .es-menu td a {
+                                                    font-size: 16px !important;
+                                                  }
+                                                  .es-header-body p,
+                                                  .es-header-body ul li,
+                                                  .es-header-body ol li,
+                                                  .es-header-body a {
+                                                    font-size: 16px !important;
+                                                  }
+                                                  .es-content-body p,
+                                                  .es-content-body ul li,
+                                                  .es-content-body ol li,
+                                                  .es-content-body a {
+                                                    font-size: 16px !important;
+                                                  }
+                                                  .es-footer-body p,
+                                                  .es-footer-body ul li,
+                                                  .es-footer-body ol li,
+                                                  .es-footer-body a {
+                                                    font-size: 16px !important;
+                                                  }
+                                                  .es-infoblock p,
+                                                  .es-infoblock ul li,
+                                                  .es-infoblock ol li,
+                                                  .es-infoblock a {
+                                                    font-size: 12px !important;
+                                                  }
+                                                  *[class="gmail-fix"] {
+                                                    display: none !important;
+                                                  }
+                                                  .es-m-txt-c,
+                                                  .es-m-txt-c h1,
+                                                  .es-m-txt-c h2,
+                                                  .es-m-txt-c h3 {
+                                                    text-align: center !important;
+                                                  }
+                                                  .es-m-txt-r,
+                                                  .es-m-txt-r h1,
+                                                  .es-m-txt-r h2,
+                                                  .es-m-txt-r h3 {
+                                                    text-align: right !important;
+                                                  }
+                                                  .es-m-txt-l,
+                                                  .es-m-txt-l h1,
+                                                  .es-m-txt-l h2,
+                                                  .es-m-txt-l h3 {
+                                                    text-align: left !important;
+                                                  }
+                                                  .es-m-txt-r img,
+                                                  .es-m-txt-c img,
+                                                  .es-m-txt-l img {
+                                                    display: inline !important;
+                                                  }
+                                                  .es-button-border {
+                                                    display: block !important;
+                                                  }
+                                                  a.es-button,
+                                                  button.es-button {
+                                                    font-size: 16px !important;
+                                                    display: block !important;
+                                                    border-left-width: 0px !important;
+                                                    border-right-width: 0px !important;
+                                                  }
+                                                  .es-btn-fw {
+                                                    border-width: 10px 0px !important;
+                                                    text-align: center !important;
+                                                  }
+                                                  .es-adaptive table,
+                                                  .es-btn-fw,
+                                                  .es-btn-fw-brdr,
+                                                  .es-left,
+                                                  .es-right {
+                                                    width: 100% !important;
+                                                  }
+                                                  .es-content table,
+                                                  .es-header table,
+                                                  .es-footer table,
+                                                  .es-content,
+                                                  .es-footer,
+                                                  .es-header {
+                                                    width: 100% !important;
+                                                    max-width: 600px !important;
+                                                  }
+                                                  .es-adapt-td {
+                                                    display: block !important;
+                                                    width: 100% !important;
+                                                  }
+                                                  .adapt-img {
+                                                    width: 100% !important;
+                                                    height: auto !important;
+                                                  }
+                                                  .es-m-p0 {
+                                                    padding: 0px !important;
+                                                  }
+                                                  .es-m-p0r {
+                                                    padding-right: 0px !important;
+                                                  }
+                                                  .es-m-p0l {
+                                                    padding-left: 0px !important;
+                                                  }
+                                                  .es-m-p0t {
+                                                    padding-top: 0px !important;
+                                                  }
+                                                  .es-m-p0b {
+                                                    padding-bottom: 0 !important;
+                                                  }
+                                                  .es-m-p20b {
+                                                    padding-bottom: 20px !important;
+                                                  }
+                                                  .es-mobile-hidden,
+                                                  .es-hidden {
+                                                    display: none !important;
+                                                  }
+                                                  tr.es-desk-hidden,
+                                                  td.es-desk-hidden,
+                                                  table.es-desk-hidden {
+                                                    width: auto !important;
+                                                    overflow: visible !important;
+                                                    float: none !important;
+                                                    max-height: inherit !important;
+                                                    line-height: inherit !important;
+                                                  }
+                                                  tr.es-desk-hidden {
+                                                    display: table-row !important;
+                                                  }
+                                                  table.es-desk-hidden {
+                                                    display: table !important;
+                                                  }
+                                                  td.es-desk-menu-hidden {
+                                                    display: table-cell !important;
+                                                  }
+                                                  .es-menu td {
+                                                    width: 1% !important;
+                                                  }
+                                                  table.es-table-not-adapt,
+                                                  .esd-block-html table {
+                                                    width: auto !important;
+                                                  }
+                                                  table.es-social {
+                                                    display: inline-block !important;
+                                                  }
+                                                  table.es-social td {
+                                                    display: inline-block !important;
+                                                  }
+                                                  .es-desk-hidden {
+                                                    display: table-row !important;
+                                                    width: auto !important;
+                                                    overflow: visible !important;
+                                                    max-height: inherit !important;
+                                                  }
+                                                }
+                                              </style>
+                                            </head>
+                                            <body
+                                              style="
+                                                width: 100%;
+                                                font-family: Montserrat, Helvetica,
+                                                  Roboto, Arial, sans-serif;
+                                                -webkit-text-size-adjust: 100%;
+                                                -ms-text-size-adjust: 100%;
+                                                padding: 0;
+                                                margin: 0;
+                                              "
+                                            >
+                                              <div
+                                                class="es-wrapper-color"
+                                                style="background-color: #f7f7f7"
+                                              >
+                                                <!--[if gte mso 9]>
+                                                  <v:background
+                                                    xmlns:v="urn:schemas-microsoft-com:vml"
+                                                    fill="t"
+                                                  >
+                                                    <v:fill
+                                                      type="tile"
+                                                      color="#F7F7F7"
+                                                    ></v:fill>
+                                                  </v:background>
+                                                <![endif]-->
+                                                <table
+                                                  cellpadding="0"
+                                                  cellspacing="0"
+                                                  class="es-wrapper"
+                                                  width="100%"
+                                                  style="
+                                                    mso-table-lspace: 0pt;
+                                                    mso-table-rspace: 0pt;
+                                                    border-collapse: collapse;
+                                                    border-spacing: 0px;
+                                                    padding: 0;
+                                                    margin: 0;
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    background-repeat: repeat;
+                                                    background-position: center top;
+                                                    background-color: #f7f7f7;
+                                                  "
+                                                >
+                                                  <tr
+                                                    style="
+                                                      border-collapse: collapse;
+                                                    "
+                                                  >
+                                                    <td
+                                                      valign="top"
+                                                      style="padding: 0; margin: 0"
+                                                    >
+                                                      <table
+                                                        cellpadding="0"
+                                                        cellspacing="0"
+                                                        class="es-header"
+                                                        align="center"
+                                                        style="
+                                                          mso-table-lspace: 0pt;
+                                                          mso-table-rspace: 0pt;
+                                                          border-collapse: collapse;
+                                                          border-spacing: 0px;
+                                                          table-layout: fixed !important;
+                                                          width: 100%;
+                                                          background-color: #34265f;
+                                                          background-repeat: repeat;
+                                                          background-position: center
+                                                            bottom;
+                                                        "
+                                                      >
+                                                        <tr
+                                                          style="
+                                                            border-collapse: collapse;
+                                                          "
+                                                        >
+                                                          <td
+                                                            align="center"
+                                                            bgcolor="#ead1dc"
+                                                            style="
+                                                              padding: 0;
+                                                              margin: 0;
+                                                              background-image: url(https://xrbfmc.stripocdn.email/content/guids/CABINET_3a7a698c62586f3eb3e12df4199718b8/images/6941564382201394.png);
+                                                              background-color: #ead1dc;
+                                                              background-position: center
+                                                                bottom;
+                                                              background-repeat: repeat;
+                                                            "
+                                                            background="https://xrbfmc.stripocdn.email/content/guids/CABINET_3a7a698c62586f3eb3e12df4199718b8/images/6941564382201394.png"
+                                                          >
+                                                            <table
+                                                              class="es-header-body"
+                                                              cellspacing="0"
+                                                              cellpadding="0"
+                                                              align="center"
+                                                              bgcolor="transparent"
+                                                              style="
+                                                                mso-table-lspace: 0pt;
+                                                                mso-table-rspace: 0pt;
+                                                                border-collapse: collapse;
+                                                                border-spacing: 0px;
+                                                                background-color: transparent;
+                                                                width: 600px;
+                                                              "
+                                                            >
+                                                              <tr
+                                                                style="
+                                                                  border-collapse: collapse;
+                                                                "
+                                                              >
+                                                                <td
+                                                                  align="left"
+                                                                  style="
+                                                                    margin: 0;
+                                                                    padding-top: 20px;
+                                                                    padding-left: 20px;
+                                                                    padding-right: 20px;
+                                                                    padding-bottom: 25px;
+                                                                    background-position: center
+                                                                      bottom;
+                                                                  "
+                                                                >
+                                                                  <table
+                                                                    width="100%"
+                                                                    cellspacing="0"
+                                                                    cellpadding="0"
+                                                                    style="
+                                                                      mso-table-lspace: 0pt;
+                                                                      mso-table-rspace: 0pt;
+                                                                      border-collapse: collapse;
+                                                                      border-spacing: 0px;
+                                                                    "
+                                                                  >
+                                                                    <tr
+                                                                      style="
+                                                                        border-collapse: collapse;
+                                                                      "
+                                                                    >
+                                                                      <td
+                                                                        valign="top"
+                                                                        align="center"
+                                                                        style="
+                                                                          padding: 0;
+                                                                          margin: 0;
+                                                                          width: 560px;
+                                                                        "
+                                                                      >
+                                                                        <table
+                                                                          width="100%"
+                                                                          cellspacing="0"
+                                                                          cellpadding="0"
+                                                                          style="
+                                                                            mso-table-lspace: 0pt;
+                                                                            mso-table-rspace: 0pt;
+                                                                            border-collapse: collapse;
+                                                                            border-spacing: 0px;
+                                                                            background-position: center
+                                                                              bottom;
+                                                                          "
+                                                                          role="presentation"
+                                                                        >
+                                                                          <tr
+                                                                            style="
+                                                                              border-collapse: collapse;
+                                                                            "
+                                                                          >
+                                                                            <td
+                                                                              class="es-m-txt-c"
+                                                                              align="center"
+                                                                              style="
+                                                                                padding: 0;
+                                                                                margin: 0;
+                                                                                font-size: 0px;
+                                                                              "
+                                                                            >
+                                                                              <a
+                                                                                href="https://artify-pnq1b2tx9-ignaciocenni.vercel.app/"
+                                                                                target="_blank"
+                                                                                style="
+                                                                                  -webkit-text-size-adjust: none;
+                                                                                  -ms-text-size-adjust: none;
+                                                                                  mso-line-height-rule: exactly;
+                                                                                  text-decoration: underline;
+                                                                                  color: #ffffff;
+                                                                                  font-size: 14px;
+                                                                                "
+                                                                                ><img  style="
+                                                                                display: block;
+                                                                                border: 0;
+                                                                                outline: none;
+                                                                                text-decoration: none;
+                                                                                -ms-interpolation-mode: bicubic;
+                                                                              "
+                                                                              width="147" src="https://artify.gallery/cdn/shop/products/WhatsApp_Image_2022-08-11_at_10.21.22.jpg?v=1675306068&width=953"/></a>
+                                                                            </td>
+                                                                          </tr>
+                                                                        </table>
+                                                                      </td>
+                                                                    </tr>
+                                                                  </table>
+                                                                </td>
+                                                              </tr>
+                                                            </table>
+                                                          </td>
+                                                        </tr>
+                                                      </table>
+                                                      <table
+                                                        cellpadding="0"
+                                                        cellspacing="0"
+                                                        class="es-content"
+                                                        align="center"
+                                                        style="
+                                                          mso-table-lspace: 0pt;
+                                                          mso-table-rspace: 0pt;
+                                                          border-collapse: collapse;
+                                                          border-spacing: 0px;
+                                                          table-layout: fixed !important;
+                                                          width: 100%;
+                                                        "
+                                                      >
+                                                        <tr
+                                                          style="
+                                                            border-collapse: collapse;
+                                                          "
+                                                        >
+                                                          <td
+                                                            align="center"
+                                                            style="
+                                                              padding: 0;
+                                                              margin: 0;
+                                                            "
+                                                          >
+                                                            <table
+                                                              bgcolor="#ffffff"
+                                                              class="es-content-body"
+                                                              align="center"
+                                                              cellpadding="0"
+                                                              cellspacing="0"
+                                                              style="
+                                                                mso-table-lspace: 0pt;
+                                                                mso-table-rspace: 0pt;
+                                                                border-collapse: collapse;
+                                                                border-spacing: 0px;
+                                                                background-color: transparent;
+                                                                width: 600px;
+                                                              "
+                                                            >
+                                                              <tr
+                                                                style="
+                                                                  border-collapse: collapse;
+                                                                "
+                                                              >
+                                                                <td
+                                                                  align="left"
+                                                                  style="
+                                                                    padding: 0;
+                                                                    margin: 0;
+                                                                    padding-top: 20px;
+                                                                    padding-left: 30px;
+                                                                    padding-right: 30px;
+                                                                    background-position: center
+                                                                      bottom;
+                                                                  "
+                                                                >
+                                                                  <table
+                                                                    cellpadding="0"
+                                                                    cellspacing="0"
+                                                                    width="100%"
+                                                                    style="
+                                                                      mso-table-lspace: 0pt;
+                                                                      mso-table-rspace: 0pt;
+                                                                      border-collapse: collapse;
+                                                                      border-spacing: 0px;
+                                                                    "
+                                                                  >
+                                                                    <tr
+                                                                      style="
+                                                                        border-collapse: collapse;
+                                                                      "
+                                                                    >
+                                                                      <td
+                                                                        align="center"
+                                                                        valign="top"
+                                                                        style="
+                                                                          padding: 0;
+                                                                          margin: 0;
+                                                                          width: 540px;
+                                                                        "
+                                                                      >
+                                                                        <table
+                                                                          cellpadding="0"
+                                                                          cellspacing="0"
+                                                                          width="100%"
+                                                                          role="presentation"
+                                                                          style="
+                                                                            mso-table-lspace: 0pt;
+                                                                            mso-table-rspace: 0pt;
+                                                                            border-collapse: collapse;
+                                                                            border-spacing: 0px;
+                                                                          "
+                                                                        >
+                                                                          <tr
+                                                                            style="
+                                                                              border-collapse: collapse;
+                                                                            "
+                                                                          >
+                                                                            <td
+                                                                              align="left"
+                                                                              style="
+                                                                                padding: 0;
+                                                                                margin: 0;
+                                                                                padding-bottom: 5px;
+                                                                                padding-left: 25px;
+                                                                                padding-right: 40px;
+                                                                              "
+                                                                            >
+                                                                              <p
+                                                                                style="
+                                                                                  margin: 0;
+                                                                                  -webkit-text-size-adjust: none;
+                                                                                  -ms-text-size-adjust: none;
+                                                                                  mso-line-height-rule: exactly;
+                                                                                  font-family: 'trebuchet ms',
+                                                                                    'lucida grande',
+                                                                                    'lucida sans unicode',
+                                                                                    'lucida sans',
+                                                                                    tahoma,
+                                                                                    sans-serif;
+                                                                                  line-height: 72px;
+                                                                                  color: #a64d79;
+                                                                                  font-size: 48px;
+                                                                                  white-space: nowrap;
+                                                                                "
+                                                                              >
+                                                                                <strong
+                                                                                  ><em
+                                                                                    ><span
+                                                                                      style="
+                                                                                        white-space: nowrap;
+                                                                                      "
+                                                                                      >¡Gracias
+                                                                                      por
+                                                                                      registr<span
+                                                                                        style="
+                                                                                          background-color: #faebd7;
+                                                                                        "
+                                                                                      ></span
+                                                                                      >arse!</span
+                                                                                    ></em
+                                                                                  ></strong
+                                                                                >
+                                                                              </p>
+                                                                            </td>
+                                                                          </tr>
+                                                                        </table>
+                                                                      </td>
+                                                                    </tr>
+                                                                  </table>
+                                                                </td>
+                                                              </tr>
+                                                              <tr
+                                                                style="
+                                                                  border-collapse: collapse;
+                                                                "
+                                                              >
+                                                                <td
+                                                                  align="left"
+                                                                  style="
+                                                                    margin: 0;
+                                                                    padding-bottom: 20px;
+                                                                    padding-left: 35px;
+                                                                    padding-top: 40px;
+                                                                    padding-right: 40px;
+                                                                  "
+                                                                >
+                                                                  <!--[if mso]><table style="width:525px" cellpadding="0" cellspacing="0"><tr><td style="width:147px" valign="top"><![endif]-->
+                                                                  <table
+                                                                    cellpadding="0"
+                                                                    cellspacing="0"
+                                                                    class="es-left"
+                                                                    align="left"
+                                                                    style="
+                                                                      mso-table-lspace: 0pt;
+                                                                      mso-table-rspace: 0pt;
+                                                                      border-collapse: collapse;
+                                                                      border-spacing: 0px;
+                                                                      float: left;
+                                                                    "
+                                                                  >
+                                                                    <tr
+                                                                      style="
+                                                                        border-collapse: collapse;
+                                                                      "
+                                                                    >
+                                                                      <td
+                                                                        class="es-m-p20b"
+                                                                        align="left"
+                                                                        style="
+                                                                          padding: 0;
+                                                                          margin: 0;
+                                                                          width: 147px;
+                                                                        "
+                                                                      >
+                                                                        <table
+                                                                          cellpadding="0"
+                                                                          cellspacing="0"
+                                                                          width="100%"
+                                                                          role="presentation"
+                                                                          style="
+                                                                            mso-table-lspace: 0pt;
+                                                                            mso-table-rspace: 0pt;
+                                                                            border-collapse: collapse;
+                                                                            border-spacing: 0px;
+                                                                          "
+                                                                        >
+                                                                          <tr
+                                                                            style="
+                                                                              border-collapse: collapse;
+                                                                            "
+                                                                          >
+                                                                            <td
+                                                                              align="center"
+                                                                              style="
+                                                                                padding: 0;
+                                                                                margin: 0;
+                                                                                font-size: 0px;
+                                                                              "
+                                                                            >
+                                                                              <img
+                                                                                src="https://static.vecteezy.com/system/resources/previews/006/606/249/non_2x/nice-stylish-girl-portrait-for-social-networks-user-avatar-vector.jpg"
+                                                                                alt
+                                                                                style="
+                                                                                  display: block;
+                                                                                  border: 0;
+                                                                                  outline: none;
+                                                                                  text-decoration: none;
+                                                                                  -ms-interpolation-mode: bicubic;
+                                                                                "
+                                                                                width="147"
+                                                                              />
+                                                                            </td>
+                                                                          </tr>
+                                                                        </table>
+                                                                      </td>
+                                                                    </tr>
+                                                                  </table>
+                                                                  <!--[if mso]></td><td style="width:20px"></td><td style="width:358px" valign="top"><![endif]-->
+                                                                  <table
+                                                                    cellpadding="0"
+                                                                    cellspacing="0"
+                                                                    class="es-right"
+                                                                    align="right"
+                                                                    style="
+                                                                      mso-table-lspace: 0pt;
+                                                                      mso-table-rspace: 0pt;
+                                                                      border-collapse: collapse;
+                                                                      border-spacing: 0px;
+                                                                      float: right;
+                                                                    "
+                                                                  >
+                                                                    <tr
+                                                                      style="
+                                                                        border-collapse: collapse;
+                                                                      "
+                                                                    >
+                                                                      <td
+                                                                        align="left"
+                                                                        style="
+                                                                          padding: 0;
+                                                                          margin: 0;
+                                                                          width: 358px;
+                                                                        "
+                                                                      >
+                                                                        <table
+                                                                          cellpadding="0"
+                                                                          cellspacing="0"
+                                                                          width="100%"
+                                                                          role="presentation"
+                                                                          style="
+                                                                            mso-table-lspace: 0pt;
+                                                                            mso-table-rspace: 0pt;
+                                                                            border-collapse: collapse;
+                                                                            border-spacing: 0px;
+                                                                          "
+                                                                        >
+                                                                          <tr
+                                                                            style="
+                                                                              border-collapse: collapse;
+                                                                            "
+                                                                          >
+                                                                            <td
+                                                                              align="left"
+                                                                              class="es-m-txt-l"
+                                                                              style="
+                                                                                padding: 0;
+                                                                                margin: 0;
+                                                                                padding-top: 10px;
+                                                                              "
+                                                                            >
+                                                                              <h3
+                                                                                style="
+                                                                                  margin: 0;
+                                                                                  line-height: 24px;
+                                                                                  mso-line-height-rule: exactly;
+                                                                                  font-family: Montserrat,
+                                                                                    Helvetica,
+                                                                                    Roboto,
+                                                                                    Arial,
+                                                                                    sans-serif;
+                                                                                  font-size: 20px;
+                                                                                  font-style: normal;
+                                                                                  font-weight: bold;
+                                                                                  color: #4a4a4a;
+                                                                                "
+                                                                              >
+                                                                                ¡Hola
+                                                                                ${name} ( ${email} )
+                                                                                !
+                                                                              </h3>
+                                                                              
+                                                                            </td>
+                                                                          </tr>
+                                                                          <tr
+                                                                            style="
+                                                                              border-collapse: collapse;
+                                                                            "
+                                                                          >
+                                                                            <td
+                                                                              align="left"
+                                                                              style="
+                                                                                padding: 0;
+                                                                                margin: 0;
+                                                                                padding-top: 10px;
+                                                                              "
+                                                                            >
+                                                                              <p
+                                                                                style="
+                                                                                  margin: 0;
+                                                                                  -webkit-text-size-adjust: none;
+                                                                                  -ms-text-size-adjust: none;
+                                                                                  mso-line-height-rule: exactly;
+                                                                                  font-family: Montserrat,
+                                                                                    Helvetica,
+                                                                                    Roboto,
+                                                                                    Arial,
+                                                                                    sans-serif;
+                                                                                  line-height: 24px;
+                                                                                  color: #4a4a4a;
+                                                                                  font-size: 16px;
+                                                                                "
+                                                                              >
+                                                                                &nbsp;<strong
+                                                                                  ><span
+                                                                                    style="
+                                                                                      font-size: 19px;
+                                                                                      font-family: 'trebuchet ms',
+                                                                                        'lucida grande',
+                                                                                        'lucida sans unicode',
+                                                                                        'lucida sans',
+                                                                                        tahoma,
+                                                                                        sans-serif;
+                                                                                    "
+                                                                                    >Te
+                                                                                    damos
+                                                                                    cordialmente
+                                                                                    la
+                                                                                    bienvenida
+                                                                                    a
+                                                                                    nuestro
+                                                                                    espacio
+                                                                                    donde
+                                                                                    esperamos
+                                                                                    fervientemente
+                                                                                    disfrutes
+                                                                                    del
+                                                                                    trabajo
+                                                                                    que
+                                                                                    comparten
+                                                                                    nuestros
+                                                                                    artesanos&nbsp;</span
+                                                                                  ></strong
+                                                                                >😀&nbsp;
+                                                                              </p>
+                                                                            </td>
+                                                                          </tr>
+                                                                        </table>
+                                                                      </td>
+                                                                    </tr>
+                                                                  </table>
+                                                                  <!--[if mso]></td></tr></table><![endif]-->
+                                                                </td>
+                                                              </tr>
+                                                            </table>
+                                                          </td>
+                                                        </tr>
+                                                      </table>
+                                                      <table
+                                                        cellpadding="0"
+                                                        cellspacing="0"
+                                                        class="es-content"
+                                                        align="center"
+                                                        style="
+                                                          mso-table-lspace: 0pt;
+                                                          mso-table-rspace: 0pt;
+                                                          border-collapse: collapse;
+                                                          border-spacing: 0px;
+                                                          table-layout: fixed !important;
+                                                          width: 100%;
+                                                        "
+                                                      >
+                                                        <tr
+                                                          style="
+                                                            border-collapse: collapse;
+                                                          "
+                                                        >
+                                                          <td
+                                                            align="center"
+                                                            style="
+                                                              padding: 0;
+                                                              margin: 0;
+                                                            "
+                                                          >
+                                                            <table
+                                                              bgcolor="#ffffff"
+                                                              class="es-content-body"
+                                                              align="center"
+                                                              cellpadding="0"
+                                                              cellspacing="0"
+                                                              style="
+                                                                mso-table-lspace: 0pt;
+                                                                mso-table-rspace: 0pt;
+                                                                border-collapse: collapse;
+                                                                border-spacing: 0px;
+                                                                background-color: transparent;
+                                                                width: 600px;
+                                                              "
+                                                            >
+                                                              <tr
+                                                                style="
+                                                                  border-collapse: collapse;
+                                                                "
+                                                              >
+                                                                <td
+                                                                  align="left"
+                                                                  style="
+                                                                    margin: 0;
+                                                                    padding-left: 10px;
+                                                                    padding-top: 20px;
+                                                                    padding-bottom: 20px;
+                                                                    padding-right: 20px;
+                                                                    background-position: left
+                                                                      top;
+                                                                    background-color: #ffffff;
+                                                                    border-radius: 13px;
+                                                                  "
+                                                                  bgcolor="#ffffff"
+                                                                >
+                                                                  <table
+                                                                    cellpadding="0"
+                                                                    cellspacing="0"
+                                                                    width="100%"
+                                                                    style="
+                                                                      mso-table-lspace: 0pt;
+                                                                      mso-table-rspace: 0pt;
+                                                                      border-collapse: collapse;
+                                                                      border-spacing: 0px;
+                                                                    "
+                                                                  >
+                                                                    <tr
+                                                                      style="
+                                                                        border-collapse: collapse;
+                                                                      "
+                                                                    >
+                                                                      <td
+                                                                        align="left"
+                                                                        style="
+                                                                          padding: 0;
+                                                                          margin: 0;
+                                                                          width: 570px;
+                                                                        "
+                                                                      >
+                                                                        <table
+                                                                          cellpadding="0"
+                                                                          cellspacing="0"
+                                                                          width="100%"
+                                                                          role="presentation"
+                                                                          style="
+                                                                            mso-table-lspace: 0pt;
+                                                                            mso-table-rspace: 0pt;
+                                                                            border-collapse: collapse;
+                                                                            border-spacing: 0px;
+                                                                          "
+                                                                        >
+                                                                          <tr
+                                                                            style="
+                                                                              border-collapse: collapse;
+                                                                            "
+                                                                          >
+                                                                            <td
+                                                                              align="left"
+                                                                              bgcolor="#C4B5FD"
+                                                                              style="
+                                                                                padding: 0;
+                                                                                margin: 0;
+                                                                                padding-top: 5px;
+                                                                                padding-bottom: 5px;
+                                                                              "
+                                                                            >
+                                                                              <ul>
+                                                                                <li
+                                                                                  style="
+                                                                                    -webkit-text-size-adjust: none;
+                                                                                    -ms-text-size-adjust: none;
+                                                                                    mso-line-height-rule: exactly;
+                                                                                    font-family: -apple-system,
+                                                                                      blinkmacsystemfont,
+                                                                                      'segoe ui',
+                                                                                      roboto,
+                                                                                      helvetica,
+                                                                                      arial,
+                                                                                      sans-serif,
+                                                                                      'apple color emoji',
+                                                                                      'segoe ui emoji',
+                                                                                      'segoe ui symbol';
+                                                                                    line-height: 24px;
+                                                                                    margin-bottom: 15px;
+                                                                                    margin-left: 0;
+                                                                                    color: #4a4a4a;
+                                                                                    font-size: 16px;
+                                                                                  "
+                                                                                >
+                                                                                  <strong
+                                                                                    >Encontrarás
+                                                                                    plasmado
+                                                                                    el
+                                                                                    trabajo
+                                                                                    de
+                                                                                    nuestros
+                                                                                    artesanos
+                                                                                    en
+                                                                                    todos
+                                                                                    sus
+                                                                                    productos.</strong
+                                                                                  >
+                                                                                </li>
+                                                                                <li
+                                                                                  style="
+                                                                                    -webkit-text-size-adjust: none;
+                                                                                    -ms-text-size-adjust: none;
+                                                                                    mso-line-height-rule: exactly;
+                                                                                    font-family: -apple-system,
+                                                                                      blinkmacsystemfont,
+                                                                                      'segoe ui',
+                                                                                      roboto,
+                                                                                      helvetica,
+                                                                                      arial,
+                                                                                      sans-serif,
+                                                                                      'apple color emoji',
+                                                                                      'segoe ui emoji',
+                                                                                      'segoe ui symbol';
+                                                                                    line-height: 24px;
+                                                                                    margin-bottom: 15px;
+                                                                                    margin-left: 0;
+                                                                                    color: #4a4a4a;
+                                                                                    font-size: 16px;
+                                                                                  "
+                                                                                >
+                                                                                  <strong
+                                                                                    >Queremos
+                                                                                    que
+                                                                                    tu
+                                                                                    experiencia
+                                                                                    sea
+                                                                                    exitosamente&nbsp;&nbsp;grata
+                                                                                    ,
+                                                                                    y
+                                                                                    es
+                                                                                    por
+                                                                                    eso
+                                                                                    que
+                                                                                    dejamos
+                                                                                    nuestro
+                                                                                    email
+                                                                                    para
+                                                                                    recibir
+                                                                                    tus
+                                                                                    consultas
+                                                                                    y/o
+                                                                                    sugerencias&nbsp;artifypf@gmail.com.</strong
+                                                                                  >
+                                                                                </li>
+                                                                              </ul>
+                                                                            </td>
+                                                                          </tr>
+                                                                        </table>
+                                                                      </td>
+                                                                    </tr>
+                                                                  </table>
+                                                                </td>
+                                                              </tr>
+                                                            </table>
+                                                          </td>
+                                                        </tr>
+                                                      </table>
+                                                      <table
+                                                        cellpadding="0"
+                                                        cellspacing="0"
+                                                        class="es-content"
+                                                        align="center"
+                                                        style="
+                                                          mso-table-lspace: 0pt;
+                                                          mso-table-rspace: 0pt;
+                                                          border-collapse: collapse;
+                                                          border-spacing: 0px;
+                                                          table-layout: fixed !important;
+                                                          width: 100%;
+                                                        "
+                                                      >
+                                                        <tr
+                                                          style="
+                                                            border-collapse: collapse;
+                                                          "
+                                                        >
+                                                          <td
+                                                            align="center"
+                                                            bgcolor="#ead1dc"
+                                                            style="
+                                                              padding: 0;
+                                                              margin: 0;
+                                                              background-color: #ead1dc;
+                                                            "
+                                                          >
+                                                            <table
+                                                              bgcolor="#FFFFFF"
+                                                              class="es-content-body"
+                                                              align="center"
+                                                              cellpadding="0"
+                                                              cellspacing="0"
+                                                              style="
+                                                                mso-table-lspace: 0pt;
+                                                                mso-table-rspace: 0pt;
+                                                                border-collapse: collapse;
+                                                                border-spacing: 0px;
+                                                                background-color: transparent;
+                                                                width: 600px;
+                                                              "
+                                                            >
+                                                              <tr
+                                                                style="
+                                                                  border-collapse: collapse;
+                                                                "
+                                                              >
+                                                                <td
+                                                                  align="left"
+                                                                  style="
+                                                                    padding: 0;
+                                                                    margin: 0;
+                                                                    padding-bottom: 30px;
+                                                                    padding-top: 40px;
+                                                                  "
+                                                                >
+                                                                  <table
+                                                                    cellpadding="0"
+                                                                    cellspacing="0"
+                                                                    width="100%"
+                                                                    style="
+                                                                      mso-table-lspace: 0pt;
+                                                                      mso-table-rspace: 0pt;
+                                                                      border-collapse: collapse;
+                                                                      border-spacing: 0px;
+                                                                    "
+                                                                  >
+                                                                    <tr
+                                                                      style="
+                                                                        border-collapse: collapse;
+                                                                      "
+                                                                    >
+                                                                      <td
+                                                                        align="center"
+                                                                        valign="top"
+                                                                        style="
+                                                                          padding: 0;
+                                                                          margin: 0;
+                                                                          width: 600px;
+                                                                        "
+                                                                      >
+                                                                        <table
+                                                                          cellpadding="0"
+                                                                          cellspacing="0"
+                                                                          width="100%"
+                                                                          role="presentation"
+                                                                          style="
+                                                                            mso-table-lspace: 0pt;
+                                                                            mso-table-rspace: 0pt;
+                                                                            border-collapse: collapse;
+                                                                            border-spacing: 0px;
+                                                                          "
+                                                                        >
+                                                                          <tr
+                                                                            style="
+                                                                              border-collapse: collapse;
+                                                                            "
+                                                                          >
+                                                                            <td
+                                                                              align="center"
+                                                                              class="es-m-txt-c"
+                                                                              style="
+                                                                                padding: 0;
+                                                                                margin: 0;
+                                                                                font-size: 0px;
+                                                                              "
+                                                                            >
+                                                                              <table
+                                                                                cellpadding="0"
+                                                                                cellspacing="0"
+                                                                                class="es-table-not-adapt es-social"
+                                                                                role="presentation"
+                                                                                style="
+                                                                                  mso-table-lspace: 0pt;
+                                                                                  mso-table-rspace: 0pt;
+                                                                                  border-collapse: collapse;
+                                                                                  border-spacing: 0px;
+                                                                                "
+                                                                              >
+                                                                                <tr
+                                                                                  style="
+                                                                                    border-collapse: collapse;
+                                                                                  "
+                                                                                >
+                                                                                  <td
+                                                                                    align="center"
+                                                                                    valign="top"
+                                                                                    style="
+                                                                                      padding: 0;
+                                                                                      margin: 0;
+                                                                                      padding-right: 10px;
+                                                                                    "
+                                                                                  >
+                                                                                    <img
+                                                                                      title="Facebook"
+                                                                                      src="https://xrbfmc.stripocdn.email/content/assets/img/social-icons/logo-black/facebook-logo-black.png"
+                                                                                      alt="Fb"
+                                                                                      width="64"
+                                                                                      style="
+                                                                                        display: block;
+                                                                                        border: 0;
+                                                                                        outline: none;
+                                                                                        text-decoration: none;
+                                                                                        -ms-interpolation-mode: bicubic;
+                                                                                        font-size: 12px;
+                                                                                      "
+                                                                                    />
+                                                                                  </td>
+                                                                                  <td
+                                                                                    align="center"
+                                                                                    valign="top"
+                                                                                    style="
+                                                                                      padding: 0;
+                                                                                      margin: 0;
+                                                                                      padding-right: 10px;
+                                                                                    "
+                                                                                  >
+                                                                                    <img
+                                                                                      title="Twitter"
+                                                                                      src="https://xrbfmc.stripocdn.email/content/assets/img/social-icons/logo-black/twitter-logo-black.png"
+                                                                                      alt="Tw"
+                                                                                      width="64"
+                                                                                      style="
+                                                                                        display: block;
+                                                                                        border: 0;
+                                                                                        outline: none;
+                                                                                        text-decoration: none;
+                                                                                        -ms-interpolation-mode: bicubic;
+                                                                                        font-size: 12px;
+                                                                                      "
+                                                                                    />
+                                                                                  </td>
+                                                                                  <td
+                                                                                    align="center"
+                                                                                    valign="top"
+                                                                                    style="
+                                                                                      padding: 0;
+                                                                                      margin: 0;
+                                                                                      padding-right: 10px;
+                                                                                    "
+                                                                                  >
+                                                                                    <img
+                                                                                      title="Youtube"
+                                                                                      src="https://xrbfmc.stripocdn.email/content/assets/img/social-icons/logo-black/youtube-logo-black.png"
+                                                                                      alt="Yt"
+                                                                                      width="64"
+                                                                                      style="
+                                                                                        display: block;
+                                                                                        border: 0;
+                                                                                        outline: none;
+                                                                                        text-decoration: none;
+                                                                                        -ms-interpolation-mode: bicubic;
+                                                                                        font-size: 12px;
+                                                                                      "
+                                                                                    />
+                                                                                  </td>
+                                                                                  <td
+                                                                                    align="center"
+                                                                                    valign="top"
+                                                                                    style="
+                                                                                      padding: 0;
+                                                                                      margin: 0;
+                                                                                      padding-right: 10px;
+                                                                                    "
+                                                                                  >
+                                                                                    <img
+                                                                                      title="Instagram"
+                                                                                      src="https://xrbfmc.stripocdn.email/content/assets/img/social-icons/logo-black/instagram-logo-black.png"
+                                                                                      alt="Ig"
+                                                                                      width="64"
+                                                                                      style="
+                                                                                        display: block;
+                                                                                        border: 0;
+                                                                                        outline: none;
+                                                                                        text-decoration: none;
+                                                                                        -ms-interpolation-mode: bicubic;
+                                                                                        font-size: 12px;
+                                                                                      "
+                                                                                    />
+                                                                                  </td>
+                                                                                  <td
+                                                                                    align="center"
+                                                                                    valign="top"
+                                                                                    style="
+                                                                                      padding: 0;
+                                                                                      margin: 0;
+                                                                                    "
+                                                                                  >
+                                                                                    <img
+                                                                                      title="Linkedin"
+                                                                                      src="https://xrbfmc.stripocdn.email/content/assets/img/social-icons/logo-black/linkedin-logo-black.png"
+                                                                                      alt="In"
+                                                                                      width="64"
+                                                                                      style="
+                                                                                        display: block;
+                                                                                        border: 0;
+                                                                                        outline: none;
+                                                                                        text-decoration: none;
+                                                                                        -ms-interpolation-mode: bicubic;
+                                                                                        font-size: 12px;
+                                                                                      "
+                                                                                    />
+                                                                                  </td>
+                                                                                </tr>
+                                                                              </table>
+                                                                            </td>
+                                                                          </tr>
+                                                                        </table>
+                                                                      </td>
+                                                                    </tr>
+                                                                  </table>
+                                                                </td>
+                                                              </tr>
+                                                            </table>
+                                                          </td>
+                                                        </tr>
+                                                      </table>
+                                                    </td>
+                                                  </tr>
+                                                </table>
+                                              </div>
+                                            </body>
+    </html>
+    
+   `,
   };
 };
