@@ -10,7 +10,7 @@ const SignInButton = () => {
   const router = useRouter();
 
   const { data: session } = useSession();
-  const handleClick = async () => {
+  const handleClick = () => {
     signIn("google");
   };
 
