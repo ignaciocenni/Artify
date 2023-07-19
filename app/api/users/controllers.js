@@ -11,8 +11,8 @@ const allUsers = async () => {
   return response;
 };
 
-const addUser = async (name, password, lastName, email, rol, provinceId) => {
-  if (!name || !email || !password || !lastName || !rol) throw new Error("Missing arguments");
+const addUser = async (name, password, lastName, email) => {
+  if (!name || !email || !password || !lastName) throw new Error("Missing arguments");
 
   // Validates:
 
@@ -33,11 +33,9 @@ const addUser = async (name, password, lastName, email, rol, provinceId) => {
   const newUser = await prisma.User.create({
     data: {
       name,
-      password,
       lastName,
       email,
-      rol,
-      provinceId,
+      password,
     },
   });
   return newUser;
