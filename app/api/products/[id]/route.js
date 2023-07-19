@@ -15,12 +15,10 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
   const { id } = params;
 
-  const { name, description, price, stock, image, status, province } = await request.json();
-
-
+  const { name, description, price, stock, status, province, saveImage, deleteImage } = await request.json();
 
   try {
-    const response = await updateProduct(id, name, description, price, stock, image, status, province);
+    const response = await updateProduct(id, name, description, price, stock, saveImage, deleteImage, status, province);
     return NextResponse.json(response, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 404 });
