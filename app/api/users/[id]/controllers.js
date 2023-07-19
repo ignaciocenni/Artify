@@ -57,8 +57,7 @@ const updateUser = async (id, name, email, password, lastName, image, aboutMe, w
       cbu: cbu,
       alias: alias,
       socials: socials,
-      status,
-      status,
+      status: status,
     },
   });
 
