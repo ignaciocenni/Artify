@@ -23,6 +23,7 @@ model User {
   cbu           Int       @default(0)
   alias         String    @default("")
   socials       String[]  @default([])
+  status        Status    @default(ACTIVE)
   sellerSales   Sales[]   @relation("SellerSales")
   customerSales Sales[]   @relation("CustomerSales")
 }
@@ -50,6 +51,7 @@ model Product {
   province    Province @relation(fields: [provinceId], references: [id])
   provinceId  Int
   status      Status   @default(PENDING)
+  sales       Sales[]
 }
 
 model Review {
@@ -69,11 +71,15 @@ model Category {
 }
 
 model Sales {
-  id         Int    @id @default(autoincrement())
-  seller     User   @relation("SellerSales", fields: [sellerId], references: [id])
-  sellerId   String
-  customer   User   @relation("CustomerSales", fields: [customerId], references: [id])
-  customerId String
+  id              Int     @id @default(autoincrement())
+  seller          User    @relation("SellerSales", fields: [sellerId], references: [id])
+  sellerId        String
+  customer        User    @relation("CustomerSales", fields: [customerId], references: [id])
+  customerId      String
+  saledProduct    Product @relation(fields: [productId], references: [id])
+  productId       Int
+  totalPrice      Float
+  productQuantity Int
 }
 
 enum Rol {

@@ -18,6 +18,7 @@ CREATE TABLE "User" (
     "cbu" INTEGER NOT NULL DEFAULT 0,
     "alias" TEXT NOT NULL DEFAULT '',
     "socials" TEXT[] DEFAULT ARRAY[]::TEXT[],
+    "status" "Status" NOT NULL DEFAULT 'ACTIVE',
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -73,6 +74,9 @@ CREATE TABLE "Sales" (
     "id" SERIAL NOT NULL,
     "sellerId" TEXT NOT NULL,
     "customerId" TEXT NOT NULL,
+    "productId" INTEGER NOT NULL,
+    "totalPrice" DOUBLE PRECISION NOT NULL,
+    "productQuantity" INTEGER NOT NULL,
 
     CONSTRAINT "Sales_pkey" PRIMARY KEY ("id")
 );
@@ -100,3 +104,6 @@ ALTER TABLE "Sales" ADD CONSTRAINT "Sales_sellerId_fkey" FOREIGN KEY ("sellerId"
 
 -- AddForeignKey
 ALTER TABLE "Sales" ADD CONSTRAINT "Sales_customerId_fkey" FOREIGN KEY ("customerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Sales" ADD CONSTRAINT "Sales_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
