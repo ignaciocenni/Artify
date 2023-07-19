@@ -55,11 +55,6 @@ const getAllProducts = async (name) => {
           lastName: true,
           email: true,
           image: true,
-          province: {
-            select: {
-              name: true,
-            },
-          },
         },
       },
       category: {
@@ -73,8 +68,28 @@ const getAllProducts = async (name) => {
   return response;
 };
 
-const addProduct = async (name, description, price, stock, image, userEmail, categoryId, authName, authImage) => {
-  if (!name || !description || !price || !stock || !image || !userEmail || !categoryId || !authName) throw new Error("Missing arguments");
+const addProduct = async (
+  name,
+  description,
+  price,
+  stock,
+  image,
+  userEmail,
+  categoryId,
+  authName,
+  authImage
+) => {
+  if (
+    !name ||
+    !description ||
+    !price ||
+    !stock ||
+    !image ||
+    !userEmail ||
+    !categoryId ||
+    !authName
+  )
+    throw new Error("Missing arguments");
 
   // Validates:
   //Name
@@ -82,7 +97,8 @@ const addProduct = async (name, description, price, stock, image, userEmail, cat
   if (!nameRegex.test(name)) throw new Error("The must be a normal name...");
 
   //Description
-  if (description.length <= 10 && !nameRegex.test(description)) throw new Error("The description must contain at least 10 characters.");
+  if (description.length <= 10 && !nameRegex.test(description))
+    throw new Error("The description must contain at least 10 characters.");
 
   //Price
   if (price <= 0) throw new Error("Price cannot be less than or equal to $0");
