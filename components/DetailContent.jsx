@@ -7,14 +7,11 @@ import Stars from "./Stars";
 import CategoryLabel from "./DetailComponents/CategoryLabel";
 import ImageSlider from "./DetailComponents/ImageSlider";
 import LatestReviews from "./DetailComponents/LatestReviews";
-import AddQuestion from "./DetailComponents/AddQuestion";
+import AddReviews from "./DetailComponents/AddReviews";
 import SellerInfo from "./DetailComponents/SellerInfo";
 import BuyNowButton from "./buttons/BuyAndDetail";
 import Footer from "./Footer";
 import AddDeductButtons from "../components/buttons/AddDeductButtons";
-import ReviewsForm from "./ReviewsForm/ReviewsForm";
-
-import { useState } from "react";
 
 const DetailContent = ({ data }) => {
   const { reviews, image, category, price, name, user, description, id } = data;
@@ -22,16 +19,7 @@ const DetailContent = ({ data }) => {
   const amount = reviews?.reduce((accumulator, currentValue) => accumulator + currentValue.rating, 0);
   const averange = amount / reviews?.length;
 
-  const [questions, setQuestions] = useState([]);
 
-  const handleQuestion = (question) => {
-    const newQuestion = {
-      id: Date.now(),
-      question: question,
-    };
-
-    setQuestions([...questions, newQuestion]);
-  };
 
   return (
     <>
@@ -74,12 +62,8 @@ const DetailContent = ({ data }) => {
             <BuyNowButton />
           </div>
         </div>
-        <div>
-          <ReviewsForm id={id} />
-        </div>
-
         <div className="flex flex-col items-start gap-3 px-5 w-[1000px]">
-          <AddQuestion onQuestion={handleQuestion} />
+          <AddReviews id={id} />
           <LatestReviews reviews={reviews} />
         </div>
       </div>
