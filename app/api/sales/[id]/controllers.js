@@ -1,21 +1,13 @@
 import prisma from "../../db/client";
 
-const getSeller = async (id) => {
-  const searchSell = await prisma.Seller.findFirst({
+const getSale = async (id) => {
+  const searchSale = await prisma.sales.findFirst({
     where: {
       id: +id,
     },
-    include: {
-      id: true,
-      seller: true,
-      sellerId: true,
-      customer: true,
-      customerId: true,
-      saledProduct: true,
-      totalPrice: true,
-      productQuantity: true,
-    },
   });
+
+  return searchSale;
 };
 
-export { getSeller };
+export { getSale };

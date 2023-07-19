@@ -8,11 +8,35 @@ const getAllSales = async () => {
       sellerId: true,
       customer: true,
       customerId: true,
-      saledProduct: true,
-      totalPrice: true,
-      productQuantity: true,
+      //saledProduct: true,
+      //productId: true,
+      //totalPrice: true,
+      //productQuantity: true,
     },
   });
+
+  if (!response.length) throw new Error("Anything sale in the DataBase.");
+  return response;
 };
 
-export { getAllSales };
+const addSale = async (
+  sellerId,
+  customerId,
+  productId,
+  totalPrice,
+  productQuantity
+) => {
+  const newSale = await prisma.Sales.create({
+    data: {
+      sellerId,
+      customerId,
+      productId,
+      totalPrice,
+      productQuantity,
+    },
+  });
+
+  return newSale;
+};
+
+export { getAllSales, addSale };
