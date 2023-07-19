@@ -8,8 +8,8 @@ interface Props {
 
 export default function Providers(props: Props) {
   return (
-    <div>
+    <>
       <SessionProvider>{props.children}</SessionProvider>
-    </div>
+    </>
   );
 }

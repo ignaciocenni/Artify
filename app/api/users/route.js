@@ -11,10 +11,10 @@ export async function GET() {
 }
 //El province ID
 export async function POST(request) {
-  const { name, password, lastName, email, rol, provinceId } = await request.json();
+  const { name, password, lastName, email } = await request.json();
 
   try {
-    const newUser = await addUser(name, password, lastName, email, rol, provinceId);
+    const newUser = await addUser(name, password, lastName, email);
     return NextResponse.json(newUser, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 404 });
