@@ -1,7 +1,12 @@
-export const validate = ({form,errors,setErros}) =>{
-    if(!form.email)
-    setErros("favor de ingresar un correo electronico")
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-    setErros("favor de ingresar un correo valido ")
+export const validate = (form) => {
+    const {email,password}=form
+    const errors = {
+        email: "",
+        password: ""
+    }
+
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email))
+    errors.email = "Ingresa un correo valido ";
+  if (!email) errors.email = "Ingresa un correo electronico";
     return errors
 }
