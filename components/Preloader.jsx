@@ -1,10 +1,10 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_PROVINCES, GET_CATEGORIES, GET_INFO, multiplied, totalPrices, localProducts } from "../store/slice";
+import { GET_PROVINCES, GET_CATEGORIES, GET_INFO, getUsers,multiplied, totalPrices, localProducts } from "../store/slice";
 import { useRef } from "react";
 
 export default function Preloader({ data }) {
-  const { categories, provinces, AllProducts } = data;
+  const { categories, provinces, AllProducts, allUsers } = data;
   const dispatch = useDispatch();
   const loaded = useRef(false);
 
@@ -12,6 +12,7 @@ export default function Preloader({ data }) {
     dispatch(GET_CATEGORIES(categories));
     dispatch(GET_PROVINCES(provinces));
     dispatch(GET_INFO(AllProducts));
+    dispatch(getUsers(allUsers));
     loaded.current = true;
   }
 
