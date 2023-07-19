@@ -813,7 +813,7 @@ export const emailWelcome = (data) => {
                                                                                   color: #4a4a4a;
                                                                                 "
                                                                               >
-                                                                                Hola
+                                                                                ¡Hola
                                                                                 ${name} ( ${email} )
                                                                                 !
                                                                               </h3>
