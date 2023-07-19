@@ -11,6 +11,7 @@ const AddDeductButtons = ({ data }) => {
 
   const product = {
     id: data.id,
+    sellerId: data.userId,
     image: data.image,
     title: data.name,
     unit_price: data.price,

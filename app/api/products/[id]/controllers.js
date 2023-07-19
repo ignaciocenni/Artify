@@ -39,7 +39,9 @@ const updateProduct = async (id, name, description, price, stock, saveImage, del
   if (!nameRegex.test(name)) throw new Error("The must be a normal name...");
 
   // Description
-  if (description?.length <= 10 && !nameRegex.test(description)) throw new Error("The description must contain at least 10 characters.");
+
+  //if (description.length <= 10 && !nameRegex.test(description)) throw new Error("The description must contain at least 10 characters.");
+
 
   // Price
   if (price <= 0) throw new Error("Price cannot be less than or equal to $0");
