@@ -4,6 +4,7 @@ export const Slice = createSlice({
   name: "valores",
   initialState: {
     products: [],
+    users: [],
     copyProducts: [],
     provinces: [],
     provincesFilter: [],
@@ -23,6 +24,9 @@ export const Slice = createSlice({
     },
     GET_CATEGORIES: (state, action) => {
       state.categories = action.payload;
+    },
+    getUsers: (state, action) => {
+      state.users = action.payload;
     },
     price: (state, { type, payload }) => {
       const price = [...state.products];
@@ -78,4 +82,5 @@ export const {
   totalPrices,
   setPath,
   localProducts,
+  getUsers
 } = Slice.actions;
