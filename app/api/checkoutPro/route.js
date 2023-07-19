@@ -22,7 +22,7 @@ export async function POST(req) {
       back_urls: {
         success: `${URL}/purchase-status`,
         failure: `${URL}/purchase-status`,
-        pending: `${URL}/purchase-status`,
+        pending: `${URL}`,
       },
     };
 
