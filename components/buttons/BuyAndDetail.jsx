@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 const postProductsMP = async (productsClean) => {
   try {
     const res = await axios.post("/api/checkoutPro", productsClean);
-    const { id } = res.data;
-    return id;
+    const { url } = res.data;
+    return url;
   } catch (error) {
     return { error: error.message };
   }
@@ -16,7 +16,7 @@ const postProductsMP = async (productsClean) => {
 
 const BuyNowButton = () => {
   const path = usePathname();
-  const [id, setId] = useState("");
+  const [url, setUrl] = useState("");
   const products = JSON.parse(localStorage.getItem("products")) || [];
   const productsClean = products.map((product) => {
     return {
@@ -30,7 +30,7 @@ const BuyNowButton = () => {
   const handleClick = async (event) => {
     event.preventDefault();
     const response = await postProductsMP(productsClean);
-    setId(response);
+    setUrl(response);
   };
   return (
     <div>
@@ -42,7 +42,7 @@ const BuyNowButton = () => {
           <h1 className="text-xs font-extrabold">Detalles de compra</h1>
         </button>
       )}
-      {id && <MpButton id={id} />}
+      {url && <MpButton url={url} />}
     </div>
   );
 };

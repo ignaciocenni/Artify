@@ -6,13 +6,19 @@ import Link from "next/link";
 import avatar from "../../public/images/userImage.svg";
 
 const ButtonSession = () => {
-  const { data: session } = useSession();
-
-  if (session && session.user) {
+  const  {data} = useSession();
+  const id = data.user.id
+  if (data && data.user) {
     return (
       <>
-        <li className="px-4 py-2 hover:bg-gray-200">
-          <Link className="flex" href="/profile">
+
+        <li className="px-4 py-2 hover:bg-gray-100">
+          <h1>Hola!</h1>
+          <h1 className="font-bold text-lg">{data.user.name}</h1>
+        </li>
+        <li className="px-4 py-2 hover:bg-gray-100">
+          <Link className="flex" href={`/profile/${id}`}>
+
             <Image
               className="rounded-full shadow-2xl"
               src={avatar}

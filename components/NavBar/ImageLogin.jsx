@@ -9,8 +9,10 @@ const ImageLogin = () => {
   const { data: session } = useSession();
 
   return (
-    <div className="flex justify-center items-center">
-      <Link href="/profile">
+
+    <div>
+      <Link href="/">
+
         <Image
           src={session && session.user ? session.user.image : avatar}
           width={40}
