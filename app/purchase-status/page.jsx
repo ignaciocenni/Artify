@@ -6,20 +6,21 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { multiplied } from "../../store/slice";
 import axios from "axios";
-import { sendContactForm } from "./lib/api";
+import { sendContactForm } from "../../components/lib/api";
 import ApprovedStatus from "../../components/PurchaseStatus/ApprovedStatus";
 import RejectedStatus from "../../components/PurchaseStatus/RejectedStatus";
 
 export default function PurchaseStatusComponent() {
   const dispatch = useDispatch();
   const data = useSession();
-  const productsLS = JSON.parse(localStorage.getItem("products")) || [];
-  const updatedStockProducts = productsLS.map((product) => ({
-    id: product.id,
-    stock: product.stock - product.quantity,
-  }));
 
   useEffect(() => {
+    const productsLS = JSON.parse(localStorage.getItem("products")) || [];
+    const updatedStockProducts = productsLS.map((product) => ({
+      id: product.id,
+      stock: product.stock - product.quantity,
+    }));
+
     if (status === "approved") {
       updatedStockProducts.forEach((product) => {
         const url = `http://localhost:3000/api/products/${product.id}`;
@@ -60,9 +61,11 @@ export default function PurchaseStatusComponent() {
           });
       });
 
-      // localStorage.removeItem("products")
-      // dispatch(multiplied([]))
-    } else if (status === "in_process") {
+      if (localStorage) {
+        localStorage.removeItem("products");
+        dispatch(multiplied([]));
+      }
+    } else if (status === "in_process" && localStorage) {
       localStorage.removeItem("products");
       dispatch(multiplied([]));
     }
