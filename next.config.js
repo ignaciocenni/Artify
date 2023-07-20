@@ -14,6 +14,7 @@ const nextConfig = {
       "lh3.googleusercontent.com",
       "uploadthing.com",
       "utfs.io",
+      "img.freepik.com",
     ],
   },
 };
