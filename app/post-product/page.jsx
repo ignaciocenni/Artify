@@ -9,8 +9,6 @@ import UploadButton from "../../components/buttons/UploadButton";
 import { GET_INFO } from "../../store/slice";
 import ImageSlider from "../../components/DetailComponents/ImageSlider";
 import logo from "../../public/images/logo.svg";
-import Heart from "../../components/Heart";
-import Stars from "../../components/Stars";
 import Footer from "../../components/Footer";
 
 const postProduct = async (product) => {
@@ -24,6 +22,8 @@ const postProduct = async (product) => {
 
 export default function Page() {
   const data = useSession();
+  console.log(data);
+  
 
   const [form, setForm] = useState({
     name: "",
@@ -36,6 +36,7 @@ export default function Page() {
     userEmail: "",
     authName: "",
     authImage: "",
+    userId:"",
   });
 
   useEffect(() => {
@@ -44,6 +45,7 @@ export default function Page() {
       userEmail: data?.data?.user.email,
       authName: data?.data?.user.name,
       authImage: data?.data?.user.image,
+      userId:data?.data?.user.id,
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -76,7 +78,7 @@ export default function Page() {
 
     if (name === "price") {
       parsedValue = parseFloat(value);
-    } else if (name === "stock" || name === "categoryId") {
+    } else if (name === "stock" || name === "categoryId" || name==="provinceId") {
       parsedValue = parseInt(value, 10);
     }
 
@@ -125,11 +127,11 @@ export default function Page() {
                 name="name"
                 value={form.name}
               />
-              <Heart />
+              
             </div>
             {errors.name && <p className="text-red-700 font-medium text-xs">{errors.name}</p>}
             <div className="flex content-center items-center py-2">
-              <Stars />
+              
             </div>
             <div className="flex flex-col gap-2 justify-start items-start py-2">
               <div className="flex justify-start items-center">
@@ -168,7 +170,7 @@ export default function Page() {
               </div>
             </div>
             <div className="flex flex-col items-start mb-4 gap-2">
-              <h1 className="font-medium text-xl">Descripción del vendedor</h1>
+              <h1 className="font-medium text-xl">Descripción del producto</h1>
               <textarea
                 className=" resize-y shadow appearance-none border rounded w-full h-64 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="description"
