@@ -29,7 +29,7 @@ const DetailContent = ({ data }) => {
             <Image className="relative top-2 left-2" src={close} alt="close" width={50} height={50} />
           </Link>
 
-          <ImageSlider image={image} />
+          <ImageSlider image={image[0]} />
 
           <div className="py-5 px-3 flex flex-col items-start gap-4">
             <CategoryLabel category={category} />
@@ -38,6 +38,7 @@ const DetailContent = ({ data }) => {
               {name}
               <Heart />
             </div>
+
 
             <div className="flex content-center items-center gap-1">
               <Stars averange={averange} />
