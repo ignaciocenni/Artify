@@ -9,12 +9,7 @@ const CONTACT_MESSAGE_FIELDS = {
 };
 
 const generateEmailContent = (data) => {
-  console.log(data);
-  const stringData = Object.entries(data).reduce(
-    (str, [key, val]) =>
-      (str += `${CONTACT_MESSAGE_FIELDS[key]}: \n${val} \n \n`),
-    ""
-  );
+  const stringData = Object.entries(data).reduce((str, [key, val]) => (str += `${CONTACT_MESSAGE_FIELDS[key]}: \n${val} \n \n`), "");
 
   let template;
   if (data.type === "welcome") {

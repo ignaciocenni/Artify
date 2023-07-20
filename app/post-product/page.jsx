@@ -25,8 +25,6 @@ const postProduct = async (product) => {
 export default function Page() {
   const data = useSession();
 
-  console.log(data);
-
   const [form, setForm] = useState({
     name: "",
     description: "",

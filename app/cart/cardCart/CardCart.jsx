@@ -54,7 +54,6 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
 
       localStorage.setItem("products", JSON.stringify(updatedArrProduct));
       updateCart(updatedArrProduct);
-      console.log(updatedArrProduct);
       dispatch(localProducts(updatedArrProduct));
     }
   };
@@ -72,7 +71,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
 
       localStorage.setItem("products", JSON.stringify(updatedArrProduct));
       updateCart(updatedArrProduct);
-      console.log(updatedArrProduct);
+
       dispatch(localProducts(updatedArrProduct));
     }
   };
