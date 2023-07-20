@@ -16,10 +16,10 @@ function AddReviews({ id }) {
 
     try {
       const response = await axios.post(url, form);
-      console.log('funciono');
+      console.log("funciono");
       return response.data;
     } catch (error) {
-      console.log('no funciono');
+      console.log("no funciono");
       throw error;
     }
   };
@@ -37,7 +37,7 @@ function AddReviews({ id }) {
         });
       })
       .catch((error) => {
-        console.log('Error al enviar la reseña:', error);
+        console.log("Error al enviar la reseña:", error);
         setIsButtonDisabled(false); // Habilitamos el botón nuevamente en caso de error
       });
   };

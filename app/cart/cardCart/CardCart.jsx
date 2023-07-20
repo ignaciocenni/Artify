@@ -37,6 +37,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
     const { arrProduct, currentQuantity } = initializeState();
     setArrProduct(arrProduct);
     setCurrentQuantity(currentQuantity);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quantity]);
 
   const handleAddProduct = () => {
@@ -53,7 +54,6 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
 
       localStorage.setItem("products", JSON.stringify(updatedArrProduct));
       updateCart(updatedArrProduct);
-      console.log(updatedArrProduct);
       dispatch(localProducts(updatedArrProduct));
     }
   };
@@ -71,7 +71,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
 
       localStorage.setItem("products", JSON.stringify(updatedArrProduct));
       updateCart(updatedArrProduct);
-      console.log(updatedArrProduct);
+
       dispatch(localProducts(updatedArrProduct));
     }
   };

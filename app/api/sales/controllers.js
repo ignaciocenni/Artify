@@ -8,10 +8,10 @@ const getAllSales = async () => {
       sellerId: true,
       customer: true,
       customerId: true,
-      //saledProduct: true,
-      //productId: true,
-      //totalPrice: true,
-      //productQuantity: true,
+      saledProduct: true,
+      productId: true,
+      totalPrice: true,
+      productQuantity: true,
     },
   });
 

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
@@ -11,7 +11,6 @@ import ImageSlider from "../../components/DetailComponents/ImageSlider";
 import logo from "../../public/images/logo.svg";
 import Heart from "../../components/Heart";
 import Stars from "../../components/Stars";
-import ProvinceFilter from "../../components/Filters/ProvinceFilter";
 import Footer from "../../components/Footer";
 
 const postProduct = async (product) => {
@@ -24,11 +23,6 @@ const postProduct = async (product) => {
 };
 
 export default function Page() {
-  const [images, setImages] = useState({
-    fileUrl: "",
-    fileKey: "",
-  });
-
   const data = useSession();
 
   const [form, setForm] = useState({
@@ -36,22 +30,35 @@ export default function Page() {
     description: "",
     price: "",
     stock: "",
-    image: "",
+    image: [],
     categoryId: "",
-    city: "",
-    userEmail: data?.user?.email || null,
-    authName: data?.user?.name || null,
-    authImage: data?.user?.image || null,
+    provinceId: "",
+    userEmail: "",
+    authName: "",
+    authImage: "",
   });
 
+  useEffect(() => {
+    setForm({
+      ...form,
+      userEmail: data?.data?.user.email,
+      authName: data?.data?.user.name,
+      authImage: data?.data?.user.image,
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.data?.user]);
+
   const categories = useSelector((state) => state.valores.categories);
+  const provinces = useSelector((state) => state.valores.provinces);
   const [errors, setErrors] = useState({});
 
   const router = useRouter();
   const dispatch = useDispatch();
-  const handleClick = async (event) => {
+
+  const onSubmit = async (event) => {
     event.preventDefault();
-    const product = { ...form, ...images };
+    const product = { ...form };
     const response = await postProduct(product);
     if (response.created) {
       const { res } = response;
@@ -82,10 +89,10 @@ export default function Page() {
     <>
       <div className="flex gap-8 justify-center pb-20">
         <div>
-          <ImageSlider image={form.image[0] ? form.image[0] : logo} />
+          <ImageSlider image={form.image.length ? form.image[0] : logo} />
         </div>
         <section className="text-center grid justify-center items-center">
-          <form>
+          <form onSubmit={onSubmit}>
             <h1 className="font-semibold text-3xl py-5">Previsualización del articulo a publicar</h1>
             <div className="flex flex-col items-start w-64">
               <select
@@ -107,7 +114,6 @@ export default function Page() {
               </select>
               {errors.categoryId && <p className="text-red-700 font-medium text-xs">{errors.categoryId}</p>}
             </div>
-
             <br />
             <div className="flex justify-center items-center gap-2 py-2">
               <input
@@ -142,9 +148,24 @@ export default function Page() {
             <div className="flex flex-col items-start py-5 ">
               <div className="flex items-center gap-3">
                 <h1 className="text-sm font-light">Publicado hoy en</h1>
-                <ProvinceFilter />
+                <select
+                  className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[var(--background-sec)] text-center font-semibold "
+                  onChange={handleChange}
+                  name="provinceId"
+                >
+                  <option selected disabled>
+                    Provincia
+                  </option>
+                  {provinces?.map((province) => {
+                    return (
+                      <option key={province.id} value={province.id} className="text-center font-semibold rounded-2xl">
+                        {province.name}
+                      </option>
+                    );
+                  })}
+                </select>
+                {errors.city && <p className="text-red-700 font-medium text-xs">{errors.city}</p>}
               </div>
-              {errors.city && <p className="text-red-700 font-medium text-xs">{errors.city}</p>}
             </div>
             <div className="flex flex-col items-start mb-4 gap-2">
               <h1 className="font-medium text-xl">Descripción del vendedor</h1>
@@ -176,17 +197,11 @@ export default function Page() {
 
             <div className="flex items-center justify-center">
               {isFormValid ? (
-                <button
-                  className="bg-[var(--detail)] text-white font-bold py-2 px-4 rounded focus:outline-none  w-[250px] opacity-50  cursor-not-allowed"
-                  onClick={handleClick}
-                >
+                <button className="bg-[var(--detail)] text-white font-bold py-2 px-4 rounded focus:outline-none  w-[250px] opacity-50  cursor-not-allowed">
                   Continuar
                 </button>
               ) : (
-                <button
-                  className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px] "
-                  onClick={handleClick}
-                >
+                <button className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px] ">
                   Continuar
                 </button>
               )}
