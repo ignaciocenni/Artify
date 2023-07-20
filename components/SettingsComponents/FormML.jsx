@@ -1,4 +1,4 @@
-import MLButton from "../buttons/MLButton";
+import MLButton from "../../components/buttons/MLButton";
 
 export default function FormML() {
   return (
