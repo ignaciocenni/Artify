@@ -11,11 +11,7 @@ const ButtonSession = () => {
   if (session && session.user) {
     return (
       <>
-        <li className="px-4 py-2 hover:bg-gray-100">
-          <h1>Hola!</h1>
-          <h1 className="font-bold text-lg">{session.user.name}</h1>
-        </li>
-        <li className="px-4 py-2 hover:bg-gray-100">
+        <li className="px-4 py-2 hover:bg-gray-200">
           <Link className="flex" href="/profile">
             <Image
               className="rounded-full shadow-2xl"
@@ -27,18 +23,7 @@ const ButtonSession = () => {
             <p className="px-7">Perfil</p>
           </Link>
         </li>
-        <li className="px-4 py-2 hover:bg-gray-100">
-          <Link className="flex" href="/">
-            <Image
-              src="/images/pencilImage.svg"
-              width={20}
-              height={20}
-              alt="icon"
-            />
-            <p className="px-7">Editar</p>
-          </Link>
-        </li>
-        <li className="px-4 py-2 hover:bg-gray-100">
+        <li className="px-4 py-2 hover:bg-gray-200">
           <Link className="flex" href="/dashboard">
             <Image
               src="/images/controlPanelImage.svg"
@@ -49,7 +34,7 @@ const ButtonSession = () => {
             <p className="px-7">Panel de Control</p>
           </Link>
         </li>
-        <li className="px-4 py-2 hover:bg-gray-100">
+        <li className="px-4 py-2 hover:bg-gray-200">
           <Link className="flex" href="/settings">
             <Image
               src="/images/settingsImage.svg"
@@ -57,7 +42,7 @@ const ButtonSession = () => {
               height={20}
               alt="icon"
             />
-            <p className="px-7">Configurar</p>
+            <p className="px-7">Configuración</p>
           </Link>
         </li>
       </>
