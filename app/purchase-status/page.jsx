@@ -24,15 +24,10 @@ export default function PurchaseStatus() {
   const dispatch = useDispatch();
   const productsLS = JSON.parse(localStorage.getItem("products")) || [];
   const updatedProducts = productsDB.reduce((acc, productDB) => {
-    const matchingProduct = productsLS.find(
-      (productLS) => productLS.id === productDB.id
-    );
+    const matchingProduct = productsLS.find((productLS) => productLS.id === productDB.id);
     if (matchingProduct) {
       const updatedStock = productDB.stock - matchingProduct.quantity;
-      return [
-        ...acc,
-        { id: productDB.id, stock: updatedStock >= 0 ? updatedStock : 0 },
-      ];
+      return [...acc, { id: productDB.id, stock: updatedStock >= 0 ? updatedStock : 0 }];
     }
     return acc;
   }, []);
@@ -62,6 +57,7 @@ export default function PurchaseStatus() {
       localStorage.removeItem("products");
       dispatch(multiplied([]));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
