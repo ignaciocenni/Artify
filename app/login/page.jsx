@@ -68,7 +68,7 @@ export default function LoginPage({ searchParams }) {
           <InputField 
             id="password"
             type="password"
-            placeholder="password"
+            placeholder="Contraseña"
             onChange={handleChange}
             name="password"
             value={form.password}

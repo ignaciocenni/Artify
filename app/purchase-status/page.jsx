@@ -16,14 +16,17 @@ export default function PurchaseStatusComponent() {
   const base_url = process.env.BASE_URL;
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
-
-  const form = {
-    email: data?.data?.user.email,
-    name: data?.data?.user.name,
+  let form = {
+    email: "",
+    name: "",
     status: status,
     type: "purchase",
   };
+  let customer = ""
   useEffect(() => {
+    form.email = data?.data?.user.email
+    form.name = data?.data?.user.name
+    customer = data?.data?.user.id
     const productsLS = JSON.parse(localStorage.getItem("products")) || [];
     const updatedStockProducts = productsLS.map((product) => ({
       id: product.id,
@@ -44,27 +47,18 @@ export default function PurchaseStatusComponent() {
             console.log(error.message);
           });
       });
-      if (data?.data?.user.id) {
-        try {
-          const response = axios.post(
-            `${base_url}api/users`,
-            data?.data?.user
-          ).data;
-          console.log(response);
-        } catch (error) {
-          console.log(error.message);
-        }
-      }
       productsLS.forEach((product) => {
-        const url = `${base_url}api/${product.id}`; /* hay que cambiar esta URL*/
+        const url = `${base_url}api/sales`;
         const data = {
           productId: product.id,
           sellerId: product.sellerId,
           totalPrice: product.unit_price * product.quantity,
+          customerId: customer,
+          productQuantity: product.quantity
         };
 
         axios
-          .put(url, data)
+          .post(url, data)
           .then((response) => {
             console.log(response);
           })
@@ -91,13 +85,17 @@ export default function PurchaseStatusComponent() {
   return (
     <div className="bg-[var(--primary)]">
       <div className="h-[8vh] p-5">
+      <Link href={"/"}>
         <button className="bg-black hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-tl rounded-tr rounded-bl rounded-br shadow-md mr-4 mt-2 mb-2">
           ← Volver al inicio
         </button>
+      </Link>
       </div>
       {status === "approved" && <ApprovedStatus />}
       {status === "rejected" && <RejectedStatus />}
-      <Link href={"/"}></Link>
+      
+
+      
     </div>
   );
 }
