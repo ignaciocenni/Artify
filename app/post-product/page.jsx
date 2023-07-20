@@ -21,7 +21,7 @@ const postProduct = async (product) => {
 };
 
 export default function Page() {
-  const data = useSession();  
+  const data = useSession();
 
   const [form, setForm] = useState({
     name: "",
@@ -34,7 +34,7 @@ export default function Page() {
     userEmail: "",
     authName: "",
     authImage: "",
-    userId:""
+    userId: ""
   });
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function Page() {
       userEmail: data?.data?.user.email,
       authName: data?.data?.user.name,
       authImage: data?.data?.user.image,
-      userId:data?.data?.user.id,
+      userId: data?.data?.user.id,
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,7 +75,7 @@ export default function Page() {
 
     if (name === "price") {
       parsedValue = parseFloat(value);
-    } else if (name === "stock" || name === "categoryId" || name==="provinceId") {
+    } else if (name === "stock" || name === "categoryId" || name === "provinceId") {
       parsedValue = parseInt(value, 10);
     }
 
@@ -124,11 +124,11 @@ export default function Page() {
                 name="name"
                 value={form.name}
               />
-              
+
             </div>
             {errors.name && <p className="text-red-700 font-medium text-xs">{errors.name}</p>}
             <div className="flex content-center items-center py-2">
-              
+
             </div>
             <div className="flex flex-col gap-2 justify-start items-start py-2">
               <div className="flex justify-start items-center">
@@ -140,6 +140,8 @@ export default function Page() {
                   onChange={handleChange}
                   name="price"
                   value={form.price}
+                  min="0"
+                  onWheel={(event) => event.currentTarget.blur()}
                 />
               </div>
               {errors.price && <p className="text-red-700 font-medium text-xs">{errors.price}</p>}
@@ -169,8 +171,8 @@ export default function Page() {
             <div className="flex flex-col items-start mb-4 gap-2">
               <h1 className="font-medium text-xl">Descripción del producto</h1>
               <textarea
-                className="  shadow appearance-none border rounded w-full h-[6em] py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"
-                rows={2} 
+                className="  shadow appearance-none border rounded w-full h-[10em] py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"
+                rows={2}
                 id="description"
                 type="text"
                 onChange={handleChange}
@@ -189,6 +191,8 @@ export default function Page() {
                 onChange={handleChange}
                 name="stock"
                 value={form.stock}
+                min="0"
+                onWheel={(event) => event.currentTarget.blur()}
               />
               {errors.stock && <p className="text-red-700 font-medium text-xs">{errors.stock}</p>}
             </div>
