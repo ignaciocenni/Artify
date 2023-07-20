@@ -11,6 +11,7 @@ const AddDeductButtons = ({ data }) => {
 
   const product = {
     id: data.id,
+    sellerId: data.userId,
     image: data.image,
     title: data.name,
     unit_price: data.price,
@@ -38,6 +39,7 @@ const AddDeductButtons = ({ data }) => {
     const { arrProduct, currentQuantity } = initializeState();
     setArrProduct(arrProduct);
     setCurrentQuantity(currentQuantity);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product.title]);
 
   const [arrProduct, setArrProduct] = useState([]);
@@ -87,12 +89,12 @@ const AddDeductButtons = ({ data }) => {
         <h1 className="text-xs font-extrabold px-2">Añadir producto</h1>
       </button>
       <div className="flex flex-col">
-      <p className="text-center">Cantidad</p>
-      <p className="text-center"> {currentQuantity}</p>
+        <p className="text-center">Cantidad</p>
+        <p className="text-center"> {currentQuantity}</p>
       </div>
       <div className="flex flex-col">
-      <p className="text-center w-18">Stock</p>
-      <p className="text-center w-18">{product.stock - currentQuantity}</p>
+        <p className="text-center w-18">Stock</p>
+        <p className="text-center w-18">{product.stock - currentQuantity}</p>
       </div>
       <button
         onClick={handleDeductProduct}

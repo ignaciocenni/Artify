@@ -1,23 +1,24 @@
 const validate = (form) => {
     let errors = {};
-  if (form.name.length < 3) {
-    errors.e1 = "Debe ingresar almenos 3 letras";
+  if (!/^[A-Za-z]{1,30}/.test(form.name)) {
+    errors.name = "No se permiten caracteres especiales ni símbolos, longitud debe estar entre 1 y 30 caracteres";
   }
   if (form.description.length < 15) {
-    errors.e2 = "Debe ingresar almenos 15 carácteres";
+    errors.description = "Debe ingresar almenos 15 carácteres";
   }
-  if (form.price > 10000000) {
-    errors.e3 = "Porfavor ingrese un monto valido";
+  if (!/^\d+([.,]\d{1,2})?$/.test(form.price)) {
+
+    errors.price = "Ingresa un precio válido en formato decimal. Ejemplos: '10', '25.5', '100.00'";
   }
 
-  // if (!/^https:\/\/.+$/.test(form.image)) {
-  //   errors.e4 = "Porfavor ingrese una URL valida";
-  // }
-  if (form.stock >= 100000) {
-    errors.e5 = "Porfavor ingrese una cantidad valida";
+  if (!/^\d+$/.test(form.stock)) {
+    errors.stock = "Ingrese un stock válido. Debe ser un número entero positivo";
   }
   if (!form.categoryId) {
-    errors.e6 = "Debe ingresar una categoria";
+    errors.categoryId = "Debe seleccionar una categoria";
+  }
+  if (!form.city) {
+    errors.city = "Debe seleccionar una ciudad";
   }
   return errors;
 };

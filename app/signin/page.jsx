@@ -13,24 +13,36 @@ export default function SignInPage() {
     password: "",
     name: "",
     rol: "USER",
-    type:"welcome"
+    lastName: "",
+    provinceId: 1
   });
 
   const [errors, setErrors] = useState({
     email: "",
     password: "",
+    name: "",
+    lastName: "",
   });
+  
   const router = useRouter();
+
   const onSubmit = async (event) => {
     event.preventDefault();
-    const user = await postUser(form).then(() => (user ? router.push("/login") : ""));
-    await sendContactForm(form);
-    
+    if (Object.entries(form).length) {
+      await postUser(form)
+      router.push("/login")
+      await sendContactForm({ ...form, type: "welcome" });
+    } else {
+      setErrors(validate({ ...errors }))
+    }
+
   };
 
   const handleChange = (event) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
-    setErrors(validate(form));
+    const name = event.target.name;
+    const value = event.target.value;
+    setForm({ ...form, [name]: value });
+    setErrors(validate({ ...form, [name]: value }));
   };
 
   return (
@@ -44,10 +56,35 @@ export default function SignInPage() {
           onChange={handleChange}
           name="email"
           value={form.email}
-          error={errors.email}
-        />
-        <InputField id="username" type="text" placeholder="Nombre y Apellido" onChange={handleChange} name="name" value={form.name} />
-        <InputField id="password" type="password" onChange={handleChange} name="password" value={form.password} placeholder="Contraseña" />
+          errors={errors.email} 
+            />
+
+        <InputField
+          id="username"
+          type="text"
+          placeholder="Nombre"
+          onChange={handleChange}
+          name="name"
+          value={form.name}
+          errors={errors.name} />
+
+        <InputField
+          id="lastName"
+          type="text"
+          placeholder="Apellido"
+          onChange={handleChange}
+          name="lastName"
+          value={form.lastName}
+          errors={errors.lastName} />
+
+        <InputField
+          id="password"
+          type="password"
+          onChange={handleChange}
+          name="password"
+          value={form.password}
+          placeholder="Contraseña"
+          errors={errors.password} />
         <SubmitButton disabled={Object.values(errors).some((error) => error)} />
         <hr />
       </form>

@@ -8,6 +8,7 @@ const ButtonSession = () => {
   const router = useRouter();
   const { data: session } = useSession();
   const handler = async () => {
+    localStorage.removeItem("products")
     const res = await signOut().then(() => (res ? router.back() : ""));
   };
 

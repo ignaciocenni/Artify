@@ -1,9 +1,17 @@
-import GoogleProvider from "next-auth/providers/google";
+import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import prisma from "../../db/client";
 export const options = {
   providers: [
     GoogleProvider({
+      profile(profile: GoogleProfile) {
+        return {
+          ...profile,
+          rol: "USER",
+          image: profile.picture,
+          id: profile.sub,
+        };
+      },
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
       authorization: {
@@ -35,13 +43,27 @@ export const options = {
             email: credentials.email,
           },
         });
-        //caso de mail incorrecto
-        if (credentials.email === user.email && credentials.password === user.password) {
+        if (!user) throw new Error("Incorrect email!");
+        if (credentials.password === user.password) {
           console.log("success");
           return user;
-        } else return null;
+        } else throw new Error("Incorrect password!");
       },
     }),
   ],
-  callbacks: {},
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) token.role = user.rol;
+      return token;
+    },
+    async session({ session, token }) {
+      if (session?.user) session.user.role = token.role;
+      return session;
+    },
+  },
+  pages: {
+    signIn: "/login",
+    error: "/login",
+    signOut: "/",
+  },
 };
