@@ -23,7 +23,6 @@ const postProduct = async (product) => {
 };
 
 export default function Page() {
-
   const data = useSession();
 
   console.log(data);
@@ -46,13 +45,14 @@ export default function Page() {
       ...form,
       userEmail: data?.data?.user.email,
       authName: data?.data?.user.name,
-      authImage: data?.data?.user.image
-    })
+      authImage: data?.data?.user.image,
+    });
 
-  }, [data?.data?.user])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.data?.user]);
 
   const categories = useSelector((state) => state.valores.categories);
-  const provinces = useSelector((state) => state.valores.provinces)
+  const provinces = useSelector((state) => state.valores.provinces);
   const [errors, setErrors] = useState({});
 
   const router = useRouter();
@@ -60,7 +60,7 @@ export default function Page() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    const product = { ...form, };
+    const product = { ...form };
     const response = await postProduct(product);
     if (response.created) {
       const { res } = response;
@@ -168,7 +168,6 @@ export default function Page() {
                 </select>
                 {errors.city && <p className="text-red-700 font-medium text-xs">{errors.city}</p>}
               </div>
-
             </div>
             <div className="flex flex-col items-start mb-4 gap-2">
               <h1 className="font-medium text-xl">Descripción del vendedor</h1>
@@ -200,15 +199,11 @@ export default function Page() {
 
             <div className="flex items-center justify-center">
               {isFormValid ? (
-                <button
-                  className="bg-[var(--detail)] text-white font-bold py-2 px-4 rounded focus:outline-none  w-[250px] opacity-50  cursor-not-allowed"
-                >
+                <button className="bg-[var(--detail)] text-white font-bold py-2 px-4 rounded focus:outline-none  w-[250px] opacity-50  cursor-not-allowed">
                   Continuar
                 </button>
               ) : (
-                <button
-                  className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px] "
-                >
+                <button className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px] ">
                   Continuar
                 </button>
               )}
