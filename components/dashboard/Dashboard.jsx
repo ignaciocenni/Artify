@@ -10,6 +10,7 @@ import CardsPublication from "./CardsPublication";
 import ColPublication from "./ColPublication";
 import ColUsers from "./ColUsers";
 import CardsUser from "./CardsUser";
+import CardsMetrics from "./CardsMetrics";
 import { useSelector } from "react-redux";
 
 const Dashboard = () => {
@@ -50,7 +51,7 @@ const Dashboard = () => {
           <CardsUser users={users} />
         </div>
       ):(
-        <h1 className="m-10">todavia no hay info</h1>
+        <CardsMetrics/>
       )
       }
     </div>
