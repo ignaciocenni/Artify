@@ -39,6 +39,7 @@ const DetailContent = ({ data }) => {
               <Heart />
             </div>
 
+
             <div className="flex content-center items-center gap-1">
               <Stars averange={averange} />
             </div>
