@@ -11,10 +11,10 @@ export async function GET() {
 }
 
 export async function POST(req) {
-  const { name, description, price, stock, image, categoryId, provinceId, userId } = await req.json();
+  const { name, description, price, stock, image, categoryId, provinceId, userId,  } = await req.json();
 
   try {
-    const newProduct = await addProduct(name, description, price, stock, image, categoryId, provinceId);
+    const newProduct = await addProduct(name, description, price, stock, image, categoryId, provinceId,userId);
 
     return NextResponse.json(newProduct, { status: 200 });
   } catch (error) {
