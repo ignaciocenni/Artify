@@ -1,4 +1,3 @@
-import { transformDocument } from "@prisma/client/runtime";
 import prisma from "../../db/client";
 
 const getSale = async (id) => {

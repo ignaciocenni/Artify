@@ -45,7 +45,6 @@ export const options = {
         });
         if (!user) throw new Error("Incorrect email!");
         if (credentials.password === user.password) {
-          console.log("success");
           return user;
         } else throw new Error("Incorrect password!");
       },
