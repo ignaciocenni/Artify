@@ -2,7 +2,7 @@ import MLButton from "../buttons/MLButton";
 
 const FormML = () => {
   return (
-    <div className="flex flex-col w-2/3 gap-2">
+    <div className="flex flex-col w-full gap-2">
       <h1 className="font-semibold text-lg ">Pagos</h1>
         <p className="text-xs font-light">
           Para Vender/Comprar una artesania, deberá ingresar su CVU/Alias de Mercado Pago!

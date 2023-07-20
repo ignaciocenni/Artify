@@ -15,7 +15,7 @@ const ButtonSession = () => {
   if (session && session.user) {
     return (
       <>
-        <li className="px-4 py-2 hover:bg-gray-100">
+        <li className="px-4 py-2 hover:bg-gray-200">
           <button className="flex" onClick={handler}>
             <Image src="/images/leaveSession.svg" width={20} height={20} alt="icon" />
             <p className="px-7">Cerrar Sesiòn</p>
