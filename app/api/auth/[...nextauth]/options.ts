@@ -10,6 +10,7 @@ export const options = {
           rol: "USER",
           image: profile.picture,
           id: profile.sub,
+          thirdparty: true,
         };
       },
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
@@ -52,11 +53,42 @@ export const options = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user) token.role = user.rol;
+      if (user) {
+        if (user.thirdparty) {
+          const name = user.name.split(" ")[0];
+          const lastName = user.name.split(" ")[1];
+          const findUser = await prisma.user.findFirst({
+            where: {
+              email: user.email,
+            },
+          });
+          if (!findUser) {
+            const dbUser = await prisma.user.create({
+              data: {
+                name: name,
+                lastName: lastName,
+                email: user.email,
+                password: "thirdPartyAuth",
+              },
+            });
+            token.role = dbUser.rol;
+            token.id = dbUser.id;
+          } else {
+            token.id = findUser.id;
+            token.role = findUser.rol;
+          }
+          return token;
+        }
+        token.role = user.rol;
+        token.id = user.id;
+      }
       return token;
     },
     async session({ session, token }) {
-      if (session?.user) session.user.role = token.role;
+      if (session?.user) {
+        session.user.role = token.role;
+        session.user.id = token.id;
+      }
       return session;
     },
   },

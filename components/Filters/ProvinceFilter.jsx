@@ -1,27 +1,48 @@
-"use client";
-import { useState} from "react";
+'use client'
+import { useState, useRef, useEffect } from "react";
 import { countrie } from "../../store/slice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ProvinceFilter() {
   const dispatch = useDispatch();
   const provinces = useSelector((state) => state.valores.provinces);
+  const products = useSelector((state) => state.valores.copyProducts);
   const provinceNames = provinces.map((province) => province.name);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [filters, setFilters] = useState({
     city: "Provincias",
     category: [],
   });
+  const dropdownRef = useRef(null);
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
   const handleCitySelect = (city) => {
     setFilters({ ...filters, city: city });
     dispatch(countrie(city));
   };
+
+  const handleOutsideClick = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
+
+  const citysWhitProducts = provinceNames.filter((city) =>
+  products.some((product) => product.province.name === city)
+);
+
   return (
-    <div>
+    <div ref={dropdownRef}>
       <button
         className=" bg-[var(--primary)] py-1 relative flex justify-center items-center focus:outline-none  text-gray-600 rounded-xl focus:ring ring-gray-200 group"
         onClick={handleDropdownToggle}
@@ -55,7 +76,7 @@ export default function ProvinceFilter() {
             >
               Todas
             </li>
-            {provinceNames.map((city) => (
+            {citysWhitProducts.map((city) => (
               <li
                 key={city}
                 className="px-4 py-1 hover:bg-grey-100 border-b cursor-pointer"
