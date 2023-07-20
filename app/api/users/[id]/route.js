@@ -14,10 +14,10 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   const { id } = params;
-  const { name, email, password, lastName, image, aboutMe, wallet, cbu, alias, socials } = await request.json();
+  const { name, email, password, lastName, image, aboutMe, wallet, cbu, alias, socials, status } = await request.json();
 
   try {
-    const user = await updateUser(id, name, email, password, lastName, image, aboutMe, wallet, cbu, alias, socials);
+    const user = await updateUser(id, name, email, password, lastName, image, aboutMe, wallet, cbu, alias, socials, status);
     return NextResponse.json(user, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 404 });
