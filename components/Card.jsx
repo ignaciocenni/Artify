@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Card(props) {
-  const { id, image, user, price, title, userImage } = props;
+  const { id, image, user, price, title, userImage, userId } = props;
   return (
     <div className="object-cover flex flex-col justify-center align-first grid-cols-1 mb-3 ml-2 mr-2 bg-[var(--primary)] rounded-3xl pb-3 shadow-sm shadow-zinc-400">
       <div className="relative h-80">
@@ -26,7 +26,7 @@ export default function Card(props) {
         <div className="flex pt-1">
           <Image className="rounded-full" src={userImage} width={20} height={20} alt={`Imagen de perfil del usuario ${id}`} />
 
-          <h3 className="px-1 text-sm font-light">{user}</h3>
+         <Link href={`/profile/${userId}`} > <h3 className="px-1 text-sm font-light">{user}</h3></Link>
         </div>
       </div>
     </div>

@@ -16,7 +16,7 @@ const ButtonSession = () => {
           <h1 className="font-bold text-lg">{session.user.name}</h1>
         </li>
         <li className="px-4 py-2 hover:bg-gray-100">
-          <Link className="flex" href="/profile">
+          <Link className="flex" href="/">
             <Image
               className="rounded-full shadow-2xl"
               src={avatar}

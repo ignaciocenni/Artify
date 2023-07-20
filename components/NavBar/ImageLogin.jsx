@@ -10,7 +10,7 @@ const ImageLogin = () => {
 
   return (
     <div>
-      <Link href="/profile">
+      <Link href="/">
         <Image
           src={session && session.user ? session.user.image : avatar}
           width={50}

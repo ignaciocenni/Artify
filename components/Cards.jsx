@@ -7,7 +7,7 @@ export default function Cards({ products, error }) {
 
   return (
     <div className="grid grid-cols-4 w-1/2 px-2">
-      {response.length ? (
+      {response && response.length ?  (
         response.map((resp) => (
           <Card
             key={resp.id}
@@ -17,9 +17,10 @@ export default function Cards({ products, error }) {
             price={resp.price}
             title={resp.name}
             userImage={resp.user.image}
+            userId={resp.userId}
           />
         ))
-      ) : response.error ? (
+      ) :response && response.error ? (
         "no se encontraron resultados"
       ) : (
         <Loading />
