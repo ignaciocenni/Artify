@@ -5,6 +5,16 @@ const getSale = async (id) => {
     where: {
       id: +id,
     },
+    include: {
+      seller: true,
+      customer: true,
+      saledProduct: {
+        select: {
+          name: true,
+          price: true,
+        },
+      },
+    },
   });
 
   return searchSale;
