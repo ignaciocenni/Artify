@@ -44,12 +44,15 @@ const Dashboard = () => {
           <ColPublication/>
           <CardsPublication products={products} />
         </div>
-      ) : (
+      ) : activeOption == "user" ? (
         <div className="w-full flex flex-col pt-11">
           <ColUsers/>
           <CardsUser users={users} />
         </div>
-      )}
+      ):(
+        <h1 className="m-10">todavia no hay info</h1>
+      )
+      }
     </div>
   );
 };
