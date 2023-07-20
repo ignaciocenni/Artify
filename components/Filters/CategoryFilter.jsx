@@ -1,7 +1,5 @@
-import { useState} from "react";
+import { useState, useEffect } from "react";
 import { category } from "../../store/slice";
-
-//crear el action
 import { useDispatch, useSelector } from "react-redux";
 
 export default function CategoryFilter() {
@@ -12,6 +10,24 @@ export default function CategoryFilter() {
     stateCategory: "Categorias",
   });
   const dispatch = useDispatch();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    function handleDocumentClick(event) {
+      // Si el clic se hizo fuera del dropdown, se cierra
+      if (!event.target.closest(".dropdown-container")) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    // Agregar el evento para escuchar los clics en todo el documento
+    document.addEventListener("click", handleDocumentClick);
+
+    // Eliminar el evento cuando el componente se desmonte para evitar fugas de memoria
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+    };
+  }, []);
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -21,12 +37,11 @@ export default function CategoryFilter() {
       ? setStateCategory({ stateCategory: "Categorias" })
       : setStateCategory({ stateCategory: cat });
     dispatch(category(cat));
+    setIsDropdownOpen(false); // Cerrar el dropdown al seleccionar una categoría
   };
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
   return (
-    <div className="gap-1 items-start">
+    <div className="gap-1 items-start dropdown-container">
       <div>
         <button
           className="bg-[var(--primary)] py-1 relative flex justify-center items-center focus:outline-none  text-gray-600 rounded-xl focus:ring ring-gray-200"

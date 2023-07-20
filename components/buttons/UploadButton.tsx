@@ -13,12 +13,15 @@ export default function UploadButtonPage(props) {
       <UploadButton<OurFileRouter>
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
+        
           if (res) {
             setForm({
               ...form,
-              image: res[0].fileUrl,
+              image: res.map((image)=>(image.fileUrl))
             });
           }
+        
+          
         }}
         onUploadError={(error: Error) => {
           alert(`ERROR! ${error.message}`);

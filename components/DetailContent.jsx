@@ -14,7 +14,7 @@ import Footer from "./Footer";
 import AddDeductButtons from "../components/buttons/AddDeductButtons";
 
 const DetailContent = ({ data }) => {
-  const { reviews, image, category, price, name, user, description, id } = data;
+  const { reviews, image, category, price, name, user,userId, description, id } = data;
 
   const amount = reviews?.reduce((accumulator, currentValue) => accumulator + currentValue.rating, 0);
   const averange = amount / reviews?.length;
@@ -29,7 +29,7 @@ const DetailContent = ({ data }) => {
             <Image className="relative top-2 left-2" src={close} alt="close" width={50} height={50} />
           </Link>
 
-          <ImageSlider image={image} />
+          <ImageSlider image={image[0]} />
 
           <div className="py-5 px-3 flex flex-col items-start gap-4">
             <CategoryLabel category={category} />
@@ -38,6 +38,7 @@ const DetailContent = ({ data }) => {
               {name}
               <Heart />
             </div>
+
 
             <div className="flex content-center items-center gap-1">
               <Stars averange={averange} />
@@ -56,7 +57,7 @@ const DetailContent = ({ data }) => {
               <p className="font-light">{description}</p>
             </div>
             <AddDeductButtons data={data} />
-            <SellerInfo user={user} />
+            <SellerInfo user={user} userId={userId}/>
           </div>
           <div>
             <BuyNowButton />
