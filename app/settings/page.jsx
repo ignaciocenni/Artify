@@ -1,4 +1,4 @@
-import FormML from "../../components/SettingsComponents/FormML";
+import FormML from "../../components/SettingsComponents/FormML.jsx";
 import SlideBarSettings from "../../components/SlideBarSettings";
 
 export default function Settings() {
