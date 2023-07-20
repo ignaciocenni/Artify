@@ -13,7 +13,7 @@ export default function notFound() {
         />
 
         <p className="font-semibold text-slate-900 text-2xl whitespace-nowrap">
-          No hay productos que cumplan con el filtrado actual...
+          No hay productos que cumplan con el filtrado actual.
         </p>
       </div>
     </>

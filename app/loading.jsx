@@ -12,7 +12,7 @@ export default function Loading() {
           style={{ maxWidth: "300%" }}
         />
         <p className="font-semibold text-slate-900 text-2xl whitespace-nowrap">
-          Cargando...💫
+          Cargando...
         </p>
       </div>
     </>
