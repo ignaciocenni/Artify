@@ -21,9 +21,7 @@ const postProduct = async (product) => {
 };
 
 export default function Page() {
-  const data = useSession();
-  console.log(data);
-  
+  const data = useSession();  
 
   const [form, setForm] = useState({
     name: "",
@@ -36,7 +34,7 @@ export default function Page() {
     userEmail: "",
     authName: "",
     authImage: "",
-    userId:"",
+    userId:""
   });
 
   useEffect(() => {
@@ -60,11 +58,10 @@ export default function Page() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    const product = { ...form };
-    const response = await postProduct(product);
+    const response = await postProduct(form);
     if (response.created) {
       const { res } = response;
-      const products = await (await axios.get("api/products")).data;
+      const products = (await axios.get("api/products")).data
       dispatch(GET_INFO(products));
       router.push(`/detail/${res.id}`);
     } else alert(response.error);
