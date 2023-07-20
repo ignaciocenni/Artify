@@ -1,4 +1,4 @@
-import FormML from "../../../components/SettingsComponents/FormML.jsx";
+import FormML from "../../../components/SettingsComponents/MlForm";
 
 export default function Settings() {
   return (
