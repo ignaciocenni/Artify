@@ -17,8 +17,8 @@ const validate = (form) => {
   if (!form.categoryId) {
     errors.categoryId = "Debe seleccionar una categoria";
   }
-  if (!form.city) {
-    errors.city = "Debe seleccionar una ciudad";
+  if (!form.provinceId) {
+    errors.provinceId = "Debe seleccionar una ciudad";
   }
   return errors;
 };

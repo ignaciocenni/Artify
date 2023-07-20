@@ -11,8 +11,14 @@ const ButtonSession = () => {
   if (session && session.user) {
     return (
       <>
-        <li className="px-4 py-2 hover:bg-gray-200">
-          <Link className="flex" href="/profile">
+
+        <li className="px-4 py-2 hover:bg-gray-100">
+          <h1>Hola!</h1>
+          <h1 className="font-bold text-lg">{session.user.name}</h1>
+        </li>
+        <li className="px-4 py-2 hover:bg-gray-100">
+          <Link className="flex" href="/">
+
             <Image
               className="rounded-full shadow-2xl"
               src={avatar}
