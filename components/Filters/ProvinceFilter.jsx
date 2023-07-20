@@ -1,5 +1,5 @@
-"use client";
-import { useState} from "react";
+'use client'
+import { useState, useRef, useEffect } from "react";
 import { countrie } from "../../store/slice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,16 +12,32 @@ export default function ProvinceFilter() {
     city: "Provincias",
     category: [],
   });
+  const dropdownRef = useRef(null);
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
   const handleCitySelect = (city) => {
     setFilters({ ...filters, city: city });
     dispatch(countrie(city));
   };
+
+  const handleOutsideClick = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
+
   return (
-    <div>
+    <div ref={dropdownRef}>
       <button
         className=" bg-[var(--primary)] py-1 relative flex justify-center items-center focus:outline-none  text-gray-600 rounded-xl focus:ring ring-gray-200 group"
         onClick={handleDropdownToggle}
