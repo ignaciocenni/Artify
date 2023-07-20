@@ -95,7 +95,7 @@ export default function Page() {
             <h1 className="font-semibold text-3xl py-5">Previsualización del articulo a publicar</h1>
             <div className="flex flex-col items-start w-64">
               <select
-                className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[var(--background-sec)] text-center font-semibold "
+                className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[#e0d8ffea] text-center font-semibold "
                 onChange={handleChange}
                 name="categoryId"
               >
@@ -148,7 +148,7 @@ export default function Page() {
               <div className="flex items-center gap-3">
                 <h1 className="text-sm font-light">Publicado hoy en</h1>
                 <select
-                  className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[var(--background-sec)] text-center font-semibold "
+                  className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[#e0d8ffea] text-center font-semibold "
                   onChange={handleChange}
                   name="provinceId"
                 >
@@ -169,7 +169,8 @@ export default function Page() {
             <div className="flex flex-col items-start mb-4 gap-2">
               <h1 className="font-medium text-xl">Descripción del producto</h1>
               <textarea
-                className=" resize-y shadow appearance-none border rounded w-full h-64 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="  shadow appearance-none border rounded w-full h-[6em] py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"
+                rows={2} 
                 id="description"
                 type="text"
                 onChange={handleChange}
