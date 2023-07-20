@@ -1,6 +1,6 @@
 const validate = (form) => {
     let errors = {};
-  if (!/^[A-Za-z]{1,30}$/.test(form.name)) {
+  if (!/^[A-Za-z]{1,30}/.test(form.name)) {
     errors.name = "No se permiten caracteres especiales ni símbolos, longitud debe estar entre 1 y 30 caracteres";
   }
   if (form.description.length < 15) {

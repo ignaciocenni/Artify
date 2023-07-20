@@ -17,7 +17,7 @@ const getAllProducts = async (name) => {
         userId: true,
         user: true,
         category: true,
-        stock:true,
+        stock: true,
         user: {
           select: {
             name: true,
@@ -51,7 +51,7 @@ const getAllProducts = async (name) => {
       user: true,
       category: true,
       province: true,
-      stock:true,
+      stock: true,
       user: {
         select: {
           name: true,
@@ -77,10 +77,13 @@ const addProduct = async (
   price,
   stock,
   image,
-  userEmail,
   categoryId,
+  provinceId,
+  userEmail,
   authName,
-  authImage
+  authImage,
+
+
 ) => {
   if (
     !name ||
@@ -88,9 +91,10 @@ const addProduct = async (
     !price ||
     !stock ||
     !image ||
-    !userEmail ||
     !categoryId ||
-    !authName
+    !provinceId
+    
+
   )
     throw new Error("Missing arguments");
 
@@ -114,8 +118,11 @@ const addProduct = async (
       email: userEmail,
     },
   });
-  const firstName = authName.split(" ")[0];
-  const lastName = authName.split(" ")[1];
+  console.log(authName); 
+  /* const firstName = authName.split(" ")[0];
+  const lastName = authName.split(" ")[1]; */
+
+  
   if (!user) {
     await prisma.user.create({
       data: {
@@ -138,6 +145,8 @@ const addProduct = async (
     });
   }
 
+
+
   const newProduct = await prisma.Product.create({
     data: {
       name,
@@ -145,8 +154,9 @@ const addProduct = async (
       price,
       stock,
       image,
-      userId: user.id,
+      userId:user.id,
       categoryId,
+      provinceId,
     },
   });
 
