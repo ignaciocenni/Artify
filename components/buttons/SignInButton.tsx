@@ -22,7 +22,7 @@ const SignInButton = () => {
     <div className="flex items-center justify-center">
       <button
         className="border border-black gap-5 flex justify-center items-center hover:bg-[var(--background-sec)] text-lg font-bold py-3 px-3 rounded-xl focus:outline-none focus:shadow-outline w-full"
-        type="submit"
+        type="button"
         onClick={() => handleClick()}
       >
         <Image src={logoGoogle} width={20} height={20} alt="GoogleLogo" className="absoulte top-10 bottom-10" />
