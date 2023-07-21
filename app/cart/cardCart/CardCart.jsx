@@ -7,7 +7,6 @@ import ButtonCloseCart from "../../../components/buttons/ButtonCloseCart";
 
 export default function CardCart({ id, image, name, price, stock, quantity, setProducts , setUrl}) {
   const dispatch = useDispatch();
-  const total = useSelector((state) => state.valores.totalPrice);
 
   const updateCart = (updatedArrProduct) => {
     dispatch(localProducts(updatedArrProduct));
