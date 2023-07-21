@@ -1,7 +1,5 @@
 "use client";
-import React from "react";
 import { useState } from "react";
-import SearchBar from "../SearchBar";
 import logoWhite from "../../public/images/logoWhite.svg";
 import Image from "next/image";
 import OptionPublicationBar from "./OptionPublicationBar";
@@ -12,8 +10,11 @@ import ColUsers from "./ColUsers";
 import CardsUser from "./CardsUser";
 import CardsMetrics from "./CardsMetrics";
 import { useSelector } from "react-redux";
+import { useSession } from "next-auth/react";
 
 const Dashboard = () => {
+  const { data: session } = useSession();
+
   const [activeOption, setActiveOption] = useState("publications");
 
   const products = useSelector((state) => state.valores.products);
@@ -26,15 +27,18 @@ const Dashboard = () => {
         <div className="w-full px-2 flex justify-between items-center">
           <div className="flex flex-col">
             <h1 className="text-white font-light text-xl">
-              Hola bienvenido de nuevo!
+              Bienvenido de nuevo!
             </h1>
-            <h1 className="text-white font-semibold">dashboard • ADMIN</h1>
+            <h1 className="text-white font-semibold">
+              Dashboard • {session ? session.user.role : null}
+            </h1>
           </div>
           <Image src={logoWhite} width={180} height={180} alt="logo" />
         </div>
         <OptionBar
           setActiveOption={setActiveOption}
           activeOption={activeOption}
+          session={session}
         />
       </div>
       {activeOption == "publications" ? (
@@ -42,18 +46,17 @@ const Dashboard = () => {
           <div className="px-6 pt-11 pb-2.5 justify-start items-start gap-2 inline-flex">
             <OptionPublicationBar />
           </div>
-          <ColPublication/>
+          <ColPublication />
           <CardsPublication products={products} />
         </div>
       ) : activeOption == "user" ? (
         <div className="w-full flex flex-col pt-11">
-          <ColUsers/>
+          <ColUsers />
           <CardsUser users={users} />
         </div>
-      ):(
-        <CardsMetrics/>
-      )
-      }
+      ) : (
+        <CardsMetrics session={session} />
+      )}
     </div>
   );
 };
