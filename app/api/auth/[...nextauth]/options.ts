@@ -94,8 +94,8 @@ export const options = {
     },
   },
   pages: {
-    signIn: `${process.env.BASE_URL}/login`,
-    error: `${process.env.BASE_URL}/login`,
-    signOut: `${process.env.BASE_URL}`,
+    signIn: `/login`,
+    error: `/login`,
+    signOut: `/`,
   },
 };
