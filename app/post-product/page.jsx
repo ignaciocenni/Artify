@@ -88,7 +88,7 @@ export default function Page() {
     <>
       <div className="flex gap-8 justify-center pb-20">
         <div>
-          <ImageSlider image={form.image.length ? form.image[0] : logo} />
+          <ImageSlider image={form.image.length ? form.image : [logo.src]} />
         </div>
         <section className="text-center grid justify-center items-center">
           <form onSubmit={onSubmit}>
