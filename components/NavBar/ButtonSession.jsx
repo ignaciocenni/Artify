@@ -13,10 +13,6 @@ export default function ButtonSession() {
     return (
       <>
         <li className="px-4 py-2 hover:bg-gray-100">
-          <h1>Hola!</h1>
-          <h1 className="font-bold text-lg">{data.user.name}</h1>
-        </li>
-        <li className="px-4 py-2 hover:bg-gray-100">
           <Link className="flex" href={`/profile/${data?.user?.id}`}>
             <Image className="rounded-full shadow-2xl" src={avatar} width={20} height={20} alt="icon" />
             <p className="px-7">Perfil</p>
