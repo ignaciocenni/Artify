@@ -5,10 +5,8 @@ import flechaDer from '../../public/images/flecha_derecha.svg';
 import { useState } from 'react';
 
 function ImageSlider({ image }) {
-  console.log(image);
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  console.log(image[currentImageIndex]);
-  console.log(currentImageIndex);
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % image.length)
