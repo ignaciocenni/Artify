@@ -10,7 +10,7 @@ import ImageLogin from "./NavBar/ImageLogin";
 export default function SlideBarSettings() {
 
   return (
-    <section className="flex w-1/6 h-full pb-10 flex-col justify-start items-center gap-4 shadow-lg">
+    <section className="flex w-1/6 h-[100vh] pb-10 flex-col justify-start items-center gap-4 shadow-lg">
       <div className="py-4 justify-center items-center gap-2.5 inline-flex w-full">
         <ImageLogin />
       </div>
