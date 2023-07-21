@@ -7,13 +7,13 @@ function IgButton({ socials }) {
     <>
       {socials ? (
         <a href="https://www.instagram.com/">
-          <button>
-            <Image alt="icono" src={icono} width={40} height={40} />
+          <button className="mx-2">
+            <Image alt="icono" src={icono} width={35} height={35} />
           </button>
         </a>
       ) : (
-        <button className="cursor-not-allowed">
-          <Image alt="icono" src={iconoGrey} width={40} height={40} />
+        <button className="cursor-not-allowed mx-2">
+          <Image alt="icono" src={iconoGrey} width={35} height={35} />
         </button>
       )}
     </>

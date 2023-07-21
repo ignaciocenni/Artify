@@ -21,13 +21,12 @@ const SellerInfo = ({ user, userId, socials }) => {
             />
           </Link>
           <Link href={`/profile/${userId}`}>
-            {" "}
             <h1 className="font-medium hover:underline">{user?.name}</h1>
           </Link>
         </div>
 
-          <div className="gap-2 flex">
-            <IgButton socials={socials?socials[1]:null} />
+          <div className=" flex justify-center items-center">
+            <IgButton  socials={socials?socials[1]:null} />
             <FbButton socials={socials?socials[0]:null} />
           </div>
       </div>
