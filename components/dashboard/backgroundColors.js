@@ -1,0 +1,27 @@
+const backgroundColors = [
+  "#FF5733",
+  "#33A2EB",
+  "#FFCE56",
+  "#4BC0C0",
+  "#9966FF",
+  "#199F40",
+  "#2B9F40",
+  "#D79F40",
+  "#EB9F40",
+  "#0F9F40",
+  "#199F40",
+  "#1C9F40",
+  "#FF5733",
+  "#33A2EB",
+  "#FFCE56",
+  "#4BC0C0",
+  "#9966FF",
+  "#199F40",
+  "#2B9F40",
+  "#D79F40",
+  "#EB9F40",
+  "#0F9F40",
+  "#199F40",
+]
+
+export default backgroundColors
