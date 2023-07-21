@@ -1,12 +1,13 @@
 import { useDispatch } from "react-redux";
 import { localProducts } from "../../store/slice";
 
-export default function ButtonCloseCart({ id, setProducts }) {
+export default function ButtonCloseCart({ id, setProducts, setUrl }) {
   const dispatch = useDispatch();
 
   const cartList = JSON.parse(localStorage.getItem("products"));
 
   const handlerClick = async (id) => {
+    setUrl("")
     const newCartList = cartList.filter((item) => item.id != id);
     localStorage.setItem("products", JSON.stringify(newCartList));
     setProducts(newCartList);

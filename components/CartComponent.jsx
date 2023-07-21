@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 
 export default function CartComponent() {
   const total = useSelector((state) => state.valores.totalPrice);
+  const [url, setUrl] = useState("")
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const cartProducts = JSON.parse(localStorage.getItem("products")) || [];
@@ -33,13 +34,14 @@ export default function CartComponent() {
                 stock={product.stock}
                 quantity={product.quantity}
                 setProducts={setProducts}
+                setUrl={setUrl}
               />
             ))}
       </div>
       <div className="flex flex-col p-4 bg-[var(--primary)] rounded-2xl shadow-md shadow-gray-600">
         <h1 className="font-bold w-80">${total}</h1>
 
-        {user.data ? <BuyAndDetail /> : "Inicia sesion para comprar!"}
+        {user.data ? <BuyAndDetail setUrl={setUrl} url={url} /> : "Inicia sesion para comprar!"}
       </div>
     </div>
   );
