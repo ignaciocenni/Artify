@@ -14,7 +14,7 @@ import Footer from "./Footer";
 import AddDeductButtons from "../components/buttons/AddDeductButtons";
 
 const DetailContent = ({ data }) => {
-  const { reviews, image, category, price, name, user,userId, description, id } = data;
+  const { reviews, image, category, price, name, user,userId, description, id ,socials} = data;
 
   const amount = reviews?.reduce((accumulator, currentValue) => accumulator + currentValue.rating, 0);
   const averange = amount / reviews?.length;
