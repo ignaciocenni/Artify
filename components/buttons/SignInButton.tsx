@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { use, useEffect } from "react";
 import { useSession, signIn } from "next-auth/react";
 import logoGoogle from "../../public/images/google-logo.png";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter, usePathname, useSearchParams } from "next/navigation";
 
 const SignInButton = () => {
   const router = useRouter();
@@ -13,10 +13,10 @@ const SignInButton = () => {
   const handleClick = () => {
     signIn("google");
   };
-
+  let params = useSearchParams();
+  let cb = params.get("p");
   if (session && session.user) {
-    let path = localStorage.getItem("path");
-    return router.push(path);
+    return router.push(`${cb}`);
   }
   return (
     <div className="flex items-center justify-center">
