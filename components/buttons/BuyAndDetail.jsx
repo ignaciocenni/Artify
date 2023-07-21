@@ -14,9 +14,8 @@ const postProductsMP = async (productsClean) => {
   }
 };
 
-const BuyNowButton = () => {
+const BuyNowButton = ({url, setUrl}) => {
   const path = usePathname();
-  const [url, setUrl] = useState("");
   const products = JSON.parse(localStorage.getItem("products")) || [];
   const productsClean = products.map((product) => {
     return {
@@ -32,15 +31,19 @@ const BuyNowButton = () => {
     const response = await postProductsMP(productsClean);
     setUrl(response);
   };
+
+  
   return (
     <div>
       {path === "/cart" && (
+        <>
         <button
           onClick={handleClick}
           className="hover:bg-[var(--background-sec)] hover:text-black w-full text-white bg-[var(--detail)] py-5 justify-center rounded-lg flex content-center items-center gap-5 shadow-xl"
         >
           <h1 className="text-xs font-extrabold">Detalles de compra</h1>
         </button>
+        </>
       )}
       {url && <MpButton url={url} />}
     </div>

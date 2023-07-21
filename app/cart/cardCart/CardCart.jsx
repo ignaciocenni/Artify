@@ -5,7 +5,7 @@ import { localProducts } from "../../../store/slice";
 import numberConverte from "./numberConverte";
 import ButtonCloseCart from "../../../components/buttons/ButtonCloseCart";
 
-export default function CardCart({ id, image, name, price, stock, quantity, setProducts }) {
+export default function CardCart({ id, image, name, price, stock, quantity, setProducts , setUrl}) {
   const dispatch = useDispatch();
   const total = useSelector((state) => state.valores.totalPrice);
 
@@ -41,6 +41,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
   }, [quantity]);
 
   const handleAddProduct = () => {
+    setUrl("")
     if (currentQuantity + 1 <= stock) {
       const updatedArrProduct = JSON.parse(localStorage.getItem("products")) || [];
 
@@ -58,6 +59,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
     }
   };
   const handleDeductProduct = () => {
+    setUrl("")
     if (currentQuantity > 1) {
       const updatedArrProduct = JSON.parse(localStorage.getItem("products")) || [];
 
@@ -78,7 +80,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
 
   return (
     <div className="flex py-4 mb-4 border-b-gray-00 border-b-2 gap-2 justify-between ">
-      <ButtonCloseCart id={id} setProducts={setProducts} />
+      <ButtonCloseCart id={id} setProducts={setProducts} setUrl={setUrl} />
       <div className="flex gap-2">
         <div className="flex flex-col gap-4">
           <div className="relative h-24 w-24 mr-4">
