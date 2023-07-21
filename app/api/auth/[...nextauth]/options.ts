@@ -94,7 +94,8 @@ export const options = {
     },
   },
   pages: {
-    error: "/login",
-    signOut: "/",
+    signIn: `/login`,
+    error: `/login`,
+    signOut: `/`,
   },
 };

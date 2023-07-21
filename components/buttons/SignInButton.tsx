@@ -16,6 +16,7 @@ const SignInButton = () => {
   let params = useSearchParams();
   let cb = params.get("p");
   if (session && session.user) {
+    if (!cb) return router.push("/");
     return router.push(`${cb}`);
   }
   return (
