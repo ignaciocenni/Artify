@@ -16,17 +16,22 @@ export default function PurchaseStatusComponent() {
   const base_url = process.env.BASE_URL;
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
-  let form = {
-    email: "",
-    name: "",
-    status: status,
-    type: "purchase",
+  const sendEmail = async () => {
+    if(data?.data?.user.email && data?.data?.user.name !== undefined){
+      const form = {
+        email:  data?.data?.user.email,
+        name:  data?.data?.user.name,
+        status: status,
+        type: "purchase",
+      };
+      await sendContactForm(form);
+    }
   };
-  let customer = ""
+  
+  let customer = "";
   useEffect(() => {
-    form.email = data?.data?.user.email
-    form.name = data?.data?.user.name
-    customer = data?.data?.user.id
+    sendEmail()
+    customer = data?.data?.user.id;
     const productsLS = JSON.parse(localStorage.getItem("products")) || [];
     const updatedStockProducts = productsLS.map((product) => ({
       id: product.id,
@@ -54,7 +59,7 @@ export default function PurchaseStatusComponent() {
           sellerId: product.sellerId,
           totalPrice: product.unit_price * product.quantity,
           customerId: customer,
-          productQuantity: product.quantity
+          productQuantity: product.quantity,
         };
 
         axios
@@ -67,11 +72,6 @@ export default function PurchaseStatusComponent() {
           });
       });
 
-      const sendEmail = async () => {
-        await sendContactForm(form);
-      };
-      sendEmail();
-
       if (localStorage) {
         localStorage.removeItem("products");
         dispatch(multiplied([]));
@@ -80,22 +80,20 @@ export default function PurchaseStatusComponent() {
       localStorage.removeItem("products");
       dispatch(multiplied([]));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+  }, [data?.data?.user.email, data?.data?.user.name]);
+
   return (
     <div className="bg-[var(--primary)]">
       <div className="h-[8vh] p-5">
-      <Link href={"/"}>
+        <Link href={"/"}>
         <button className="bg-black hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-tl rounded-tr rounded-bl rounded-br shadow-md mr-4 mt-2 mb-2">
           ← Volver al inicio
         </button>
-      </Link>
+        </Link>
       </div>
       {status === "approved" && <ApprovedStatus />}
       {status === "rejected" && <RejectedStatus />}
-      
-
-      
     </div>
   );
 }
