@@ -23,6 +23,7 @@ const getProduct = async (id) => {
           name: true,
           lastName: true,
           image: true,
+          socials : true
         },
       },
     },
