@@ -7,7 +7,6 @@ import ButtonSession from "./ButtonSession";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import CartButton from "./CartButton";
-import { useSelector } from "react-redux";
 import SearchBar from "../SearchBar";
 import { usePathname } from "next/navigation";
 const NavBar = () => {
@@ -17,8 +16,6 @@ const NavBar = () => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-
-  const product = useSelector((state) => state.valores.cartQuantity);
 
   return (
     <>

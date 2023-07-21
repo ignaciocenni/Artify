@@ -10,7 +10,7 @@ const ImageLogin = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <Link href="/profile">
+      <Link href={session && session.user ? `/profile/${session && session.user.id }`:'/'}>
         <Image
           src={session && session.user ? session.user.image : avatar}
           width={40}
