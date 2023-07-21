@@ -72,6 +72,7 @@ const NavBar = () => {
           {isOpen && (
             <div className="absolute mt-5 top-14 right-0 w-[20%] bg-[var(--background)] border rounded shadow z-40 ">
               <ul>
+                <ButtonSession />
                 <li className="px-4 py-2 hover:bg-gray-200">
                   <Link className="flex" href="/">
                     <Image
@@ -84,7 +85,6 @@ const NavBar = () => {
                   </Link>
                 </li>
                 <LoginButton />
-                <ButtonSession />
                 <LogoutButton />
               </ul>
             </div>
