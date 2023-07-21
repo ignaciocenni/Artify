@@ -29,7 +29,7 @@ const DetailContent = ({ data }) => {
             <Image className="relative top-2 left-2" src={close} alt="close" width={50} height={50} />
           </Link>
 
-          <ImageSlider image={image[0]} />
+          <ImageSlider image={image} />
 
           <div className="py-5 px-3 flex flex-col items-start gap-4">
             <CategoryLabel category={category} />
