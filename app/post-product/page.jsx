@@ -9,8 +9,6 @@ import UploadButton from "../../components/buttons/UploadButton";
 import { GET_INFO } from "../../store/slice";
 import ImageSlider from "../../components/DetailComponents/ImageSlider";
 import logo from "../../public/images/logo.svg";
-import Heart from "../../components/Heart";
-import Stars from "../../components/Stars";
 import Footer from "../../components/Footer";
 
 const postProduct = async (product) => {
@@ -36,6 +34,7 @@ export default function Page() {
     userEmail: "",
     authName: "",
     authImage: "",
+    userId: ""
   });
 
   useEffect(() => {
@@ -44,6 +43,7 @@ export default function Page() {
       userEmail: data?.data?.user.email,
       authName: data?.data?.user.name,
       authImage: data?.data?.user.image,
+      userId: data?.data?.user.id,
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,11 +58,10 @@ export default function Page() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    const product = { ...form };
-    const response = await postProduct(product);
+    const response = await postProduct(form);
     if (response.created) {
       const { res } = response;
-      const products = await (await axios.get("api/products")).data;
+      const products = (await axios.get("api/products")).data
       dispatch(GET_INFO(products));
       router.push(`/detail/${res.id}`);
     } else alert(response.error);
@@ -76,7 +75,7 @@ export default function Page() {
 
     if (name === "price") {
       parsedValue = parseFloat(value);
-    } else if (name === "stock" || name === "categoryId") {
+    } else if (name === "stock" || name === "categoryId" || name === "provinceId") {
       parsedValue = parseInt(value, 10);
     }
 
@@ -89,14 +88,14 @@ export default function Page() {
     <>
       <div className="flex gap-8 justify-center pb-20">
         <div>
-          <ImageSlider image={form.image.length ? form.image[0] : logo} />
+          <ImageSlider image={form.image.length ? form.image : [logo.src]} />
         </div>
         <section className="text-center grid justify-center items-center">
           <form onSubmit={onSubmit}>
             <h1 className="font-semibold text-3xl py-5">Previsualización del articulo a publicar</h1>
             <div className="flex flex-col items-start w-64">
               <select
-                className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[var(--background-sec)] text-center font-semibold "
+                className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[#e0d8ffea] text-center font-semibold "
                 onChange={handleChange}
                 name="categoryId"
               >
@@ -125,11 +124,11 @@ export default function Page() {
                 name="name"
                 value={form.name}
               />
-              <Heart />
+
             </div>
             {errors.name && <p className="text-red-700 font-medium text-xs">{errors.name}</p>}
             <div className="flex content-center items-center py-2">
-              <Stars />
+
             </div>
             <div className="flex flex-col gap-2 justify-start items-start py-2">
               <div className="flex justify-start items-center">
@@ -141,6 +140,8 @@ export default function Page() {
                   onChange={handleChange}
                   name="price"
                   value={form.price}
+                  min="0"
+                  onWheel={(event) => event.currentTarget.blur()}
                 />
               </div>
               {errors.price && <p className="text-red-700 font-medium text-xs">{errors.price}</p>}
@@ -149,7 +150,7 @@ export default function Page() {
               <div className="flex items-center gap-3">
                 <h1 className="text-sm font-light">Publicado hoy en</h1>
                 <select
-                  className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[var(--background-sec)] text-center font-semibold "
+                  className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[#e0d8ffea] text-center font-semibold "
                   onChange={handleChange}
                   name="provinceId"
                 >
@@ -168,9 +169,10 @@ export default function Page() {
               </div>
             </div>
             <div className="flex flex-col items-start mb-4 gap-2">
-              <h1 className="font-medium text-xl">Descripción del vendedor</h1>
+              <h1 className="font-medium text-xl">Descripción del producto</h1>
               <textarea
-                className=" resize-y shadow appearance-none border rounded w-full h-64 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="  shadow appearance-none border rounded w-full h-[10em] py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"
+                rows={2}
                 id="description"
                 type="text"
                 onChange={handleChange}
@@ -189,6 +191,8 @@ export default function Page() {
                 onChange={handleChange}
                 name="stock"
                 value={form.stock}
+                min="0"
+                onWheel={(event) => event.currentTarget.blur()}
               />
               {errors.stock && <p className="text-red-700 font-medium text-xs">{errors.stock}</p>}
             </div>
