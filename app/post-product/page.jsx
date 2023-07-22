@@ -45,8 +45,6 @@ export default function Page() {
       authImage: data?.data?.user.image,
       userId: data?.data?.user.id,
     });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.data?.user]);
 
   const categories = useSelector((state) => state.valores.categories);
