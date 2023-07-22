@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import ApplyButton from "../buttons/ApplyButton";
 
 const CardPublication = (props) => {
   const { id, image, user, price, title, userImage, category } = props;
@@ -19,7 +19,7 @@ const CardPublication = (props) => {
         />
       </div>
       <div className="px-5 justify-start items-center gap-5 flex">
-        <Link className="w-[32rem]"href={`/detail/${id}`}>
+        <Link className="w-[32rem]" href={`/detail/${id}`}>
           <h1 className="font-semibold">{title}</h1>
         </Link>
         <h1 className="w-40">{category.name}</h1>
@@ -47,6 +47,7 @@ const CardPublication = (props) => {
           Pendiente
         </option>
       </select>
+      <ApplyButton />
     </div>
   );
 };
