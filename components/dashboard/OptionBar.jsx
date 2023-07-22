@@ -24,7 +24,7 @@ const OptionPublicationBar = (params) => {
         <Image width={50} src={release} alt="release" />
         Publicaciones
       </button>
-      {session?.user.role == "USER" ? null : (
+      {/* {session?.user.role == "USER" ? null : ( */}
         <button
           className={`px-3 py-2 ${
             activeOption === "user"
@@ -35,7 +35,7 @@ const OptionPublicationBar = (params) => {
           <Image width={50} src={people} alt="people" />
           Usuarios
         </button>
-      )}
+      {/* )} */}
       <button
         className={`px-3 py-4 ${
           activeOption === "metrics"
