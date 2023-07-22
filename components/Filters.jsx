@@ -1,7 +1,3 @@
-"use client";
-import { price } from "../store/slice";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
 import CategoryFilter from "./Filters/CategoryFilter";
 import ProvinceFilter from "./Filters/ProvinceFilter";
 import PriceFilter from "./Filters/PriceFilter";

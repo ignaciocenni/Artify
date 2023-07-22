@@ -12,7 +12,7 @@ const getUser = async (id) => {
   return user;
 };
 
-const updateUser = async (id, name, email, password, lastName, image, aboutMe, wallet, cbu, alias, socials, status) => {
+const updateUser = async (id, name, email, password, lastName, image, aboutMe, wallet, cbu, alias, socials, status, rol) => {
   // Validates:
   // Name and lastName
   const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s']+$/;
@@ -58,6 +58,7 @@ const updateUser = async (id, name, email, password, lastName, image, aboutMe, w
       alias: alias,
       socials: socials,
       status: status,
+      rol: rol,
     },
   });
 

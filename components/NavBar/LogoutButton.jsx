@@ -3,15 +3,46 @@ import Image from "next/image";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
+import Swal from "sweetalert2";
 
 const ButtonSession = () => {
-  const router = useRouter();
   const { data: session } = useSession();
-  const handler = async () => {
-    if(localStorage){
-      localStorage.removeItem("products")
-    }
-    const res = await signOut().then(() => (res ? router.back() : ""));
+  const handler = () => {
+    Swal.fire({
+      icon: "warning",
+      title: "Seguro que deseas cerrar sesión?",
+      showDenyButton: true,
+      confirmButtonText: "Si",
+      denyButtonText: `No`,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        if (localStorage) {
+          localStorage.removeItem("products");
+        }
+        signOut();
+        let timerInterval;
+        Swal.fire({
+          title: "Cerrando sesión",
+          timer: 4000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            const b = Swal.getHtmlContainer().querySelector("b");
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft();
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log("I was closed by the timer");
+          }
+        });
+      } else if (result.isDenied) return "";
+    });
   };
 
   if (session && session.user) {
