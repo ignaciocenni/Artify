@@ -1,9 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import ApplyButton from "../buttons/ApplyButton";
+import { useState } from "react";
 
 const CardPublication = (props) => {
-  const { id, image, user, price, title, userImage, category } = props;
+  const { id, image, user, price, title, userImage, category, status } = props;
+
+  const [statusChange, setStatusChange] = useState("default");
+
+  const handleChange = (event) => {
+    setStatusChange(event.target.value)
+  };
+
   return (
     <div className="px-4 py-3 rounded-lg shadow-md justify-start items-center gap-3 inline-flex mx-4">
       <div className="relative h-10 w-10">
@@ -34,20 +42,26 @@ const CardPublication = (props) => {
           />
           <div className="w-32 text-base font-light">{user}</div>
         </div>
+        <h1 className="w-20 font-semibold">{status}</h1>
       </div>
 
-      <select className="px-3 py-2 bg-[var(--primary)] border border-black border-opacity-25 justify-center items-center gap-2 flex font-medium rounded-xl cursor-pointer">
-        <option className="rounded-xl cursor-pointer" value="active">
+      <select
+        onChange={handleChange}
+        className="px-3 py-2 bg-[var(--primary)] border border-black border-opacity-25 justify-center items-center gap-2 flex font-medium rounded-xl cursor-pointer">
+        <option className="rounded-xl cursor-pointer" value="default">
+          Cambiar Estado
+        </option>
+        <option className="rounded-xl cursor-pointer" value="ACTIVE">
           Activa
         </option>
-        <option className="rounded-xl cursor-pointer" value="inactive">
+        <option className="rounded-xl cursor-pointer" value="INACTIVE">
           Inactiva
         </option>
-        <option className="rounded-xl cursor-pointer" value="pending">
+        <option className="rounded-xl cursor-pointer" value="PENDING">
           Pendiente
         </option>
       </select>
-      <ApplyButton />
+      {statusChange !== "default" ? <ApplyButton id={id} value={statusChange} /> : null}
     </div>
   );
 };
