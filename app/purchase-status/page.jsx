@@ -13,6 +13,7 @@ import { sendContactForm } from "../../components/lib/api";
 export default function PurchaseStatusComponent() {
   const dispatch = useDispatch();
   const data = useSession();
+  const base_url = process.env.BASE_URL;
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
   const sendEmail = async () => {
@@ -36,42 +37,41 @@ export default function PurchaseStatusComponent() {
       id: product.id,
       stock: product.stock - product.quantity,
     }));
-
+    
     if (status === "approved") {
-      updatedStockProducts.forEach((product) => {
+      updatedStockProducts.forEach(async (product) => {
         const url = `/api/products/${product.id}`;
         const data = { stock: product.stock };
-
-        axios
-          .put(url, data)
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
+        
+        await axios
+        .put(url, data)
+        .then((response) => {
+          console.log("put exitoso",response);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
       });
-      
-      productsLS.forEach((product) => {
+      productsLS.forEach(async (product) => {
         const url = `/api/sales`;
-        const data = {
+        const content = {
           productId: product.id,
           sellerId: product.sellerId,
           totalPrice: product.unit_price * product.quantity,
           customerId: customer,
           productQuantity: product.quantity,
         };
-
-        axios
-          .post(url, data)
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
+        
+        await axios
+        .post(url, content)
+        .then((response) => {
+          console.log("post exitoso", response);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
       });
-
+      
       if (localStorage) {
         localStorage.removeItem("products");
         dispatch(multiplied([]));
@@ -82,7 +82,7 @@ export default function PurchaseStatusComponent() {
     }
 
   }, [data?.data?.user.email, data?.data?.user.name]);
-
+  
   return (
     <div className="bg-[var(--primary)]">
       <div className="h-[8vh] p-5">
