@@ -23,6 +23,9 @@ const CardUser = (params) => {
 
       <select className="px-3 py-2 bg-[var(--primary)] border border-black border-opacity-25 justify-center items-center gap-3 flex font-medium rounded-xl cursor-pointer">
         <option className="rounded-xl cursor-pointer" value="USER">
+          DEFAULT
+        </option>
+        <option className="rounded-xl cursor-pointer" value="USER">
           USER
         </option>
         <option className="rounded-xl cursor-pointer" value="ADMIN">

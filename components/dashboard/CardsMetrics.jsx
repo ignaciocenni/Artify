@@ -8,10 +8,16 @@ import backgroundColors from "./backgroundColors";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import LoadingData from "./LoadingData";
+import TotalUsers from "./TotalUsers.jsx";
 
 const getStats = async (session) => {
-  const stats = (await axios.get(`api/stats/${session && session.user.id}`))
-    .data;
+  let stats;
+  if (session.user.role === "USER") {
+    stats = (await axios.get(`api/stats/${session && session.user.id}`)).data;
+  } else {
+    stats = (await axios.get("api/stats")).data;
+  }
+
   return stats;
 };
 
@@ -33,16 +39,17 @@ const CardsMetrics = (params) => {
     fetchData();
   }, [session]);
 
-  const noDataAvailable =
-    stats &&
-    Object.values(stats.userProvinceSales).every((value) => value === 0);
+  const noDataAvailable = stats?.userProvinceSales
+    ? Object.values(stats.userProvinceSales).every((value) => value === 0)
+    : true;
 
   const provincesData = {
-    labels: stats && Object.keys(stats.userProvinceSales),
+    labels: stats?.userProvinceSales && Object.keys(stats.userProvinceSales),
     datasets: [
       {
         label: "Ventas en la provincia",
-        data: stats && Object.values(stats.userProvinceSales),
+        data:
+          stats?.userProvinceSales && Object.values(stats.userProvinceSales),
         backgroundColor: backgroundColors,
         borderWidth: 1,
       },
@@ -63,28 +70,78 @@ const CardsMetrics = (params) => {
       </div>
 
       <div className="flex flex-col justify-center w-1/2 gap-10">
-        <TotalSells total={stats ? `$${stats.totalSales}` : <LoadingData />} />
+        {session && session.user.role === "USER" ? (
+          <>
+            <TotalSells
+              total={
+                stats && stats.totalSales ? (
+                  `$${stats.totalSales}`
+                ) : (
+                  <LoadingData />
+                )
+              }
+            />
+          </>
+        ) : (
+          <>
+            <TotalUsers
+              total={
+                stats && stats.totalUsers ? stats.totalUsers : <LoadingData />
+              }
+            />
+          </>
+        )}
 
         <div className="bg-white justify-center items-center rounded-3xl h-full px-28 py-14 shadow-md shadow-zinc-400 ">
           <h1 className="font-bold mb-3">Estado de los productos</h1>
           <div className="flex justify-center gap-2">
             <ProductStatus
               quantity={
-                stats ? stats.productUserStatus.ACTIVE : <LoadingData />
+                session && session.user.role === "USER" ? (
+                  stats ? (
+                    stats.productUserStatus.ACTIVE
+                  ) : (
+                    <LoadingData />
+                  )
+                ) : stats ? (
+                  stats.productStatus.ACTIVE
+                ) : (
+                  <LoadingData />
+                )
               }
               image={visible}
               text={"Productos Activos"}
             />
             <ProductStatus
               quantity={
-                stats ? stats.productUserStatus.INACTIVE : <LoadingData />
+                session && session.user.role === "USER" ? (
+                  stats ? (
+                    stats.productUserStatus.INACTIVE
+                  ) : (
+                    <LoadingData />
+                  )
+                ) : stats ? (
+                  stats.productStatus.INACTIVE
+                ) : (
+                  <LoadingData />
+                )
               }
               image={invisible}
               text={"Productos Inactivos"}
             />
             <ProductStatus
               quantity={
-                stats ? stats.productUserStatus.PENDING : <LoadingData />
+                session && session.user.role === "USER" ? (
+                  stats ? (
+                    stats.productUserStatus.PENDING
+                  ) : (
+                    <LoadingData />
+                  )
+                ) : stats ? (
+                  stats.productStatus.PENDING
+                ) : (
+                  <LoadingData />
+                )
               }
               image={pending}
               text={"Productos Pendientes"}

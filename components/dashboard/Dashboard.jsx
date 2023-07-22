@@ -17,34 +17,27 @@ const Dashboard = () => {
 
   const [activeOption, setActiveOption] = useState("publications");
 
-  const products = useSelector((state) => state.valores.products);
+  const allProducts = useSelector((state) => state.valores.products);
 
   const users = useSelector((state) => state.valores.users);
+  const [products, setProducts] = useState(allProducts);
 
   return (
     <div className="w-full flex-col justify-start items-start flex">
       <div className="flex flex-col w-full h-44 px-2 py-6 bg-gradient-to-l from-pink-500 via-purple-400 to-purple-900  justify-start items-start gap-5 ">
         <div className="w-full px-2 flex justify-between items-center">
           <div className="flex flex-col">
-            <h1 className="text-white font-light text-xl">
-              Bienvenido de nuevo!
-            </h1>
-            <h1 className="text-white font-semibold">
-              Dashboard • {session ? session.user.role : null}
-            </h1>
+            <h1 className="text-white font-light text-xl">Bienvenido de nuevo!</h1>
+            <h1 className="text-white font-semibold">Dashboard • {session ? session.user.role : null}</h1>
           </div>
           <Image src={logoWhite} width={180} height={180} alt="logo" />
         </div>
-        <OptionBar
-          setActiveOption={setActiveOption}
-          activeOption={activeOption}
-          session={session}
-        />
+        <OptionBar setActiveOption={setActiveOption} activeOption={activeOption} session={session} />
       </div>
       {activeOption == "publications" ? (
         <div className="flex flex-col w-full">
           <div className="px-6 pt-11 pb-2.5 justify-start items-start gap-2 inline-flex">
-            <OptionPublicationBar />
+            <OptionPublicationBar setProducts={setProducts} products={allProducts} />
           </div>
           <ColPublication />
           <CardsPublication products={products} />
