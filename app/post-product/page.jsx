@@ -40,8 +40,6 @@ export default function Page() {
       ...form,
       userId: data?.data?.user.id,
     });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.data?.user]);
 
   const categories = useSelector((state) => state.valores.categories);
