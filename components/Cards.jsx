@@ -21,9 +21,9 @@ export default  function Cards({ products }) {
           />
         )) 
       ) : response && response.length ? (
-        <NotFound />
-      ) : (
         <Loading />
+        ) : (
+        <NotFound />
       )}
     </div>
   );

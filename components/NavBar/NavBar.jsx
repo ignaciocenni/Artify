@@ -29,7 +29,7 @@ const NavBar = () => {
   return (
     <>
       {path !== "/purchase-status" && (
-        <nav className="flex justify-between items-center py-3 px-8 shadow-md ">
+        <nav className="flex justify-between items-center h-[10vh] py-3 px-8 shadow-md ">
           <div className="flex content-center items-center ">
             <Image className="pr-2 h-2/4" src="/images/logo.svg" width={65.31} height={40} alt="logo" />
 
