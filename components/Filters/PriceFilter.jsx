@@ -7,8 +7,8 @@ import { useDispatch } from "react-redux";
 export default function PriceFilter() {
   const dispatch = useDispatch();
   const [filters, setFilters] = useState({
-    max: "",
-    min: "",
+    max: Infinity,
+    min: -Infinity
   });
 
   const handlerImput = (event) => {
@@ -17,9 +17,18 @@ export default function PriceFilter() {
     setFilters({ ...filters, [property]: value });
   };
   const handleBuscar = () => {
-    const min = filters.min;
-    const max = filters.max;
+    let min = filters.min;
+    let max = filters.max;
+    if (min === '' && max === '') {
+      max = Infinity
+      min = -Infinity
+        dispatch(price([min, max]))
+    }
     dispatch(price([min, max]));
+    setFilters({
+      max: Infinity,
+      min: -Infinity
+    })
   };
 
   return (
@@ -33,6 +42,7 @@ export default function PriceFilter() {
           placeholder="Min."
           value={filters.min}
           onChange={handlerImput}
+          min = '0'
         />
         <h1 className="font-thin"> a </h1>
         <input
@@ -43,6 +53,8 @@ export default function PriceFilter() {
           placeholder="Max."
           value={filters.max}
           onChange={handlerImput}
+          min = '1'
+
         />
       </div>
       <div className="flex">
