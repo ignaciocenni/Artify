@@ -7,7 +7,6 @@ export default function CategoryFilter() {
   const products = useSelector((state) => state.valores.products);
   const categoryNames = categories.map((category) => category.name);
 
-  // Filtrar las categorías basadas en si hay algún producto con esa categoría
   const filteredCategoryNames = categoryNames.filter((cat) =>
   products.some((product) => product.category.name === cat)
 );
