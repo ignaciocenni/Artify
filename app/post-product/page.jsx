@@ -10,6 +10,7 @@ import { GET_INFO } from "../../store/slice";
 import ImageSlider from "../../components/DetailComponents/ImageSlider";
 import logo from "../../public/images/logo.svg";
 import Footer from "../../components/Footer";
+import Swal from "sweetalert2";
 
 const postProduct = async (product) => {
   try {
@@ -31,18 +32,12 @@ export default function Page() {
     image: [],
     categoryId: "",
     provinceId: "",
-    userEmail: "",
-    authName: "",
-    authImage: "",
-    userId: ""
+    userId: "",
   });
 
   useEffect(() => {
     setForm({
       ...form,
-      userEmail: data?.data?.user.email,
-      authName: data?.data?.user.name,
-      authImage: data?.data?.user.image,
       userId: data?.data?.user.id,
     });
   }, [data?.data?.user]);
@@ -59,10 +54,22 @@ export default function Page() {
     const response = await postProduct(form);
     if (response.created) {
       const { res } = response;
-      const products = (await axios.get("api/products")).data
+      const products = (await axios.get("api/products")).data;
       dispatch(GET_INFO(products));
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Publicación creada con exito",
+        showConfirmButton: true,
+      });
       router.push(`/detail/${res.id}`);
-    } else alert(response.error);
+    } else
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Algo salió mal",
+        showConfirmButton: true,
+      });
   };
 
   const handleChange = (event) => {
@@ -122,12 +129,9 @@ export default function Page() {
                 name="name"
                 value={form.name}
               />
-
             </div>
             {errors.name && <p className="text-red-700 font-medium text-xs">{errors.name}</p>}
-            <div className="flex content-center items-center py-2">
-
-            </div>
+            <div className="flex content-center items-center py-2"></div>
             <div className="flex flex-col gap-2 justify-start items-start py-2">
               <div className="flex justify-start items-center">
                 <h1 className="text-4xl font-bold">$</h1>
