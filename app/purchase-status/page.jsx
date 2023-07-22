@@ -40,7 +40,7 @@ export default function PurchaseStatusComponent() {
 
     if (status === "approved") {
       updatedStockProducts.forEach((product) => {
-        const url = `${base_url}api/products/${product.id}`;
+        const url = `${base_url}/api/products/${product.id}`;
         const data = { stock: product.stock };
 
         axios
