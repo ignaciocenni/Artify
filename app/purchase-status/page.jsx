@@ -13,7 +13,6 @@ import { sendContactForm } from "../../components/lib/api";
 export default function PurchaseStatusComponent() {
   const dispatch = useDispatch();
   const data = useSession();
-  const base_url = process.env.BASE_URL;
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
   const sendEmail = async () => {
@@ -40,7 +39,7 @@ export default function PurchaseStatusComponent() {
 
     if (status === "approved") {
       updatedStockProducts.forEach((product) => {
-        const url = `${base_url}/api/products/${product.id}`;
+        const url = `/api/products/${product.id}`;
         const data = { stock: product.stock };
 
         axios
@@ -52,8 +51,9 @@ export default function PurchaseStatusComponent() {
             console.log(error.message);
           });
       });
+      
       productsLS.forEach((product) => {
-        const url = `${base_url}api/sales`;
+        const url = `/api/sales`;
         const data = {
           productId: product.id,
           sellerId: product.sellerId,
