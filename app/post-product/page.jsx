@@ -10,6 +10,7 @@ import { GET_INFO } from "../../store/slice";
 import ImageSlider from "../../components/DetailComponents/ImageSlider";
 import logo from "../../public/images/logo.svg";
 import Footer from "../../components/Footer";
+import Swal from "sweetalert2";
 
 const postProduct = async (product) => {
   try {
@@ -57,8 +58,20 @@ export default function Page() {
       const { res } = response;
       const products = (await axios.get("api/products")).data;
       dispatch(GET_INFO(products));
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Publicación creada con exito",
+        showConfirmButton: true,
+      });
       router.push(`/detail/${res.id}`);
-    } else alert(response.error);
+    } else
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Algo salió mal",
+        showConfirmButton: true,
+      });
   };
 
   const handleChange = (event) => {
