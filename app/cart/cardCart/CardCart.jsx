@@ -76,7 +76,6 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
       dispatch(localProducts(updatedArrProduct));
     }
   };
-
   return (
     <div className="flex py-4 mb-4 border-b-gray-00 border-b-2 gap-2 justify-between ">
       <ButtonCloseCart id={id} setProducts={setProducts} setUrl={setUrl} />
@@ -86,7 +85,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
             <Image
               id={id}
               alt={`Imagen de producto ${name}`}
-              src={image}
+              src={image[0]}
               fill
               sizes="100vw"
               style={{

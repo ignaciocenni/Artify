@@ -1,18 +1,26 @@
 "use client";
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-import Link from 'next/link';
 
+import Image from 'next/image';
+import Link from 'next/link';
+import MercadoLogo from "../../public/images/logo_mp_nuevo.png"
 
 
 export default function MpButton({url}) {
-    initMercadoPago(process.env.NEXT_PUBLIC_KEY);
+    
   return (
     <div>
       <Link href={`${url}`}>
       <button
-        className='className="hover:bg-[var(--background-sec)] hover:text-black w-full text-white bg-[var(--detail)] py-5 justify-center rounded-lg flex content-center items-center gap-5 shadow-xl'
+        className="bg-sky-500 hover:bg-sky-600 w-full h-12 text-white py-5 justify-center rounded-md flex content-center items-center gap-5 shadow-xl"
        type='button'>
-        Comprar ahora !
+        <Image 
+        alt="logo-mp"
+        width={40}
+        height={30} 
+        src={MercadoLogo}
+        >
+        </Image>
+        Paga con Mercado Pago
       </button>
       </Link>
     </div>
