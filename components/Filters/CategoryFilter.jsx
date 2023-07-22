@@ -3,8 +3,15 @@ import { category } from "../../store/slice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function CategoryFilter() {
-  let categories = useSelector((state) => state.valores.categories);
-  let CategoryNames = categories.map((category) => category.name);
+  const categories = useSelector((state) => state.valores.categories);
+  const products = useSelector((state) => state.valores.products);
+  const categoryNames = categories.map((category) => category.name);
+
+  // Filtrar las categorías basadas en si hay algún producto con esa categoría
+  const filteredCategoryNames = categoryNames.filter((cat) =>
+  products.some((product) => product.category.name === cat)
+);
+
 
   const [stateCategory, setStateCategory] = useState({
     stateCategory: "Categorias",
@@ -14,16 +21,13 @@ export default function CategoryFilter() {
 
   useEffect(() => {
     function handleDocumentClick(event) {
-      // Si el clic se hizo fuera del dropdown, se cierra
       if (!event.target.closest(".dropdown-container")) {
         setIsDropdownOpen(false);
       }
     }
 
-    // Agregar el evento para escuchar los clics en todo el documento
     document.addEventListener("click", handleDocumentClick);
 
-    // Eliminar el evento cuando el componente se desmonte para evitar fugas de memoria
     return () => {
       document.removeEventListener("click", handleDocumentClick);
     };
@@ -37,7 +41,7 @@ export default function CategoryFilter() {
       ? setStateCategory({ stateCategory: "Categorias" })
       : setStateCategory({ stateCategory: cat });
     dispatch(category(cat));
-    setIsDropdownOpen(false); // Cerrar el dropdown al seleccionar una categoría
+    setIsDropdownOpen(false);
   };
 
   return (
@@ -78,7 +82,7 @@ export default function CategoryFilter() {
                 Todas
               </li>
 
-              {CategoryNames.map((cat) => (
+              {filteredCategoryNames.map((cat) => (
                 <li
                   key={cat}
                   className="px-4 py-1 hover:bg-grey-100 border-b cursor-pointer"
