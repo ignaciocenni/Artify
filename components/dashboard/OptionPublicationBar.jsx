@@ -1,47 +1,49 @@
 "use client";
 import React, { useState } from "react";
 
-const OptionPublicationBar = () => {
-  const [activeOption, setActiveOption] = useState("all");
+const OptionPublicationBar = ({ setProducts, products }) => {
+  const [activeOption, setActiveOption] = useState("ALL");
 
   const handleOptionClick = (category) => {
     setActiveOption(category);
+    if (category === "ACTIVE") setProducts(products.filter((product) => product.status === "ACTIVE"));
+    if (category === "INACTIVE") setProducts(products.filter((product) => product.status === "INACTIVE"));
+    if (category === "PENDING") setProducts(products.filter((product) => product.status === "PENDING"));
+    if (category === "ALL") setProducts(products);
   };
 
   return (
     <div className="flex justify-center items-center gap-2 py-1 ">
       <button
         className={`px-3 py-2 ${
-          activeOption === "all" ? "bg-[var(--extra)] text-white shadow-xl" : ""
+          activeOption === "ALL" ? "bg-[var(--extra)] text-white shadow-xl" : ""
         } rounded-lg  border border-zinc-500 border-opacity-25 justify-center items-center gap-2.5 flex text-xl font-medium`}
-        onClick={() => handleOptionClick("all")}>
+        onClick={() => handleOptionClick("ALL")}
+      >
         Todas
       </button>
       <button
         className={`px-3 py-2 ${
-          activeOption === "pending"
-            ? "bg-[var(--extra)] text-white shadow-xl"
-            : ""
+          activeOption === "PENDING" ? "bg-[var(--extra)] text-white shadow-xl" : ""
         } rounded-lg  border border-zinc-500 border-opacity-25 justify-center items-center gap-2.5 flex text-xl font-medium`}
-        onClick={() => handleOptionClick("pending")}>
+        onClick={() => handleOptionClick("PENDING")}
+      >
         Pendientes
       </button>
       <button
         className={`px-3 py-2 ${
-          activeOption === "posted"
-            ? "bg-[var(--extra)] text-white shadow-xl"
-            : ""
+          activeOption === "ACTIVE" ? "bg-[var(--extra)] text-white shadow-xl" : ""
         } rounded-lg  border border-zinc-500 border-opacity-25 justify-center items-center gap-2.5 flex text-xl font-medium`}
-        onClick={() => handleOptionClick("posted")}>
+        onClick={() => handleOptionClick("ACTIVE")}
+      >
         Publicadas
       </button>
       <button
         className={`px-3 py-2 ${
-          activeOption === "hidden"
-            ? "bg-[var(--extra)] text-white shadow-xl"
-            : ""
+          activeOption === "INACTIVE" ? "bg-[var(--extra)] text-white shadow-xl" : ""
         } rounded-lg border border-zinc-500 border-opacity-25 justify-center items-center gap-2.5 flex text-xl font-medium`}
-        onClick={() => handleOptionClick("hidden")}>
+        onClick={() => handleOptionClick("INACTIVE")}
+      >
         Ocultos
       </button>
     </div>
