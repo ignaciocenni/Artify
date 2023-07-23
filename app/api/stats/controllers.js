@@ -1,3 +1,5 @@
+import prisma from "../db/client";
+
 const getTotalProducts = async () => {
   const products = await prisma.product.findMany();
 
