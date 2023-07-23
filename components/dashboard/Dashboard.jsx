@@ -1,8 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logoWhite from "../../public/images/logoWhite.svg";
 import Image from "next/image";
 import OptionPublicationBar from "./OptionPublicationBar";
+import OptionUserBar from "./OptionUserBar.jsx";
 import OptionBar from "./OptionBar";
 import CardsPublication from "./CardsPublication";
 import ColPublication from "./ColPublication";
@@ -19,9 +20,17 @@ const Dashboard = () => {
 
   const allProducts = useSelector((state) => state.valores.products);
 
-  const users = useSelector((state) => state.valores.users);
+  const allUsers = useSelector((state) => state.valores.users);
+
   const [products, setProducts] = useState(allProducts);
 
+  const [users, setUsers] = useState(allUsers);
+
+
+  useEffect(()=>{
+
+    
+  },[products])
   return (
     <div className="w-full flex-col justify-start items-start flex">
       <div className="flex flex-col w-full h-44 px-2 py-6 bg-gradient-to-l from-pink-500 via-purple-400 to-purple-900  justify-start items-start gap-5 ">
@@ -43,7 +52,10 @@ const Dashboard = () => {
           <CardsPublication products={products} />
         </div>
       ) : activeOption == "user" ? (
-        <div className="w-full flex flex-col pt-11">
+        <div className="w-full flex flex-col ">
+           <div className="px-6 pt-11 pb-2.5 justify-start items-start gap-2 inline-flex">
+            <OptionUserBar setUsers={setUsers} users={allUsers} />
+          </div>
           <ColUsers />
           <CardsUser users={users} />
         </div>
