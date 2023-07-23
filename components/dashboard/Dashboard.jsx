@@ -18,10 +18,6 @@ const Dashboard = () => {
 
   const [activeOption, setActiveOption] = useState("publications");
 
-  const allUsers = useSelector((state) => state.valores.users);
-
-  const [users, setUsers] = useState(allUsers);
-
   return (
     <div className="w-full flex-col justify-start items-start flex">
       <div className="flex flex-col w-full h-44 px-2 py-6 bg-gradient-to-l from-pink-500 via-purple-400 to-purple-900  justify-start items-start gap-5 ">
