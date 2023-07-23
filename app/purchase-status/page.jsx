@@ -5,15 +5,17 @@ import ApprovedStatus from "../../components/PurchaseStatus/ApprovedStatus";
 import RejectedStatus from "../../components/PurchaseStatus/RejectedStatus";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { multiplied } from "../../store/slice";
 import { sendContactForm } from "../../components/lib/api";
 
+
 export default function PurchaseStatusComponent() {
+  
+  const [products, setProducts] = useState([])
   const dispatch = useDispatch();
   const data = useSession();
-  const base_url = process.env.BASE_URL;
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
   const sendEmail = async () => {
@@ -27,16 +29,40 @@ export default function PurchaseStatusComponent() {
       await sendContactForm(form);
     }
   };
-  
-  let customer = "";
+  const peticionPost = (products) => {
+    let customer = ""
+    if(data?.data?.user.id !== undefined){
+      customer = data?.data?.user.id
+    }
+    products.forEach(async (product) => {
+      const url = `/api/sales`;
+      const content = {
+        productId: product.id,
+        sellerId: product.sellerId,
+        totalPrice: product.unit_price * product.quantity,
+        customerId: customer,
+        productQuantity: product.quantity,
+      };
+      
+      await axios
+      .post(url, content)
+      .then((response) => {
+        console.log("post exitoso", response);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    });
+  }
   useEffect(() => {
     sendEmail()
-    customer = data?.data?.user.id;
     const productsLS = JSON.parse(localStorage.getItem("products")) || [];
+    setProducts(productsLS)
     const updatedStockProducts = productsLS.map((product) => ({
       id: product.id,
       stock: product.stock - product.quantity,
     }));
+    peticionPost(products)
     
     if (status === "approved") {
       updatedStockProducts.forEach(async (product) => {
@@ -47,25 +73,6 @@ export default function PurchaseStatusComponent() {
         .put(url, data)
         .then((response) => {
           console.log("put exitoso",response);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-      });
-      productsLS.forEach(async (product) => {
-        const url = `/api/sales`;
-        const content = {
-          productId: product.id,
-          sellerId: product.sellerId,
-          totalPrice: product.unit_price * product.quantity,
-          customerId: customer,
-          productQuantity: product.quantity,
-        };
-        
-        await axios
-        .post(url, content)
-        .then((response) => {
-          console.log("post exitoso", response);
         })
         .catch((error) => {
           console.log(error.message);
