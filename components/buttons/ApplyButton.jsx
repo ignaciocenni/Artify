@@ -7,7 +7,7 @@ import { GET_INFO, getUsers, setDashUsers, setDashProducts } from "../../store/s
 import Swal from "sweetalert2";
 import { savingChanges } from "./alerts";
 
-function ApplyButton({ id, value, prev }) {
+function ApplyButton({ id, value }) {
   const dispatch = useDispatch();
   const userRol = useSelector((state) => state.valores.userRol);
   const productStatus = useSelector((state) => state.valores.productStatus);
@@ -39,7 +39,7 @@ function ApplyButton({ id, value, prev }) {
   return (
     <>
       <button
-        onClick={() => handleApply(id, value, prev)}
+        onClick={() => handleApply(id, value)}
         className="w-24 h-10 px-3 py-1 bg-purple-600 rounded-full shadow-md shadow-zinc-400 justify-center items-center gap-1 flex"
       >
         <h1 className="text-white text-xs">Aplicar</h1>
