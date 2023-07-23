@@ -1,8 +1,10 @@
 "use client";
+
 import CardUser from "./CardUser";
+import { useSelector } from "react-redux";
 
-
-const CardsUser = ({users}) => {
+const CardsUser = () => {
+  const users = useSelector((state) => state.valores.dashUsers);
   return (
     <>
       {users.length ? (

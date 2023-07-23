@@ -4,7 +4,11 @@ export const Slice = createSlice({
   name: "valores",
   initialState: {
     products: [],
+    dashProducts: [],
+    productStatus: "",
     users: [],
+    userRol: "",
+    dashUsers: [],
     copyProducts: [],
     provinces: [],
     provincesFilter: [],
@@ -16,6 +20,7 @@ export const Slice = createSlice({
   reducers: {
     GET_INFO: (state, action) => {
       state.products = action.payload;
+      state.dashProducts = action.payload;
       state.copyProducts = action.payload;
       state.provincesFilter = action.payload;
     },
@@ -27,6 +32,7 @@ export const Slice = createSlice({
     },
     getUsers: (state, action) => {
       state.users = action.payload;
+      state.dashUsers = action.payload;
     },
     price: (state, { type, payload }) => {
       const price = [...state.products];
@@ -35,6 +41,15 @@ export const Slice = createSlice({
       });
       state.products = find;
       state.provincesFilter = find;
+    },
+    setDashProducts: (state, { type, payload }) => {
+      console.log(payload);
+      state.dashProducts = payload[0];
+      state.productStatus = payload[1];
+    },
+    setDashUsers: (state, { type, payload }) => {
+      state.dashUsers = payload[0];
+      state.userRol = payload[1];
     },
     countrie: (state, action) => {
       const countrie = [...state.copyProducts];
@@ -83,5 +98,7 @@ export const {
   totalPrices,
   setPath,
   localProducts,
-  getUsers
+  getUsers,
+  setDashProducts,
+  setDashUsers,
 } = Slice.actions;

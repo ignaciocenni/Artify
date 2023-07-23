@@ -1,14 +1,16 @@
 "use client";
 import React, { useState } from "react";
-
-const OptionPublicationBar = ({ setUsers, users}) => {
+import { useSelector, useDispatch } from "react-redux";
+import { setDashUsers } from "../../store/slice";
+const OptionPublicationBar = () => {
   const [activeOption, setActiveOption] = useState("ALL");
-
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.valores.users);
   const handleOptionClick = (category) => {
     setActiveOption(category);
-    if (category === "ADMIN") setUsers(users.filter((user) => user.rol === "ADMIN"));
-    if (category === "USER") setUsers(users.filter((user) => user.rol === "USER"));
-    if (category === "ALL") setUsers(users);
+    if (category === "ADMIN") dispatch(setDashUsers([users.filter((user) => user.rol === "ADMIN"), "ADMIN"]));
+    if (category === "USER") dispatch(setDashUsers([users.filter((user) => user.rol === "USER"), "USER"]));
+    if (category === "ALL") dispatch(setDashUsers([users, "ALL"]));
   };
 
   return (
@@ -37,7 +39,6 @@ const OptionPublicationBar = ({ setUsers, users}) => {
       >
         Administradores
       </button>
-     
     </div>
   );
 };

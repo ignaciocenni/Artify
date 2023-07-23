@@ -1,15 +1,29 @@
 "use client";
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setDashProducts } from "../../store/slice";
 
-const OptionPublicationBar = ({ setProducts, products }) => {
+const OptionPublicationBar = () => {
   const [activeOption, setActiveOption] = useState("ALL");
-
+  const products = useSelector((state) => state.valores.copyProducts);
+  const dispatch = useDispatch();
   const handleOptionClick = (category) => {
     setActiveOption(category);
-    if (category === "ACTIVE") setProducts(products.filter((product) => product.status === "ACTIVE"));
-    if (category === "INACTIVE") setProducts(products.filter((product) => product.status === "INACTIVE"));
-    if (category === "PENDING") setProducts(products.filter((product) => product.status === "PENDING"));
-    if (category === "ALL") setProducts(products);
+    if (category === "ACTIVE") {
+      let filtered = products.filter((product) => product.status === "ACTIVE");
+      dispatch(setDashProducts([filtered, "ACTIVE"]));
+    }
+    if (category === "INACTIVE") {
+      let filtered = products.filter((product) => product.status === "INACTIVE");
+      dispatch(setDashProducts([filtered, "INACTIVE"]));
+    }
+    if (category === "PENDING") {
+      let filtered = products.filter((product) => product.status === "PENDING");
+      dispatch(setDashProducts([filtered, "PENDING"]));
+    }
+    if (category === "ALL") {
+      dispatch(setDashProducts([products, "ALL"]));
+    }
   };
 
   return (
