@@ -24,6 +24,14 @@ const OptionPublicationBar = ({ setProducts, products }) => {
       </button>
       <button
         className={`px-3 py-2 ${
+          activeOption === "ACTIVE" ? "bg-[var(--extra)] text-white shadow-xl" : ""
+        } rounded-lg  border border-zinc-500 border-opacity-25 justify-center items-center gap-2.5 flex text-xl font-medium`}
+        onClick={() => handleOptionClick("ACTIVE")}
+      >
+        Activas
+      </button>
+      <button
+        className={`px-3 py-2 ${
           activeOption === "PENDING" ? "bg-[var(--extra)] text-white shadow-xl" : ""
         } rounded-lg  border border-zinc-500 border-opacity-25 justify-center items-center gap-2.5 flex text-xl font-medium`}
         onClick={() => handleOptionClick("PENDING")}
@@ -32,19 +40,11 @@ const OptionPublicationBar = ({ setProducts, products }) => {
       </button>
       <button
         className={`px-3 py-2 ${
-          activeOption === "ACTIVE" ? "bg-[var(--extra)] text-white shadow-xl" : ""
-        } rounded-lg  border border-zinc-500 border-opacity-25 justify-center items-center gap-2.5 flex text-xl font-medium`}
-        onClick={() => handleOptionClick("ACTIVE")}
-      >
-        Publicadas
-      </button>
-      <button
-        className={`px-3 py-2 ${
           activeOption === "INACTIVE" ? "bg-[var(--extra)] text-white shadow-xl" : ""
         } rounded-lg border border-zinc-500 border-opacity-25 justify-center items-center gap-2.5 flex text-xl font-medium`}
         onClick={() => handleOptionClick("INACTIVE")}
       >
-        Ocultos
+        Inactivas
       </button>
     </div>
   );

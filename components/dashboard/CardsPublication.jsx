@@ -1,7 +1,8 @@
 "use client";
 import CardPublication from "./CardPublication";
 
-const CardsPublication = ({ products }) => {
+const CardsPublication = ({products }) => {
+ 
   return (
     <>
       {products.length ? (
@@ -15,10 +16,13 @@ const CardsPublication = ({ products }) => {
             title={product.name}
             category={product.category}
             userImage={product.user.image}
+            status={product.status}
           />
         ))
       ) : (
-        <div>No hay informacion!</div>
+        <div className="px-4 py-3 rounded-lg shadow-md items-center gap-3 inline-flex mx-3 font-medium">
+          No hay publicaciones
+        </div>
       )}
     </>
   );
