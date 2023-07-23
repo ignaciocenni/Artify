@@ -10,7 +10,6 @@ import ColPublication from "./ColPublication";
 import ColUsers from "./ColUsers";
 import CardsUser from "./CardsUser";
 import CardsMetrics from "./CardsMetrics";
-import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 
 const Dashboard = () => {

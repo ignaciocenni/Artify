@@ -5,15 +5,15 @@ import lupa from "../public/images/search-white.svg";
 
 export default function SearchBar() {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.valores.copyProducts);
+  const products = useSelector((state) => state.valores.activeProducts);
+  const copy = useSelector((state) => state.valores.copyProducts);
   const handlerValue = (event) => {
     if (event.target.value === "") {
-      dispatch(search([...products]));
+      dispatch(search(copy));
+    } else {
+      const res = products.filter((product) => product.name.toLowerCase().includes(event.target.value.toLowerCase()));
+      dispatch(search(res));
     }
-    const res = products.filter((product) =>
-      product.name.toLowerCase().includes(event.target.value.toLowerCase())
-    );
-    dispatch(search(res));
   };
 
   return (

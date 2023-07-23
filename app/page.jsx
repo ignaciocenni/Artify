@@ -1,11 +1,10 @@
 "use client";
 import Filters from "../components/Filters";
 import Cards from "../components/Cards";
-import {useSelector} from "react-redux";
-
+import { useSelector } from "react-redux";
 
 export default function Home() {
-  const products = useSelector((state) => state.valores.products);
+  let products = useSelector((state) => state.valores.activeProducts);
 
   return (
     <>
