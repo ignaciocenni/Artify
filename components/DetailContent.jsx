@@ -12,15 +12,25 @@ import SellerInfo from "./DetailComponents/SellerInfo";
 import BuyNowButton from "./buttons/BuyAndDetail";
 import Footer from "./Footer";
 import AddDeductButtons from "../components/buttons/AddDeductButtons";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
-const DetailContent = ({ data }) => {
+const DetailContent =  ({ data, sale }) => {
+ const [toggle,setToggle]= useState(false)
+  
   const { reviews, image, category, price, name, user,userId, description, id ,socials} = data;
-
+  
   const amount = reviews?.reduce((accumulator, currentValue) => accumulator + currentValue.rating, 0);
   const averange = amount / reviews?.length;
-
-
-
+  const sales = sale.sales
+  const { data: session } = useSession();
+  const buyerId = session?.user?.id
+ 
+  useEffect(() =>{
+    const saleWithBuyerId = sales?.some((sales) => sales.customerId === buyerId);
+    setToggle(saleWithBuyerId)
+  },[buyerId,sales])
+  
   return (
     <>
       <div className="flex flex-col justify-center items-center content-center gap-14">
@@ -64,7 +74,7 @@ const DetailContent = ({ data }) => {
           </div>
         </div>
         <div className="flex flex-col items-start gap-3 px-5 w-[1000px]">
-          <AddReviews id={id} />
+          { toggle && <AddReviews id={id} setToggle={setToggle} />}
           <LatestReviews reviews={reviews} />
         </div>
       </div>

@@ -1,5 +1,6 @@
 import DetailContent from "../../../components/DetailContent";
 import { getProduct } from "../../api/products/[id]/controllers";
+import { getSale } from "../../api/sales/[id]/controllers";
 
 const dataFetching = async (id) => {
   let product = getProduct(id);
@@ -10,10 +11,11 @@ const dataFetching = async (id) => {
 const Detail = async ({ params }) => {
   const id = params.id;
   const data = await dataFetching(id);
+  const sales = await getSale(id);
 
   return (
     <>
-      <DetailContent data={data} />
+      <DetailContent data={data} sale={sales} />
     </>
   );
 };
