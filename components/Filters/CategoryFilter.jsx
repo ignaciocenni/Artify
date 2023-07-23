@@ -4,13 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function CategoryFilter() {
   const categories = useSelector((state) => state.valores.categories);
-  const products = useSelector((state) => state.valores.products);
+  const products = useSelector((state) => state.valores.activeProducts);
   const categoryNames = categories.map((category) => category.name);
 
-  const filteredCategoryNames = categoryNames.filter((cat) =>
-  products.some((product) => product.category.name === cat)
-);
-
+  const filteredCategoryNames = categoryNames.filter((cat) => products.some((product) => product.category.name === cat));
 
   const [stateCategory, setStateCategory] = useState({
     stateCategory: "Categorias",
@@ -36,9 +33,7 @@ export default function CategoryFilter() {
     setIsDropdownOpen(!isDropdownOpen);
   };
   const handleCategorySelect = (cat) => {
-    cat === "allCategories"
-      ? setStateCategory({ stateCategory: "Categorias" })
-      : setStateCategory({ stateCategory: cat });
+    cat === "allCategories" ? setStateCategory({ stateCategory: "Categorias" }) : setStateCategory({ stateCategory: cat });
     dispatch(category(cat));
     setIsDropdownOpen(false);
   };
@@ -59,19 +54,10 @@ export default function CategoryFilter() {
               viewBox="0 0 24 24"
               xmlns="https://file.rendit.io/n/0aXnru4DI8UuSC0ZygNs.svg"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </span>
-          <div
-            className={`absolute ${
-              isDropdownOpen ? "block" : "hidden"
-            } top-full min-w-full w-max bg-white shadow-md mt-1 rounded z-10`}
-          >
+          <div className={`absolute ${isDropdownOpen ? "block" : "hidden"} top-full min-w-full w-max bg-white shadow-md mt-1 rounded z-10`}>
             <ul className="text-left border rounded">
               <li
                 value="allCategories"
@@ -82,11 +68,7 @@ export default function CategoryFilter() {
               </li>
 
               {filteredCategoryNames.map((cat) => (
-                <li
-                  key={cat}
-                  className="px-4 py-1 hover:bg-grey-100 border-b cursor-pointer"
-                  onClick={() => handleCategorySelect(cat)}
-                >
+                <li key={cat} className="px-4 py-1 hover:bg-grey-100 border-b cursor-pointer" onClick={() => handleCategorySelect(cat)}>
                   {cat}
                 </li>
               ))}

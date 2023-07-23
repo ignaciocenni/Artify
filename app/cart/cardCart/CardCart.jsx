@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { localProducts } from "../../../store/slice";
 import numberConverte from "./numberConverte";
 import ButtonCloseCart from "../../../components/buttons/ButtonCloseCart";
 
-export default function CardCart({ id, image, name, price, stock, quantity, setProducts , setUrl}) {
+export default function CardCart({ id, image, name, price, stock, quantity, setProducts, setUrl }) {
   const dispatch = useDispatch();
 
   const updateCart = (updatedArrProduct) => {
@@ -40,7 +40,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
   }, [quantity]);
 
   const handleAddProduct = () => {
-    setUrl("")
+    setUrl("");
     if (currentQuantity + 1 <= stock) {
       const updatedArrProduct = JSON.parse(localStorage.getItem("products")) || [];
 
@@ -58,7 +58,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
     }
   };
   const handleDeductProduct = () => {
-    setUrl("")
+    setUrl("");
     if (currentQuantity > 1) {
       const updatedArrProduct = JSON.parse(localStorage.getItem("products")) || [];
 

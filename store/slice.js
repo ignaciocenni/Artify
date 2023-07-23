@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const Slice = createSlice({
   name: "valores",
   initialState: {
+    activeProducts: [],
     products: [],
     dashProducts: [],
     productStatus: "",
@@ -21,8 +22,9 @@ export const Slice = createSlice({
     GET_INFO: (state, action) => {
       state.products = action.payload;
       state.dashProducts = action.payload;
-      state.copyProducts = action.payload;
       state.provincesFilter = action.payload;
+      state.copyProducts = action.payload.filter((product) => product.status === "ACTIVE");
+      state.activeProducts = action.payload.filter((product) => product.status === "ACTIVE");
     },
     GET_PROVINCES: (state, action) => {
       state.provinces = action.payload;
@@ -35,11 +37,11 @@ export const Slice = createSlice({
       state.dashUsers = action.payload;
     },
     price: (state, { type, payload }) => {
-      const price = [...state.products];
+      const price = [...state.activeProducts];
       const find = price.filter(function (num) {
         return num.price >= payload[0] && num.price <= payload[1];
       });
-      state.products = find;
+      state.activeProducts = find;
       state.provincesFilter = find;
     },
     setDashProducts: (state, { type, payload }) => {
@@ -55,16 +57,16 @@ export const Slice = createSlice({
       const countrie = [...state.copyProducts];
       const find = countrie.filter((element) => element.province.name === action.payload);
 
-      state.products = action.payload === "Todas" ? countrie : find;
+      state.activeProducts = action.payload === "Todas" ? countrie : find;
       state.provincesFilter = action.payload === "Todas" ? countrie : find;
     },
     category: (state, action) => {
       const category = [...state.provincesFilter];
-      state.products =
+      state.activeProducts =
         action.payload === "allCategories" ? category : category.filter((value) => value.category.name.includes(action.payload));
     },
     search: (state, { type, payload }) => {
-      state.products = payload;
+      state.activeProducts = payload;
     },
     multiplied: (state, { type, payload }) => {
       state.cartQuantity = payload?.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
