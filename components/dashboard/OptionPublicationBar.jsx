@@ -5,7 +5,7 @@ import { setDashProducts } from "../../store/slice";
 
 const OptionPublicationBar = () => {
   const [activeOption, setActiveOption] = useState("ALL");
-  const products = useSelector((state) => state.valores.copyProducts);
+  const products = useSelector((state) => state.valores.products);
   const dispatch = useDispatch();
   const handleOptionClick = (category) => {
     setActiveOption(category);
