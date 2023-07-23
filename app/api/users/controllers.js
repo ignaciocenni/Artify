@@ -19,8 +19,7 @@ const getAllUsers = async () => {
   return response;
 };
 
-
-const addUser = async (name, password, lastName, email) => {
+const addUser = async (name, password, lastName, email, image) => {
   if (!name || !email || !password || !lastName) throw new Error("Missing arguments");
 
   // Validates:
@@ -45,6 +44,7 @@ const addUser = async (name, password, lastName, email) => {
       lastName,
       email,
       password,
+      image: image,
     },
   });
   return newUser;

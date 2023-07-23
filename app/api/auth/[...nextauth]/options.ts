@@ -67,6 +67,7 @@ export const options = {
             const dbUser = await prisma.user.create({
               data: {
                 name: name,
+                image: user.image,
                 lastName: lastName,
                 email: user.email,
                 password: "thirdPartyAuth",
