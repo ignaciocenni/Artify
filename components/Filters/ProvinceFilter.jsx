@@ -42,7 +42,7 @@ export default function ProvinceFilter() {
 );
 
   return (
-    <div ref={dropdownRef}>
+    <div className="w-full" ref={dropdownRef}>
       <button
         className=" bg-[var(--primary)] py-1 relative flex justify-center items-center focus:outline-none  text-gray-600 rounded-xl focus:ring ring-gray-200 group"
         onClick={handleDropdownToggle}
