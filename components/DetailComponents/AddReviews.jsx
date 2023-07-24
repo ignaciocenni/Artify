@@ -14,8 +14,6 @@ function AddReviews({ id, setToggle,buyerId }) {
 
   const postReviews = async (id, form) => {
     const url = `http://localhost:3000/api/products/${id}/reviews`;
-    console.log('esa acaaa '+form)
-    console.log('esa acaaa '+id)
     try {
       const response = await axios.post(url, form);
       console.log("funciono");
