@@ -1,8 +1,20 @@
 "use client";
 import CardPublication from "./CardPublication";
 import { useSelector } from "react-redux";
+import { useSession } from "next-auth/react";
 const CardsPublication = () => {
-  const products = useSelector((state) => state.valores.dashProducts);
+  const { data: session } = useSession();
+  const allproducts = useSelector((state) => state.valores.dashProducts);
+
+  let products;
+  if (session && session.user.role === "USER") {
+    products = allproducts.filter(
+      (product) => product.user.email === session.user.email
+    );
+  } else {
+    products = allproducts;
+  }
+
   return (
     <>
       {products.length ? (
@@ -20,7 +32,9 @@ const CardsPublication = () => {
           />
         ))
       ) : (
-        <div className="px-4 py-3 rounded-lg shadow-md items-center gap-3 inline-flex mx-3 font-medium">No hay publicaciones</div>
+        <div className="px-4 py-3 rounded-lg shadow-md items-center gap-3 inline-flex mx-3 font-medium">
+          No hay publicaciones
+        </div>
       )}
     </>
   );
