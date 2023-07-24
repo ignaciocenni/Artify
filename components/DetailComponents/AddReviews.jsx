@@ -2,18 +2,20 @@ import { useState } from "react";
 import DropDownRating from "./DropDownRating";
 import axios from "axios";
 
-function AddReviews({ id, setToggle }) {
+function AddReviews({ id, setToggle,buyerId }) {
   const [form, setForm] = useState({
     comment: "",
     rating: 0,
     productId: id,
+    userId:buyerId
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isDropDownVisible, setIsDropDownVisible] = useState(true);
 
   const postReviews = async (id, form) => {
     const url = `http://localhost:3000/api/products/${id}/reviews`;
-
+    console.log('esa acaaa '+form)
+    console.log('esa acaaa '+id)
     try {
       const response = await axios.post(url, form);
       console.log("funciono");

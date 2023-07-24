@@ -29,6 +29,10 @@ const DetailContent =  ({ data, sale }) => {
   useEffect(() =>{
     const saleWithBuyerId = sales?.some((sales) => sales.customerId === buyerId);
     setToggle(saleWithBuyerId)
+    if(reviews?.some((review) => review.userId === buyerId)){
+      setToggle(false)
+    }
+    
   },[buyerId,sales,reviews])
   
   return (
@@ -74,7 +78,7 @@ const DetailContent =  ({ data, sale }) => {
           </div>
         </div>
         <div className="flex flex-col items-start gap-3 px-5 w-[1000px]">
-          { toggle && <AddReviews id={id} setToggle={setToggle} />}
+          { toggle && <AddReviews id={id} setToggle={setToggle} buyerId={buyerId} />}
           <LatestReviews reviews={reviews} />
         </div>
       </div>
