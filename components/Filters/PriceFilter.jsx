@@ -32,8 +32,8 @@ export default function PriceFilter() {
   };
 
   return (
-    <div>
-      <div className="flex flex-row justify-between relative items-center gap-4">
+    <div className="w-full">
+      <div className="flex flex-row justify-between relative items-center gap-4 w-full">
         <input
           className="p-2 w-24 rounded-xl bg-[var(--primary)]"
           name="min"

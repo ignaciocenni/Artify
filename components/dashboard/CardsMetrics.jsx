@@ -39,23 +39,48 @@ const CardsMetrics = (params) => {
     fetchData();
   }, [session]);
 
-  const noDataAvailable = stats?.userProvinceSales
-    ? Object.values(stats.userProvinceSales).every((value) => value === 0)
-    : true;
 
-  const provincesData = {
-    labels: stats?.userProvinceSales && Object.keys(stats.userProvinceSales),
+  let noDataAvailable
+  let provincesData
+  
+  if (session.user.role === "USER") {
+    
+    noDataAvailable = stats?.userProvinceSales
+      ? Object.values(stats.userProvinceSales).every((value) => value === 0)
+      : true;
+  
+    provincesData = {
+      labels: stats?.userProvinceSales && Object.keys(stats.userProvinceSales),
+      datasets: [
+        {
+          label: "Ventas en la provincia",
+          data:
+            stats?.userProvinceSales && Object.values(stats.userProvinceSales),
+          backgroundColor: backgroundColors,
+          borderWidth: 1,
+        },
+      ],
+    };
+  } else {
+    noDataAvailable = stats?.provinceSales
+    ? Object.values(stats.provinceSales).every((value) => value === 0)
+    : false;
+
+  provincesData = {
+    labels: stats?.provinceSales && Object.keys(stats.provinceSales),
     datasets: [
       {
         label: "Ventas en la provincia",
         data:
-          stats?.userProvinceSales && Object.values(stats.userProvinceSales),
+          stats?.provinceSales && Object.values(stats.provinceSales),
         backgroundColor: backgroundColors,
         borderWidth: 1,
       },
     ],
   };
-
+    
+  }
+  
   return (
     <div className="flex w-full bg-[var(--primary)] h-full p-20 gap-20">
       <div className="flex flex-col w-1/2 bg-white rounded-3xl shadow-md shadow-zinc-400 p-20 justify-center items-center">
@@ -73,13 +98,7 @@ const CardsMetrics = (params) => {
         {session && session.user.role === "USER" ? (
           <>
             <TotalSells
-              total={
-                stats && stats.totalSales ? (
-                  `$${stats.totalSales}`
-                ) : (
-                  <LoadingData />
-                )
-              }
+              total={stats ? `$${stats.totalSales}` : <LoadingData />}
             />
           </>
         ) : (
