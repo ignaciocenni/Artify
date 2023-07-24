@@ -3,50 +3,47 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import UploadButton from "../../../components/buttons/UploadButton";
 import axios from "axios";
-import validate from "./validate";
-import Image from "next/image";
+import Swal from "sweetalert2";
 
-const getUser = async (id) => {
+/* const getUser = async (id) => {
   const { data } = await axios.get(`/api/users/${id}`);
-  console.log("Get user: " + data);
+
   return data;
-};
+}; */
 
 const putProfile = async (profileData) => {
   try {
-    const res = (await axios.put("api/users", profileData)).data;
+    const res = (await axios.put("/api/users", profileData)).data;
     return { created: true, res };
   } catch (error) {
     return { created: false, error: error.message };
   }
 };
 
-export default function Page({ params }) {
-  const { userId } = params;
-  const [userData, setUserData] = useState(null);
+export default function Page() {
+  const data = useSession();
 
-  useEffect(() => {
+  const [form, setForm] = useState({
+    aboutMe: "",
+    password: "",
+    image: "",
+    /* wallet: "", */
+    cbu: "",
+    alias: "",
+    socials: [],
+    userId: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  /* useEffect(() => {
     const fetchData = async () => {
       const user = await getUser(userId);
       setUserData(user);
     };
 
     fetchData();
-  }, [userId]);
-
-  const data = useSession();
-  console.log(data);
-
-  const [form, setForm] = useState({
-    aboutMe: "",
-    password: "",
-    image: "",
-    wallet: "",
-    cbu: "",
-    alias: "",
-    socials: [],
-    userId: "",
-  });
+  }, [userId]); */
 
   useEffect(() => {
     setForm({
@@ -55,11 +52,25 @@ export default function Page({ params }) {
     });
   }, [data?.data?.user]);
 
-  const [errors, setErrors] = useState({});
-
   const onSubmit = async (event) => {
     event.preventDefault();
     const response = await putProfile(form);
+    console.log("Respuesta del form: " + response);
+    if (response.created) {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Perfil Editado",
+        showConfirmButton: true,
+      });
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Algo salió mal",
+        showConfirmButton: true,
+      });
+    }
   };
 
   const handleChange = (event) => {
@@ -72,13 +83,19 @@ export default function Page({ params }) {
       parsedValue = parseFloat(value);
     } else if (name === "cbu") {
       parsedValue = parseInt(value, 10);
+    } else if (name.startsWith("socials_")) {
+      const index = parseInt(name.split("_")[1], 10);
+      const updatedSocials = [...form.socials];
+      updatedSocials[index] = parsedValue;
+      setErrors({ ...errors, socials: null });
+      setForm({ ...form, socials: updatedSocials });
+      return;
     }
 
-    setErrors(validate({ ...form, [name]: parsedValue }));
     setForm({ ...form, [name]: parsedValue });
   };
 
-  const isFormValid = Object.keys(errors).length > 0;
+  const isFormValid = Object.values(form).some((value) => value === "");
 
   return (
     <>
@@ -87,15 +104,6 @@ export default function Page({ params }) {
           <form onSubmit={onSubmit}>
             <h1 className="font-semibold text-3xl py-5">Editar Perfil</h1>
 
-            <div className="flex justify-center flex-col items-center p-5 m-5">
-              <Image
-                src={userData.image}
-                width={144}
-                height={144}
-                alt="me"
-                style={{ borderRadius: "100%" }}
-              />
-            </div>
             <div className="flex justify-center items-center gap-2 py-2">
               <input
                 className="flex gap-3 font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline"
@@ -136,7 +144,7 @@ export default function Page({ params }) {
                 placeholder="Alias."
                 onChange={handleChange}
                 name="alias"
-                value={form.password}
+                value={form.alias}
               />
             </div>
             {errors.alias && (
@@ -144,15 +152,15 @@ export default function Page({ params }) {
             )}
 
             <div className="flex flex-col items-start mb-4 gap-2">
-              <h1 className="font-medium text-xl">Acerca de ti.</h1>
               <textarea
                 className="  shadow appearance-none border rounded w-full h-[10em] py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"
                 rows={2}
                 id="aboutMe"
                 type="text"
+                placeholder="Acerca de ti"
                 onChange={handleChange}
-                name="description"
-                value={form.description}
+                name="aboutMe"
+                value={form.aboutMe}
               />
               {errors.aboutMe && (
                 <p className="text-red-700 font-medium text-xs">
@@ -161,7 +169,60 @@ export default function Page({ params }) {
               )}
             </div>
 
-            <h3 className="font-semibold text-2xl py-5">Redes Sociales</h3>
+            <h3 className="font-semibold text-1xl py-5">Redes Sociales</h3>
+
+            <div className="flex justify-center items-center gap-2 py-2">
+              <input
+                className="flex gap-3 font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+                id="socials"
+                type="text"
+                placeholder="Instagram."
+                onChange={handleChange}
+                name="socials_0"
+                value={form.socials[0]}
+              />
+            </div>
+            {errors.socials && (
+              <p className="text-red-700 font-medium text-xs">
+                {errors.socials}
+              </p>
+            )}
+
+            <div className="flex justify-center items-center gap-2 py-2">
+              <input
+                className="flex gap-3 font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+                id="socials"
+                type="text"
+                placeholder="Facebook"
+                onChange={handleChange}
+                name="socials_1"
+                value={form.socials[1]}
+              />
+            </div>
+            {errors.socials && (
+              <p className="text-red-700 font-medium text-xs">
+                {errors.socials}
+              </p>
+            )}
+
+            <div className="flex justify-center items-center gap-2 py-2">
+              <input
+                className="flex gap-3 font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+                id="socials"
+                type="text"
+                placeholder="Whatsapp"
+                onChange={handleChange}
+                name="socials_2"
+                value={form.socials[2]}
+              />
+            </div>
+            {errors.socials && (
+              <p className="text-red-700 font-medium text-xs">
+                {errors.socials}
+              </p>
+            )}
+
+            <h3 className="font-semibold text-1xl py-5">Foto de Perfil</h3>
 
             <UploadButton setForm={setForm} form={form} />
 
