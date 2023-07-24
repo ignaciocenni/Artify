@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 
 const DetailContent =  ({ data, sale }) => {
  const [toggle,setToggle]= useState(false)
+ const [latestReview, setLatestReview] = useState(null);
   
   const { reviews, image, category, price, name, user,userId, description, id ,socials} = data;
   
@@ -33,7 +34,7 @@ const DetailContent =  ({ data, sale }) => {
       setToggle(false)
     }
     
-  },[buyerId,sales,reviews])
+  },[buyerId,sales,reviews,toggle])
   
   return (
     <>
@@ -78,9 +79,9 @@ const DetailContent =  ({ data, sale }) => {
           </div>
         </div>
         <div className="flex flex-col items-start gap-3 px-5 w-[1000px]">
-          { toggle && <AddReviews id={id} setToggle={setToggle} buyerId={buyerId} />}
-          <LatestReviews reviews={reviews} />
-        </div>
+        {toggle && <AddReviews id={id} setToggle={setToggle} setLatestReview={setLatestReview} buyerId={buyerId} />}
+        <LatestReviews reviews={reviews} latestReview={latestReview} />
+      </div>
       </div>
       <Footer />
     </>
