@@ -1,20 +1,18 @@
 import Image from "next/image";
+import image from "../public/images/search-not-found.png";
 
 export default function notFound() {
   return (
     <>
-      <div className="flex-col justify-center items-center">
-        <Image
-          src="https://img.freepik.com/vector-gratis/ilustracion-error-404-pagina-web-dibujos-animados_33099-705.jpg?w=740&t=st=1689872044~exp=1689872644~hmac=3bb74ea805fa8f5991247d8fcfbcbee35da6f8363812df3733395fff5763a66c"
-          //src="https://i.pinimg.com/originals/ea/b7/e1/eab7e1120c9dd628d3bb39a20a94927d.gif"
-          width={400}
-          height={400}
-          style={{ maxWidth: "400%" }}
-        />
+      <div className="w-full h-[80vh] flex flex-col  justify-center items-center" >
+        <Image src={image} width={200} height={200} alt="notfound" />
 
-        <p className="font-semibold text-slate-900 text-2xl whitespace-nowrap">
-          No hay productos que cumplan con el filtrado actual.
-        </p>
+        <h1 className="font-semibold text-2xl mt-6">
+          No hay publicaciones que coincidan con tu búsqueda
+        </h1>
+        <h1 className="text-zinc-600">
+        Haz una nueva búsqueda. Comprueba la ortografía, cambia los filtros o busca un término menos específico.
+        </h1>
       </div>
     </>
   );

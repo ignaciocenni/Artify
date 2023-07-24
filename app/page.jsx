@@ -9,10 +9,12 @@ export default function Home() {
   return (
     <>
       <div className="flex py-2 px-5">
-        <div className="flex flex-col gap-6 w-[25%] ">
+        <div className="flex flex-col gap-6 w-1/4 ">
           <Filters />
         </div>
-        <Cards products={products} />
+        <div className="flex justify-center items-center w-1/2">
+          <Cards products={products} />
+        </div>
       </div>
     </>
   );

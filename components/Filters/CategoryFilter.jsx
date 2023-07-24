@@ -39,7 +39,7 @@ export default function CategoryFilter() {
   };
 
   return (
-    <div className="gap-1 items-start dropdown-container">
+    <div className="w-full gap-1 items-start dropdown-container">
       <div>
         <button
           className="bg-[var(--primary)] py-1 relative flex justify-center items-center focus:outline-none  text-gray-600 rounded-xl focus:ring ring-gray-200"
