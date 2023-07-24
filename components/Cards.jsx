@@ -1,7 +1,7 @@
 "use client";
 import Card from "./Card";
 import Loading from "../app/loading";
-import NotFound from "../app/notFound";
+import NotFound from "./notFound";
 
 export default function Cards({ products }) {
   const response = products;
