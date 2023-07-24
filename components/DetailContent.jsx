@@ -29,7 +29,7 @@ const DetailContent =  ({ data, sale }) => {
   useEffect(() =>{
     const saleWithBuyerId = sales?.some((sales) => sales.customerId === buyerId);
     setToggle(saleWithBuyerId)
-  },[buyerId,sales])
+  },[buyerId,sales,reviews])
   
   return (
     <>
