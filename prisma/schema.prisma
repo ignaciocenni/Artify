@@ -26,6 +26,7 @@ model User {
   status        Status    @default(ACTIVE)
   sellerSales   Sales[]   @relation("SellerSales")
   customerSales Sales[]   @relation("CustomerSales")
+  reviews       Review[]
 }
 
 model Province {
@@ -61,6 +62,8 @@ model Review {
   createdAt DateTime @default(now())
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
 }
 
 model Category {
