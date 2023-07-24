@@ -41,7 +41,6 @@ const postAllUsers = async () => {
         email: "alice@example.com",
         password: "alice123",
         aboutMe: "I love photography and traveling.",
-        provinceId: 1,
       },
       {
         name: "Bob",
@@ -49,7 +48,6 @@ const postAllUsers = async () => {
         email: "bob@example.com",
         password: "bob123",
         aboutMe: "I'm a software engineer and a coffee lover.",
-        provinceId: 1,
       },
       {
         name: "Emily",
@@ -57,7 +55,6 @@ const postAllUsers = async () => {
         email: "emily@example.com",
         password: "emily123",
         aboutMe: "I enjoy painting and playing musical instruments.",
-        provinceId: 3,
       },
 
       {
@@ -66,7 +63,6 @@ const postAllUsers = async () => {
         email: "john@example.com",
         password: "john123",
         aboutMe: "I'm a fitness enthusiast and a dog lover.",
-        provinceId: 1,
       },
       {
         name: "Sarah",
@@ -74,7 +70,6 @@ const postAllUsers = async () => {
         email: "sarah@example.com",
         password: "sarah123",
         aboutMe: "I'm passionate about cooking and trying new recipes.",
-        provinceId: 1,
       },
       {
         name: "Michael",
@@ -82,7 +77,6 @@ const postAllUsers = async () => {
         email: "michael@example.com",
         password: "michael123",
         aboutMe: "I enjoy playing basketball and watching movies.",
-        provinceId: 3,
       },
       {
         name: "Emma",
@@ -90,7 +84,6 @@ const postAllUsers = async () => {
         email: "emma@example.com",
         password: "emma123",
         aboutMe: "I love reading books and spending time in nature.",
-        provinceId: 6,
       },
       {
         name: "Daniel",
@@ -98,7 +91,6 @@ const postAllUsers = async () => {
         email: "daniel@example.com",
         password: "daniel123",
         aboutMe: "I'm a technology enthusiast and a gamer.",
-        provinceId: 1,
       },
       {
         name: "Olivia",
@@ -106,7 +98,6 @@ const postAllUsers = async () => {
         email: "olivia@example.com",
         password: "olivia123",
         aboutMe: "I enjoy hiking and exploring new places.",
-        provinceId: 3,
       },
       {
         name: "James",
@@ -114,7 +105,6 @@ const postAllUsers = async () => {
         email: "james@example.com",
         password: "james123",
         aboutMe: "I'm a music lover and play the guitar.",
-        provinceId: 8,
       },
     ],
     skipDuplicates: true,
@@ -131,7 +121,7 @@ const postAllProducts = async () => {
         price: 49.99,
         stock: 10,
         image: "https://example.com/ceramica_talavera.jpg",
-        userId: "131e9055-dd1c-4eef-ad52-554393925e83",
+        userId: "ce3cf01b-e1da-4760-84c4-89a52e228099",
         categoryId: 1,
       },
       {
@@ -140,7 +130,7 @@ const postAllProducts = async () => {
         price: 19.99,
         stock: 8,
         image: "https://example.com/mandala_tejido.jpg",
-        userId: "131e9055-dd1c-4eef-ad52-554393925e83",
+        userId: "2003b65c-1692-492a-bfa8-7eb213d9fc28",
         categoryId: 2,
       },
       {
@@ -167,8 +157,34 @@ const postAllProducts = async () => {
 };
 
 const postAllCategory = async () => {
-  const allCategories = await prisma.Product.createMany({
-    data: [],
+  const allCategories = await prisma.Category.createMany({
+    data: [
+      {
+        id: 1,
+        name: "Hogar",
+        description: "Artículos esenciales para tu hogar con un toque especial",
+      },
+      {
+        id: 2,
+        name: "Accesorios",
+        description: "Diseños únicos y sutiles para complementar tu estilo",
+      },
+      {
+        id: 3,
+        name: "Madera",
+        description: "Detalles únicos diseñados a base de madera, fusionando arte y funcionalidad",
+      },
+      {
+        id: 4,
+        name: "Reciclado",
+        description: "Productos originales con materiales reciclados, una opción sostenible y con estilo",
+      },
+      {
+        id: 5,
+        name: "Natural",
+        description: "Productos únicos y bellos inspirados en la maravilla de la naturaleza",
+      },
+    ],
   });
 };
 
