@@ -1,11 +1,13 @@
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { localProducts } from "../../../store/slice";
+import { Flip, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Image from "next/image";
 import numberConverte from "./numberConverte";
 import ButtonCloseCart from "../../../components/buttons/ButtonCloseCart";
 
-export default function CardCart({
+const CardCart = ({
   id,
   image,
   name,
@@ -14,7 +16,7 @@ export default function CardCart({
   quantity,
   setProducts,
   setUrl,
-}) {
+}) => {
   const dispatch = useDispatch();
 
   const updateCart = (updatedArrProduct) => {
@@ -40,11 +42,13 @@ export default function CardCart({
 
   const [arrProduct, setArrProduct] = useState([]);
   const [currentQuantity, setCurrentQuantity] = useState(1);
+  const [notificationStatus, setNotificationStatus] = useState({});
 
   useEffect(() => {
     const { arrProduct, currentQuantity } = initializeState();
     setArrProduct(arrProduct);
     setCurrentQuantity(currentQuantity);
+    setNotificationStatus({}); // Resetear los estados de notificación al cambiar el producto
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quantity]);
 
@@ -64,9 +68,34 @@ export default function CardCart({
 
       localStorage.setItem("products", JSON.stringify(updatedArrProduct));
       updateCart(updatedArrProduct);
-      dispatch(localProducts(updatedArrProduct));
+
+      if (!notificationStatus[id]?.isProductAdded) {
+        const notify = () =>
+          toast.success("El producto"+` "${name}" `+"fue añadido al carrito!", {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Flip,
+          });
+        notify();
+        setNotificationStatus((prevStatus) => ({
+          ...prevStatus,
+          [id]: { isProductAdded: true, isProductRemoved: false },
+        }));
+      }
+
+      setNotificationStatus((prevStatus) => ({
+        ...prevStatus,
+        [id]: { ...prevStatus[id], isProductRemoved: false },
+      }));
     }
   };
+
   const handleDeductProduct = () => {
     setUrl("");
     if (currentQuantity > 1) {
@@ -84,9 +113,33 @@ export default function CardCart({
       localStorage.setItem("products", JSON.stringify(updatedArrProduct));
       updateCart(updatedArrProduct);
 
-      dispatch(localProducts(updatedArrProduct));
+      if (!notificationStatus[id]?.isProductRemoved) {
+        const notify = () =>
+          toast.error("El producto"+` "${name}" `+"fue eliminado del carrito!", {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Flip,
+          });
+        notify();
+        setNotificationStatus((prevStatus) => ({
+          ...prevStatus,
+          [id]: { ...prevStatus[id], isProductRemoved: true, isProductAdded: false },
+        }));
+      }
+
+      setNotificationStatus((prevStatus) => ({
+        ...prevStatus,
+        [id]: { ...prevStatus[id], isProductAdded: false },
+      }));
     }
   };
+
   return (
     <div className="flex py-4 mb-4 border-b-2 gap-2 justify-between w-full ">
       <div className="flex gap-2">
@@ -107,7 +160,8 @@ export default function CardCart({
           <div className="w-max flex items-center text-white ">
             <button
               className="px-3  py-1 rounded-l-lg hover:bg-[var(--background-sec)] hover:text-black text-white font-bold bg-[var(--detail)]  flex content-center items-center shadow-xl transition-colors "
-              onClick={handleDeductProduct}>
+              onClick={handleDeductProduct}
+            >
               -
             </button>
 
@@ -116,7 +170,8 @@ export default function CardCart({
             </div>
             <button
               className="px-3  py-1 rounded-r-lg hover:bg-[var(--background-sec)] hover:text-black text-white font-bold bg-[var(--detail)]  flex content-center items-center shadow-xl transition-colors "
-              onClick={handleAddProduct}>
+              onClick={handleAddProduct}
+            >
               +
             </button>
           </div>
@@ -139,6 +194,9 @@ export default function CardCart({
           ${numberConverte(currentQuantity * price)}
         </h1>
       </div>
+      <ToastContainer />
     </div>
   );
-}
+};
+
+export default CardCart;
