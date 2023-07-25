@@ -1,9 +1,18 @@
 "use client";
 
 import CardUser from "./CardUser";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { getUsers } from "../../store/slice";
+import axios from "axios";
+import { useEffect } from "react";
 const CardsUser = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getAllUsers = () => {
+      return axios.get("/api/users");
+    };
+    const AllUsers = getAllUsers().then(() => (users.data ? dispatch(getUsers(AllUsers.data)) : ""));
+  }, [dispatch]);
   const users = useSelector((state) => state.valores.dashUsers);
   return (
     <>

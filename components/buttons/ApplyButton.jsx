@@ -33,8 +33,8 @@ function ApplyButton({ id, value, prevStatus, prevRol }) {
       } else {
         await axios.put(`api/products/${id}`, { status: `${value}` });
         const newProducts = await axios.get("api/products");
-
         dispatch(GET_INFO(newProducts.data));
+
         if (productStatus === "ACTIVE")
           dispatch(setDashProducts([newProducts.data.filter((product) => product.status === "ACTIVE"), "ACTIVE"]));
         if (productStatus === "INACTIVE")
