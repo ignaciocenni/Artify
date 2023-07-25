@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import Image from "next/image";
 import FormML from "../../../../../components/SettingsComponents/MlForm";
 import SubmitButton from "../../../../../components/buttons/SubmitButton";
+import FormName from "../[id]/FormNombre"
 
 /* const getUser = async (id) => {
   const { data } = await axios.get(`/api/users/${id}`);
@@ -15,7 +16,7 @@ import SubmitButton from "../../../../../components/buttons/SubmitButton";
 }; */
 const putProfile = async (form) => {
   /*  try { */
-  const res = (await axios.put(`/api/users/${form.userId}`, form)).data; pero
+  const res = (await axios.put(`/api/users/${form.userId}`, form)).data;
   return { created: true, res };
   /*   } catch (error) {
       return { created: false, error: error.message };
@@ -26,7 +27,7 @@ const putProfile = async (form) => {
 export default function EditProfile({ params }) {
   const { id } = params
   const data = useSession();
-
+  
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -39,8 +40,9 @@ export default function EditProfile({ params }) {
     alias: "",
     socials: "",
     status: "",
-    rol: ""
+    rol: "",
   });
+  console.log(userData);
 
   const [form, setForm] = useState({
     name: "",
@@ -49,13 +51,7 @@ export default function EditProfile({ params }) {
     lastName: "",
     image: "",
     aboutMe: "",
-    social: [
-      {
-        web: "",
-        instagram: "",
-        facebook: ""
-      }
-    ]
+
 
 
 
@@ -65,7 +61,7 @@ export default function EditProfile({ params }) {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    const prueba = async () => {
+    const allDataUser = async () => {
       const result = (await axios.get(`/api/users/${id}`)).data;
       setUserData({
         name: result.name,
@@ -83,7 +79,7 @@ export default function EditProfile({ params }) {
 
       });
     }
-    prueba()
+    allDataUser()
     setForm({
       ...form,
       userId: data?.data?.user.id,
@@ -93,7 +89,6 @@ export default function EditProfile({ params }) {
   const onSubmit = async (event) => {
 
     const response = await putProfile(form);
-    console.log(form);
     console.log("Respuesta del form: " + response);
     if (response.created) {
       Swal.fire({
@@ -149,43 +144,11 @@ export default function EditProfile({ params }) {
             alt="imagen de usuario"
           />
         </div>
+        <FormName
+          userData={userData}
+          userId={form.userId}
+        />
 
-        <form className=" w-[37em]" onSubmit={onSubmit}>
-          <label htmlFor="Nombre">Nombre</label>
-          <input
-            className=" bg-[var(--primary)] flex text-xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
-            id="price"
-            type="text"
-            placeholder={userData.name}
-            onChange={handleChange}
-            name="name"
-            value={form.name}
-          />
-          <label htmlFor="Nombre">Apellidos</label>
-          <input
-            className=" bg-[var(--primary)] flex text-xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
-            id="price"
-            type="text"
-            placeholder={userData.lastName}
-            onChange={handleChange}
-            name="lastName"
-            value={form.lastName}
-          />
-          <label htmlFor="Nombre">Acerca de mi</label>
-          <textarea
-            className=" bg-[var(--primary)]  shadow appearance-none border rounded w-full h-[10em] py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none mb-3"
-            id="description"
-            type="text"
-            onChange={handleChange}
-            name="aboutMe"
-            value={form.aboutMe}
-            placeholder={userData.aboutMe}
-          />
-          <div className="w-[37em]">
-            <SubmitButton
-              label="Guardar" />
-          </div>
-        </form>
         <br />
         <hr />
         <h1 className="font-semibold text-lg text mb-4">Cambiar contraseña</h1>
