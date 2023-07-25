@@ -14,7 +14,6 @@ import Footer from "./Footer";
 import AddDeductButtons from "../components/buttons/AddDeductButtons";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import StarRating from './DetailComponents/starsComponent/StarRating'
 
 const DetailContent =  ({ data, sale }) => {
  const [toggle,setToggle]= useState(false)
@@ -57,7 +56,6 @@ const DetailContent =  ({ data, sale }) => {
 
             <div className="flex gap-3 font-bold text-3xl">
               {name}
-              <Heart />
             </div>
 
             <div className="flex content-center items-center gap-1">

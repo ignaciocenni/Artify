@@ -4,7 +4,14 @@ import formatDate from "./formatDate"
 function LatestReviews({ reviews, latestReview }) {
   return (
     <div>
-      <h1 className="font-semibold">Últimos realizados</h1>
+      <h1 className="font-semibold">Experiencias de los clientes con el producto</h1>
+      {!reviews.length &&
+       <div  className='flex flex-col  pb-4 border-zinc-300 border-b-2'>
+       <div className="flex justify-between items-center mb-3">
+       </div>
+       <p className="text-zinc-700">Por el momento, no hay opiniones sobre este producto</p>
+     </div>
+      }
       {reviews?.map((rev) => (
         <div key={rev.id} className='flex flex-col  pb-4 border-zinc-300 border-b-2'>
           <div className="flex justify-between items-center mb-3">
