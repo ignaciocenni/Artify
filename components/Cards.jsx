@@ -1,14 +1,14 @@
 "use client";
 import Card from "./Card";
-import NotFounded from "./NotFounded";
-import LoadingPublication from "./loadings/LoadingPublication";
+import Loading from "../app/loading";
+import NotFound from "./notFound";
 
 export default function Cards({ products }) {
   const response = products;
   return (
     <>
       {response && response.length > 0 ? (
-        <div className="grid grid-cols-4 px-2 items-center justify-center">
+        <div className="grid grid-cols-5 px-2 gap-4 w-full items-center justify-center">
           {response.map((resp) => (
             <Card
               key={resp.id}
@@ -23,9 +23,9 @@ export default function Cards({ products }) {
           ))}
         </div>
       ) : response && response.length == 0 ? (
-        <NotFounded />
+        <NotFound />
       ) : (
-        <LoadingPublication />
+        <Loading />
       )}
     </>
   );
