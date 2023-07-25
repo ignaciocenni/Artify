@@ -1,22 +1,23 @@
 import { useState } from "react";
-import DropDownRating from "./DropDownRating";
+import StarRating from "./starsComponent/StarRating";
 import axios from "axios";
 
-function AddReviews({ id, setToggle,buyerId, setLatestReview }) {
+function AddReviews({ id, setToggle, buyerId, setLatestReview }) {
   const [form, setForm] = useState({
     comment: "",
     rating: 0,
     productId: id,
-    userId:buyerId
+    userId: buyerId,
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isDropDownVisible, setIsDropDownVisible] = useState(true);
+  const [filledStars, setFilledStars] = useState(0); // Estado de las estrellas llenas seleccionadas
 
   const postReviews = async (id, form) => {
     const url = `/api/products/${id}/reviews`;
     try {
       const response = await axios.post(url, form);
-      setLatestReview(form)
+      setLatestReview(form);
       return response.data;
     } catch (error) {
       throw error;
@@ -24,7 +25,7 @@ function AddReviews({ id, setToggle,buyerId, setLatestReview }) {
   };
 
   const handlerOnClick = () => {
-    setIsButtonDisabled(true); 
+    setIsButtonDisabled(true);
     postReviews(id, form)
       .then(() => {
         setIsDropDownVisible(false);
@@ -33,11 +34,11 @@ function AddReviews({ id, setToggle,buyerId, setLatestReview }) {
           comment: "",
           rating: 0,
         });
-        setToggle(false)
+        setToggle(false);
       })
       .catch((error) => {
         console.log("Error al enviar la reseña:", error);
-        setIsButtonDisabled(false); 
+        setIsButtonDisabled(false);
       });
   };
 
@@ -52,8 +53,7 @@ function AddReviews({ id, setToggle,buyerId, setLatestReview }) {
   return (
     <>
       <h1 className="font-semibold">Haz una reseña</h1>
-      {isDropDownVisible && <DropDownRating setForm={setForm} />}
-
+      <StarRating setForm={setForm} filledStars={filledStars} setFilledStars={setFilledStars} /> {/* Pasar el estado de las estrellas llenas seleccionadas */}
       <div className="flex gap-5">
         <input
           onChange={handlerChange}

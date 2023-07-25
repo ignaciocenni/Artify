@@ -56,7 +56,6 @@ const DetailContent =  ({ data, sale }) => {
 
             <div className="flex gap-3 font-bold text-3xl">
               {name}
-              <Heart />
             </div>
 
             <div className="flex content-center items-center gap-1">
