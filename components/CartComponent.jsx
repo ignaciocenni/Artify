@@ -22,7 +22,7 @@ export default function CartComponent() {
   return (
     <>
       {products.length ? (
-        <div className="flex pt-6 mx-auto w-full md:w-3/5 lg:w-2/5 xl:w-1/2 items-start justify-center gap-10 ">
+        <div className="flex pt-6 mx-auto w-full md:w-3/5 lg:w-2/3 xl:w-2/3  items-start justify-center gap-10 "> 
           <div className="flex flex-col w-full p-4 bg-[var(--primary)] rounded-2xl shadow-md shadow-gray-600">
             <h1 className="text-2xl font-medium pb-2  ">Productos</h1>
             {products.map((product) => (
