@@ -65,7 +65,7 @@ export default function SlideBarSettings() {
         </div>
 
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
-          <Link href={`/edit-profile/${data?.user?.id}`}>
+          <Link href={`/dashboard/edit-profile/${data?.user?.id}`}>
             <button class="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
               Editar Perfil
             </button>

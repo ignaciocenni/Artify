@@ -45,7 +45,6 @@ export const Slice = createSlice({
       state.provincesFilter = find;
     },
     setDashProducts: (state, { type, payload }) => {
-      console.log(payload);
       state.dashProducts = payload[0];
       state.productStatus = payload[1];
     },

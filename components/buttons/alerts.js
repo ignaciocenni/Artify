@@ -10,4 +10,9 @@ const savingChanges = {
   },
 };
 
-export { savingChanges };
+const noChanges = {
+  icon: "warning",
+  title: "No se encontraron cambios",
+};
+
+export { savingChanges, noChanges };

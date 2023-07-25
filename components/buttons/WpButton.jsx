@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-function IgButton({ socials }) {
+function WpButton({ socials }) {
   return (
     <>
       {socials ? (
@@ -8,7 +8,7 @@ function IgButton({ socials }) {
           <a href="https://www.instagram.com/">
             <Image
               alt="icono"
-              src="/images/instagramBlack.png"
+              src="/images/whatsappBlack.png"
               width={35}
               height={35}
               className="shadow-sm shadow-purple-500 rounded-3xl hover:shadow-md hover:shadow-purple-600 transition-all"
@@ -19,7 +19,7 @@ function IgButton({ socials }) {
         <button className="cursor-not-allowed">
           <Image
             alt="icono"
-            src="/images/instagramBlack.png"
+            src="/images/whatsappBlack.png"
             width={35}
             height={35}
           />
@@ -28,4 +28,4 @@ function IgButton({ socials }) {
     </>
   );
 }
-export default IgButton;
+export default WpButton;

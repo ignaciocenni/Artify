@@ -85,7 +85,9 @@ export default function SignInPage() {
           value={form.password}
           placeholder="Contraseña"
           errors={errors.password} />
-        <SubmitButton disabled={Object.values(errors).some((error) => error)} />
+        <SubmitButton 
+        disabled={Object.values(errors).some((error) => error) }
+        label="continuar" />
         <hr />
       </form>
     </div>

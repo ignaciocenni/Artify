@@ -1,18 +1,29 @@
 import Image from "next/image";
-import icono from "../../public/images/facebookicons.svg";
-import iconoGrey from "../../public/images/facebookgrey.svg";
+
 function FbButton({ socials }) {
   return (
     <>
       {socials ? (
         <a href="https://www.facebook.com/">
-          <button className="mx-2">
-            <Image alt="icono" src={icono} width={35} height={35} />
+          <button>
+            <Image
+              alt="icono"
+              src="/images/facebookBlack.png"
+              width={35}
+              height={35}
+              className="shadow-sm shadow-purple-500 rounded-3xl hover:shadow-md hover:shadow-purple-600 transition-all"
+            />
           </button>
         </a>
       ) : (
-        <button className="cursor-not-allowed mx-2">
-          <Image alt="icono" src={iconoGrey} width={35} height={35} />
+        <button className="cursor-not-allowed">
+          <Image
+            alt="icono"
+            src="/images/facebookBlack.png"
+            width={35}
+            height={35}
+            
+          />
         </button>
       )}
     </>
