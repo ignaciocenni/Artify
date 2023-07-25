@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { localProducts } from "../../store/slice";
+import { Flip, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddDeductButtons = ({ data }) => {
   const dispatch = useDispatch();
@@ -21,7 +23,9 @@ const AddDeductButtons = ({ data }) => {
 
   const initializeState = () => {
     const storedProducts = JSON.parse(localStorage.getItem("products")) || [];
-    const existingProduct = storedProducts.find((p) => p.title === product.title);
+    const existingProduct = storedProducts.find(
+      (p) => p.title === product.title
+    );
 
     if (existingProduct) {
       return {
@@ -57,13 +61,29 @@ const AddDeductButtons = ({ data }) => {
       setCurrentQuantity(existingProduct.quantity);
       localStorage.setItem("products", JSON.stringify(arrProduct));
       updateCart();
+      const notify = () => toast.success('Su producto fue añadido al carrito!', {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Flip
+        });
+      notify()
     } else {
       const updatedProduct = { ...product };
       updatedProduct.quantity = currentQuantity + 1;
       setArrProduct((prevArrProduct) => [...prevArrProduct, updatedProduct]);
-      localStorage.setItem("products", JSON.stringify([...arrProduct, updatedProduct]));
+      localStorage.setItem(
+        "products",
+        JSON.stringify([...arrProduct, updatedProduct])
+      );
       setCurrentQuantity(updatedProduct.quantity);
       updateCart();
+      
     }
   };
 
@@ -77,31 +97,46 @@ const AddDeductButtons = ({ data }) => {
         localStorage.setItem("products", JSON.stringify(arrProduct));
         updateCart();
       }
+      const notify = () => toast.error('El producto fue eliminado del carrito!', {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Flip
+        });
+      notify()
     }
   };
 
   return (
-    <div className="flex items-center w-full bg-[var(--primary)] rounded-xl justify-around">
-      <button
-        onClick={handleAddProduct}
-        className="hover:bg-[var(--background-sec)] hover:text-black  text-white bg-[var(--detail)] py-5  rounded-lg flex content-center items-center gap-5 shadow-xl"
-      >
-        <h1 className="text-xs font-extrabold px-2">Añadir producto</h1>
-      </button>
-      <div className="flex flex-col">
-        <p className="text-center">Cantidad</p>
-        <p className="text-center"> {currentQuantity}</p>
+    <div className="w-full">
+      <ToastContainer/>
+      <div className="flex items-center justify-center">
+        <div className="bg-[var(--primary)] rounded-xl p-5">
+          <div className="flex items-center gap-5">
+            <button
+              onClick={handleAddProduct}
+              className="hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)] w-12 h-12 rounded-lg flex justify-center items-center shadow-xl transition-colors duration-300"
+            >
+              <span className="text-xl font-bold">+</span>
+            </button>
+            <div className="flex flex-col items-center">
+              <p className="text-gray-500 text-sm">Cantidad</p>
+              <p className="text-center text-xl font-bold">{currentQuantity}</p>
+            </div>
+            <button
+              onClick={handleDeductProduct}
+              className="hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)] w-12 h-12 rounded-lg flex justify-center items-center shadow-xl transition-colors duration-300"
+            >
+              <span className="text-xl font-bold">-</span>
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="flex flex-col">
-        <p className="text-center w-18">Stock</p>
-        <p className="text-center w-18">{product.stock - currentQuantity}</p>
-      </div>
-      <button
-        onClick={handleDeductProduct}
-        className="hover:bg-[var(--background-sec)] hover:text-black  text-white bg-[var(--detail)] py-5  rounded-lg flex content-center items-center gap-5 shadow-xl"
-      >
-        <h1 className="text-xs font-extrabold px-2">Quitar producto</h1>
-      </button>
     </div>
   );
 };
