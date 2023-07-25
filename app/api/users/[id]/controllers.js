@@ -17,7 +17,7 @@ const updateUser = async (id, name, email, password, lastName, image, aboutMe, w
   // Name and lastName
   const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s']+$/;
 
-  if (name && lastName) {
+  /* if (name && lastName) {
     if (!nameRegex.test(name) && !nameRegex.test(lastName)) throw new Error("Enter a correct name.");
   }
 
@@ -41,7 +41,7 @@ const updateUser = async (id, name, email, password, lastName, image, aboutMe, w
   if (aboutMe) {
     if (aboutMe.length < 40) throw new Error("You have to add a description of yourself, or your work, of at least 5 characters.");
   }
-
+ */
   const user = await prisma.User.update({
     where: {
       id: id,

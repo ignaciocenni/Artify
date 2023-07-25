@@ -10,17 +10,20 @@ import Swal from "sweetalert2";
 
   return data;
 }; */
+const putProfile = async ({form}) => {
 
-const putProfile = async (profileData) => {
   try {
-    const res = (await axios.put("/api/users", profileData)).data;
+    const res = (await axios.put(`/api/users/${form.userId}`, form)).data;
     return { created: true, res };
   } catch (error) {
     return { created: false, error: error.message };
   }
 };
 
+
 export default function Page() {
+  
+
   const data = useSession();
 
   const [form, setForm] = useState({
