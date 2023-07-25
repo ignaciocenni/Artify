@@ -139,20 +139,21 @@ export default function EditProfile({ params }) {
     <section className="w-full grid h-max justify-center ">
       <div className=" pl-5 text-left  w-[37em] ">
 
-        <h1 className=" h-23 font-semibold text-3xl py-5 " >Editar Perfil</h1>
+        <h1 className=" h-23 font-semibold text-xl py-5 " >Editar Perfil</h1>
         <div className=" w-[37em] mb-3 flex justify-center items-center">
           <Image
             className=" rounded-full shadow-sm"
             src={data?.data?.user?.image}
             width={100}
             height={100}
+            alt="imagen de usuario"
           />
         </div>
 
         <form className=" w-[37em]" onSubmit={onSubmit}>
           <label htmlFor="Nombre">Nombre</label>
           <input
-            className=" bg-[var(--primary)] flex font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
+            className=" bg-[var(--primary)] flex text-xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
             id="price"
             type="text"
             placeholder={userData.name}
@@ -162,7 +163,7 @@ export default function EditProfile({ params }) {
           />
           <label htmlFor="Nombre">Apellidos</label>
           <input
-            className=" bg-[var(--primary)] flex font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
+            className=" bg-[var(--primary)] flex text-xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
             id="price"
             type="text"
             placeholder={userData.lastName}
@@ -191,7 +192,7 @@ export default function EditProfile({ params }) {
         <form className=" w-[37em]" onSubmit={onSubmit}>
           <label htmlFor="Nombre">Contraseña actual</label>
           <input
-            className="  bg-[var(--primary)]  flex  font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
+            className="  bg-[var(--primary)]  flex  font-bold text-xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
             id="password"
             type="password"
             placeholder=""
@@ -200,7 +201,7 @@ export default function EditProfile({ params }) {
           />
           <label htmlFor="Nombre">Nueva contraseña</label>
           <input
-            className=" bg-[var(--primary)]  flex  font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
+            className=" bg-[var(--primary)]  flex  font-bold text-xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
             id="newpassword"
             type="password"
             placeholder=""
@@ -210,7 +211,7 @@ export default function EditProfile({ params }) {
           />
           <label htmlFor="Nombre">Confirma la nueva contraseña</label>
           <input
-            className=" bg-[var(--primary)] mb-3  flex  font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+            className=" bg-[var(--primary)] mb-3  flex  font-bold text-xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline"
             id="reppassword"
             type="password"
             placeholder=""
@@ -228,7 +229,7 @@ export default function EditProfile({ params }) {
         <form className=" w-[37em]" onSubmit={onSubmit}>
           <label htmlFor="Nombre">Página web</label>
           <input
-            className=" bg-[var(--primary)]  flex mb-3 font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+            className=" bg-[var(--primary)]  flex mb-3 font-bold text-xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline"
             id="pagina web"
             type="url"
             placeholder=""
@@ -238,7 +239,7 @@ export default function EditProfile({ params }) {
           />
           <label htmlFor="Nombre">Instagram</label>
           <input
-            className=" bg-[var(--primary)] mb-3 flex  font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+            className=" bg-[var(--primary)] mb-3 flex  font-bold text-xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline"
             id="instagram"
             type="url"
             placeholder=""
@@ -248,7 +249,7 @@ export default function EditProfile({ params }) {
           />
           <label htmlFor="Nombre">Facebook</label>
           <input
-            className=" bg-[var(--primary)] mb-3  flex  font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+            className=" bg-[var(--primary)] mb-3  flex  font-bold shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline"
             id="facebook"
             type="url"
             placeholder=""
@@ -269,17 +270,17 @@ export default function EditProfile({ params }) {
         <br />
         <hr className="  text-black" />
         <div className=" mb-5">
-          <h1 className="text-rose-500 p-3 text-2xl">Eliminar cuenta</h1>
-          <div className=" p-3 w-[37em] border-2 border-rose-500 rounded-md grid grid-cols-3 grid-rows-4">
+          <h1 className="text-red-500 py-3 text-xl font-semibold">Eliminar cuenta</h1>
+          <div className="px-3 border-2 border-red-500 rounded-lg grid grid-cols-3 grid-rows-4">
             <div className=" row-start-2 col-span-2" >
-              <h2 className=" ">Eliminar esta cuenta</h2>
+              <h2 className="font-semibold text-sm">Eliminar esta cuenta</h2>
             </div>
             <div className=' col-span-2 row-start-3 '>
-              <h2 >Si elimina esta cuenta no podrá recuperarla</h2>
+              <h2 className="text-xs font-light text-zinc-500" >Si elimina esta cuenta no podrá recuperarla</h2>
             </div>
-            <div className=" row-start-2 col-start-3 row-span-2   grid justify-center content-center ">
-              <button className=" rounded-md w-20 h-8 text-gray-50 bg-rose-500 ">
-                Eliminar
+            <div className=" row-start-2 col-start-3 row-span-2 grid justify-center content-center ">
+              <button className="shadow-sm shadow-red-500 rounded-lg py-2 px-4 font-bold text-gray-50 bg-red-500 ">
+                Eliminar cuenta
               </button>
             </div>
           </div>
