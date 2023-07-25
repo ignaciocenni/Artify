@@ -59,7 +59,7 @@ export default function Page() {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "Publicación creada con exito",
+        title: "Publicación creada con éxito",
         showConfirmButton: true,
       });
       router.push(`/detail/${res.id}`);

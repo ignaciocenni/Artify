@@ -6,6 +6,9 @@ import { sendContactForm } from "../../components/lib/api";
 import SubmitButton from "../../components/buttons/SubmitButton";
 import InputField from "../../components/inputs/InputField";
 import postUser from "../../components/utils/postUser";
+import Swal from "sweetalert2";
+
+
 
 export default function SignInPage() {
   const [form, setForm] = useState({
@@ -31,6 +34,13 @@ export default function SignInPage() {
     if (Object.entries(form).length) {
       await postUser(form)
       router.push("/login")
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Te has registrado con éxito',
+        showConfirmButton: false,
+        timer: 2500
+      })
       await sendContactForm({ ...form, type: "welcome" });
     } else {
       setErrors(validate({ ...errors }))
@@ -87,7 +97,7 @@ export default function SignInPage() {
           errors={errors.password} />
         <SubmitButton 
         disabled={Object.values(errors).some((error) => error) }
-        label="continuar" />
+        label="Continuar" />
         <hr />
       </form>
     </div>
