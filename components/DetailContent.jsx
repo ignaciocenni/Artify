@@ -19,8 +19,12 @@ const DetailContent =  ({ data, sale }) => {
  const [toggle,setToggle]= useState(false)
  const [latestReview, setLatestReview] = useState(null);
   
-  const { reviews, image, category, price, name, user,userId, description, id ,socials} = data;
-  
+  const { reviews, image, category, price, name, user,userId ,stock ,description, id ,socials} = data;
+  const amount = reviews?.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.rating,
+    0
+  );
+  const averange = amount / reviews?.length;
   const amount = reviews?.reduce((accumulator, currentValue) => accumulator + currentValue.rating, 0);
   const averange = amount / reviews?.length;
   const sales = sale.sales
@@ -41,7 +45,13 @@ const DetailContent =  ({ data, sale }) => {
       <div className="flex flex-col justify-center items-center content-center gap-14">
         <div className="flex items-start justify-center">
           <Link href={"/"}>
-            <Image className="relative top-2 left-2" src={close} alt="close" width={50} height={50} />
+            <Image
+              className="relative top-2 left-2"
+              src={close}
+              alt="close"
+              width={50}
+              height={50}
+            />
           </Link>
 
           <ImageSlider image={image} />
@@ -54,13 +64,20 @@ const DetailContent =  ({ data, sale }) => {
               <Heart />
             </div>
 
-
             <div className="flex content-center items-center gap-1">
               <Stars averange={averange} />
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 w-full mr-7">
               <h1 className="text-4xl font-bold">${price}</h1>
+              <div className="text-center ml-20">
+                <p className="text-lg font-bold text-gray-800">
+                  Stock Disponible
+                </p>
+                <p className="text-4xl font-extrabold text-purple-800">
+                  {stock}
+                </p>
+              </div>
             </div>
 
             <div className="flex items-center gap-2">
@@ -72,7 +89,7 @@ const DetailContent =  ({ data, sale }) => {
               <p className="font-light">{description}</p>
             </div>
             <AddDeductButtons data={data} />
-            <SellerInfo user={user} userId={userId}/>
+            <SellerInfo user={user} userId={userId} />
           </div>
           <div>
             <BuyNowButton />
