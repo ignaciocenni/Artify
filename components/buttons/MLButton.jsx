@@ -4,10 +4,10 @@ import logo from "../../public/images/MercadoPago-logo.svg";
 
 const MLButton = () => {
   return (
-    <div className="flex h-16">
-      <button class="flex items-center bg-blue-500 hover:bg-blue-700 text-white text-base font-bold py-2 px-4 rounded gap-3">
+    <div className="flex h-16 w-full">
+      <button class="flex items-center bg-blue-500 hover:bg-blue-700 text-white text-base font-bold py-2 px-4 rounded-2xl gap-3">
         <Image src={logo} width={100} alt="logoML"></Image>
-        <h1>Enlazar Mercado Pago</h1>
+        <h1 className="text-sm">Enlazar Mercado Pago</h1>
       </button>
     </div>
   );

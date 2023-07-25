@@ -35,26 +35,13 @@ export default function ButtonSession() {
             <p className="px-7">Panel de Control</p>
           </Link>
         </li>
+
         <li className="px-4 py-2 hover:bg-gray-200">
-          <Link className="flex" href="/settings">
-            <Image
-              src="/images/settingsImage.svg"
-              width={20}
-              height={20}
-              alt="icon"
-            />
+          <Link
+            className="flex"
+            href={`/dashboard/edit-profile/${data?.user?.id}`}>
+            <Image src="/images/edit.svg" width={20} height={20} alt="icon" />
             <p className="px-7">Configuración</p>
-          </Link>
-        </li>
-        <li className="px-4 py-2 hover:bg-gray-200">
-          <Link className="flex" href={`/edit-profile/${data?.user?.id}`}>
-            <Image
-              src="/images/editProfile.png"
-              width={20}
-              height={20}
-              alt="icon"
-            />
-            <p className="px-7">Editar Perfil</p>
           </Link>
         </li>
       </>
