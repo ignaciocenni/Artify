@@ -12,7 +12,7 @@ const putPassword = async (profilePassword) => {
   }
 };
 
-export default function forgotenPassword() {
+export default function ForgotenPassword() {
   const [form, setForm] = useState({
     email: "",
   });
@@ -33,18 +33,9 @@ export default function forgotenPassword() {
 
   return (
     <div className=" text-center grid justify-center items-center mt-10">
-      <form
-        className="w-96 flex flex-col gap-5 items-center"
-        onSubmit={onSubmit}
-      >
+      <form className="w-96 flex flex-col gap-5 items-center" onSubmit={onSubmit}>
         <h1 className="font-semibold text-3xl mb-5">Ingrese su email.</h1>
-        <InputField
-          id="username"
-          type="text"
-          placeholder="example@gmail.com"
-          onChange={handleChange}
-          value={form.email}
-        />
+        <InputField id="username" type="text" placeholder="example@gmail.com" onChange={handleChange} value={form.email} />
 
         <button className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px] ">
           Enviar email de recuperacion.
