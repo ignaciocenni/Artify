@@ -5,7 +5,16 @@ import { localProducts } from "../../../store/slice";
 import numberConverte from "./numberConverte";
 import ButtonCloseCart from "../../../components/buttons/ButtonCloseCart";
 
-export default function CardCart({ id, image, name, price, stock, quantity, setProducts, setUrl }) {
+export default function CardCart({
+  id,
+  image,
+  name,
+  price,
+  stock,
+  quantity,
+  setProducts,
+  setUrl,
+}) {
   const dispatch = useDispatch();
 
   const updateCart = (updatedArrProduct) => {
@@ -42,7 +51,8 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
   const handleAddProduct = () => {
     setUrl("");
     if (currentQuantity + 1 <= stock) {
-      const updatedArrProduct = JSON.parse(localStorage.getItem("products")) || [];
+      const updatedArrProduct =
+        JSON.parse(localStorage.getItem("products")) || [];
 
       const updatedProduct = updatedArrProduct.find((p) => p.id === id);
       if (updatedProduct) {
@@ -60,7 +70,8 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
   const handleDeductProduct = () => {
     setUrl("");
     if (currentQuantity > 1) {
-      const updatedArrProduct = JSON.parse(localStorage.getItem("products")) || [];
+      const updatedArrProduct =
+        JSON.parse(localStorage.getItem("products")) || [];
 
       const updatedProduct = updatedArrProduct.find((p) => p.id === id);
       if (updatedProduct) {
@@ -77,8 +88,7 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
     }
   };
   return (
-    <div className="flex py-4 mb-4 border-b-gray-00 border-b-2 gap-2 justify-between ">
-      <ButtonCloseCart id={id} setProducts={setProducts} setUrl={setUrl} />
+    <div className="flex py-4 mb-4 border-b-2 gap-2 justify-between w-full ">
       <div className="flex gap-2">
         <div className="flex flex-col gap-4">
           <div className="relative h-24 w-24 mr-4">
@@ -97,16 +107,16 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
           <div className="w-max flex items-center text-white ">
             <button
               className="px-3  py-1 rounded-l-lg hover:bg-[var(--background-sec)] hover:text-black text-white font-bold bg-[var(--detail)]  flex content-center items-center shadow-xl transition-colors "
-              onClick={handleDeductProduct}
-            >
+              onClick={handleDeductProduct}>
               -
             </button>
 
-            <div className="inline-block w-max  py-1 bg-[var(--detail)] text-white px-3">{currentQuantity}</div>
+            <div className="inline-block w-max  py-1 bg-[var(--detail)] text-white px-3">
+              {currentQuantity}
+            </div>
             <button
               className="px-3  py-1 rounded-r-lg hover:bg-[var(--background-sec)] hover:text-black text-white font-bold bg-[var(--detail)]  flex content-center items-center shadow-xl transition-colors "
-              onClick={handleAddProduct}
-            >
+              onClick={handleAddProduct}>
               +
             </button>
           </div>
@@ -115,13 +125,19 @@ export default function CardCart({ id, image, name, price, stock, quantity, setP
           <p className="font-medium text-xl">{name}</p>
           <p>${price} ARS</p>
           <p>
-            {stock - currentQuantity} {stock - currentQuantity === 1 ? `unidad disponible` : `unidades disponibles`}
+            {stock - currentQuantity}{" "}
+            {stock - currentQuantity === 1
+              ? `unidad disponible`
+              : `unidades disponibles`}
           </p>
         </div>
       </div>
 
-      <div className="flex items-end">
-        <h1 className=" ml-auto text-xl font-medium">${numberConverte(currentQuantity * price)}</h1>
+      <div className="flex flex-col items-end justify-between">
+        <ButtonCloseCart id={id} setProducts={setProducts} setUrl={setUrl} />
+        <h1 className=" ml-auto text-xl font-medium">
+          ${numberConverte(currentQuantity * price)}
+        </h1>
       </div>
     </div>
   );
