@@ -1,9 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Image from "next/image";
 import Cards from "../../../components/Cards";
 import Footer from "../../../components/Footer";
-import Image from "next/image";
+import IgButton from "../../../components/buttons/IgButton";
+import FbButton from "../../../components/buttons/FbButton";
+import WpButton from "../../../components/buttons/WpButton";
+import NotFounded from "../../../components/NotFounded";
+import LoadingProfile from "../../../components/loadings/LoadingProfile";
 
 const getUser = async (id) => {
   const { data } = await axios.get(`/api/users/${id}`);
@@ -40,82 +45,59 @@ export default function Profile({ params }) {
     products.filter((product) => product.user.name === userData.name);
 
   return (
-    <div className="m-50">
-      {userData && (
-        <div className="flex justify-center items-center ">
-          <div className="flex w-2/4 justify-evenly p-0.5 bg-purple-200">
-            <div className="flex justify-center flex-col items-center p-5 m-5">
+    <div className="flex flex-col items-center justify-center">
+      {userData ? (
+        <div className="flex items-center flex-col w-1/2 mt-5 border-zinc-300 border-b-2">
+          <div className="flex flex-col w-full items-center">
+            <div className="flex justify-center flex-col items-center pt-5 pb-2 gap-5">
               <Image
                 src={userData.image}
-                width={144}
-                height={144}
+                width={100}
+                height={100}
                 alt="me"
-                style={{ borderRadius: "100%" }}
+                className="rounded-full shadow-md shadow-gray-500"
               />
+              <h1 className="font-bold text-2xl">
+                {userData.name} {userData.lastName}
+              </h1>
             </div>
-            <div className="flex  w-2/4 items-center ">
-              <div className="flex flex-col">
-                <div className="bg-purple-100">
-                  <h1 className="pb-5 font-bold text-3xl">
-                    {userData.name} {userData.lastName}
-                  </h1>
-                </div>
-                <h3 className="pb-5 text-sm">{userData && userData.aboutMe}</h3>
+            <div className="flex justify-between p-6 w-full">
+              <div className="flex flex-col items-start pr-10 w-full">
+                <h1 className="font-bold text-xl text-[var(--secundary)]">
+                  Descripción
+                </h1>
+                <h3 className="text-zinc-600 text-sm">
+                  {userData && userData.aboutMe.length == 0
+                    ? "Este usuario todavia no tiene descripción."
+                    : userData.aboutMe}
+                </h3>
+              </div>
+              <div className="flex flex-col justify-center items-center h-full gap-5">
+                <IgButton socials={userData && userData.socials} />
+
+                <FbButton socials={userData && userData.socials} />
+
+                <WpButton socials={userData && userData.socials} />
               </div>
             </div>
           </div>
-        </div>
-      )}
-      <div className="flex justify-center items-center ">
-        <div className="flex w-2/4 justify-evenly p-0.5 bg-purple-200">
-          <div className="flex justify-between ">
-            <div className="flex gap-2 content-center items-center">
-              <a href="https://www.instagram.com/" className="hover:underline">
-                Instagram
-              </a>
-              <Image
-                src="/images/instagramBlack.png"
-                width={20}
-                height={20}
-                alt="logo"
-              />
-            </div>
-            <div className="flex gap-2 content-center items-center">
-              <a href="https://www.facebook.com/" className="hover:underline">
-                Facebook
-              </a>
-              <Image
-                src="/images/facebookBlack.png"
-                width={20}
-                height={20}
-                alt="logo"
-              />
-            </div>
-            <div className="flex gap-2 content-center items-center">
-              <a href="https://www.wathsapp.com/" className="hover:underline">
-                Whatsapp
-              </a>
-              <Image
-                src="/images/whatsappBlack.png"
-                width={20}
-                height={20}
-                alt="logo"
-              />
-            </div>
+
+          <div className="flex w-full flex-col">
+            <h1 className="pl-5 text-xl font-bold text-[var(--secundary)]">
+              Publicaciones
+            </h1>
+            {userProducts && userProducts.length == 0 ? (
+              <NotFounded context={"profile"} />
+            ) : (
+              <Cards products={userProducts} />
+            )}
           </div>
         </div>
-      </div>
-      <div className="flex justify-center items-center ">
-        <div className="flex w-2/4 justify-evenly p-0.5 bg-purple-200">
-          <h3>Publicaciones: {userData && userData.products} </h3>
-        </div>
-      </div>
-      <div className="flex justify-center items-center w-full m-5">
-        <Cards products={userProducts} />
-      </div>
-      <div className="flex justify-center items-center w-full m-5">
-        <Footer />
-      </div>
+      ) : (
+        <LoadingProfile />
+      )}
+
+      <Footer />
     </div>
   );
 }
