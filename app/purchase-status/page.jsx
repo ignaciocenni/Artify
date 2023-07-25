@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { multiplied } from "../../store/slice";
 import { sendContactForm } from "../../components/lib/api";
+import { useRouter } from "next/navigation";
 
 
 export default function PurchaseStatusComponent() {
@@ -53,6 +54,10 @@ export default function PurchaseStatusComponent() {
         console.log(error.message);
       });
     });
+  }
+  const router = useRouter()
+  if(status === "null"){
+    router.push("/")
   }
   useEffect(() => {
     sendEmail()
