@@ -49,6 +49,16 @@ const updateProduct = async (id, name, description, price, stock, images, status
   // Stock
   if (stock <= 0) throw new Error("Stock cannot be less than 0 units.");
 
+  if (stock === 0) {
+    prisma.product.update({
+      where: {
+        id: +id,
+      },
+      data: {
+        status: "INACTIVE",
+      },
+    });
+  }
   //Image
 
   const product = await prisma.product.update({
