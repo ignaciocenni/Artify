@@ -14,15 +14,14 @@ export async function POST(req) {
      unit_price: Number(ele.price),
      quantity: Number(ele.stock),
      }))  
-  const base_url = process.env.BASE_URL;
   try {
     const preference = {
       items:products,
       auto_return: "approved",
       back_urls: {
-        success: `${base_url}/purchase-status`,
-        failure: `${base_url}/purchase-status`,
-        pending: `${base_url}`,
+        success: `${process.env.BASE_URL}/purchase-status`,
+        failure: `${process.env.BASE_URL}/purchase-status`,
+        pending: `${process.env.BASE_URL}`,
       },
     };
 
