@@ -15,10 +15,12 @@ import { useRouter } from "next/navigation";
 export default function PurchaseStatusComponent() {
   
   const [products, setProducts] = useState([])
+  const [redirectTimer, setRedirectTimer] = useState(10);
   const dispatch = useDispatch();
   const data = useSession();
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
+  const router = useRouter()
   const sendEmail = async () => {
     if(data?.data?.user.email && data?.data?.user.name !== undefined){
       const form = {
@@ -55,7 +57,6 @@ export default function PurchaseStatusComponent() {
       });
     });
   }
-  const router = useRouter()
   if(status === "null"){
     router.push("/")
   }
@@ -92,7 +93,18 @@ export default function PurchaseStatusComponent() {
       localStorage.removeItem("products");
       dispatch(multiplied([]));
     }
+    const timer = setTimeout(() => {
+      router.push("/");
+    }, 10000);
 
+    const interval = setInterval(() => {
+      setRedirectTimer((prevTimer) => prevTimer - 1);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+      clearInterval(interval);
+    };
   }, [data?.data?.user.email, data?.data?.user.name]);
   
   return (
@@ -104,8 +116,8 @@ export default function PurchaseStatusComponent() {
         </button>
         </Link>
       </div>
-      {status === "approved" && <ApprovedStatus />}
-      {status === "rejected" && <RejectedStatus />}
+      {status === "approved" && <ApprovedStatus redirectTimer={redirectTimer}/>}
+      {status === "rejected" && <RejectedStatus redirectTimer={redirectTimer}/>}
     </div>
   );
 }

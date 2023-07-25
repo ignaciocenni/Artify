@@ -141,10 +141,11 @@ const CardCart = ({
   };
 
   return (
+    <>
     <div className="flex py-4 mb-4 border-b-2 gap-2 justify-between w-full ">
-      <div className="flex gap-2">
-        <div className="flex flex-col gap-4">
-          <div className="relative h-24 w-24 mr-4">
+      <div className="flex gap-2 ">
+        <div className="flex flex-col mr-5 items-center justify-center gap-4">
+          <div className="relative h-32 w-32 ">
             <Image
               id={id}
               alt={`Imagen de producto ${name}`}
@@ -190,12 +191,13 @@ const CardCart = ({
 
       <div className="flex flex-col items-end justify-between">
         <ButtonCloseCart id={id} setProducts={setProducts} setUrl={setUrl} />
-        <h1 className=" ml-auto text-xl font-medium">
+        <h1 className=" text-xl font-medium">
           ${numberConverte(currentQuantity * price)}
         </h1>
       </div>
-      <ToastContainer />
     </div>
+  <ToastContainer />
+    </>
   );
 };
 
