@@ -2,7 +2,7 @@ import { useState } from "react";
 import DropDownRating from "./DropDownRating";
 import axios from "axios";
 
-function AddReviews({ id }) {
+function AddReviews({ id, setToggle }) {
   const [form, setForm] = useState({
     comment: "",
     rating: 0,
@@ -25,20 +25,20 @@ function AddReviews({ id }) {
   };
 
   const handlerOnClick = () => {
-    console.log(form);
-    setIsButtonDisabled(true); // Deshabilitamos el botón al hacer clic
+    setIsButtonDisabled(true); 
     postReviews(id, form)
       .then(() => {
-        setIsDropDownVisible(false); // Ocultamos el componente DropDownRating después de realizar la acción
+        setIsDropDownVisible(false);
         setForm({
           ...form,
           comment: "",
           rating: 0,
         });
+        setToggle(false)
       })
       .catch((error) => {
         console.log("Error al enviar la reseña:", error);
-        setIsButtonDisabled(false); // Habilitamos el botón nuevamente en caso de error
+        setIsButtonDisabled(false); 
       });
   };
 
