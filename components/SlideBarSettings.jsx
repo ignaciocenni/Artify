@@ -20,18 +20,12 @@ export default function SlideBarSettings() {
           <ImageLogin />
         </div>
 
-        <Link
-          href={"/"}
-          className=" w-full px-5 flex flex-row justify-start items-center gap-7"
-        >
+        <Link href={"/"} className=" w-full px-5 flex flex-row justify-start items-center gap-7">
           <Image src={explore} alt="explore" width={30} height={30} />
           <h1 className="text-lg">Explorar</h1>
         </Link>
 
-        <Link
-          href={"/profile"}
-          className=" w-full px-5 flex flex-row justify-start items-center gap-7"
-        >
+        <Link href={"/profile"} className=" w-full px-5 flex flex-row justify-start items-center gap-7">
           <Image src={profile} alt="explore" width={30} height={30} />
           <h1 className="text-lg">Perfil</h1>
         </Link>
@@ -42,22 +36,13 @@ export default function SlideBarSettings() {
           <Image src={message} alt="explore" width={30} height={30} />
           <h1 className="text-xl">Mensaje</h1>
         </Link> */}
-        <Link
-          className="w-full px-5 flex flex-row justify-start items-center gap-7"
-          href="/dashboard"
-        >
-          <Image
-            className=" "
-            src="/images/controlPanelImage.svg"
-            width={30}
-            height={30}
-            alt="icon"
-          />
+        <Link className="w-full px-5 flex flex-row justify-start items-center gap-7" href="/dashboard">
+          <Image className=" " src="/images/controlPanelImage.svg" width={30} height={30} alt="icon" />
           <h1 className="text-lg">Panel de Control</h1>
         </Link>
 
-        <div class="w-56 border-b border-neutral-400 py-3"></div>
-        <div class="w-56 "></div>
+        <div className="w-56 border-b border-neutral-400 py-3"></div>
+        <div className="w-56 "></div>
 
         <div className=" w-full px-5 flex flex-row justify-start items-center gap-7">
           <Image src={settings} alt="explore" width={30} height={30} />
@@ -66,43 +51,28 @@ export default function SlideBarSettings() {
 
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
           <Link href={`/dashboard/edit-profile/${data?.user?.id}`}>
-            <button class="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
-              Editar Perfil
-            </button>
+            <button className="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">Editar Perfil</button>
           </Link>
         </div>
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
-          <button class="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
-            Contraseña
-          </button>
+          <button className="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">Contraseña</button>
         </div>
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
-          <button class="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
-            Redes Sociales
-          </button>
+          <button className="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">Redes Sociales</button>
         </div>
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
-          <button class="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
-            Pagos
-          </button>
+          <button className="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">Pagos</button>
         </div>
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
-          <button class="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
-            Otros
-          </button>
+          <button className="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">Otros</button>
         </div>
 
-        <div class="w-56 border-b border-neutral-400 py-3"></div>
-        <div class="w-56 "></div>
+        <div className="w-56 border-b border-neutral-400 py-3"></div>
+        <div className="w-56 "></div>
 
-        <Link
-          href={"/"}
-          className=" w-full px-5 flex flex-row justify-start items-center gap-7"
-        >
+        <Link href={"/"} className=" w-full px-5 flex flex-row justify-start items-center gap-7">
           <Image src={logout} alt="explore" width={30} height={30} />
-          <h1 className="text-xl font-medium text-[var(--secundary)]">
-            Cerrar Sesion
-          </h1>
+          <h1 className="text-xl font-medium text-[var(--secundary)]">Cerrar Sesion</h1>
         </Link>
       </section>
     );

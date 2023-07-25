@@ -9,7 +9,6 @@ const CardPublication = (props) => {
 
   const [statusChange, setStatusChange] = useState("default");
   const { data } = useSession();
-  console.log(data);
   const handleChange = (event) => {
     setStatusChange(event.target.value);
   };
@@ -29,7 +28,7 @@ const CardPublication = (props) => {
         />
       </div>
       <div className="px-5 justify-start items-center gap-5 flex">
-        <Link className="w-[32rem]" href={`/detail/${id}`}>
+        <Link className="w-[32rem]" href={`/dashboard/edit-product/${id}`}>
           <h1 className="font-semibold">{title}</h1>
         </Link>
         <h1 className="w-40">{category.name}</h1>
