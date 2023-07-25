@@ -72,12 +72,6 @@ const NavBar = () => {
             <div className="absolute mt-5 top-14 right-0 w-[20%] bg-[var(--background)] border rounded shadow z-40 ">
               <ul>
                 <ButtonSession />
-                <li className="px-4 py-2 hover:bg-gray-200">
-                  <Link className="flex" href="/">
-                    <Image src="/images/lupaImage.svg" width={20} height={20} alt="icon" />
-                    <p className="px-7">Explorar</p>
-                  </Link>
-                </li>
                 <LoginButton />
                 <LogoutButton />
               </ul>
