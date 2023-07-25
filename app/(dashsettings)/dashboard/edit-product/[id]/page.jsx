@@ -5,7 +5,7 @@ import SubmitButton from "../../../../../components/buttons/SubmitButton";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-export default function ({ params }) {
+export default function EditProduct({ params }) {
   const { id } = params;
   const [product, setProduct] = useState();
   const provinces = useSelector((state) => state.valores.provinces);
