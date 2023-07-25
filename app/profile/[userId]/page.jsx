@@ -42,7 +42,7 @@ export default function Profile({ params }) {
 
   const userProducts =
     products &&
-    products.filter((product) => product.user.name === userData.name);
+    products.filter((product) => product.user.name === userData.name && product.status !== "INACTIVE");
 
   return (
     <div className="flex flex-col items-center justify-center">
