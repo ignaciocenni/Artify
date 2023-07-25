@@ -12,21 +12,41 @@ import SellerInfo from "./DetailComponents/SellerInfo";
 import BuyNowButton from "./buttons/BuyAndDetail";
 import Footer from "./Footer";
 import AddDeductButtons from "../components/buttons/AddDeductButtons";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
-const DetailContent = ({ data }) => {
-  const { reviews, image, category, price, name, user,userId, description, id ,socials} = data;
-
+const DetailContent =  ({ data, sale }) => {
+ const [toggle,setToggle]= useState(false)
+ const [latestReview, setLatestReview] = useState(null);
+  
+  const { reviews, image, category, price, name, user,userId ,stock ,description, id ,socials} = data;
   const amount = reviews?.reduce((accumulator, currentValue) => accumulator + currentValue.rating, 0);
   const averange = amount / reviews?.length;
-
-
-
+  const sales = sale.sales
+  const { data: session } = useSession();
+  const buyerId = session?.user?.id
+ 
+  useEffect(() =>{
+    const saleWithBuyerId = sales?.some((sales) => sales.customerId === buyerId);
+    setToggle(saleWithBuyerId)
+    if(reviews?.some((review) => review.userId === buyerId)){
+      setToggle(false)
+    }
+    
+  },[buyerId,sales,reviews,toggle])
+  
   return (
     <>
       <div className="flex flex-col justify-center items-center content-center gap-14">
         <div className="flex items-start justify-center">
           <Link href={"/"}>
-            <Image className="relative top-2 left-2" src={close} alt="close" width={50} height={50} />
+            <Image
+              className="relative top-2 left-2"
+              src={close}
+              alt="close"
+              width={50}
+              height={50}
+            />
           </Link>
 
           <ImageSlider image={image} />
@@ -39,13 +59,20 @@ const DetailContent = ({ data }) => {
               <Heart />
             </div>
 
-
             <div className="flex content-center items-center gap-1">
               <Stars averange={averange} />
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 w-full mr-7">
               <h1 className="text-4xl font-bold">${price}</h1>
+              <div className="text-center ml-20">
+                <p className="text-lg font-bold text-gray-800">
+                  Stock Disponible
+                </p>
+                <p className="text-4xl font-extrabold text-purple-800">
+                  {stock}
+                </p>
+              </div>
             </div>
 
             <div className="flex items-center gap-2">
@@ -57,16 +84,16 @@ const DetailContent = ({ data }) => {
               <p className="font-light">{description}</p>
             </div>
             <AddDeductButtons data={data} />
-            <SellerInfo user={user} userId={userId}/>
+            <SellerInfo user={user} userId={userId} />
           </div>
           <div>
             <BuyNowButton />
           </div>
         </div>
         <div className="flex flex-col items-start gap-3 px-5 w-[1000px]">
-          <AddReviews id={id} />
-          <LatestReviews reviews={reviews} />
-        </div>
+        {toggle && <AddReviews id={id} setToggle={setToggle} setLatestReview={setLatestReview} buyerId={buyerId} />}
+        <LatestReviews reviews={reviews} latestReview={latestReview} />
+      </div>
       </div>
       <Footer />
     </>

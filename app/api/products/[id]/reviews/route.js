@@ -13,9 +13,9 @@ export async function GET(request, { params }) {
 
 export async function POST(request, { params }) {
   const { id } = params;
-  const { comment, rating } = await request.json();
+  const { comment, rating, userId } = await request.json();
   try {
-    const res = await addReview(comment, rating, id);
+    const res = await addReview(comment, rating, id, userId);
     return NextResponse.json(res, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 404 });

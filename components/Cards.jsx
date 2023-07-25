@@ -1,7 +1,7 @@
 "use client";
 import Card from "./Card";
-import Loading from "../app/loading";
-import NotFound from "./notFound";
+import NotFounded from "./NotFounded";
+import LoadingPublication from "./loadings/LoadingPublication";
 
 export default function Cards({ products }) {
   const response = products;
@@ -23,9 +23,9 @@ export default function Cards({ products }) {
           ))}
         </div>
       ) : response && response.length == 0 ? (
-        <NotFound />
+        <NotFounded />
       ) : (
-        <Loading />
+        <LoadingPublication />
       )}
     </>
   );

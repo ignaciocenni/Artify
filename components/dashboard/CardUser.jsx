@@ -2,8 +2,9 @@
 import Image from "next/image";
 import ApplyButton from "../buttons/ApplyButton";
 import { useState } from "react";
-
+import { useSession } from "next-auth/react";
 const CardUser = (params) => {
+  const { data: session } = useSession();
   const { name, lastName, email, rol, image, id } = params;
   const [statusChange, setStatusChange] = useState("default");
 
@@ -23,22 +24,26 @@ const CardUser = (params) => {
         <h1 className="w-10 font-bold">{rol}</h1>
       </div>
 
-      <select
-        onChange={handleChange}
-        className="px-3 py-2 bg-[var(--primary)] border border-black border-opacity-25 justify-center items-center gap-3 flex font-medium rounded-xl cursor-pointer"
-      >
-        <option className="rounded-xl cursor-pointer" value="default">
-          Cambiar Rol
-        </option>
-        <option className="rounded-xl cursor-pointer" value="USER">
-          USER
-        </option>
-        <option className="rounded-xl cursor-pointer" value="ADMIN">
-          ADMIN
-        </option>
-      </select>
+      {session?.user?.role === "ADMIN" ? (
+        <select
+          onChange={handleChange}
+          className="px-3 py-2 bg-[var(--primary)] border border-black border-opacity-25 justify-center items-center gap-3 flex font-medium rounded-xl cursor-pointer"
+        >
+          <option className="rounded-xl cursor-pointer" value="default">
+            Cambiar Rol
+          </option>
+          <option className="rounded-xl cursor-pointer" value="USER">
+            USER
+          </option>
+          <option className="rounded-xl cursor-pointer" value="ADMIN">
+            ADMIN
+          </option>
+        </select>
+      ) : (
+        ""
+      )}
 
-      {statusChange !== "default" ? <ApplyButton id={id} value={statusChange} prev={rol} /> : null}
+      <ApplyButton id={id} value={statusChange} prevRol={rol} />
     </div>
   );
 };
