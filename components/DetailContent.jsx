@@ -30,9 +30,9 @@ const DetailContent =  ({ data, sale }) => {
   useEffect(() =>{
     const saleWithBuyerId = sales?.some((sales) => sales.customerId === buyerId);
     setToggle(saleWithBuyerId)
-    // if(reviews?.some((review) => review.userId === buyerId)){
-    //   setToggle(false)
-    // }
+    if(reviews?.some((review) => review.userId === buyerId)){
+      setToggle(false)
+    }
     
   },[buyerId,sales,reviews,toggle])
   
