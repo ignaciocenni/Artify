@@ -14,6 +14,7 @@ import Footer from "./Footer";
 import AddDeductButtons from "../components/buttons/AddDeductButtons";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import StarRating from './DetailComponents/starsComponent/StarRating'
 
 const DetailContent =  ({ data, sale }) => {
  const [toggle,setToggle]= useState(false)
