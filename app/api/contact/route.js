@@ -9,7 +9,11 @@ const CONTACT_MESSAGE_FIELDS = {
 };
 
 const generateEmailContent = (data) => {
-  const stringData = Object.entries(data).reduce((str, [key, val]) => (str += `${CONTACT_MESSAGE_FIELDS[key]}: \n${val} \n \n`), "");
+  const stringData = Object.entries(data).reduce(
+    (str, [key, val]) =>
+      (str += `${CONTACT_MESSAGE_FIELDS[key]}: \n${val} \n \n`),
+    ""
+  );
   let template;
   if (data.type === "welcome") {
     template = emailWelcome(data);
@@ -26,7 +30,7 @@ const generateEmailContent = (data) => {
 export async function POST(req) {
   const data = await req.json();
   let mailOptions;
-  if (data.type === "welcome") {
+  if ((await data.type) === "welcome") {
     mailOptions = {
       from: "artifypf@gmail.com",
       to: data.email,
@@ -42,6 +46,7 @@ export async function POST(req) {
   try {
     await transporter.sendMail({
       ...mailOptions,
+      ...generateEmailContent(data),
     });
     return NextResponse.json({ status: 200 });
   } catch (error) {
