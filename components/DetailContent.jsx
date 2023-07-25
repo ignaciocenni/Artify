@@ -20,11 +20,6 @@ const DetailContent =  ({ data, sale }) => {
  const [latestReview, setLatestReview] = useState(null);
   
   const { reviews, image, category, price, name, user,userId ,stock ,description, id ,socials} = data;
-  const amount = reviews?.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.rating,
-    0
-  );
-  const averange = amount / reviews?.length;
   const amount = reviews?.reduce((accumulator, currentValue) => accumulator + currentValue.rating, 0);
   const averange = amount / reviews?.length;
   const sales = sale.sales
