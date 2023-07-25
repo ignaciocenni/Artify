@@ -47,7 +47,7 @@ const updateProduct = async (id, name, description, price, stock, images, status
   if (price <= 0) throw new Error("Price cannot be less than or equal to $0");
 
   // Stock
-  if (stock <= 0) throw new Error("Stock cannot be less than 0 units.");
+  if (stock < 0) throw new Error("Stock cannot be less than 0 units.");
 
   if (stock === 0) {
     prisma.product.update({
