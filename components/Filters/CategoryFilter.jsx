@@ -3,27 +3,27 @@ import { category } from "../../store/slice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function CategoryFilter() {
-  let categories = useSelector((state) => state.valores.categories);
-  let CategoryNames = categories.map((category) => category.name);
+  const categories = useSelector((state) => state.valores.categories);
+  const products = useSelector((state) => state.valores.activeProducts);
+  const categoryNames = categories.map((category) => category.name);
+
+  const filteredCategoryNames = categoryNames.filter((cat) => products.some((product) => product.category.name === cat));
 
   const [stateCategory, setStateCategory] = useState({
     stateCategory: "Categorias",
   });
-  const dispatch = useDispatch();
+ // const dispatch = useDispatch();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     function handleDocumentClick(event) {
-      // Si el clic se hizo fuera del dropdown, se cierra
       if (!event.target.closest(".dropdown-container")) {
         setIsDropdownOpen(false);
       }
     }
 
-    // Agregar el evento para escuchar los clics en todo el documento
     document.addEventListener("click", handleDocumentClick);
 
-    // Eliminar el evento cuando el componente se desmonte para evitar fugas de memoria
     return () => {
       document.removeEventListener("click", handleDocumentClick);
     };
@@ -33,15 +33,13 @@ export default function CategoryFilter() {
     setIsDropdownOpen(!isDropdownOpen);
   };
   const handleCategorySelect = (cat) => {
-    cat === "allCategories"
-      ? setStateCategory({ stateCategory: "Categorias" })
-      : setStateCategory({ stateCategory: cat });
-    dispatch(category(cat));
-    setIsDropdownOpen(false); // Cerrar el dropdown al seleccionar una categoría
+    cat === "allCategories" ? setStateCategory({ stateCategory: "Categorias" }) : setStateCategory({ stateCategory: cat });
+    //dispatch(category(cat));
+    setIsDropdownOpen(false);
   };
 
   return (
-    <div className="gap-1 items-start dropdown-container">
+    <div className="w-full gap-1 items-start dropdown-container">
       <div>
         <button
           className="bg-[var(--primary)] py-1 relative flex justify-center items-center focus:outline-none  text-gray-600 rounded-xl focus:ring ring-gray-200"
@@ -56,19 +54,10 @@ export default function CategoryFilter() {
               viewBox="0 0 24 24"
               xmlns="https://file.rendit.io/n/0aXnru4DI8UuSC0ZygNs.svg"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </span>
-          <div
-            className={`absolute ${
-              isDropdownOpen ? "block" : "hidden"
-            } top-full min-w-full w-max bg-white shadow-md mt-1 rounded z-10`}
-          >
+          <div className={`absolute ${isDropdownOpen ? "block" : "hidden"} top-full min-w-full w-max bg-white shadow-md mt-1 rounded z-10`}>
             <ul className="text-left border rounded">
               <li
                 value="allCategories"
@@ -78,12 +67,8 @@ export default function CategoryFilter() {
                 Todas
               </li>
 
-              {CategoryNames.map((cat) => (
-                <li
-                  key={cat}
-                  className="px-4 py-1 hover:bg-grey-100 border-b cursor-pointer"
-                  onClick={() => handleCategorySelect(cat)}
-                >
+              {filteredCategoryNames.map((cat) => (
+                <li key={cat} className="px-4 py-1 hover:bg-grey-100 border-b cursor-pointer" onClick={() => handleCategorySelect(cat)}>
                   {cat}
                 </li>
               ))}

@@ -1,8 +1,9 @@
 "use client";
 import axios from "axios";
-import { useState } from "react";
 import MpButton from "../../components/mercadoPagoButton/MpButton";
 import { usePathname } from "next/navigation";
+import BuyDetail from "../BuyDetail";
+import Swal from "sweetalert2";
 
 const postProductsMP = async (productsClean) => {
   try {
@@ -14,9 +15,8 @@ const postProductsMP = async (productsClean) => {
   }
 };
 
-const BuyNowButton = () => {
+const BuyNowButton = ({ url, setUrl }) => {
   const path = usePathname();
-  const [url, setUrl] = useState("");
   const products = JSON.parse(localStorage.getItem("products")) || [];
   const productsClean = products.map((product) => {
     return {
@@ -29,20 +29,32 @@ const BuyNowButton = () => {
   });
   const handleClick = async (event) => {
     event.preventDefault();
-    const response = await postProductsMP(productsClean);
-    setUrl(response);
+    if (products.length) {
+      const response = await postProductsMP(productsClean);
+      setUrl(response);
+    } else Swal.fire("Error!", "Carrito vacío!", "error");
   };
+
   return (
     <div>
       {path === "/cart" && (
-        <button
-          onClick={handleClick}
-          className="hover:bg-[var(--background-sec)] hover:text-black w-full text-white bg-[var(--detail)] py-5 justify-center rounded-lg flex content-center items-center gap-5 shadow-xl"
-        >
-          <h1 className="text-xs font-extrabold">Detalles de compra</h1>
-        </button>
+        <>
+          {!url && (
+            <button
+              onClick={handleClick}
+              className="hover:bg-[var(--background-sec)] hover:text-black w-full text-white bg-[var(--detail)] py-5 justify-center rounded-lg flex content-center items-center gap-5 shadow-xl"
+            >
+              <h1 className="text-xs font-extrabold">Detalles de compra</h1>
+            </button>
+          )}
+        </>
       )}
-      {url && <MpButton url={url} />}
+      {url && (
+        <>
+          <BuyDetail />
+          <MpButton url={url} />
+        </>
+      )}
     </div>
   );
 };

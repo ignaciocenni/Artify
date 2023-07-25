@@ -1,18 +1,25 @@
-'use client'
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Cards from '../../../components/Cards';
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Image from "next/image";
+import Cards from "../../../components/Cards";
+import Footer from "../../../components/Footer";
+import IgButton from "../../../components/buttons/IgButton";
+import FbButton from "../../../components/buttons/FbButton";
+import WpButton from "../../../components/buttons/WpButton";
+import NotFounded from "../../../components/NotFounded";
+import LoadingProfile from "../../../components/loadings/LoadingProfile";
 
 const getUser = async (id) => {
-  const { data } = await axios.get(`http://localhost:3000/api/users/${id}`);
+  const { data } = await axios.get(`/api/users/${id}`);
+  console.log("Get user: " + data);
   return data;
 };
 
 const getProducts = async () => {
-  const { data } = await axios.get('http://localhost:3000/api/products');
-  console.log(data)
+  const { data } = await axios.get("/api/products");
+  console.log(data);
+  console.log("Get Products: " + data);
   return data;
 };
 
@@ -33,31 +40,64 @@ export default function Profile({ params }) {
     fetchData();
   }, [userId]);
 
-   const userProducts = products && products.filter((product) => product.user.name === userData.name);
+  const userProducts =
+    products &&
+    products.filter((product) => product.user.name === userData.name);
 
   return (
-    <div className="z-10">
-      {userData && (
-        <div className="flex justify-center items-center w-full">
-          <div className="flex w-2/4 justify-evenly">
-            <div className="flex justify-center flex-col items-center">
-              <Image src={userData.image} width={144} height={144} alt="me" />
-              <h1 className="pb-2 font-bold text-3xl">{userData.name} {userData.lastName}</h1>
-              <p className="pb-2">Artesano</p>
-              <div className="flex w-full justify-around">
+    <div className="flex flex-col items-center justify-center">
+      {userData ? (
+        <div className="flex items-center flex-col w-1/2 mt-5 border-zinc-300 border-b-2">
+          <div className="flex flex-col w-full items-center">
+            <div className="flex justify-center flex-col items-center pt-5 pb-2 gap-5">
+              <Image
+                src={userData.image}
+                width={100}
+                height={100}
+                alt="me"
+                className="rounded-full shadow-md shadow-gray-500"
+              />
+              <h1 className="font-bold text-2xl">
+                {userData.name} {userData.lastName}
+              </h1>
+            </div>
+            <div className="flex justify-between p-6 w-full">
+              <div className="flex flex-col items-start pr-10 w-full">
+                <h1 className="font-bold text-xl text-[var(--secundary)]">
+                  Descripción
+                </h1>
+                <h3 className="text-zinc-600 text-sm">
+                  {userData && userData.aboutMe.length == 0
+                    ? "Este usuario todavia no tiene descripción."
+                    : userData.aboutMe}
+                </h3>
+              </div>
+              <div className="flex flex-col justify-center items-center h-full gap-5">
+                <IgButton socials={userData && userData.socials} />
+
+                <FbButton socials={userData && userData.socials} />
+
+                <WpButton socials={userData && userData.socials} />
               </div>
             </div>
-            <div className="flex w-2/4 items-center">
-              <p className="text-sm">
-              {userData && userData.aboutMe}
-              </p>
-            </div>
+          </div>
+
+          <div className="flex w-full flex-col">
+            <h1 className="pl-5 text-xl font-bold text-[var(--secundary)]">
+              Publicaciones
+            </h1>
+            {userProducts && userProducts.length == 0 ? (
+              <NotFounded context={"profile"} />
+            ) : (
+              <Cards products={userProducts} />
+            )}
           </div>
         </div>
+      ) : (
+        <LoadingProfile />
       )}
-      <div className="flex justify-center items-center w-full">
-        <Cards products={userProducts} />
-      </div>
+
+      <Footer />
     </div>
   );
 }

@@ -1,19 +1,20 @@
 "use client";
 import Filters from "../components/Filters";
 import Cards from "../components/Cards";
-import {useSelector} from "react-redux";
-
+import { useSelector } from "react-redux";
 
 export default function Home() {
-  const products = useSelector((state) => state.valores.products);
+  let products = useSelector((state) => state.valores.activeProducts);
 
   return (
     <>
       <div className="flex py-2 px-5">
-        <div className="flex flex-col gap-6 w-[25%] ">
+        <div className="flex flex-col gap-6 w-1/4 ">
           <Filters />
         </div>
-        <Cards products={products} />
+        <div className="flex justify-center items-center w-1/2">
+          <Cards products={products} />
+        </div>
       </div>
     </>
   );

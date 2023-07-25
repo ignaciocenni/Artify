@@ -3,8 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export const Slice = createSlice({
   name: "valores",
   initialState: {
+    activeProducts: [],
     products: [],
+    dashProducts: [],
+    productStatus: "",
     users: [],
+    userRol: "",
+    dashUsers: [],
     copyProducts: [],
     provinces: [],
     provincesFilter: [],
@@ -16,8 +21,10 @@ export const Slice = createSlice({
   reducers: {
     GET_INFO: (state, action) => {
       state.products = action.payload;
-      state.copyProducts = action.payload;
+      state.dashProducts = action.payload;
       state.provincesFilter = action.payload;
+      state.copyProducts = action.payload.filter((product) => product.status === "ACTIVE");
+      state.activeProducts = action.payload.filter((product) => product.status === "ACTIVE");
     },
     GET_PROVINCES: (state, action) => {
       state.provinces = action.payload;
@@ -27,29 +34,38 @@ export const Slice = createSlice({
     },
     getUsers: (state, action) => {
       state.users = action.payload;
+      state.dashUsers = action.payload;
     },
     price: (state, { type, payload }) => {
-      const price = [...state.products];
+      const price = [...state.activeProducts];
       const find = price.filter(function (num) {
         return num.price >= payload[0] && num.price <= payload[1];
       });
-      state.products = find;
+      state.activeProducts = find;
       state.provincesFilter = find;
+    },
+    setDashProducts: (state, { type, payload }) => {
+      state.dashProducts = payload[0];
+      state.productStatus = payload[1];
+    },
+    setDashUsers: (state, { type, payload }) => {
+      state.dashUsers = payload[0];
+      state.userRol = payload[1];
     },
     countrie: (state, action) => {
       const countrie = [...state.copyProducts];
       const find = countrie.filter((element) => element.province.name === action.payload);
 
-      state.products = action.payload === "Todas" ? countrie : find;
+      state.activeProducts = action.payload === "Todas" ? countrie : find;
       state.provincesFilter = action.payload === "Todas" ? countrie : find;
     },
     category: (state, action) => {
       const category = [...state.provincesFilter];
-      state.products =
+      state.activeProducts =
         action.payload === "allCategories" ? category : category.filter((value) => value.category.name.includes(action.payload));
     },
     search: (state, { type, payload }) => {
-      state.products = payload;
+      state.activeProducts = payload;
     },
     multiplied: (state, { type, payload }) => {
       state.cartQuantity = payload?.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
@@ -83,5 +99,7 @@ export const {
   totalPrices,
   setPath,
   localProducts,
-  getUsers
+  getUsers,
+  setDashProducts,
+  setDashUsers,
 } = Slice.actions;

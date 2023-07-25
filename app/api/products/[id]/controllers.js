@@ -23,7 +23,7 @@ const getProduct = async (id) => {
           name: true,
           lastName: true,
           image: true,
-          socials : true
+          socials: true,
         },
       },
     },
@@ -32,7 +32,7 @@ const getProduct = async (id) => {
   return searchedUser;
 };
 
-const updateProduct = async (id, name, description, price, stock, saveImage, deleteImage, status, province) => {
+const updateProduct = async (id, name, description, price, stock, images, status, provinceId) => {
   // Validates:
   //Name
   const nameRegex = /^[a-zA-Z0-9\s.,áéíóúÁÉÍÓÚñÑ]*$/;
@@ -43,7 +43,6 @@ const updateProduct = async (id, name, description, price, stock, saveImage, del
 
   //if (description.length <= 10 && !nameRegex.test(description)) throw new Error("The description must contain at least 10 characters.");
 
-
   // Price
   if (price <= 0) throw new Error("Price cannot be less than or equal to $0");
 
@@ -51,20 +50,6 @@ const updateProduct = async (id, name, description, price, stock, saveImage, del
   if (stock <= 0) throw new Error("Stock cannot be less than 0 units.");
 
   //Image
-  const oldProduct = await prisma.product.findFirst({ where: { id: +id } });
-
-  let images = oldProduct.image;
-  if (deleteImage) {
-    if (Array.isArray(deleteImage)) {
-      images = images.filter((img) => !deleteImage.includes(img));
-    } else {
-      images = images.filter((img) => img !== deleteImage);
-    }
-  }
-
-  if (saveImage) {
-    images = Array.isArray(saveImage) ? [...images, ...saveImage] : [...images, saveImage];
-  }
 
   const product = await prisma.product.update({
     where: {
@@ -77,7 +62,7 @@ const updateProduct = async (id, name, description, price, stock, saveImage, del
       stock: stock,
       image: images,
       status: status,
-      province: province,
+      provinceId: provinceId,
     },
   });
   return product;

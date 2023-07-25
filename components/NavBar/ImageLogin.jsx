@@ -10,7 +10,7 @@ const ImageLogin = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <Link href="/profile">
+      <Link href={session && session.user ? `/profile/${session && session.user.id }`:'/'}>
         <Image
           src={session && session.user ? session.user.image : avatar}
           width={40}
@@ -21,7 +21,7 @@ const ImageLogin = () => {
       </Link>
       <div className="px-4">
         <h1 className="text-sm">Hola!</h1>
-        <Link href="/profile">
+        <Link href={session && session.user ? `/profile/${session && session.user.id }`:'/'}>
           <h1 className="font-bold hover:underline">
             {session && session.user ? session.user.name : null}
           </h1>

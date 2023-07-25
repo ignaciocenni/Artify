@@ -10,23 +10,22 @@ const getAllReviews = async (id) => {
   return allReviews;
 };
 
-const addReview = async (comment, rating, id) => {
-  if (!comment || !rating ) throw new Error("Faltan Argumentos!");
+const addReview = async (comment, rating, id, userId) => {
+  if (!comment || !rating) throw new Error("Faltan Argumentos!");
 
   // Validates:
   // Comments
-  if (comment.length <= 5)
-    throw new Error("The comment must have at least 5 characters.");
+  if (comment.length <= 5) throw new Error("The comment must have at least 5 characters.");
 
   // Rating
-  if (rating < 1 || rating > 5)
-    throw new Error("The rating must be from 0 to 5");
+  if (rating < 1 || rating > 5) throw new Error("The rating must be from 0 to 5");
 
   const newReview = await prisma.Review.create({
     data: {
       comment: comment,
       rating: rating,
       productId: +id,
+      userId: userId,
     },
   });
   return newReview;

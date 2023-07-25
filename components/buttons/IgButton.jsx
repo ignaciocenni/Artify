@@ -1,19 +1,28 @@
 import Image from "next/image";
-import icono from "../../public/images/instagramicons.svg";
-import iconoGrey from "../../public/images/instagramgrey.svg";
 
 function IgButton({ socials }) {
   return (
     <>
       {socials ? (
-        <a href="https://www.instagram.com/">
-          <button className="mx-2">
-            <Image alt="icono" src={icono} width={35} height={35} />
-          </button>
-        </a>
+        <button className="rounder-3xl">
+          <a href="https://www.instagram.com/">
+            <Image
+              alt="icono"
+              src="/images/instagramBlack.png"
+              width={35}
+              height={35}
+              className="shadow-sm shadow-purple-500 rounded-3xl hover:shadow-md hover:shadow-purple-600 transition-all"
+            />
+          </a>
+        </button>
       ) : (
-        <button className="cursor-not-allowed mx-2">
-          <Image alt="icono" src={iconoGrey} width={35} height={35} />
+        <button className="cursor-not-allowed">
+          <Image
+            alt="icono"
+            src="/images/instagramBlack.png"
+            width={35}
+            height={35}
+          />
         </button>
       )}
     </>

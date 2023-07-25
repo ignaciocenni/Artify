@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 export default function ProvinceFilter() {
   const dispatch = useDispatch();
   const provinces = useSelector((state) => state.valores.provinces);
-  const products = useSelector((state) => state.valores.copyProducts);
+  const products = useSelector((state) => state.valores.activeProducts);
   const provinceNames = provinces.map((province) => province.name);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [filters, setFilters] = useState({
@@ -42,7 +42,7 @@ export default function ProvinceFilter() {
 );
 
   return (
-    <div ref={dropdownRef}>
+    <div className="w-full" ref={dropdownRef}>
       <button
         className=" bg-[var(--primary)] py-1 relative flex justify-center items-center focus:outline-none  text-gray-600 rounded-xl focus:ring ring-gray-200 group"
         onClick={handleDropdownToggle}

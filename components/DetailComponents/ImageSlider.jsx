@@ -19,15 +19,13 @@ function ImageSlider({ image }) {
       <button onClick={prevImage}>
         <Image src={flechaIzq} alt="flecha derecha" width={50} height={50} />
       </button>
-      <div className='relative h-[600px] w-[500px] mr-4'>
+      <div className='relative h-[46rem] w-[46rem] flex justify-center items-center'>
         <Image
-          className="rounded-3xl border-s-violet-600"
+          className="rounded-xl"
           src={image[currentImageIndex]}
           alt="imagen publicacion"
           fill
-          sizes="100vw"
-          
-          
+          objectFit='contain'
         />
       </div>
 
