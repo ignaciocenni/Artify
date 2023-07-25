@@ -10,8 +10,7 @@ import Swal from "sweetalert2";
 
   return data;
 }; */
-const putProfile = async ({form}) => {
-
+const putProfile = async ({ form }) => {
   try {
     const res = (await axios.put(`/api/users/${form.userId}`, form)).data;
     return { created: true, res };
@@ -20,10 +19,7 @@ const putProfile = async ({form}) => {
   }
 };
 
-
 export default function Page() {
-  
-
   const data = useSession();
 
   const [form, setForm] = useState({
