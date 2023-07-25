@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { transporter } from "../../../components/config/nodemailer";
 import { emailWelcome } from "../../../components/templates/emailWelcome";
 import { emailPurchaseDone } from "../../../components/templates/emailPurchaseDone";
+import { emailPassword } from "../../../components/templates/emailPassword";
 
 const CONTACT_MESSAGE_FIELDS = {
   name: "Name",
@@ -19,6 +20,8 @@ const generateEmailContent = (data) => {
     template = emailWelcome(data);
   } else if (data.type === "purchase") {
     template = emailPurchaseDone(data);
+  } else if (data.type === "password") {
+    template = emailPassword(data);
   } else if (data.rol === "compra realizada") {
   }
   return {
@@ -34,15 +37,22 @@ export async function POST(req) {
     mailOptions = {
       from: "artifypf@gmail.com",
       to: data.email,
-      subject: "BIENVENID@",
+      subject: "¡Bienvenido/a a Artify!",
     };
   } else if (data.type === "purchase") {
     mailOptions = {
       from: "artifypf@gmail.com",
       to: data.email,
-      subject: "Compra Realizada",
+      subject: "¡Compra Realizada!",
+    };
+  } else if (data.type === "password") {
+    mailOptions = {
+      from: "artifypf@gmail.com",
+      to: data.email,
+      subject: "Cambio de contraseña.",
     };
   }
+
   try {
     await transporter.sendMail({
       ...mailOptions,
