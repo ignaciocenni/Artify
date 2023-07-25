@@ -2,14 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import ApplyButton from "../buttons/ApplyButton";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 const CardPublication = (props) => {
   const { id, image, user, price, title, userImage, category, status } = props;
 
   const [statusChange, setStatusChange] = useState("default");
-
+  const { data } = useSession();
+  console.log(data);
   const handleChange = (event) => {
-    setStatusChange(event.target.value)
+    setStatusChange(event.target.value);
   };
 
   return (
@@ -33,35 +35,34 @@ const CardPublication = (props) => {
         <h1 className="w-40">{category.name}</h1>
         <h1 className="font-medium w-28">${price}</h1>
         <div className="justify-start items-center gap-1 flex">
-          <Image
-            width={20}
-            height={20}
-            className="rounded-full"
-            src={userImage}
-            alt="Author"
-          />
+          <Image width={20} height={20} className="rounded-full" src={userImage} alt="Author" />
           <div className="w-32 text-base font-light">{user}</div>
         </div>
         <h1 className="w-20 font-semibold">{status}</h1>
       </div>
 
-      <select
-        onChange={handleChange}
-        className="px-3 py-2 bg-[var(--primary)] border border-black border-opacity-25 justify-center items-center gap-2 flex font-medium rounded-xl cursor-pointer">
-        <option className="rounded-xl cursor-pointer" value="default">
-          Cambiar Estado
-        </option>
-        <option className="rounded-xl cursor-pointer" value="ACTIVE">
-          Activa
-        </option>
-        <option className="rounded-xl cursor-pointer" value="INACTIVE">
-          Inactiva
-        </option>
-        <option className="rounded-xl cursor-pointer" value="PENDING">
-          Pendiente
-        </option>
-      </select>
-      {statusChange !== "default" ? <ApplyButton id={id} value={statusChange} /> : null}
+      {data?.user?.role === "ADMIN" ? (
+        <select
+          onChange={handleChange}
+          className="px-3 py-2 bg-[var(--primary)] border border-black border-opacity-25 justify-center items-center gap-2 flex font-medium rounded-xl cursor-pointer"
+        >
+          <option className="rounded-xl cursor-pointer" value="default">
+            Cambiar Estado
+          </option>
+          <option className="rounded-xl cursor-pointer" value="ACTIVE">
+            Activa
+          </option>
+          <option className="rounded-xl cursor-pointer" value="INACTIVE">
+            Inactiva
+          </option>
+          <option className="rounded-xl cursor-pointer" value="PENDING">
+            Pendiente
+          </option>
+        </select>
+      ) : (
+        ""
+      )}
+      <ApplyButton id={id} value={statusChange} prevStatus={status} />
     </div>
   );
 };
