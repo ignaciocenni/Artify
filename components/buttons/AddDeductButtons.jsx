@@ -39,15 +39,18 @@ const AddDeductButtons = ({ data }) => {
       };
     }
   };
+  
+  const [arrProduct, setArrProduct] = useState([]);
+  const [currentQuantity, setCurrentQuantity] = useState(1);
+  const [isProductAdded, setIsProductAdded] = useState(false);
+  const [isProductRemoved, setIsProductRemoved] = useState(false);
+
   useEffect(() => {
     const { arrProduct, currentQuantity } = initializeState();
     setArrProduct(arrProduct);
     setCurrentQuantity(currentQuantity);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product.title]);
-
-  const [arrProduct, setArrProduct] = useState([]);
-  const [currentQuantity, setCurrentQuantity] = useState(1);
 
   const handleAddProduct = () => {
     if (currentQuantity + 1 > product.stock) {
@@ -58,21 +61,25 @@ const AddDeductButtons = ({ data }) => {
 
     if (existingProduct) {
       existingProduct.quantity += 1;
-      setCurrentQuantity(existingProduct.quantity);
+      setCurrentQuantity((prevQuantity) => prevQuantity + 1);
       localStorage.setItem("products", JSON.stringify(arrProduct));
       updateCart();
-      const notify = () => toast.success('Su producto fue añadido al carrito!', {
-        position: "top-right",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        transition: Flip
+      if (!isProductAdded) {
+        const notify = () => toast.success("El producto"+` "${product.title}" `+"fue añadido al carrito!", {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Flip
         });
-      notify()
+        notify();
+        setIsProductAdded(true);
+      }
+      setIsProductRemoved(false);
     } else {
       const updatedProduct = { ...product };
       updatedProduct.quantity = currentQuantity + 1;
@@ -83,7 +90,6 @@ const AddDeductButtons = ({ data }) => {
       );
       setCurrentQuantity(updatedProduct.quantity);
       updateCart();
-      
     }
   };
 
@@ -91,24 +97,29 @@ const AddDeductButtons = ({ data }) => {
     if (currentQuantity > 0) {
       setCurrentQuantity((prevQuantity) => prevQuantity - 1);
       const existingProduct = arrProduct.find((p) => p.title === product.title);
-
+  
       if (existingProduct) {
         existingProduct.quantity -= 1;
         localStorage.setItem("products", JSON.stringify(arrProduct));
         updateCart();
+        setIsProductAdded(false);
       }
-      const notify = () => toast.error('El producto fue eliminado del carrito!', {
-        position: "top-right",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        transition: Flip
+  
+      if (!isProductRemoved) {
+        const notify = () => toast.error("El producto"+` "${product.title}" `+"fue eliminado del carrito!", {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Flip
         });
-      notify()
+        notify();
+        setIsProductRemoved(true);
+      }
     }
   };
 
