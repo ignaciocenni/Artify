@@ -12,7 +12,7 @@ export default function CategoryFilter() {
   const [stateCategory, setStateCategory] = useState({
     stateCategory: "Categorias",
   });
-  const dispatch = useDispatch();
+ // const dispatch = useDispatch();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function CategoryFilter() {
   };
   const handleCategorySelect = (cat) => {
     cat === "allCategories" ? setStateCategory({ stateCategory: "Categorias" }) : setStateCategory({ stateCategory: cat });
-    dispatch(category(cat));
+    //dispatch(category(cat));
     setIsDropdownOpen(false);
   };
 
