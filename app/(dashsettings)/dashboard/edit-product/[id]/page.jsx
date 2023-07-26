@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import SubmitButton from "../../../../../components/buttons/SubmitButton";
+import ImageSlider from "../../../../../components/DetailComponents/ImageSlider";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Loading from "../../../../loading";
 
 export default function EditProduct({ params }) {
   const { id } = params;
@@ -12,8 +14,17 @@ export default function EditProduct({ params }) {
   useEffect(() => {
     const fetching = async () => {
       const res = await axios.get(`/api/products/${id}`);
-      const { name, description, price, stock, status, provinceId, image } = res.data;
-      setProduct({ name, description, price, stock, status, provinceId, image });
+      const { name, description, price, stock, status, provinceId, image } =
+        res.data;
+      setProduct({
+        name,
+        description,
+        price,
+        stock,
+        status,
+        provinceId,
+        image,
+      });
     };
     fetching();
   }, [id]);
@@ -33,60 +44,74 @@ export default function EditProduct({ params }) {
   };
 
   return (
-    <section className="w-full grid h-max justify-center text-center ">
-      <h1 className=" h-23 font-semibold text-3xl py-5">Editar Producto</h1>
-      {/* <ImageSlider image={[logo.src]} /> */}
-      <select
-        className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[#e0d8ffea] text-center font-semibold "
-        onChange={handleChange}
-        name="provinceId"
-      >
-        <option>Provincia</option>
-        {provinces?.map((province) => {
-          return (
-            <option key={province.id} value={province.id} className="text-center font-semibold rounded-2xl">
-              {province.name}
-            </option>
-          );
-        })}
-      </select>
-      <form onSubmit={handleSubmit} className=" text-left  w-96">
-        <label htmlFor="">Título</label>
-        <input
-          name="title"
+    <div className="flex gap-5 mt-[10vh] ml-[34vh] bg-[var(--background)]">
+      
+        {product && product.image ? (
+          <div>
+          <ImageSlider image={product?.image} />
+          </div>
+        ) : (
+          <div className="w-[53rem] h-[40rem] p-10 flex justify-center items-center">
+          <Loading />
+          </div>
+        )}
+     
+      <section className="grid h-max justify-center text-center ">
+        <h1 className="font-semibold text-3xl py-5">Editar Producto</h1>
+        <select
+          className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[var(--background-sec)] text-center font-semibold "
           onChange={handleChange}
-          type="text"
-          className=" bg-[var(--primary)] flex font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
-          placeholder={product?.name}
-        />
-        <label htmlFor="description">Descripción</label>
-        <textarea
-          name="description"
-          onChange={handleChange}
-          type="text"
-          className="resize-none h-20 bg-[var(--primary)] flex font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
-          placeholder={product?.description}
-        />
-        <label htmlFor="price">Precio</label>
-        <input
-          name="price"
-          onChange={handleChange}
-          type="number"
-          min="0"
-          className="  bg-[var(--primary)] flex font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
-          placeholder={product?.price}
-        />
-        <label htmlFor="stock">Stock</label>
-        <input
-          name="stock"
-          onChange={handleChange}
-          type="number"
-          min="0"
-          className=" bg-[var(--primary)] flex font-bold text-1xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-8"
-          placeholder={product?.stock}
-        />
-        <SubmitButton label={"Guardar"} />
-      </form>
-    </section>
+          name="provinceId">
+          <option>Provincia</option>
+          {provinces?.map((province) => {
+            return (
+              <option
+                key={province.id}
+                value={province.id}
+                className="text-center font-semibold rounded-2xl">
+                {province.name}
+              </option>
+            );
+          })}
+        </select>
+        <form onSubmit={handleSubmit} className=" text-left  w-96">
+          <label htmlFor="">Título</label>
+          <input
+            name="title"
+            onChange={handleChange}
+            type="text"
+            className=" bg-[var(--primary)] flex  shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
+            placeholder={product?.name}
+          />
+          <label htmlFor="description">Descripción</label>
+          <textarea
+            name="description"
+            onChange={handleChange}
+            type="text"
+            className="resize-none h-20 bg-[var(--primary)] flex  shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
+            placeholder={product?.description}
+          />
+          <label htmlFor="price">Precio</label>
+          <input
+            name="price"
+            onChange={handleChange}
+            type="number"
+            min="0"
+            className="  bg-[var(--primary)] flex  shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
+            placeholder={product?.price}
+          />
+          <label htmlFor="stock">Stock</label>
+          <input
+            name="stock"
+            onChange={handleChange}
+            type="number"
+            min="0"
+            className=" bg-[var(--primary)] flex shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-8"
+            placeholder={product?.stock}
+          />
+          <SubmitButton label={"Guardar"} />
+        </form>
+      </section>
+    </div>
   );
 }

@@ -2,12 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import explore from "../public/images/search.svg";
-import profile from "../public/images/userImage.svg";
-import message from "../public/images/email.svg";
-import settings from "../public/images/settingsImage.svg";
-import logout from "../public/images/leaveSession.svg";
-import ImageLogin from "./NavBar/ImageLogin";
 import { useSession } from "next-auth/react";
 
 export default function SlideBarSettings() {
@@ -15,7 +9,7 @@ export default function SlideBarSettings() {
 
   if (data && data.user) {
     return (
-      <section className="flex w-1/6 h-[100vh] pb-10 flex-col justify-start items-center gap-4 shadow-lg">
+      <section className="flex fixed top-[10vh] left-0 w-1/6 z-50 h-[100vh] pb-10 flex-col justify-start items-center gap-4 shadow-lg">
         <div className="py-4 justify-center items-center gap-2.5 inline-flex w-full">
           <div className="flex justify-center items-center">
             <Image

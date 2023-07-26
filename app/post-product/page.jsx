@@ -91,7 +91,7 @@ export default function Page() {
 
   return (
     <>
-      <div className="flex gap-8 justify-center pb-20">
+      <div className="flex gap-8 justify-center pb-20 mt-[10vh]">
         <div>
           <ImageSlider image={form.image.length ? form.image : [logo.src]} />
         </div>

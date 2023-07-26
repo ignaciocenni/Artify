@@ -49,7 +49,7 @@ export default function LoginPage({ searchParams }) {
 
   return (
     <div>
-      <div className=" text-center grid justify-center items-center mt-10">
+      <div className=" text-center flex justify-center items-center h-screen ">
         <form className="w-96 flex flex-col gap-5" onSubmit={onSubmit}>
           <h1 className="font-semibold text-3xl mb-5">Iniciar Sesión</h1>
           <div className="mb-4">
@@ -75,15 +75,19 @@ export default function LoginPage({ searchParams }) {
               errors={errors.password}
             />
           </div>
-          {credentialsError && <p className=" text-red-700">{credentialsError}</p>}
+          {credentialsError && (
+            <p className=" text-red-700">{credentialsError}</p>
+          )}
           <div className="flex items-center justify-center">
             <button className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-lg  text-white font-bold py-3 px-3 rounded-xl focus:outline-none focus:shadow-outline w-full">
               Continuar
             </button>
           </div>
 
-          <a className="inline-block align-baseline font-bold text-sm text-slate-500  hover:text-[var(--background-sec)] mt-2" href="#">
-            Olvido su contraseña?
+          <a
+            className="inline-block align-baseline font-bold text-sm text-slate-500  hover:text-[var(--background-sec)] mt-2"
+            href="/forgotenPassword">
+            ¿Olvidó su contraseña?
           </a>
           <hr />
           <SignInButton />
@@ -93,8 +97,6 @@ export default function LoginPage({ searchParams }) {
             </button>
           </Link>
         </form>
-
-        <p className="text-center text-gray-500 text-xs mt-56">Apify. All rights reserved.</p>
       </div>
     </div>
   );

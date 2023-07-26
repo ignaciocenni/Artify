@@ -42,62 +42,68 @@ export default function Profile({ params }) {
 
   const userProducts =
     products &&
-    products.filter((product) => product.user.name === userData.name && product.status === "ACTIVE");
+    products.filter(
+      (product) =>
+        product.user.name === userData.name && product.status === "ACTIVE"
+    );
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      {userData ? (
-        <div className="flex items-center flex-col w-1/2 mt-5 border-zinc-300 border-b-2">
-          <div className="flex flex-col w-full items-center">
-            <div className="flex justify-center flex-col items-center pt-5 pb-2 gap-5">
-              <Image
-                src={userData.image}
-                width={100}
-                height={100}
-                alt="me"
-                className="rounded-full shadow-md shadow-gray-500"
-              />
-              <h1 className="font-bold text-2xl">
-                {userData.name} {userData.lastName}
-              </h1>
-            </div>
-            <div className="flex justify-between p-6 w-full">
-              <div className="flex flex-col items-start pr-10 w-full">
-                <h1 className="font-bold text-xl text-[var(--secundary)]">
-                  Descripción
+    <>
+      <div className="flex h-screen flex-col items-center pb-3 mt-[10vh] bg-[var(--background)] ">
+        {userData ? (
+          <div className="flex items-center flex-col w-1/2 mt-5">
+            <div className="flex flex-col w-full items-center">
+              <div className="flex justify-center flex-col items-center pt-5 pb-2 gap-5">
+                <Image
+                  src={userData.image}
+                  width={100}
+                  height={100}
+                  alt="me"
+                  className="rounded-full shadow-md shadow-gray-500"
+                />
+                <h1 className="font-bold text-2xl">
+                  {userData.name} {userData.lastName}
                 </h1>
-                <h3 className="text-zinc-600 text-sm">
-                  {userData && userData.aboutMe.length == 0
-                    ? "Este usuario todavia no tiene descripción."
-                    : userData.aboutMe}
-                </h3>
               </div>
-              <div className="flex flex-col justify-center items-center h-full gap-5">
-                <IgButton socials={userData && userData.socials} />
+              <div className="flex justify-between p-6 w-full">
+                <div className="flex flex-col items-start pr-10 w-full">
+                  <h1 className="pb-3 font-bold text-xl text-[var(--secundary)]">
+                    Descripción
+                  </h1>
+                  <h3 className="text-zinc-600 text-sm">
+                    {userData && userData.aboutMe.length == 0
+                      ? "Este usuario todavia no tiene descripción."
+                      : userData.aboutMe}
+                  </h3>
+                </div>
+                <div className="flex flex-col justify-center items-center h-full gap-5">
+                  <IgButton socials={userData && userData.socials} />
 
-                <FbButton socials={userData && userData.socials} />
+                  <FbButton socials={userData && userData.socials} />
 
-                <WpButton socials={userData && userData.socials} />
+                  <WpButton socials={userData && userData.socials} />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="flex w-full flex-col">
-            <h1 className="pl-5 text-xl font-bold text-[var(--secundary)]">
-              Publicaciones
-            </h1>
-            {userProducts && userProducts.length == 0 ? (
-              <NotFounded context={"profile"} />
-            ) : (
-              <Cards products={userProducts} />
-            )}
+            <div className="flex w-full flex-col">
+              <h1 className="pl-5 pb-3 text-xl font-bold text-[var(--secundary)]">
+                Publicaciones
+              </h1>
+              {userProducts && userProducts.length == 0 ? (
+                <NotFounded context={"profile"} />
+              ) : (
+                <div className="flex w-full justify-center items-center ">
+                  <Cards products={userProducts} />
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      ) : (
-        <LoadingProfile />
-      )}
-
+        ) : (
+          <LoadingProfile />
+        )}
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }

@@ -56,7 +56,7 @@ export const Slice = createSlice({
       const countrie = [...state.copyProducts];
       const find = countrie.filter((element) => element.province.name === action.payload);
 
-      state.activeProducts = action.payload === "Todas" ? countrie : find;
+       state.activeProducts = action.payload === "Todas" ? countrie : find;
       state.provincesFilter = action.payload === "Todas" ? countrie : find;
     },
     category: (state, action) => {
