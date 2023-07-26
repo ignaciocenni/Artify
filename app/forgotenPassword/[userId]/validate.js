@@ -1,8 +1,8 @@
 const validate = (userPassword) => {
   let errors = {};
 
-  if (!/^(?=.*\d).{6,}$/.test(userPassword.passwordCheck)) {
-    errors.passwordCheck = "Al menos 6 caracteres";
+  if (!/^(?=.*\d).{6,}$/.test(userPassword.password)) {
+    errors.password = "Al menos 6 caracteres";
   }
 
   return errors;
