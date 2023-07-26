@@ -5,7 +5,7 @@ import InputField from "../../components/inputs/InputField";
 import { sendContactForm } from "../../components/lib/api";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import validate from "./validate";
 
 export default function ForgotenPassword() {
   useEffect(() => {
@@ -38,12 +38,12 @@ export default function ForgotenPassword() {
     event.preventDefault();
 
     Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: '¡Email enviado!  Verifique su correo.',
+      position: "center",
+      icon: "success",
+      title: "¡Email enviado!  Verifique su correo.",
       showConfirmButton: false,
-      timer: 2500
-    })
+      timer: 2500,
+    });
 
     await sendContactForm({ ...form, type: "password" });
   };
@@ -52,6 +52,7 @@ export default function ForgotenPassword() {
     event.preventDefault();
     const name = event.target.name;
     const value = event.target.value;
+    setErrors(validate({ ...form, [name]: value }));
     setForm({ ...form, [name]: value });
   };
 
@@ -73,13 +74,13 @@ export default function ForgotenPassword() {
     <div className="h-screen text-center grid justify-center items-center">
       <form
         className="w-96 flex flex-col gap-5 items-center"
-        onSubmit={onSubmit}>
+        onSubmit={onSubmit}
+      >
         <h1 className="font-semibold text-3xl mb-5">Ingrese su email</h1>
         <h3 className="text-zinc-600 mb-5">
           Se le enviará un email para verificar que el usuario le pertenece y
           cambiar su contraseña
         </h3>
-        
 
         <InputField
           id="email" // Corregir el ID a "email"
@@ -88,6 +89,7 @@ export default function ForgotenPassword() {
           onChange={handleChange}
           name="email"
           value={form.email}
+          errors={errors.email}
         />
 
         <button className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 rounded-lg focus:outline-none focus:shadow-outline w-full">
