@@ -1,6 +1,6 @@
 const TotalSells = ({ total }) => {
   return (
-    <div className="flex flex-col bg-zinc-50 inl justify-center rounded-3xl h-full px-28 py-14 shadow-md shadow-zinc-400">
+    <div className="flex flex-col inl justify-center rounded-3xl h-full px-28 py-14 shadow-md shadow-zinc-400 bg-white">
       <h1 className="font-bold">Venta total de productos</h1>
       <h1 className="text-xs">Ganancia neta por ventas</h1>
       <h1 className="mt-5 flex items-end text-[var(--secundary)] text-6xl font-light p-2 ">
