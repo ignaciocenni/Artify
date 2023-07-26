@@ -136,7 +136,7 @@ export default function EditProfile({ params }) {
   const isFormValid = Object.values(form).some((value) => value === "");
 
   return (
-    <section className="w-full grid h-max justify-center ">
+    <section className="w-full grid h-max justify-center mt-[10vh] ml-[34vh] bg-[var(--background)] ">
       <div className=" pl-5 text-left  w-[37em] ">
 
         <h1 className=" h-23 font-semibold text-xl py-5 " >Editar Perfil</h1>
