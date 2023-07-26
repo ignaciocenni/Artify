@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import InputField from "../../components/inputs/InputField";
 import { sendContactForm } from "../../components/lib/api";
 import axios from "axios";
+import Swal from "sweetalert2";
+
 
 export default function ForgotenPassword() {
   useEffect(() => {
     async function fetchUsers() {
       try {
         const response = await axios.get("/api/users");
-        console.log(response.data);
         setUsers(response.data);
       } catch (error) {
         // Manejar el error, si es necesario
@@ -35,6 +36,15 @@ export default function ForgotenPassword() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: '¡Email enviado!  Verifique su correo.',
+      showConfirmButton: false,
+      timer: 2500
+    })
+
     await sendContactForm({ ...form, type: "password" });
   };
 
@@ -60,16 +70,16 @@ export default function ForgotenPassword() {
   }
 
   return (
-    <div className="text-center grid justify-center items-center mt-10">
+    <div className="h-screen text-center grid justify-center items-center">
       <form
         className="w-96 flex flex-col gap-5 items-center"
-        onSubmit={onSubmit}
-      >
-        <h1 className="font-semibold text-3xl mb-5">Ingrese su email.</h1>
-        <h3 className="font-semibold text-1xl mb-5">
+        onSubmit={onSubmit}>
+        <h1 className="font-semibold text-3xl mb-5">Ingrese su email</h1>
+        <h3 className="text-zinc-600 mb-5">
           Se le enviará un email para verificar que el usuario le pertenece y
-          cambiar su contraseña.
+          cambiar su contraseña
         </h3>
+        
 
         <InputField
           id="email" // Corregir el ID a "email"
@@ -80,8 +90,8 @@ export default function ForgotenPassword() {
           value={form.email}
         />
 
-        <button className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[250px]">
-          Enviar email de recuperación.
+        <button className="bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 rounded-lg focus:outline-none focus:shadow-outline w-full">
+          Enviar email de recuperación
         </button>
         <hr />
       </form>

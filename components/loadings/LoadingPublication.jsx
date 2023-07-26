@@ -2,9 +2,9 @@ import React from "react";
 
 function LoadingPublication() {
   return (
-    <div className="flex gap-4">
+    <div className="flex w-full gap-4">
       {" "}
-      {[...Array(4)].map((_, i) => (
+      {[...Array(5)].map((_, i) => (
         <div
           key={i}
           className=" w-96 object-cover flex flex-col justify-center items-start pb-3 my-2 mx-2 rounded-3xl shadow-sm animate-pulse">

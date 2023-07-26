@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Loading() {
   return (
     <>
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center h-screen">
         <Image
           src="https://i.pinimg.com/originals/ea/b7/e1/eab7e1120c9dd628d3bb39a20a94927d.gif"
           alt="animacion de carga"

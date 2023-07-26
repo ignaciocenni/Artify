@@ -44,20 +44,20 @@ export default function EditProduct({ params }) {
   };
 
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-5 mt-[10vh] ml-[34vh] bg-[var(--background)]">
       
         {product && product.image ? (
           <div>
           <ImageSlider image={product?.image} />
           </div>
         ) : (
-          <div className="w-[60rem] h-[60rem] p-10 flex justify-center items-center">
+          <div className="w-[53rem] h-[40rem] p-10 flex justify-center items-center">
           <Loading />
           </div>
         )}
      
-      <section className="w-full grid h-max justify-center text-center ">
-        <h1 className=" h-23 font-semibold text-3xl py-5">Editar Producto</h1>
+      <section className="grid h-max justify-center text-center ">
+        <h1 className="font-semibold text-3xl py-5">Editar Producto</h1>
         <select
           className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[var(--background-sec)] text-center font-semibold "
           onChange={handleChange}

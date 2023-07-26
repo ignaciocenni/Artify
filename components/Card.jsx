@@ -24,9 +24,14 @@ export default function Card(props) {
         <h3 className="text-sm font-medium pt-1">${price}</h3>
         <h3 className="text-sm font-semibold py-2 w-full h-16">{title}</h3>
         <div className="flex pt-1">
-          <Image className="rounded-full" src={userImage} width={20} height={20} alt={`Imagen de perfil del usuario ${id}`} />
+          <Image
+            className="rounded-full"
+            src={userImage}
+            width={20}
+            height={20}
+            alt={`Imagen de perfil del usuario ${id}`}
+          />
           <Link href={`/profile/${userId}`}>
-            {" "}
             <h3 className="px-1 text-sm font-light">{user}</h3>
           </Link>
         </div>

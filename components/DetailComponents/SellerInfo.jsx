@@ -25,7 +25,7 @@ const SellerInfo = ({ user, userId, socials }) => {
           </Link>
         </div>
 
-          <div className=" flex justify-center items-center">
+          <div className=" flex justify-center items-center gap-3">
             <IgButton  socials={socials?socials[1]:null} />
             <FbButton socials={socials?socials[0]:null} />
           </div>

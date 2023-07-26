@@ -108,11 +108,11 @@ export default function PurchaseStatusComponent() {
   }, [data?.data?.user.email, data?.data?.user.name]);
   
   return (
-    <div className="bg-[var(--primary)]">
+    <div className="bg-[var(--primary)] mt-[10vh]">
       <div className="h-[8vh] p-5">
         <Link href={"/"}>
         <button className="bg-black hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-tl rounded-tr rounded-bl rounded-br shadow-md mr-4 mt-2 mb-2">
-          ← Volver al inicio
+          Volver
         </button>
         </Link>
       </div>

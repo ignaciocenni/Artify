@@ -130,20 +130,20 @@ const AddDeductButtons = ({ data }) => {
         <div className="bg-[var(--primary)] rounded-xl p-5">
           <div className="flex items-center gap-5">
             <button
-              onClick={handleAddProduct}
-              className="hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)] w-12 h-12 rounded-lg flex justify-center items-center shadow-xl transition-colors duration-300"
+              onClick={handleDeductProduct}
+              className="hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)] w-12 h-12 rounded-lg flex justify-center items-center shadow-xl transition-colors duration-200"
             >
-              <span className="text-xl font-bold">+</span>
+              <span className="text-xl font-bold">-</span>
             </button>
             <div className="flex flex-col items-center">
               <p className="text-gray-500 text-sm">Cantidad</p>
               <p className="text-center text-xl font-bold">{currentQuantity}</p>
             </div>
             <button
-              onClick={handleDeductProduct}
-              className="hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)] w-12 h-12 rounded-lg flex justify-center items-center shadow-xl transition-colors duration-300"
+              onClick={handleAddProduct}
+              className="hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)] w-12 h-12 rounded-lg flex justify-center items-center shadow-xl transition-colors duration-200"
             >
-              <span className="text-xl font-bold">-</span>
+              <span className="text-xl font-bold">+</span>
             </button>
           </div>
         </div>
