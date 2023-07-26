@@ -1,21 +1,19 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
-import close from "../public/images/close.svg";
-import Heart from "./Heart";
 import Stars from "./Stars";
 import CategoryLabel from "./DetailComponents/CategoryLabel";
 import ImageSlider from "./DetailComponents/ImageSlider";
 import LatestReviews from "./DetailComponents/LatestReviews";
 import AddReviews from "./DetailComponents/AddReviews";
 import SellerInfo from "./DetailComponents/SellerInfo";
-import BuyNowButton from "./buttons/BuyAndDetail";
 import Footer from "./Footer";
 import AddDeductButtons from "../components/buttons/AddDeductButtons";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
+
+
 const DetailContent = ({ data, sale }) => {
+
   const [toggle, setToggle] = useState(false);
   const [latestReview, setLatestReview] = useState(null);
 
@@ -53,40 +51,43 @@ const DetailContent = ({ data, sale }) => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center content-center gap-14 mt-[10vh] ml-[34vh]">
-        <div className="flex items-start justify-center">
+      <div className="flex flex-col justify-center items-center content-center mt-[10vh] ml-[34vh]">
+        <div className="flex justify-center gap-5 mb-20">
           <ImageSlider image={image} />
+          <div className="flex flex-col justify-between">
+            <div className="py-5 px-3 flex flex-col items-start gap-4 ">
+              <CategoryLabel category={category} />
 
-          <div className="py-5 px-3 flex flex-col items-start gap-4">
-            <CategoryLabel category={category} />
+              <div className="flex gap-3 font-bold text-3xl">{name}</div>
 
-            <div className="flex gap-3 font-bold text-3xl">{name}</div>
+              <div className="flex content-center items-center gap-1">
+                <Stars averange={averange} />
+              </div>
 
-            <div className="flex content-center items-center gap-1">
-              <Stars averange={averange} />
-            </div>
+              <div className="flex items-end gap-2 w-full mr-7">
+                <h1 className="text-4xl font-bold">${price}</h1>
+                <p className="text-gray-500 text-sm ">({stock} Disponibles)</p>
+              </div>
 
-            <div className="flex items-end gap-2 w-full mr-7">
-              <h1 className="text-4xl font-bold">${price}</h1>
-              <p className="text-gray-500 text-sm ">({stock} Disponibles)</p>
-            </div>
-
-            {/* <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
               <h1 className="text-sm font-light">{`Publicado en ${user?.province.name}`}</h1>
             </div> */}
 
-            <div className="flex flex-col py-3 gap-2 my-0 px-0 w-[524px] h-[363px]">
-              <h1 className="font-medium text-xl">Descripción del vendedor</h1>
-              <p className="font-light">{description}</p>
-            </div>
-            <div className="flex">
-              <AddDeductButtons data={data} />
+              <div className="flex flex-col py-3 gap-2 my-0 px-0 ">
+                <h1 className="font-medium text-xl">
+                  Descripción del vendedor
+                </h1>
+                <p className="font-light h-70">{description}</p>
+              </div>
             </div>
 
-            <SellerInfo user={user} userId={userId} />
-            <BuyNowButton />
+            <div className="flex flex-col w-full">
+              <SellerInfo user={user} userId={userId} />
+              <AddDeductButtons data={data} />
+        
+            </div>
           </div>
-          <div></div>
+ 
         </div>
         <div className="flex flex-col items-start gap-3 px-5 w-[1000px]">
           {toggle && (
