@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 export default function ProvinceFilter() {
   const dispatch = useDispatch();
   const provinces = useSelector((state) => state.valores.provinces);
+  const Allproducts = useSelector((state) => state.valores.copyProducts);
   const products = useSelector((state) => state.valores.activeProducts);
   const provinceNames = provinces.map((province) => province.name);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -38,7 +39,7 @@ export default function ProvinceFilter() {
   }, []);
 
   const citysWhitProducts = provinceNames.filter((city) =>
-  products.some((product) => product.province.name === city)
+  Allproducts.some((product) => product.province.name === city)
 );
 
   return (

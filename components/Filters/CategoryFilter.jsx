@@ -4,15 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function CategoryFilter() {
   const categories = useSelector((state) => state.valores.categories);
+  const Allproducts = useSelector((state) => state.valores.provincesFilter);
   const products = useSelector((state) => state.valores.activeProducts);
   const categoryNames = categories.map((category) => category.name);
 
-  const filteredCategoryNames = categoryNames.filter((cat) => products.some((product) => product.category.name === cat));
+  const filteredCategoryNames = categoryNames.filter((cat) => Allproducts.some((product) => product.category.name === cat));
 
   const [stateCategory, setStateCategory] = useState({
     stateCategory: "Categorias",
   });
- // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function CategoryFilter() {
   };
   const handleCategorySelect = (cat) => {
     cat === "allCategories" ? setStateCategory({ stateCategory: "Categorias" }) : setStateCategory({ stateCategory: cat });
-    //dispatch(category(cat));
+    dispatch(category(cat));
     setIsDropdownOpen(false);
   };
 
