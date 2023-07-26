@@ -9,9 +9,11 @@ export default function Preloader() {
   const loaded = useRef(false);
 
   const { data: products, isLoading } = useGetProductsQuery();
-  const provinces = useGetProvincesQuery();
-  const categories = useGetCategoriesQuery();
-  const users = useGetUsersQuery();
+  let provinces = useGetProvincesQuery();
+
+  let categories = useGetCategoriesQuery();
+
+  let users = useGetUsersQuery();
 
   if (!isLoading && !provinces.isLoading && !categories.isLoading && !users.isLoading) {
     if (!loaded.current && !isLoading) {
