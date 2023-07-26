@@ -11,14 +11,19 @@ import Link from "next/link";
 //import numberConverte from "../app/cart/cardCart/numberConverte";
 
 export default function CartComponent() {
+  const user = useSession();
   const total = useSelector((state) => state.valores.totalPrice);
   const [url, setUrl] = useState("");
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
-    const cartProducts = JSON.parse(localStorage.getItem("products")) || [];
-    setProducts(cartProducts);
+    const products = JSON.parse(localStorage.getItem("products")) || [];
+    const filteredProducts = products.filter((product) => product.quantity !== 0)
+    localStorage.setItem("products", JSON.stringify(filteredProducts));
+    const newProducts = JSON.parse(localStorage.getItem("products"))
+
+    setProducts(newProducts);
   }, []);
-  const user = useSession();
   return (
     <>
       {products.length ? (
