@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import InputField from "../../components/inputs/InputField";
 import { sendContactForm } from "../../components/lib/api";
 import axios from "axios";
+import Swal from "sweetalert2";
+
 
 export default function ForgotenPassword() {
   useEffect(() => {
     async function fetchUsers() {
       try {
         const response = await axios.get("/api/users");
-        console.log(response.data);
         setUsers(response.data);
       } catch (error) {
         // Manejar el error, si es necesario
@@ -35,6 +36,15 @@ export default function ForgotenPassword() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: '¡Email enviado!  Verifique su correo.',
+      showConfirmButton: false,
+      timer: 2500
+    })
+
     await sendContactForm({ ...form, type: "password" });
   };
 
@@ -69,6 +79,7 @@ export default function ForgotenPassword() {
           Se le enviará un email para verificar que el usuario le pertenece y
           cambiar su contraseña
         </h3>
+        
 
         <InputField
           id="email" // Corregir el ID a "email"
