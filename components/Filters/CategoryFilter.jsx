@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function CategoryFilter() {
   const categories = useSelector((state) => state.valores.categories);
-  const Allproducts = useSelector((state) => state.valores.provincesFilter);
+  const Allproducts = useSelector((state) => state.valores.copyProducts);
   const products = useSelector((state) => state.valores.activeProducts);
   const categoryNames = categories.map((category) => category.name);
 
@@ -34,7 +34,7 @@ export default function CategoryFilter() {
     setIsDropdownOpen(!isDropdownOpen);
   };
   const handleCategorySelect = (cat) => {
-    cat === "allCategories" ? setStateCategory({ stateCategory: "Categorias" }) : setStateCategory({ stateCategory: cat });
+    cat === "Todas" ? setStateCategory({ stateCategory: "Categorias" }) : setStateCategory({ stateCategory: cat });
     dispatch(category(cat));
     setIsDropdownOpen(false);
   };
@@ -61,9 +61,9 @@ export default function CategoryFilter() {
           <div className={`absolute ${isDropdownOpen ? "block" : "hidden"} top-full min-w-full w-max bg-white shadow-md mt-1 rounded z-10`}>
             <ul className="text-left border rounded">
               <li
-                value="allCategories"
+                value="Todas"
                 className="px-4 py-1 hover:bg-grey-100 border-b cursor-pointer"
-                onClick={() => handleCategorySelect("allCategories")}
+                onClick={() => handleCategorySelect("Todas")}
               >
                 Todas
               </li>
