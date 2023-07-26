@@ -70,7 +70,7 @@ export const options = {
                 image: user.image,
                 lastName: lastName,
                 email: user.email,
-                password: "thirdPartyAuth",
+                password: "thirdPartyAuth1",
               },
             });
             token.role = dbUser.rol;
