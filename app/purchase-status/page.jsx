@@ -61,16 +61,16 @@ export default function PurchaseStatusComponent() {
     router.push("/")
   }
   useEffect(() => {
-    sendEmail()
     const productsLS = JSON.parse(localStorage.getItem("products")) || [];
     setProducts(productsLS)
     const updatedStockProducts = productsLS.map((product) => ({
       id: product.id,
       stock: product.stock - product.quantity,
     }));
-    peticionPost(products)
     
     if (status === "approved") {
+      peticionPost(products)
+      sendEmail()
       updatedStockProducts.forEach(async (product) => {
         const url = `/api/products/${product.id}`;
         const data = { stock: product.stock };
