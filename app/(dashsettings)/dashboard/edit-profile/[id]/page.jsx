@@ -76,48 +76,9 @@ export default function EditProfile({ params }) {
     });
   }, [data?.data?.user]);
 
-  const onSubmit = async (event) => {
-    const response = await putProfile(form);
-    console.log("Respuesta del form: " + response);
-    if (response.created) {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Perfil Editado",
-        showConfirmButton: true,
-      });
-    } else {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Algo salió mal",
-        showConfirmButton: true,
-      });
-    }
-  };
 
-  const handleChange = (event) => {
-    event.preventDefault();
-    const { name, value } = event.target;
 
-    let parsedValue = value;
 
-    if (name === "wallet") {
-      parsedValue = parseFloat(value);
-    } else if (name === "cbu") {
-      parsedValue = parseInt(value, 10);
-    } else if (name.startsWith("socials_")) {
-      const index = parseInt(name.split("_")[1], 10);
-      const updatedSocials = [...form.socials];
-      updatedSocials[index] = parsedValue;
-      setErrors({ ...errors, socials: null });
-      setForm({ ...form, socials: updatedSocials });
-      return;
-    }
-    setForm({ ...form, [name]: parsedValue });
-  };
-
-  const isFormValid = Object.values(form).some((value) => value === "");
 
   return (
     <section className="w-full grid h-max justify-center mt-[10vh] ml-[34vh] bg-[var(--background)] ">
@@ -132,10 +93,13 @@ export default function EditProfile({ params }) {
             alt="imagen de usuario"
           />
         </div>
+        <UploadButton />
         <FormName userData={userData} userId={form.userId} />
         <br />
         <hr />
-        <FormPassword userPassword={userData.password} userId={form.userId} />
+        <FormPassword
+        userId={form.userId}
+        userPassword={userData.password}/>
         <br />
         <hr />
         <FormSocials />
@@ -146,7 +110,8 @@ export default function EditProfile({ params }) {
         </div>
         <br />
         <hr className="  text-black" />
-        <DeleteUser />
+        <DeleteUser 
+        userId={form.userId}/>
       </div>
     </section>
   );
