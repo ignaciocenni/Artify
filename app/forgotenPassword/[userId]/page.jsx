@@ -5,19 +5,24 @@ import InputField from "../../../components/inputs/InputField";
 import axios from "axios";
 import { usePathname } from "next/navigation";
 import Swal from "sweetalert2";
+import validate from "./validate";
 
 export default function ChangePassword() {
   const pathName = usePathname();
   const parts = pathName.split("/"); // Divide la cadena por cada "/"
   const lastPart = parts[parts.length - 1]; // Obtiene el último elemento del arreglo
 
-  const utPassword = async (userPassword) => {
+  const putPassword = async (userPassword) => {
     const res = (await axios.put(`/api/users/${userId.id}`, userPassword)).data;
     return { created: true, res };
   };
 
   const [userPassword, setUsePassword] = useState({
     password: "",
+    passwordCheck: "",
+  });
+
+  const [errors, setErrors] = useState({
     passwordCheck: "",
   });
 
@@ -49,6 +54,7 @@ export default function ChangePassword() {
     event.preventDefault();
     const name = event.target.name;
     const value = event.target.value;
+    setErrors(validate({ ...userPassword, [name]: value }));
     setUsePassword({ ...userPassword, [name]: value });
     setUserId({ ...userId, id: lastPart });
   };
@@ -57,7 +63,8 @@ export default function ChangePassword() {
     <div className="h-screen w-full text-center flex justify-center items-center bg-[var(--background)]">
       <form
         className="w-96 flex flex-col gap-5 items-center"
-        onSubmit={onSubmit}>
+        onSubmit={onSubmit}
+      >
         <h1 className="font-semibold text-3xl mb-5">Cambia tu contraseña.</h1>
 
         {/* <h3 className="font-semibold text-1xl mb-5">
@@ -72,6 +79,7 @@ export default function ChangePassword() {
           onChange={handleChange}
           name="password"
           value={userPassword.password}
+          errors={errors.passwordCheck}
         />
 
         <InputField
