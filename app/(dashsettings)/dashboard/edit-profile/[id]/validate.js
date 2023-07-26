@@ -1,5 +1,5 @@
-export const validate = ( password) => {
-    const {  newPassword, repPassword } = password
+export const validate = (form) => {
+    const { newPassword, repPassword } = form
     const errors = {
         actualPassword: "",
         newPassword: "",
@@ -17,9 +17,7 @@ export const validate = ( password) => {
     //repPassword
     if (repPassword !== newPassword)
         errors.repPassword = "La contraseña no coincide"
-    //Password
-    /* if (actualpassword !== oldPassword)
-        errors.actualPassword = "La contraseña no coincide"
- */
+    
+ 
     return errors;
 };
