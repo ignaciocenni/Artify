@@ -14,7 +14,7 @@ export default function FormSocials() {
 
     }
   return (
-    <div>
+    <div id="socials">
         <h1 className="font-semibold text-lg mb-4">Redes Sociales</h1>
         <form className=" w-[37em]" onSubmit={onSubmit}>
           <label htmlFor="Nombre">WhatsApp</label>

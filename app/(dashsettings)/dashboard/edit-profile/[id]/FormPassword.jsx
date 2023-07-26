@@ -60,8 +60,9 @@ export default function FormPassword({ userPassword, userId }) {
   };
 
   return (
-    <div>
-      <h1 className="font-semibold text-lg text mb-4">Cambiar contraseña</h1>
+    <div >
+      <h1
+      className="font-semibold text-lg text mb-4">Cambiar contraseña</h1>
       <form className=" w-[37em]" onSubmit={onSubmit}>
         { oldPassword !== "thirdPartyAuth1" ? (
             <>
