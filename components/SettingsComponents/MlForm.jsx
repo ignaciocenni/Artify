@@ -8,11 +8,16 @@ export default function FormML() {
         <p className="text-xs font-light">Para Vender/Comprar una artesania, deberá ingresar su CVU/Alias de Mercado Pago!</p>
         <div className="flex items-center gap-5 w-full">
           <input
-            placeholder="CVU/Alias"
+            placeholder="CVU"
             className="text-black px-3 w-60 h-11 rounded-xl bg-[var(--primary)] focus:outline-none"
             type="text"
           />
-          <MLButton />
+           <input
+            placeholder="Alias"
+            className="text-black px-3 w-60 h-11 rounded-xl bg-[var(--primary)] focus:outline-none"
+            type="text"
+          />
+          <button>Guardar</button>
         </div>
       </div>
     </>

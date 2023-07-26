@@ -25,11 +25,7 @@ const NavBar = () => {
 
   const handleClick = () => {
     if (!session) {
-      Swal.fire(
-        "Advertencia!",
-        "Debes iniciar sesión para poder publicar!",
-        "warning"
-      );
+      Swal.fire("Advertencia!", "Debes iniciar sesión para poder publicar!", "warning");
     }
   };
 
@@ -56,20 +52,16 @@ const NavBar = () => {
         <nav className="flex fixed top-0 w-full left-0 justify-between items-center h-[10vh] px-10 shadow-md bg-[var(--background)] z-50">
           <Link href="/">
             <div className="flex content-center items-center ">
-              <Image
-                src="/images/logo.svg"
-                width={100}
-                height={100}
-                alt="logo"
-              />
+              <Image src="/images/logo.svg" width={100} height={100} alt="logo" />
             </div>
           </Link>
-          <SearchBar />
+          {path === "/" && <SearchBar />}
           <div className="flex content-center items-center gap-5 ">
             <Link href="/post-product">
               <button
                 onClick={handleClick}
-                className="hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-sm text-xs font-bold px-2 h-11">
+                className="hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-sm text-xs font-bold px-2 h-11"
+              >
                 <h1 className="">+ Crear publicación</h1>
               </button>
             </Link>
@@ -85,13 +77,9 @@ const NavBar = () => {
             <div className="flex">
               <button
                 onClick={toggleDropdown}
-                className="focus:outline-none px-3 relative hover:bg-[var(--primary)] hover:shadow-lg rounded-full ">
-                <Image
-                  src="/images/arrow-down.svg"
-                  width={20}
-                  height={20}
-                  alt="menu"
-                />
+                className="focus:outline-none px-3 relative hover:bg-[var(--primary)] hover:shadow-lg rounded-full "
+              >
+                <Image src="/images/arrow-down.svg" width={20} height={20} alt="menu" />
               </button>
             </div>
           </div>

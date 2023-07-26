@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import InputField from "../../../components/inputs/InputField";
 import axios from "axios";
 import { usePathname } from "next/navigation";
 import Swal from "sweetalert2";
-import validate from "./validate";
 
 export default function ChangePassword() {
   const pathName = usePathname();
@@ -22,17 +22,16 @@ export default function ChangePassword() {
     passwordCheck: "",
   });
 
-  const [errors, setErrors] = useState({
-    passwordCheck: "",
-  });
-
   const [userId, setUserId] = useState({
     id: "",
   });
 
+  const router = useRouter();
+
   const onSubmit = async (event) => {
     event.preventDefault();
     const response = await putPassword(userPassword);
+
     if (response.created) {
       Swal.fire({
         position: "center",
@@ -40,6 +39,7 @@ export default function ChangePassword() {
         title: "Perfil Editado",
         showConfirmButton: true,
       });
+      router.push("/login");
     } else {
       Swal.fire({
         position: "center",
@@ -48,13 +48,14 @@ export default function ChangePassword() {
         showConfirmButton: true,
       });
     }
+
+    /* router.push("/login"); */
   };
 
   const handleChange = (event) => {
     event.preventDefault();
     const name = event.target.name;
     const value = event.target.value;
-    setErrors(validate({ ...userPassword, [name]: value }));
     setUsePassword({ ...userPassword, [name]: value });
     setUserId({ ...userId, id: lastPart });
   };
@@ -66,6 +67,9 @@ export default function ChangePassword() {
         onSubmit={onSubmit}
       >
         <h1 className="font-semibold text-3xl mb-5">Cambia tu contraseña.</h1>
+        <p className="text-red-700 font-medium text-xs">
+          Debe contener almenos 6 caracteres.
+        </p>
 
         {/* <h3 className="font-semibold text-1xl mb-5">
           Se le enviará un email para verificar que el usuario le pertenece y
@@ -79,7 +83,6 @@ export default function ChangePassword() {
           onChange={handleChange}
           name="password"
           value={userPassword.password}
-          errors={errors.passwordCheck}
         />
 
         <InputField
