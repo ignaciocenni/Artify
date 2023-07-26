@@ -2,7 +2,7 @@ import { useState } from "react";
 import StarRating from "./starsComponent/StarRating";
 import axios from "axios";
 
-function AddReviews({ id, setToggle, buyerId, setLatestReview }) {
+function AddReviews({ id, buyerId, setLatestReview }) {
   const [form, setForm] = useState({
     comment: "",
     rating: 0,
@@ -10,9 +10,8 @@ function AddReviews({ id, setToggle, buyerId, setLatestReview }) {
     userId: buyerId,
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [isDropDownVisible, setIsDropDownVisible] = useState(true);
   const [filledStars, setFilledStars] = useState(0); // Estado de las estrellas llenas seleccionadas
-
+  const [toggle, setToggle] = useState(true);
   const postReviews = async (id, form) => {
     const url = `/api/products/${id}/reviews`;
     try {
@@ -27,14 +26,13 @@ function AddReviews({ id, setToggle, buyerId, setLatestReview }) {
   const handlerOnClick = () => {
     setIsButtonDisabled(true);
     postReviews(id, form)
-      .then(() => {
-        setIsDropDownVisible(false);
-        setForm({
-          ...form,
-          comment: "",
-          rating: 0,
-        });
-        setToggle(false);
+    .then(() => {
+      setForm({
+        ...form,
+        comment: "",
+        rating: 0,
+      });
+      setToggle(false);
       })
       .catch((error) => {
         console.log("Error al enviar la reseña:", error);
@@ -52,8 +50,9 @@ function AddReviews({ id, setToggle, buyerId, setLatestReview }) {
 
   return (
     <>
+    {toggle ?<div>
       <h1 className="font-semibold">Haz una reseña</h1>
-      <StarRating setForm={setForm} filledStars={filledStars} setFilledStars={setFilledStars} /> {/* Pasar el estado de las estrellas llenas seleccionadas */}
+      <StarRating setForm={setForm} filledStars={filledStars} setFilledStars={setFilledStars} />
       <div className="flex gap-5">
         <input
           onChange={handlerChange}
@@ -70,6 +69,11 @@ function AddReviews({ id, setToggle, buyerId, setLatestReview }) {
           <h1 className="text-xs font-extrabold px-5">Comentar</h1>
         </button>
       </div>
+      </div>
+      :
+      <div></div>
+      }
+      
     </>
   );
 }

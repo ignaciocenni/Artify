@@ -5,7 +5,7 @@ function LatestReviews({ reviews, latestReview }) {
   return (
     <div>
       <h1 className="font-semibold">Experiencias de los clientes con el producto</h1>
-      {!reviews.length &&
+      {!reviews.length && !latestReview &&
        <div  className='flex flex-col  pb-4 border-zinc-300 border-b-2'>
        <div className="flex justify-between items-center mb-3">
        </div>
@@ -21,7 +21,7 @@ function LatestReviews({ reviews, latestReview }) {
           <p className="text-zinc-700">{rev.comment}</p>
         </div>
       ))}
-      {latestReview && (
+      {latestReview && reviews[-1]?.comment != latestReview.comment &&(
         <div key={latestReview.id} className='flex flex-col  pb-4 border-zinc-300 border-b-2'>
         <div className="flex justify-between items-center mb-3">
           <p ><Stars averange={latestReview.rating} size={20} /></p>
