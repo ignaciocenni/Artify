@@ -80,6 +80,7 @@ export default function ForgotenPassword() {
           Se le enviará un email para verificar que el usuario le pertenece y
           cambiar su contraseña.
         </h3>
+        
 
         <InputField
           id="email" // Corregir el ID a "email"
