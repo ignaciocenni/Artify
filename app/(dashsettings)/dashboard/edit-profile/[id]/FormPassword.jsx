@@ -2,82 +2,108 @@ import { useState } from "react";
 import axios from "axios";
 import SubmitButton from "../../../../../components/buttons/SubmitButton"
 import Swal from "sweetalert2";
+import { validate } from "./validate"
 
 
-export default function FormPassword({ userPassword,userId }) {
-  const actualPassword = userPassword
-  const [errors, setErrors] = useState({})
-  const validate = ({ actualPassword, password, newPassword }) => {
-    const errors = {
-      actualPassword: "",
-      newPassword: "",
-    };
-    if (actualPassword !== password)
-      errors.actualPassword = "Tu contraseña actual no coincide";
-
-    if (!newPassword)
-      errors.newPassword = "Debes ingresar una nueva contraseña";
-
-    return errors;
-  };
-
-  const [password, setPassword] = useState({
-    password: "",
+export default function FormPassword({ userPassword, userId }) {
+  const oldPassword = userPassword
+  const [errors, setErrors] = useState({
+    actualPassword: "",
     newPassword: "",
+    repPassword: ""
+  })
+
+  const [form, setPassword] = useState({
+    actualPassword: "",
+    newPassword: "",
+    repPassword: ""
 
   })
+  const valActualPass=(form)=>{
+    const { actualPassword } = form
+    const error={
+      actualPassword:""
+    }
+    if (actualPassword !== oldPassword)
+    error.actualPassword="La contraseña no coincide"
+    return error
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target
-    setPassword({ [name]: value })
-    setErrors(validate({ ...password, [name]: value, password, actualPassword }))
+    setPassword({ ...form, [name]: value })
+    setErrors(validate({ ...form, [name]: value }))
+    setErrors(valActualPass({ ...form, [name]: value }))
+   
+
 
   }
-
+  const resp = {
+    password: form.newPassword
+  }
+  console.log(resp);
 
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    const validationErrors = validate(password);
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length > 0) {
-      return;
+    const putPassword = async (resp) => {
+      try {
+        const res = (await axios.put(`/api/users/${userId}`, resp)).data;
+        return { created: true, res };
+      } catch (error) {
+        return { created: false, error: error.message };
+      }
+    };
+    const resp = {
+      password: form.newPassword
     }
-    try {
+    const response = await putPassword(resp);
 
-      const res = await axios.put(`/api/users/${userId}`,password.newPassword);
-
+    if (response.created) {
       Swal.fire({
+        position: "center",
         icon: "success",
-        title: "Contraseña cambiada",
-        text: "Tu contraseña ha sido cambiada exitosamente.",
+        title: "Perfil Editado",
+        showConfirmButton: true,
       });
-    } catch (error) {
+    } else {
       Swal.fire({
+        position: "center",
         icon: "error",
-        title: "Error al cambiar la contraseña",
-        text: "Hubo un problema al cambiar tu contraseña. Por favor, inténtalo nuevamente.",
+        title: "Algo salió mal",
+        showConfirmButton: true,
       });
     }
+    setPassword({
+      actualPassword: "",
+      newPassword: "",
+      repPassword: ""
+
+    })
   };
 
   return (
     <div >
       <h1
-      className="font-semibold text-lg text mb-4">Cambiar contraseña</h1>
+        className="font-semibold text-lg text mb-4">Cambiar contraseña</h1>
       <form className=" w-[37em]" onSubmit={onSubmit}>
-        <label htmlFor="Nombre">Contraseña actual</label>
-        <input
-          className="  bg-[var(--primary)]  flex  font-bold text-xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
-          id="password"
-          type="password"
-          placeholder=""
-          onChange={handleChange}
-        />
-           {errors.actualPassword && (
-          <p className="text-red-600 mb-2">{errors.actualPassword}</p>
-        )}
+        {oldPassword !== "thirdPartyAuth1" ? (
+          <>
+            <label htmlFor="Nombre">Contraseña actual</label>
+            <input
+              className="bg-[var(--primary)] flex font-bold text-xl shadow appearance-none rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
+              id="password"
+              type="password"
+              onChange={handleChange}
+              name="actualPassword"
+              value={form.actualPassword}
+            />
+            {errors.actualPassword && (
+              <p className="text-red-600 mb-2">{errors.actualPassword}</p>
+            )}
+          </>
+        ) : null
+        }
 
         <label htmlFor="Nombre">Nueva contraseña</label>
         <input
@@ -86,7 +112,7 @@ export default function FormPassword({ userPassword,userId }) {
           type="Password"
           onChange={handleChange}
           name="newPassword"
-          value={password.password}
+          value={form.newPassword}
         />
         {errors.newPassword && (
           <p className="text-red-600 mb-2">{errors.newPassword}</p>
@@ -98,13 +124,18 @@ export default function FormPassword({ userPassword,userId }) {
           type="password"
           placeholder=""
           onChange={handleChange}
-
+          name="repPassword"
+          value={form.repPassword}
         />
+        {errors.repPassword && (
+          <p className="text-red-600 mb-2">{errors.repPassword}</p>
+        )}
+        <div className="w-[37em]">
+          <SubmitButton
+            label="Guardar"
+          />
+        </div>
       </form>
-      <div className="w-[37em]">
-        <SubmitButton
-          label="Guardar" />
-      </div>
     </div>
   )
 }
