@@ -56,24 +56,32 @@ export default function SlideBarSettings() {
           </Link>
         </div>
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
+          <Link href="#aboutMe">
           <button className="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
             Contraseña
           </button>
+          </Link>
         </div>
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
+        <Link href="#socials">
           <button className="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
             Redes Sociales
           </button>
+        </Link>
         </div>
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
+        <Link href="#socials">
           <button className="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
             Pagos
           </button>
+        </Link>
         </div>
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
+        <Link href="#socials">
           <button className="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
             Otros
           </button>
+        </Link>
         </div>
 
         <div className="w-56 border-b border-neutral-400 py-3"></div>
