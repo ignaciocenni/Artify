@@ -7,10 +7,10 @@ import Swal from "sweetalert2";
 import Image from "next/image";
 import FormML from "../../../../../components/SettingsComponents/MlForm";
 import SubmitButton from "../../../../../components/buttons/SubmitButton";
-import FormName from "./FormNombre"
-import FormPassword from "./FormPassword"
-import FormSocials from "./FormSocials"
-import DeleteUser from "./DeleteUser"
+import FormName from "./FormNombre";
+import FormPassword from "./FormPassword";
+import FormSocials from "./FormSocials";
+import DeleteUser from "./DeleteUser";
 
 /* const putProfile = async (form) => {
     try { 
@@ -21,12 +21,10 @@ import DeleteUser from "./DeleteUser"
     } 
   }; */
 
-
 export default function EditProfile({ params }) {
-
-  const { id } = params
+  const { id } = params;
   const data = useSession();
-  
+
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -41,7 +39,6 @@ export default function EditProfile({ params }) {
     status: "",
     rol: "",
   });
-  
 
   const [form, setForm] = useState({
     name: "",
@@ -70,18 +67,16 @@ export default function EditProfile({ params }) {
         socials: result.socials,
         status: "",
         rol: "",
-
       });
-    }
-    allDataUser()
+    };
+    allDataUser();
     setForm({
       ...form,
       userId: data?.data?.user.id,
-    })
+    });
   }, [data?.data?.user]);
 
   const onSubmit = async (event) => {
-
     const response = await putProfile(form);
     console.log("Respuesta del form: " + response);
     if (response.created) {
@@ -125,9 +120,9 @@ export default function EditProfile({ params }) {
   const isFormValid = Object.values(form).some((value) => value === "");
 
   return (
-    <section className="w-full grid bg-slate-500 h-screen justify-center overflow-scroll">
+    <section className="w-full grid h-max justify-center mt-[10vh] ml-[34vh] bg-[var(--background)] ">
       <div className=" pl-5 text-left  w-[37em] ">
-        <h1 className=" h-23 font-semibold text-xl py-5 " >Editar Perfil</h1>
+        <h1 className=" h-23 font-semibold text-xl py-5 ">Editar Perfil</h1>
         <div className=" w-[37em] mb-3 flex justify-center items-center">
           <Image
             className=" rounded-full shadow-sm"
@@ -137,18 +132,13 @@ export default function EditProfile({ params }) {
             alt="imagen de usuario"
           />
         </div>
-        <FormName
-          userData={userData}
-          userId={form.userId}
-        />
+        <FormName userData={userData} userId={form.userId} />
         <br />
         <hr />
-        <FormPassword
-        userPassword={userData.password}
-        userId={form.userId}/>
+        <FormPassword userPassword={userData.password} userId={form.userId} />
         <br />
         <hr />
-        <FormSocials/>
+        <FormSocials />
         <br />
         <hr className="  text-black" />
         <div className="w-full">
@@ -156,9 +146,8 @@ export default function EditProfile({ params }) {
         </div>
         <br />
         <hr className="  text-black" />
-        <DeleteUser/>
+        <DeleteUser />
       </div>
-
     </section>
   );
 }

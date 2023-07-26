@@ -6,13 +6,12 @@ import axios from "axios";
 import { usePathname } from "next/navigation";
 import Swal from "sweetalert2";
 
-export default function changePassword() {
+export default function ChangePassword() {
   const pathName = usePathname();
   const parts = pathName.split("/"); // Divide la cadena por cada "/"
   const lastPart = parts[parts.length - 1]; // Obtiene el último elemento del arreglo
 
-
-  const putPassword = async (userPassword) => {
+  const utPassword = async (userPassword) => {
     const res = (await axios.put(`/api/users/${userId.id}`, userPassword)).data;
     return { created: true, res };
   };
@@ -22,12 +21,9 @@ export default function changePassword() {
     passwordCheck: "",
   });
 
-
-
   const [userId, setUserId] = useState({
     id: "",
   });
-  
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -58,11 +54,10 @@ export default function changePassword() {
   };
 
   return (
-    <div className="text-center  flex justify-center items-center mt-52">
+    <div className="h-screen w-full text-center flex justify-center items-center bg-[var(--background)]">
       <form
         className="w-96 flex flex-col gap-5 items-center"
-        onSubmit={onSubmit}
-      >
+        onSubmit={onSubmit}>
         <h1 className="font-semibold text-3xl mb-5">Cambia tu contraseña.</h1>
 
         {/* <h3 className="font-semibold text-1xl mb-5">

@@ -2,6 +2,7 @@
 import Card from "./Card";
 import Loading from "../app/loading";
 import NotFound from "./notFound";
+import LoadingPublication from "./loadings/LoadingPublication";
 
 export default function Cards({ products }) {
   const response = products;
@@ -25,7 +26,9 @@ export default function Cards({ products }) {
       ) : response && response.length == 0 ? (
         <NotFound />
       ) : (
-        <Loading />
+        <div className="flex justify-center items-center w-full">
+          <LoadingPublication />
+        </div>
       )}
     </>
   );
