@@ -80,14 +80,20 @@ export default function Page() {
 
     if (name === "price") {
       parsedValue = parseFloat(value);
-    } else if (name === "stock" || name === "categoryId" || name === "provinceId") {
+    } else if (
+      name === "stock" ||
+      name === "categoryId" ||
+      name === "provinceId"
+    ) {
       parsedValue = parseInt(value, 10);
     }
 
     setErrors(validate({ ...form, [name]: parsedValue }));
     setForm({ ...form, [name]: parsedValue });
   };
-  const isFormValid = Object.keys(errors).length > 0 || Object.values(form).some((value) => value === "");
+  const isFormValid =
+    Object.keys(errors).length > 0 ||
+    Object.values(form).some((value) => value === "");
 
   return (
     <>
@@ -97,26 +103,34 @@ export default function Page() {
         </div>
         <section className="text-center grid justify-center items-center">
           <form onSubmit={onSubmit}>
-            <h1 className="font-semibold text-3xl py-5">Previsualización del articulo a publicar</h1>
+            <h1 className="font-semibold text-3xl py-5">
+              Previsualización del articulo a publicar
+            </h1>
             <div className="flex flex-col items-start w-64">
               <select
                 className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[#e0d8ffea] text-center font-semibold "
                 onChange={handleChange}
-                name="categoryId"
-              >
+                name="categoryId">
                 <option selected disabled>
                   Seleccione su categoria
                 </option>
                 {categories?.map((category) => {
                   const id = String(category.id);
                   return (
-                    <option key={category.id} value={id} className="text-center font-semibold rounded-2xl">
+                    <option
+                      key={category.id}
+                      value={id}
+                      className="text-center font-semibold rounded-2xl">
                       {category.name}
                     </option>
                   );
                 })}
               </select>
-              {errors.categoryId && <p className="text-red-700 font-medium text-xs">{errors.categoryId}</p>}
+              {errors.categoryId && (
+                <p className="text-red-700 font-medium text-xs">
+                  {errors.categoryId}
+                </p>
+              )}
             </div>
             <br />
             <div className="flex justify-center items-center gap-2 py-2">
@@ -130,7 +144,9 @@ export default function Page() {
                 value={form.name}
               />
             </div>
-            {errors.name && <p className="text-red-700 font-medium text-xs">{errors.name}</p>}
+            {errors.name && (
+              <p className="text-red-700 font-medium text-xs">{errors.name}</p>
+            )}
             <div className="flex content-center items-center py-2"></div>
             <div className="flex flex-col gap-2 justify-start items-start py-2">
               <div className="flex justify-start items-center">
@@ -146,7 +162,11 @@ export default function Page() {
                   onWheel={(event) => event.currentTarget.blur()}
                 />
               </div>
-              {errors.price && <p className="text-red-700 font-medium text-xs">{errors.price}</p>}
+              {errors.price && (
+                <p className="text-red-700 font-medium text-xs">
+                  {errors.price}
+                </p>
+              )}
             </div>
             <div className="flex flex-col items-start py-5 ">
               <div className="flex items-center gap-3">
@@ -154,20 +174,26 @@ export default function Page() {
                 <select
                   className="flex py-2 px-5 gap-2 items-center justify-center rounded-2xl bg-[#e0d8ffea] text-center font-semibold "
                   onChange={handleChange}
-                  name="provinceId"
-                >
+                  name="provinceId">
                   <option selected disabled>
-                    Provincia
+                    Seleccione una provinciapnp
                   </option>
                   {provinces?.map((province) => {
                     return (
-                      <option key={province.id} value={province.id} className="text-center font-semibold rounded-2xl">
+                      <option
+                        key={province.id}
+                        value={province.id}
+                        className="text-center font-semibold rounded-2xl">
                         {province.name}
                       </option>
                     );
                   })}
                 </select>
-                {errors.city && <p className="text-red-700 font-medium text-xs">{errors.city}</p>}
+                {errors.city && (
+                  <p className="text-red-700 font-medium text-xs">
+                    {errors.city}
+                  </p>
+                )}
               </div>
             </div>
             <div className="flex flex-col items-start mb-4 gap-2">
@@ -181,7 +207,11 @@ export default function Page() {
                 name="description"
                 value={form.description}
               />
-              {errors.description && <p className="text-red-700 font-medium text-xs">{errors.description}</p>}
+              {errors.description && (
+                <p className="text-red-700 font-medium text-xs">
+                  {errors.description}
+                </p>
+              )}
             </div>
 
             <div className="flex flex-col items-start mb-4 gap-2">
@@ -196,7 +226,11 @@ export default function Page() {
                 min="0"
                 onWheel={(event) => event.currentTarget.blur()}
               />
-              {errors.stock && <p className="text-red-700 font-medium text-xs">{errors.stock}</p>}
+              {errors.stock && (
+                <p className="text-red-700 font-medium text-xs">
+                  {errors.stock}
+                </p>
+              )}
             </div>
 
             <UploadButton setForm={setForm} form={form} />

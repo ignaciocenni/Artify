@@ -42,11 +42,11 @@ model Product {
   price       Float
   stock       Int
   image       String[]
-  user        User     @relation(fields: [userId], references: [id]) // Relación con el modelo User
-  userId      String // Campo para la relación con el modelo User
-  reviews     Review[] // Relación con el modelo Review
-  categoryId  Int // Campo para la relación con el modelo Category
-  category    Category @relation(fields: [categoryId], references: [id]) // Relación con el modelo Category
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  reviews     Review[]
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   province    Province @relation(fields: [provinceId], references: [id])
@@ -75,11 +75,11 @@ model Category {
 
 model Sales {
   id              Int     @id @default(autoincrement())
-  seller          User    @relation("SellerSales", fields: [sellerId], references: [id])
+  seller          User    @relation("SellerSales", fields: [sellerId], references: [id], onDelete: Cascade)
   sellerId        String
-  customer        User    @relation("CustomerSales", fields: [customerId], references: [id])
+  customer        User    @relation("CustomerSales", fields: [customerId], references: [id], onDelete: Cascade)
   customerId      String
-  saledProduct    Product @relation(fields: [productId], references: [id])
+  saledProduct    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId       Int
   totalPrice      Float
   productQuantity Int
@@ -95,3 +95,101 @@ enum Status {
   PENDING
   INACTIVE
 }
+
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+// datasource db {
+//   provider          = "postgresql"
+//   url               = env("POSTGRES_PRISMA_URL") 
+//   directUrl         = env("POSTGRES_URL_NON_POOLING") 
+//   shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") 
+// }
+
+// model User {
+//   id            String    @id @default(uuid())
+//   name          String
+//   lastName      String
+//   email         String    @unique
+//   password      String
+//   image         String    @default("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png")
+//   aboutMe       String    @default("")
+//   products      Product[]
+//   rol           Rol       @default(USER)
+//   wallet        Float     @default(0)
+//   cbu           Int       @default(0)
+//   alias         String    @default("")
+//   socials       String[]  @default([])
+//   status        Status    @default(ACTIVE)
+//   sellerSales   Sales[]   @relation("SellerSales")
+//   customerSales Sales[]   @relation("CustomerSales")
+//   reviews       Review[]
+// }
+
+// model Province {
+//   id               Int       @id @default(autoincrement())
+//   name             String    @unique
+//   productLocations Product[]
+// }
+
+// model Product {
+//   id          Int      @id @default(autoincrement())
+//   name        String
+//   description String
+//   price       Float
+//   stock       Int
+//   image       String[]
+//   user        User     @relation(fields: [userId], references: [id]) 
+//   userId      String 
+//   reviews     Review[] 
+//   categoryId  Int 
+//   category    Category @relation(fields: [categoryId], references: [id]) 
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+//   province    Province @relation(fields: [provinceId], references: [id])
+//   provinceId  Int
+//   status      Status   @default(PENDING)
+//   sales       Sales[]
+// }
+
+// model Review {
+//   id        Int      @id @default(autoincrement())
+//   comment   String
+//   rating    Int
+//   createdAt DateTime @default(now())
+//   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+//   productId Int
+//   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   userId    String
+// }
+
+// model Category {
+//   id          Int       @id @default(autoincrement())
+//   name        String
+//   description String
+//   products    Product[]
+// }
+
+// model Sales {
+//   id              Int     @id @default(autoincrement())
+//   seller          User    @relation("SellerSales", fields: [sellerId], references: [id])
+//   sellerId        String
+//   customer        User    @relation("CustomerSales", fields: [customerId], references: [id])
+//   customerId      String
+//   saledProduct    Product @relation(fields: [productId], references: [id])
+//   productId       Int
+//   totalPrice      Float
+//   productQuantity Int
+// }
+
+// enum Rol {
+//   ADMIN
+//   USER
+// }
+
+// enum Status {
+//   ACTIVE
+//   PENDING
+//   INACTIVE
+// }
