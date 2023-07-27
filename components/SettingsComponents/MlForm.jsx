@@ -55,7 +55,7 @@ export default function FormML({ userId }) {
         position: "center",
         icon: "success",
         title: "Se agrego tu información de Pago",
-        subtitle: "Los cambios se reflajeran al volver a incicar sesión ",
+        text:"Los cambios se reflejaran cuando vuelvas a iniciar sesion",
         showConfirmButton: true,
       });
     } else {

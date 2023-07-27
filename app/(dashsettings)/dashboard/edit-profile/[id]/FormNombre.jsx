@@ -35,7 +35,8 @@ export default function FormName({ userData, userId }) {
             Swal.fire({
                 position: "center",
                 icon: "success",
-                title: "Perfil Editado",
+                title: "Perfil editado",
+                text:"Los cambios se reflejaran cuando vuelvas a iniciar sesion ",
                 showConfirmButton: true,
             });
         } else {
