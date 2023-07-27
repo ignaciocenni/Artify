@@ -48,14 +48,24 @@ export const Slice = createSlice({
       state.dashUsers = payload[0];
       state.userRol = payload[1];
     },
+
     price: (state, { type, payload }) => {
-      const price = [...state.activeProducts];
-      const find = price.filter(function (num) {
-        return num.price >= payload[0] && num.price <= payload[1];
-      });
-      state.activeProducts = find;
-      state.provincesFilter = find;
+      let products = state.searched.length !== 0 ? state.searched : [...state.copyProducts];
+      if (payload !== "reset") {
+        products = products.filter((product) => product.price >= payload[0] && product.price <= payload[1]);
+        state.activeProducts = products;
+      }
+
+      if (state.categoriesFilter !== "Todas") {
+        products = products.filter((product) => product.category.name === state.categoriesFilter);
+      }
+
+      if (state.provincesFilter !== "Todas") {
+        products = products.filter((product) => product.province.name === state.provincesFilter);
+      }
+      state.activeProducts = products;
     },
+
     countrie: (state, { type, payload }) => {
       const products = state.searched.length !== 0 ? [...state.searched] : [...state.copyProducts];
       const currentCategorie = state.categoriesFilter;
@@ -101,7 +111,6 @@ export const Slice = createSlice({
     search: (state, { type, payload }) => {
       let products = [...state.copyProducts];
 
-      if (payload === "") state.searched = "";
       if (state.categoriesFilter !== "Todas") {
         products = products.filter((product) => product.category.name === state.categoriesFilter);
       }
@@ -111,7 +120,7 @@ export const Slice = createSlice({
       }
       products = products.filter((product) => product.name.toLowerCase().includes(payload.toLowerCase()));
 
-      state.searched = products;
+      state.searched = payload === "" ? "" : products;
       state.activeProducts = products;
     },
 

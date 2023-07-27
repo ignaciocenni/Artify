@@ -3,12 +3,13 @@
 import { price } from "../../store/slice";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 export default function PriceFilter() {
   const dispatch = useDispatch();
   const [filters, setFilters] = useState({
-    max: Infinity,
-    min: -Infinity,
+    max: "",
+    min: "",
   });
 
   const handlerImput = (event) => {
@@ -16,18 +17,47 @@ export default function PriceFilter() {
     const value = event.target.value;
     setFilters({ ...filters, [property]: value });
   };
-  const handleBuscar = () => {
+  const handleBuscar = (flag) => {
     let min = filters.min;
     let max = filters.max;
-    if (min === "" && max === "") {
-      max = Infinity;
-      min = -Infinity;
-      dispatch(price([min, max]));
+    console.log(min, max);
+
+    if (min === "" && max === "" && flag !== "reset") {
+      Swal.fire({
+        icon: "warning",
+        title: "Por favor ingrese un precio valido",
+        confirmButtonText: "ok",
+      });
+      setFilters({
+        max: "",
+        min: "",
+      });
+      return;
+    }
+    if (min > max && flag !== "reset") {
+      Swal.fire({
+        icon: "warning",
+        title: "Por favor ingrese un rango valido",
+        confirmButtonText: "ok",
+      });
+      setFilters({
+        max: "",
+        min: "",
+      });
+      return;
+    }
+    if (flag === "reset") {
+      dispatch(price("reset"));
+      setFilters({
+        max: "",
+        min: "",
+      });
+      return;
     }
     dispatch(price([min, max]));
     setFilters({
-      max: Infinity,
-      min: -Infinity,
+      max: "",
+      min: "",
     });
   };
 
@@ -59,12 +89,14 @@ export default function PriceFilter() {
       <div className="flex w-full justify-between">
         <button
           className=" mt-4 overflow-hidden hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-md text-xs font-bold px-6 h-11"
-          onClick={handleBuscar}>
+          onClick={handleBuscar}
+        >
           Aplicar
         </button>
         <button
           className="hover:text-[var(--background-sec)]  shadow-md mt-4 overflow-hidden rounded-lg flex content-center items-center text-xs font-bold px-6 h-11"
-          onClick={handleBuscar}>
+          onClick={() => handleBuscar("reset")}
+        >
           Limpiar filtro
         </button>
       </div>
