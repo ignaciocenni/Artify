@@ -64,6 +64,7 @@ export default function FormPassword({ userPassword, userId }) {
         position: "center",
         icon: "success",
         title: "Perfil Editado",
+        text:"Los cambios se reflejaran cuando vuelvas a iniciar sesion ",
         showConfirmButton: true,
       });
     } else {

@@ -57,6 +57,7 @@ export default function FormSocials({ userId }) {
         position: "center",
         icon: "error",
         title: "Algo salió mal",
+        text:"Los cambios se reflejaran cuando vuelvas a iniciar sesion ",
         showConfirmButton: true,
       });
     }
