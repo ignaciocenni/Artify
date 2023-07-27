@@ -8,7 +8,7 @@ export default function PriceFilter() {
   const dispatch = useDispatch();
   const [filters, setFilters] = useState({
     max: Infinity,
-    min: -Infinity
+    min: -Infinity,
   });
 
   const handlerImput = (event) => {
@@ -19,16 +19,16 @@ export default function PriceFilter() {
   const handleBuscar = () => {
     let min = filters.min;
     let max = filters.max;
-    if (min === '' && max === '') {
-      max = Infinity
-      min = -Infinity
-        dispatch(price([min, max]))
+    if (min === "" && max === "") {
+      max = Infinity;
+      min = -Infinity;
+      dispatch(price([min, max]));
     }
     dispatch(price([min, max]));
     setFilters({
       max: Infinity,
-      min: -Infinity
-    })
+      min: -Infinity,
+    });
   };
 
   return (
@@ -42,7 +42,7 @@ export default function PriceFilter() {
           placeholder="Min."
           value={filters.min}
           onChange={handlerImput}
-          min = '0'
+          min="0"
         />
         <h1 className="font-thin"> a </h1>
         <input
@@ -53,15 +53,19 @@ export default function PriceFilter() {
           placeholder="Max."
           value={filters.max}
           onChange={handlerImput}
-          min = '1'
-
+          min="1"
         />
       </div>
-      <div className="flex">
+      <div className="flex w-full justify-between">
         <button
-          className=" mt-4 overflow-hidden hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-xl text-xs font-bold px-6 h-11"
+          className=" mt-4 overflow-hidden hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-md text-xs font-bold px-6 h-11"
           onClick={handleBuscar}>
           Aplicar
+        </button>
+        <button
+          className="hover:text-[var(--background-sec)]  shadow-md mt-4 overflow-hidden rounded-lg flex content-center items-center text-xs font-bold px-6 h-11"
+          onClick={handleBuscar}>
+          Limpiar filtro
         </button>
       </div>
     </div>

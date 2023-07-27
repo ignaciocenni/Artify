@@ -4,25 +4,28 @@ export const Slice = createSlice({
   name: "valores",
   initialState: {
     activeProducts: [],
-    products: [],
     dashProducts: [],
     productStatus: "",
-    users: [],
     userRol: "",
     dashUsers: [],
+    users: [],
     copyProducts: [],
+    products: [],
     provinces: [],
-    provincesFilter: [],
     categories: [],
     cartQuantity: 0,
     totalPrice: 0,
+
+    searched: [],
+    provincesFilter: "Todas",
+    categoriesFilter: "Todas",
+    range: [],
   },
 
   reducers: {
     GET_INFO: (state, action) => {
       state.products = action.payload;
       state.dashProducts = action.payload;
-      state.provincesFilter = action.payload;
       state.copyProducts = action.payload.filter((product) => product.status === "ACTIVE");
       state.activeProducts = action.payload.filter((product) => product.status === "ACTIVE");
     },
@@ -36,14 +39,7 @@ export const Slice = createSlice({
       state.users = action.payload;
       state.dashUsers = action.payload;
     },
-    price: (state, { type, payload }) => {
-      const price = [...state.activeProducts];
-      const find = price.filter(function (num) {
-        return num.price >= payload[0] && num.price <= payload[1];
-      });
-      state.activeProducts = find;
-      state.provincesFilter = find;
-    },
+
     setDashProducts: (state, { type, payload }) => {
       state.dashProducts = payload[0];
       state.productStatus = payload[1];
@@ -52,21 +48,73 @@ export const Slice = createSlice({
       state.dashUsers = payload[0];
       state.userRol = payload[1];
     },
-    countrie: (state, action) => {
-      const countrie = [...state.copyProducts];
-      const find = countrie.filter((element) => element.province.name === action.payload);
+    price: (state, { type, payload }) => {
+      const price = [...state.activeProducts];
+      const find = price.filter(function (num) {
+        return num.price >= payload[0] && num.price <= payload[1];
+      });
+      state.activeProducts = find;
+      state.provincesFilter = find;
+    },
+    countrie: (state, { type, payload }) => {
+      const products = state.searched.length !== 0 ? [...state.searched] : [...state.copyProducts];
+      const currentCategorie = state.categoriesFilter;
+      state.provincesFilter = payload;
+      let filtered = [];
+      if (payload === "Todas") {
+        if (currentCategorie === "Todas") {
+          filtered = [...products];
+        } else {
+          filtered = products.filter((product) => product.category.name === currentCategorie);
+        }
+      } else {
+        if (currentCategorie === "Todas") {
+          filtered = products.filter((product) => product.province.name === payload);
+        } else {
+          filtered = products.filter((product) => product.category.name === currentCategorie && product.province.name === payload);
+        }
+      }
+      state.activeProducts = filtered;
+    },
 
-       state.activeProducts = action.payload === "Todas" ? countrie : find;
-      state.provincesFilter = action.payload === "Todas" ? countrie : find;
+    category: (state, { type, payload }) => {
+      const products = state.searched.length !== 0 ? [...state.searched] : [...state.copyProducts];
+      const currentProvince = state.provincesFilter;
+      state.categoriesFilter = payload;
+      let filtered = [];
+      if (payload === "Todas") {
+        if (currentProvince === "Todas") {
+          filtered = [...products];
+        } else {
+          filtered = products.filter((product) => product.province.name === currentProvince);
+        }
+      } else {
+        if (currentProvince === "Todas") {
+          filtered = products.filter((product) => product.category.name === payload);
+        } else {
+          filtered = products.filter((product) => product.province.name === currentProvince && product.category.name === payload);
+        }
+      }
+      state.activeProducts = filtered;
     },
-    category: (state, action) => {
-      const category = [...state.provincesFilter];
-      state.activeProducts =
-        action.payload === "allCategories" ? category : category.filter((value) => value.category.name.includes(action.payload));
-    },
+
     search: (state, { type, payload }) => {
-      state.activeProducts = payload;
+      let products = [...state.copyProducts];
+
+      if (payload === "") state.searched = "";
+      if (state.categoriesFilter !== "Todas") {
+        products = products.filter((product) => product.category.name === state.categoriesFilter);
+      }
+
+      if (state.provincesFilter !== "Todas") {
+        products = products.filter((product) => product.province.name === state.provincesFilter);
+      }
+      products = products.filter((product) => product.name.toLowerCase().includes(payload.toLowerCase()));
+
+      state.searched = products;
+      state.activeProducts = products;
     },
+
     multiplied: (state, { type, payload }) => {
       state.cartQuantity = payload?.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     },

@@ -5,12 +5,11 @@ import NotFound from "./notFound";
 import LoadingPublication from "./loadings/LoadingPublication";
 
 export default function Cards({ products }) {
-  const response = products;
   return (
     <>
-      {response && response.length > 0 ? (
+      {products.length ? (
         <div className="grid grid-cols-5 px-2 gap-4 w-full items-center justify-center">
-          {response.map((resp) => (
+          {products.map((resp) => (
             <Card
               key={resp.id}
               id={resp.id}
@@ -23,7 +22,7 @@ export default function Cards({ products }) {
             />
           ))}
         </div>
-      ) : response && response.length == 0 ? (
+      ) : !products ? (
         <NotFound />
       ) : (
         <div className="flex justify-center items-center w-full">

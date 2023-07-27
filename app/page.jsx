@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 export default function Home() {
   let products = useSelector((state) => state.valores.activeProducts);
-
   return (
     <>
       <div className="flex py-2 px-5 justify-center">
