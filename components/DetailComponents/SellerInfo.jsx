@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import FbButton from "../buttons/FbButton";
-import IgButton from "../buttons/IgButton";
+import WpButton from "../buttons/WpButton";
 
 const SellerInfo = ({ user, userId, socials }) => {
   return (
@@ -26,8 +25,7 @@ const SellerInfo = ({ user, userId, socials }) => {
         </div>
 
           <div className=" flex justify-center items-center gap-3">
-            <IgButton  socials={socials?socials[1]:null} />
-            <FbButton socials={socials?socials[0]:null} />
+            <WpButton  socials={socials ?  socials : []} />
           </div>
       </div>
     </div>
