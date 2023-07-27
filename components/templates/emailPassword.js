@@ -95,13 +95,15 @@ export const emailPassword = (data) => {
     <td align="center" style="padding:0;Margin:0;padding-top:5px;padding-bottom:5px"><h2 style="Margin:0;line-height:36px;mso-line-height-rule:exactly;font-family:Montserrat, sans-serif;font-size:30px;font-style:normal;font-weight:bold;color:#999999">¡Estamos para ayudarte!</h2></td>
     </tr>
     <tr>
-    <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px"><!--[if mso]><a href=${process.env.BASE_URL}/${idUser} target="_blank" hidden>
-    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href=${process.env.BASE_URL}/${idUser}
+    <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px"><!--[if mso]><a href=${process.env.BASE_URL}/forgotenPassword/${idUser} target="_blank" hidden>
+    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href=${process.env.BASE_URL}/forgotenPassword/${idUser}
     style="height:54px; v-text-anchor:middle; width:302px" arcsize="28%" strokecolor="#999999" strokeweight="2px" fillcolor="#35d0a6">
     <w:anchorlock></w:anchorlock>
     <center style='color:#ffffff; font-family:Montserrat, sans-serif; font-size:20px; font-weight:700; line-height:20px; mso-text-raise:1px'>Restablecer contraseña.</center>
     </v:roundrect></a>
-    <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#999999;background:#35d0a6;border-width:2px;display:inline-block;border-radius:15px;width:auto;mso-hide:all"><a href="${process.env.BASE_URL}/${idUser}" class="es-button es-button-1690213518605" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;padding:20px 20px 10px;display:inline-block;background:#35D0A6;border-radius:15px;font-family:Montserrat, sans-serif;font-weight:bold;font-style:normal;line-height:24px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #35D0A6">Restablecer contraseña.</a></span><!--<![endif]--></td>
+
+    <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#999999;background:#35d0a6;border-width:2px;display:inline-block;border-radius:15px;width:auto;mso-hide:all"><a href=${process.env.BASE_URL}/forgotenPassword/${idUser} class="es-button es-button-1690213518605" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;padding:20px 20px 10px;display:inline-block;background:#35D0A6;border-radius:15px;font-family:Montserrat, sans-serif;font-weight:bold;font-style:normal;line-height:24px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #35D0A6">Restablecer contraseña.</a></span><!--<![endif]--></td>
+
     </tr>
     </table></td>
     </tr>
