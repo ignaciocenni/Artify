@@ -1,7 +1,8 @@
 import logo from "../../public/images/logo.jpg";
 
 export const emailPurchaseDone = (data) => {
-  const { name, status } = data;
+  const { name, status, total, details, email } = data;
+  console.log(data);
 
   return {
     html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -113,16 +114,33 @@ export const emailPurchaseDone = (data) => {
     <td align="center" valign="top" style="padding:0;Margin:0;width:560px">
     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
     <tr>
-    <td align="center" class="es-m-txt-c es-m-p0r es-m-p0l" style="padding:0;Margin:0;padding-left:40px;padding-right:40px"><h1 style="Margin:0;line-height:36px;mso-line-height-rule:exactly;font-family:Orbitron, sans-serif;font-size:30px;font-style:normal;font-weight:bold;color:#455A64">${name} su compra ha sido aprobada, muchas gracias por elegirnos!</h1></td>
-    </tr>
+    <td align="center" class="es-m-txt-c es-m-p0r es-m-p0l" style="padding:0;Margin:0;padding-left:40px;padding-right:40px">
+  <h1 style="Margin:0;line-height:36px;mso-line-height-rule:exactly;font-family:Orbitron, sans-serif;font-size:30px;font-style:normal;font-weight:bold;color:#455A64">
+    ¡${name}, su compra ha sido aprobada, muchas gracias por elegirnos!
+  </h1>
+  
+  
+  <ul>
+    ${details
+      .map(
+        (detail) =>
+          `<h1 style="Margin:0;line-height:36px;mso-line-height-rule:exactly;font-family:Orbitron, sans-serif;font-size:15px;font-style:normal;font-weight:bold;color:#455A64">${detail.title}, $ ${detail.unit_price}</h1>`
+      )
+      .join("")}
+  </ul>
+  <h1 style="Margin:0;line-height:36px;mso-line-height-rule:exactly;font-family:Orbitron, sans-serif;font-size:15px;font-style:normal;font-weight:bold;color:#455A64">Total: $${total}</h1>
+</td>
+
     <tr>
-    <td align="center" style="padding:0;Margin:0;padding-top:20px"><!--[if mso]><a href="https://viewstripo.email" target="_blank" hidden>
-    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="https://viewstripo.email"
+    <td align="center" style="padding:0;Margin:0;padding-top:20px"><!--[if mso]><a href="http://localhost:3000" target="_blank" hidden>
+    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="http://localhost:3000"
     style="height:41px; v-text-anchor:middle; width:169px" arcsize="24%" stroke="f" fillcolor="#bd242b">
     <w:anchorlock></w:anchorlock>
     <center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:15px; font-weight:400; line-height:15px; mso-text-raise:1px'>Volver a Artify</center>
     </v:roundrect></a>
-    <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#BD242B;border-width:0px;display:inline-block;border-radius:10px;width:auto;mso-hide:all"><a href="https://viewstripo.email" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;padding:10px 20px 10px 20px;display:inline-block;background:#BD242B;border-radius:10px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #BD242B">Volver a Artify</a></span><!--<![endif]--></td>
+    <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#BD242B;border-width:0px;display:inline-block;border-radius:10px;width:auto;mso-hide:all"><a href=${
+      process.env.BASE_URL
+    } class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;padding:10px 20px 10px 20px;display:inline-block;background:#BD242B;border-radius:10px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #BD242B">Volver a Artify</a></span><!--<![endif]--></td>
     </tr>
     </table></td>
     </tr>

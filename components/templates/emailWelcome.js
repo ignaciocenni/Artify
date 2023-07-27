@@ -106,13 +106,13 @@ export const emailWelcome = (data) => {
     <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-bottom:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:24px;color:#563993;font-size:16px">Te damos coordialmente la bienvenida a nuestro espacio donde esperamos fervientemente disfrutes del trabajo que comparten artesanos de todo el país!</p></td>
     </tr>
     <tr>
-    <td align="center" style="padding:0;Margin:0"><!--[if mso]><a href="https://viewstripo.email" target="_blank" hidden>
-    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="https://viewstripo.email"
+    <td align="center" style="padding:0;Margin:0"><!--[if mso]><a href=${process.env.BASE_URL} target="_blank" hidden>
+    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href=${process.env.BASE_URL}
     style="height:51px; v-text-anchor:middle; width:132px" arcsize="50%" stroke="f" fillcolor="#bc2919">
     <w:anchorlock></w:anchorlock>
     <center style='color:#ffffff; font-family:Prompt, sans-serif; font-size:18px; font-weight:400; line-height:18px; mso-text-raise:1px'>INICIO</center>
     </v:roundrect></a>
-    <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#BC2919;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-hide:all"><a href="https://viewstripo.email" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;padding:15px 30px 15px 30px;display:inline-block;background:#BC2919;border-radius:30px;font-family:Prompt, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #BC2919">INICIO</a></span><!--<![endif]--></td>
+    <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#BC2919;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-hide:all"><a href=${process.env.BASE_URL} class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;padding:15px 30px 15px 30px;display:inline-block;background:#BC2919;border-radius:30px;font-family:Prompt, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #BC2919">INICIO</a></span><!--<![endif]--></td>
     </tr>
     </table></td>
     </tr>
@@ -131,21 +131,9 @@ export const emailWelcome = (data) => {
     <tr>
     <td align="left" style="padding:0;Margin:0;width:560px">
     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-    <tr>
-    <td align="center" style="padding:0;Margin:0;padding-top:5px;padding-bottom:5px"><h2 style="Margin:0;line-height:34px;mso-line-height-rule:exactly;font-family:Prompt, sans-serif;font-size:28px;font-style:normal;font-weight:bold;color:#2E175A">¿Preguntas?</h2></td>
-    </tr>
-    <tr>
-    <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-bottom:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:21px;color:#563993;font-size:14px">Habla con nosotros.</p></td>
-    </tr>
-    <tr>
-    <td align="center" style="padding:0;Margin:0;padding-bottom:40px"><!--[if mso]><a href="tel:" target="_blank" hidden>
-    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="tel:"
-    style="height:51px; v-text-anchor:middle; width:180px" arcsize="50%" stroke="f" fillcolor="#bc2919">
-    <w:anchorlock></w:anchorlock>
-    <center style='color:#ffffff; font-family:Prompt, sans-serif; font-size:18px; font-weight:400; line-height:18px; mso-text-raise:1px'>11 54697123</center>
-    </v:roundrect></a>
-    <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#BC2919;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-hide:all"><a href="" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;padding:15px 30px 15px 30px;display:inline-block;background:#BC2919;border-radius:30px;font-family:Prompt, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #BC2919">11 54697123</a></span><!--<![endif]--></td>
-    </tr>
+   
+   
+    
     <tr>
     <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-bottom:20px;font-size:0px"><a target="_blank" href="https://viewstripo.email" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#563993;font-size:14px"><img src="https://m.media-amazon.com/images/S/stores-image-uploads-na-prod/7/AmazonStores/A2EUQ1WTGCTBG2/6fc26214e8f6fb7414bf6600b7280ec6.w1500.h1000.png" alt="Logo" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" height="40" title="Logo"></a></td>
     </tr>
