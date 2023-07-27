@@ -44,10 +44,10 @@ const DetailContent = ({ data, sale }) => {
       (sales) => sales.customerId === buyerId
     );
     setToggle(saleWithBuyerId);
-    if (reviews?.some((review) => review.userId === buyerId)) {
-      setToggle(false);
-    }
-  }, [buyerId, sales, reviews, toggle]);
+    // if (reviews?.some((review) => review.userId === buyerId)) {
+    //   setToggle(false);
+    // }
+  }, [buyerId, sales, reviews,toggle]);
 
   return (
     <>
@@ -93,7 +93,6 @@ const DetailContent = ({ data, sale }) => {
           {toggle && (
             <AddReviews
               id={id}
-              setToggle={setToggle}
               setLatestReview={setLatestReview}
               buyerId={buyerId}
             />
