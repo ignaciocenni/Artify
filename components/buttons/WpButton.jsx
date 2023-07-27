@@ -3,15 +3,15 @@ import Image from "next/image";
 function WpButton({ socials }) {
   return (
     <>
-      {socials ? (
+      {socials.length !== 0 ? (
         <button className="rounder-3xl">
-          <a href="https://www.instagram.com/">
+          <a href={socials}>
             <Image
               alt="icono"
               src="/images/whatsappBlack.png"
               width={35}
               height={35}
-              className="shadow-sm shadow-purple-500 rounded-3xl hover:shadow-md hover:shadow-purple-600 transition-all"
+              className="rounded-3xl hover:shadow-md hover:shadow-green-400 transition-all"
             />
           </a>
         </button>
@@ -19,7 +19,7 @@ function WpButton({ socials }) {
         <button className="cursor-not-allowed">
           <Image
             alt="icono"
-            src="/images/whatsappBlack.png"
+            src="/images/whatsappGray.png"
             width={35}
             height={35}
           />

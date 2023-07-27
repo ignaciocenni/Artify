@@ -4,22 +4,17 @@ import axios from "axios";
 import Image from "next/image";
 import Cards from "../../../components/Cards";
 import Footer from "../../../components/Footer";
-import IgButton from "../../../components/buttons/IgButton";
-import FbButton from "../../../components/buttons/FbButton";
 import WpButton from "../../../components/buttons/WpButton";
 import NotFounded from "../../../components/NotFounded";
 import LoadingProfile from "../../../components/loadings/LoadingProfile";
 
 const getUser = async (id) => {
   const { data } = await axios.get(`/api/users/${id}`);
-  console.log("Get user: " + data);
   return data;
 };
 
 const getProducts = async () => {
   const { data } = await axios.get("/api/products");
-  console.log(data);
-  console.log("Get Products: " + data);
   return data;
 };
 
@@ -63,6 +58,7 @@ export default function Profile({ params }) {
                 />
                 <h1 className="font-bold text-2xl">
                   {userData.name} {userData.lastName}
+                  <WpButton socials={userData && userData.socials} />
                 </h1>
               </div>
               <div className="flex justify-between p-6 w-full">
@@ -75,13 +71,6 @@ export default function Profile({ params }) {
                       ? "Este usuario todavia no tiene descripción."
                       : userData.aboutMe}
                   </h3>
-                </div>
-                <div className="flex flex-col justify-center items-center h-full gap-5">
-                  <IgButton socials={userData && userData.socials} />
-
-                  <FbButton socials={userData && userData.socials} />
-
-                  <WpButton socials={userData && userData.socials} />
                 </div>
               </div>
             </div>

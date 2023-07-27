@@ -50,30 +50,38 @@ export default function SlideBarSettings() {
 
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
           <Link href={`/dashboard/edit-profile/${data?.user?.id}`}>
-            <button className="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
+            <button className="hover:underline">
               Editar Perfil
             </button>
           </Link>
         </div>
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
-          <button className="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
+          <Link href="#aboutMe">
+          <button className="hover:underline">
             Contraseña
           </button>
+          </Link>
         </div>
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
-          <button className="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
+        <Link href="#socials">
+          <button className="hover:underline">
             Redes Sociales
           </button>
+        </Link>
         </div>
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
-          <button className="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
+        <Link href="#socials">
+          <button className="hover:underline">
             Pagos
           </button>
+        </Link>
         </div>
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
-          <button className="px-1 border-l-2 border-[var(--primary)] hover:border-[var(--extra)]">
+        <Link href="#socials">
+          <button className="hover:underline">
             Otros
           </button>
+        </Link>
         </div>
 
         <div className="w-56 border-b border-neutral-400 py-3"></div>

@@ -19,8 +19,8 @@ export default function FormName({ userData, userId }) {
         Object.entries(form).filter(([key, value]) => value !== '')
     );
 
-    const onSubmit = async () => {
-
+    const onSubmit = async (event) => {
+        event.preventDefault()
         const putProfile = async (form) => {
             try {
                 const res = (await axios.put(`/api/users/${userId}`, filteredData)).data;
@@ -81,7 +81,8 @@ export default function FormName({ userData, userId }) {
                     value={form.aboutMe}
                     placeholder={userData.aboutMe}
                 />
-                <div className="w-[37em]">
+                <div 
+                 className="w-[37em]">
                     <SubmitButton
                         label="Guardar"
                         disabled={Object.keys(filteredData).length === 0} />
