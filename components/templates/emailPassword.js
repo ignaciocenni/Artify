@@ -95,8 +95,8 @@ export const emailPassword = (data) => {
     <td align="center" style="padding:0;Margin:0;padding-top:5px;padding-bottom:5px"><h2 style="Margin:0;line-height:36px;mso-line-height-rule:exactly;font-family:Montserrat, sans-serif;font-size:30px;font-style:normal;font-weight:bold;color:#999999">¡Estamos para ayudarte!</h2></td>
     </tr>
     <tr>
-    <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px"><!--[if mso]><a href="http://localhost:3000/forgotenPassword/${idUser}" target="_blank" hidden>
-    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="http://localhost:3000/forgotenPassword/${idUser}"
+    <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px"><!--[if mso]><a href=${process.env.BASE_URL}/${idUser} target="_blank" hidden>
+    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href=${process.env.BASE_URL}/${idUser}
     style="height:54px; v-text-anchor:middle; width:302px" arcsize="28%" strokecolor="#999999" strokeweight="2px" fillcolor="#35d0a6">
     <w:anchorlock></w:anchorlock>
     <center style='color:#ffffff; font-family:Montserrat, sans-serif; font-size:20px; font-weight:700; line-height:20px; mso-text-raise:1px'>Restablecer contraseña.</center>

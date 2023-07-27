@@ -19,13 +19,13 @@ export default function FormPassword({ userPassword, userId }) {
     repPassword: ""
 
   })
-  const valActualPass=(form)=>{
+  const valActualPass = (form) => {
     const { actualPassword } = form
-    const error={
-      actualPassword:""
+    const error = {
+      actualPassword: ""
     }
     if (actualPassword !== oldPassword)
-    error.actualPassword="La contraseña no coincide"
+      error.actualPassword = "La contraseña no coincide"
     return error
   }
 
@@ -34,14 +34,14 @@ export default function FormPassword({ userPassword, userId }) {
     setPassword({ ...form, [name]: value })
     setErrors(validate({ ...form, [name]: value }))
     setErrors(valActualPass({ ...form, [name]: value }))
-   
+
 
 
   }
   const resp = {
     password: form.newPassword
   }
-  console.log(resp);
+
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -81,6 +81,7 @@ export default function FormPassword({ userPassword, userId }) {
 
     })
   };
+  /* const hasErrors = Object.values(errors).some((errMsg) => errMsg !== "") || Object.values(form).some((value) => value === ""); */
 
   return (
     <div >
@@ -132,6 +133,7 @@ export default function FormPassword({ userPassword, userId }) {
         )}
         <div className="w-[37em]">
           <SubmitButton
+            /* disabled={hasErrors} */
             label="Guardar"
           />
         </div>
