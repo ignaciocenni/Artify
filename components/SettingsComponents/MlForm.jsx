@@ -81,7 +81,8 @@ export default function FormML({ userId }) {
       <div className="flex flex-col w-full gap-2">
         <h1 className="font-semibold text-lg ">Pagos</h1>
         <p className="text-xs font-light">Para Vender/Comprar una artesania, deberá ingresar su CBU/Alias!</p>
-        <form className="flex flex-col items-center gap-5 w-full">
+        <form className="flex flex-col items-center gap-5 w-full"
+        onSubmit={onSubmit}>
           <input
             placeholder="CBU"
             className="text-black px-3 w-60 h-11 rounded-xl bg-[var(--primary)] focus:outline-none"
@@ -89,6 +90,7 @@ export default function FormML({ userId }) {
             onChange={handleChange}
             name="cbu"
             value={form.cbu}
+            maxLength={21}
           />
           {error.cbu && (
             <p className="text-red-600 mb-2">{error.cbu}</p>
