@@ -5,7 +5,7 @@ export async function POST() {
   try {
     // const provinces = await postAllProvinces();
     // const users = await postAllUsers();
-    // const products = await postAllProducts();
+    const products = await postAllProducts();
     // const reviews = await postAllCategory();
     return NextResponse.json({ message: "DataBase Full" }, { status: 200 });
   } catch (error) {
