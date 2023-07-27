@@ -39,6 +39,11 @@ export default function EditProfile({ params }) {
   });
 
   const [errors, setErrors] = useState({});
+  const [image, setImage] = useState("");
+
+  const handleImage = async () => {
+    await axios.put(`/api/users/${userId}`, image);
+  };
 
   useEffect(() => {
     const allDataUser = async () => {
@@ -65,10 +70,6 @@ export default function EditProfile({ params }) {
     });
   }, [data?.data?.user]);
 
-
-
-
-
   return (
     <section className="w-full grid h-max justify-center mt-[10vh] ml-[34vh] bg-[var(--background)] ">
       <div className=" pl-5 text-left  w-[37em] ">
@@ -76,33 +77,29 @@ export default function EditProfile({ params }) {
         <div className=" w-[37em] mb-3 flex justify-center items-center">
           <Image
             className=" rounded-full shadow-sm"
-            src={data?.data?.user?.image}
+            src={image !== "" ? image : data?.data?.user?.image}
             width={100}
             height={100}
             alt="imagen de usuario"
           />
         </div>
-        <UploadButton />
+        <UploadButton setForm={setImage} form={image} />
+        <button onClick={handleImage}>Guardar</button>
         <FormName userData={userData} userId={form.userId} />
         <br />
         <hr />
-        <FormPassword
-        userId={form.userId}
-        userPassword={userData.password}/>
+        <FormPassword userId={form.userId} userPassword={userData.password} />
         <br />
         <hr />
-        <FormSocials 
-        userId={form.userId}/>
+        <FormSocials userId={form.userId} />
         <br />
         <hr className="  text-black" />
         <div className="w-full">
-          <FormML 
-          userId={form.userId}/>
+          <FormML userId={form.userId} />
         </div>
         <br />
         <hr className="  text-black" />
-        <DeleteUser 
-        userId={form.userId}/>
+        <DeleteUser userId={form.userId} />
       </div>
     </section>
   );
