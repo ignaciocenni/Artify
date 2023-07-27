@@ -56,7 +56,7 @@ export default function FormName({ userData, userId }) {
                     className=" bg-[var(--primary)] flex text-xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
                     id="name"
                     type="text"
-                    placeholder={userData.name}
+                    /* placeholder={userData.name} */
                     onChange={handleChange}
                     name="name"
                     value={form.name}
@@ -66,7 +66,7 @@ export default function FormName({ userData, userId }) {
                     className=" bg-[var(--primary)] flex text-xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-3"
                     id="lastName"
                     type="text"
-                    placeholder={userData.lastName}
+                    /* placeholder={userData.lastName} */
                     onChange={handleChange}
                     name="lastName"
                     value={form.lastName}
@@ -79,7 +79,7 @@ export default function FormName({ userData, userId }) {
                     onChange={handleChange}
                     name="aboutMe"
                     value={form.aboutMe}
-                    placeholder={userData.aboutMe}
+                    /* placeholder={userData.aboutMe} */
                 />
                 <div 
                  className="w-[37em]">
