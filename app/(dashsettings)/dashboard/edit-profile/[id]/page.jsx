@@ -3,23 +3,12 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import UploadButton from "../../../../../components/buttons/UploadButton";
 import axios from "axios";
-import Swal from "sweetalert2";
 import Image from "next/image";
 import FormML from "../../../../../components/SettingsComponents/MlForm";
-import SubmitButton from "../../../../../components/buttons/SubmitButton";
 import FormName from "./FormNombre";
 import FormPassword from "./FormPassword";
 import FormSocials from "./FormSocials";
 import DeleteUser from "./DeleteUser";
-
-/* const putProfile = async (form) => {
-    try { 
-  const res = (await axios.put(`/api/users/${form.userId}`, form)).data;
-  return { created: true, res };
-     } catch (error) {
-      return { created: false, error: error.message };
-    } 
-  }; */
 
 export default function EditProfile({ params }) {
   const { id } = params;
@@ -102,7 +91,8 @@ export default function EditProfile({ params }) {
         userPassword={userData.password}/>
         <br />
         <hr />
-        <FormSocials />
+        <FormSocials 
+        userId={form.userId}/>
         <br />
         <hr className="  text-black" />
         <div className="w-full">
