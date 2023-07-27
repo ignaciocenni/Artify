@@ -42,8 +42,9 @@ export default function EditProfile({ params }) {
   const [image, setImage] = useState("");
 
   const handleImage = async () => {
-    await axios.put(`/api/users/${userId}`, image);
+        await axios.put(`/api/users/${id}`, {image:image.image[0]})
   };
+  
 
   useEffect(() => {
     const allDataUser = async () => {
@@ -71,20 +72,23 @@ export default function EditProfile({ params }) {
   }, [data?.data?.user]);
 
   return (
-    <section className="w-full grid h-max justify-center mt-[10vh] ml-[34vh] bg-[var(--background)] ">
+    <section className=" w-full grid h-max justify-center mt-[10vh] ml-[34vh] bg-[var(--background)] ">
       <div className=" pl-5 text-left  w-[37em] ">
         <h1 className=" h-23 font-semibold text-xl py-5 ">Editar Perfil</h1>
         <div className=" w-[37em] mb-3 flex justify-center items-center">
           <Image
             className=" rounded-full shadow-sm"
-            src={image !== "" ? image : data?.data?.user?.image}
+            src={image !== "" ? image.image[0] : data?.data?.user?.image}
             width={100}
             height={100}
             alt="imagen de usuario"
           />
         </div>
+        <div className="flex  flex-col justify-center items-center">
+
         <UploadButton setForm={setImage} form={image} />
-        <button onClick={handleImage}>Guardar</button>
+        <button className=" mt-2 p-2 bg-[var(--detail)] hover:bg-[var(--background-sec)] hover:text-black text-white font-bold py-2 rounded-lg focus:outline-none focus:shadow-outline w-[5em]" onClick={handleImage}>Guardar</button>
+        </div>
         <FormName userData={userData} userId={form.userId} />
         <br />
         <hr />
