@@ -3,8 +3,10 @@ import Image from "next/image";
 import React from "react";
 import { useSession, signOut } from "next-auth/react";
 import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const ButtonSession = () => {
+  const router = useRouter();
   const { data: session } = useSession();
   const handler = () => {
     Swal.fire({
@@ -18,7 +20,10 @@ const ButtonSession = () => {
         if (localStorage) {
           localStorage.removeItem("products");
         }
-        signOut();
+        router.push("/");
+        setTimeout(() => {
+          signOut();
+        }, "1000");
         let timerInterval;
         Swal.fire({
           title: "Cerrando sesión",
