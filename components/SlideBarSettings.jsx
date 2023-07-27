@@ -79,7 +79,7 @@ export default function SlideBarSettings() {
         <div className="w-full pl-20 justify-start items-center gap-8 flex ">
         <Link href="#socials">
           <button className="hover:underline">
-            Otros
+            Eliminar Cuenta
           </button>
         </Link>
         </div>
