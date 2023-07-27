@@ -29,10 +29,6 @@ export default function FormSocials({ userId }) {
     setNum({ [name]: value })
     setErrors(validate({ [name]: value }))
   }
-  const socials = {
-    socials: ["https://wa.me/549" + num.phone]
-  }
-  console.log(socials);
 
   const onSubmit = async (event) => {
     event.preventDefault()

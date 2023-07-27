@@ -135,7 +135,7 @@ export default function Page() {
             <br />
             <div className="flex justify-center items-center gap-2 py-2">
               <input
-                className="flex gap-3 font-bold text-3xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+                className="flex gap-3  text-2xl shadow appearance-none  rounded-xl w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                 id="username"
                 type="text"
                 placeholder="Titulo"
@@ -152,7 +152,7 @@ export default function Page() {
               <div className="flex justify-start items-center">
                 <h1 className="text-4xl font-bold">$</h1>
                 <input
-                  className="text-4xl font-bold shadow appearance-none border py-2 px-3 focus:outline-none focus:shadow-outline rounded-xl"
+                  className="text-2xl shadow appearance-none border py-2 px-3 focus:outline-none focus:shadow-outline rounded-xl"
                   id="price"
                   type="number"
                   onChange={handleChange}
@@ -176,7 +176,7 @@ export default function Page() {
                   onChange={handleChange}
                   name="provinceId">
                   <option selected disabled>
-                    Seleccione una provinciapnp
+                    Seleccione una provincia
                   </option>
                   {provinces?.map((province) => {
                     return (

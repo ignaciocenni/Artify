@@ -67,7 +67,7 @@ export default function ChangePassword() {
         onSubmit={onSubmit}
       >
         <h1 className="font-semibold text-3xl mb-5">Cambia tu contraseña.</h1>
-        <p className="text-red-700 font-medium text-xs">
+        <p className="text-green-700 font-medium text-xs">
           Debe contener almenos 6 caracteres.
         </p>
 
