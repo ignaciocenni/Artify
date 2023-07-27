@@ -32,8 +32,8 @@ export default function FormPassword({ userPassword, userId }) {
   const handleChange = (event) => {
     const { name, value } = event.target
     setPassword({ ...form, [name]: value })
-    setErrors(validate({ ...form, [name]: value }))
     setErrors(valActualPass({ ...form, [name]: value }))
+    setErrors(validate({ ...form, [name]: value }))
 
 
 
@@ -81,7 +81,7 @@ export default function FormPassword({ userPassword, userId }) {
 
     })
   };
-  /* const hasErrors = Object.values(errors).some((errMsg) => errMsg !== "") || Object.values(form).some((value) => value === ""); */
+
 
   return (
     <div >
@@ -133,7 +133,7 @@ export default function FormPassword({ userPassword, userId }) {
         )}
         <div className="w-[37em]">
           <SubmitButton
-            /* disabled={hasErrors} */
+            disabled={ form.newPassword === ""}
             label="Guardar"
           />
         </div>

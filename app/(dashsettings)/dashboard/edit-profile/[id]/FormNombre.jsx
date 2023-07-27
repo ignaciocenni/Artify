@@ -21,7 +21,7 @@ export default function FormName({ userData, userId }) {
 
     const onSubmit = async (event) => {
         event.preventDefault()
-        const putProfile = async (form) => {
+        const putProfile = async (filteredData) => {
             try {
                 const res = (await axios.put(`/api/users/${userId}`, filteredData)).data;
                 return { created: true, res };
@@ -29,7 +29,7 @@ export default function FormName({ userData, userId }) {
                 return { created: false, error: error.message };
             }
         };
-        const response = await putProfile(form);
+        const response = await putProfile(filteredData);
 
         if (response.created) {
             Swal.fire({
@@ -46,6 +46,12 @@ export default function FormName({ userData, userId }) {
                 showConfirmButton: true,
             });
         }
+        setForm({
+            name: "",
+            lastName: "",
+            aboutMe: ""
+    
+        })
     }
 
     return (

@@ -96,7 +96,8 @@ export default function EditProfile({ params }) {
         <br />
         <hr className="  text-black" />
         <div className="w-full">
-          <FormML />
+          <FormML 
+          userId={form.userId}/>
         </div>
         <br />
         <hr className="  text-black" />
