@@ -1,14 +1,16 @@
-import CategoryFilter from "./Filters/CategoryFilter";
-import ProvinceFilter from "./Filters/ProvinceFilter";
-import PriceFilter from "./Filters/PriceFilter";
+import PriceFilter from './Filters/PriceFilter'
+import FilterDropDown from './ui/FilterDropDown'
+import { getCategories, getProvinces } from '../app/lib/services'
 
-export default function Filters() {
+export default async function Filters() {
+  const provinces = await getProvinces()
+  const categories = await getCategories()
   return (
-    <div className="flex flex-col px-5 gap-2 items-start h-screen w-64 fixed left-0 mt-[10vh]">
+    <div className="flex flex-col px-5 gap-2 items-start  w-64  mt-[15vh]">
       <h1 className="text-2xl font-semibold">Filtros</h1>
-      <ProvinceFilter />
-      <CategoryFilter />
+      <FilterDropDown options={provinces} name="Provincias" />
+      <FilterDropDown options={categories} name="Categorias" />
       <PriceFilter />
     </div>
-  );
+  )
 }

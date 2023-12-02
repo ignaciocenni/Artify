@@ -1,65 +1,53 @@
-"use client";
-
-import { price } from "../../store/slice";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import Swal from "sweetalert2";
+'use client'
+import { useState } from 'react'
+import Swal from 'sweetalert2'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 export default function PriceFilter() {
-  const dispatch = useDispatch();
-  const [filters, setFilters] = useState({
-    max: "",
-    min: "",
-  });
+  const [min, setMin] = useState('')
+  const [max, setMax] = useState('')
+  const pathname = usePathname()
+  const { replace } = useRouter()
+  const searchParams = useSearchParams()
 
-  const handlerImput = (event) => {
-    const property = event.target.name;
-    const value = event.target.value;
-    setFilters({ ...filters, [property]: value });
-  };
-  const handleBuscar = (flag) => {
-    let min = filters.min;
-    let max = filters.max;
-    console.log(min, max);
+  const handlerInput = (event) => {
+    event.target.name === 'min' ? setMin(event.target.value) : setMax(event.target.value)
+  }
 
-    if (min === "" && max === "" && flag !== "reset") {
+  const handleApply = () => {
+    const params = new URLSearchParams(searchParams)
+    if (min === '' && max === '') {
       Swal.fire({
-        icon: "warning",
-        title: "Por favor ingrese un precio valido",
-        confirmButtonText: "ok",
-      });
-      setFilters({
-        max: "",
-        min: "",
-      });
-      return;
+        icon: 'warning',
+        title: 'Por favor ingrese un precio valido',
+        confirmButtonText: 'ok'
+      })
+      reset()
+      return
     }
-    if (min > max && flag !== "reset") {
+    if (min > max) {
       Swal.fire({
-        icon: "warning",
-        title: "Por favor ingrese un rango valido",
-        confirmButtonText: "ok",
-      });
-      setFilters({
-        max: "",
-        min: "",
-      });
-      return;
+        icon: 'warning',
+        title: 'Por favor ingrese un rango valido',
+        confirmButtonText: 'ok'
+      })
+      reset()
+      return
     }
-    if (flag === "reset") {
-      dispatch(price("reset"));
-      setFilters({
-        max: "",
-        min: "",
-      });
-      return;
-    }
-    dispatch(price([min, max]));
-    setFilters({
-      max: "",
-      min: "",
-    });
-  };
+    params.set('min', min)
+    params.set('max', max)
+
+    replace(`${pathname}?${params.toString()}`)
+  }
+
+  const reset = () => {
+    setMax('')
+    setMin('')
+    const params = new URLSearchParams(searchParams)
+    params.delete('max')
+    params.delete('min')
+    replace(`${pathname}?${params.toString()}`)
+  }
 
   return (
     <div className="w-full">
@@ -70,8 +58,8 @@ export default function PriceFilter() {
           type="number"
           pattern="[0-9]*"
           placeholder="Min."
-          value={filters.min}
-          onChange={handlerImput}
+          value={min}
+          onChange={handlerInput}
           min="0"
         />
         <h1 className="font-thin"> a </h1>
@@ -81,25 +69,25 @@ export default function PriceFilter() {
           type="number"
           pattern="[0-9]*"
           placeholder="Max."
-          value={filters.max}
-          onChange={handlerImput}
+          value={max}
+          onChange={handlerInput}
           min="1"
         />
       </div>
       <div className="flex w-full justify-between">
         <button
           className=" mt-4 overflow-hidden hover:bg-[var(--background-sec)] hover:text-black text-white bg-[var(--detail)]  rounded-lg flex content-center items-center shadow-md text-xs font-bold px-6 h-11"
-          onClick={handleBuscar}
+          onClick={handleApply}
         >
           Aplicar
         </button>
         <button
           className="hover:text-[var(--background-sec)]  shadow-md mt-4 overflow-hidden rounded-lg flex content-center items-center text-xs font-bold px-6 h-11"
-          onClick={() => handleBuscar("reset")}
+          onClick={reset}
         >
           Limpiar filtro
         </button>
       </div>
     </div>
-  );
+  )
 }
