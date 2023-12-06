@@ -4,11 +4,13 @@ import { useState, useRef, useEffect } from 'react'
 import { usePathname, useSearchParams, useRouter } from 'next/navigation'
 
 export default function ProvinceFilter({ options, name }) {
+  const searchParams = useSearchParams()
+  const currentOption = options.find((option) => String(option.id) === searchParams.get(name))
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const [selectedOption, setSelectedOption] = useState(name)
+  const [selectedOption, setSelectedOption] = useState(currentOption || name)
+
   const pathname = usePathname()
   const { replace } = useRouter()
-  const searchParams = useSearchParams()
   const dropdownRef = useRef(null)
 
   const handleDropdownToggle = () => {
@@ -20,8 +22,9 @@ export default function ProvinceFilter({ options, name }) {
     const params = new URLSearchParams(searchParams)
     if (option === 'Todas') {
       params.delete(name)
+      setSelectedOption(name)
     } else {
-      params.set(name, option)
+      params.set(name, option.id)
     }
     replace(`${pathname}?${params.toString()}`)
   }
@@ -45,7 +48,7 @@ export default function ProvinceFilter({ options, name }) {
         className=" bg-[var(--primary)] py-1 relative flex justify-center items-center focus:outline-none  text-gray-600 rounded-xl focus:ring ring-gray-200 group"
         onClick={handleDropdownToggle}
       >
-        <p className="px-4">{selectedOption === 'Todas' ? name : selectedOption} </p>
+        <p className="px-4">{selectedOption.name ? selectedOption.name : selectedOption} </p>
         <ArrowDown />
         <div className={`absolute ${isDropdownOpen ? 'block' : 'hidden'} top-full min-w-full w-max bg-white shadow-md mt-1 rounded z-10`}>
           <ul className="text-left border rounded">
@@ -53,8 +56,8 @@ export default function ProvinceFilter({ options, name }) {
               Todas
             </li>
             {options.map((option) => (
-              <li key={option} className="px-4 py-1 hover:bg-grey-100 border-b cursor-pointer" onClick={() => handleSelect(option)}>
-                {option}
+              <li key={option.id} className="px-4 py-1 hover:bg-grey-100 border-b cursor-pointer" onClick={() => handleSelect(option)}>
+                {option.name}
               </li>
             ))}
           </ul>

@@ -4,11 +4,11 @@ import Swal from 'sweetalert2'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 export default function PriceFilter() {
-  const [min, setMin] = useState('')
-  const [max, setMax] = useState('')
+  const searchParams = useSearchParams()
+  const [min, setMin] = useState(searchParams.get('min') || '')
+  const [max, setMax] = useState(searchParams.get('max') || '')
   const pathname = usePathname()
   const { replace } = useRouter()
-  const searchParams = useSearchParams()
 
   const handlerInput = (event) => {
     event.target.name === 'min' ? setMin(event.target.value) : setMax(event.target.value)
