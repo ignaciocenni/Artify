@@ -1,9 +1,20 @@
 import prisma from '../../api/db/client'
 
-export const getActiveProducts = async ({ Provincias, Categorias, min, max }) => {
+export const getActiveProducts = async ({ Provincias, Categorias, min, max, query }) => {
   let productsConfig = {
     status: 'ACTIVE'
   }
+
+  if (query) {
+    productsConfig = {
+      ...productsConfig,
+      name: {
+        contains: query,
+        mode: 'insensitive'
+      }
+    }
+  }
+
   if (Provincias) {
     productsConfig = {
       ...productsConfig,

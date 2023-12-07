@@ -1,28 +1,47 @@
-import { useDispatch, useSelector } from "react-redux";
-import { search } from "../store/slice";
-import Image from "next/image";
-import lupa from "../public/images/search-white.svg";
+'use client'
+import Image from 'next/image'
+import lupa from '../public/images/search-white.svg'
+import { usePathname, useSearchParams, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import clsx from 'clsx'
 
 export default function SearchBar() {
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.valores.activeProducts);
-  const copy = useSelector((state) => state.valores.copyProducts);
-  const handlerValue = (event) => {
-    dispatch(search(event.target.value));
-  };
+  const searchParams = useSearchParams()
+  const [query, setQuery] = useState(searchParams.get('query') || '')
+  const { replace } = useRouter()
+  const path = usePathname()
+
+  const handleChange = (e) => {
+    setQuery(e.target.value)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const params = new URLSearchParams(searchParams)
+    params.set('query', query)
+    replace(`${path}?${params.toString()}`)
+  }
+
+  useEffect(() => {
+    if (query === '') {
+      const params = new URLSearchParams(searchParams)
+      params.delete('query')
+      replace(`${path}?${params.toString()}`)
+    }
+  }, [query, path, searchParams, replace])
 
   return (
-    <div className="flex w-96 items-center justify-center">
-      {/* <h1 className="text-2xl font-semibold">Buscar</h1> */}
+    <form onSubmit={handleSubmit} className={clsx('flex w-96 items-center justify-center', { hidden: path !== '/' })}>
       <input
         placeholder="Buscar.."
-        onChange={handlerValue}
+        onChange={handleChange}
+        value={query}
         className="text-black px-3 w-60 h-11 focus:w-80 rounded-l-xl bg-[var(--primary)] focus:outline-none transition-all"
         type="text"
       />
-      <div className="bg-[var(--detail)] h-11 px-3 flex rounded-r-xl">
+      <button type="submit" className="bg-[var(--detail)] h-11 px-3 flex items-center rounded-r-xl">
         <Image src={lupa} width={20} height={20} alt="buscar" />
-      </div>
-    </div>
-  );
+      </button>
+    </form>
+  )
 }
