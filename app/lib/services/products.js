@@ -10,10 +10,18 @@ export const getActiveProducts = async (filters) => {
   })
 }
 
-export const getAllProducts = async () => {
-  return await prisma.product.findMany({
-    select: productModel
-  })
+export const getAllProducts = async ({ activeFilter }) => {
+  // caso de all da error, validar que sea un status valido antes de hacer la query
+  return activeFilter === 'ALL'
+    ? await prisma.product.findMany({
+        select: productModel
+      })
+    : await prisma.product.findMany({
+        where: {
+          status: activeFilter
+        },
+        select: productModel
+      })
 }
 
 export const getProvinces = async () => {
