@@ -1,13 +1,14 @@
-import Dashboard from "../../../components/dashboard/Dashboard.jsx";
+import Dashboard from '../../../components/dashboard/Dashboard.jsx'
 
-function DashboardPage() {
+function DashboardPage({ searchParams }) {
+  const { section } = searchParams
   return (
     <>
       <section className="flex w-full mt-[10vh] ml-[34vh]">
-        <Dashboard />
+        <Dashboard activeSection={section} />
       </section>
     </>
-  );
+  )
 }
 
-export default DashboardPage;
+export default DashboardPage
