@@ -1,70 +1,18 @@
 import prisma from '../../api/db/client'
+import { productModel } from '../models'
+import { getProductsConfig } from '../filtersHelper'
 
-export const getActiveProducts = async ({ Provincias, Categorias, min, max, query }) => {
-  let productsConfig = {
-    status: 'ACTIVE'
-  }
-
-  if (query) {
-    productsConfig = {
-      ...productsConfig,
-      name: {
-        contains: query,
-        mode: 'insensitive'
-      }
-    }
-  }
-
-  if (Provincias) {
-    productsConfig = {
-      ...productsConfig,
-      provinceId: Number(Provincias)
-    }
-  }
-  if (Categorias) {
-    productsConfig = {
-      ...productsConfig,
-      categoryId: Number(Categorias)
-    }
-  }
-
-  if (min && max) {
-    productsConfig = {
-      ...productsConfig,
-      price: {
-        gte: Number(min),
-        lte: Number(max)
-      }
-    }
-  }
-
+export const getActiveProducts = async (filters) => {
+  const productsConfig = getProductsConfig(filters)
   return await prisma.product.findMany({
     where: productsConfig,
-    select: {
-      id: true,
-      name: true,
-      price: true,
-      image: true,
-      userId: true,
-      user: true,
-      category: true,
-      province: true,
-      stock: true,
-      status: true,
-      user: {
-        select: {
-          name: true,
-          lastName: true,
-          email: true,
-          image: true
-        }
-      },
-      category: {
-        select: {
-          name: true
-        }
-      }
-    }
+    select: productModel
+  })
+}
+
+export const getAllProducts = async () => {
+  return await prisma.product.findMany({
+    select: productModel
   })
 }
 

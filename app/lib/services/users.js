@@ -1,4 +1,5 @@
 import prisma from '../../api/db/client'
+import { productModel } from '../models'
 
 export const getUserInfo = async (id) => {
   return prisma.user.findFirst({
@@ -12,30 +13,6 @@ export const getUserProducts = async (id) => {
       userId: id,
       status: 'ACTIVE'
     },
-    select: {
-      id: true,
-      name: true,
-      price: true,
-      image: true,
-      userId: true,
-      user: true,
-      category: true,
-      province: true,
-      stock: true,
-      status: true,
-      user: {
-        select: {
-          name: true,
-          lastName: true,
-          email: true,
-          image: true
-        }
-      },
-      category: {
-        select: {
-          name: true
-        }
-      }
-    }
+    select: productModel
   })
 }
