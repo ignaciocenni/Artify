@@ -23,3 +23,15 @@ export const productModel = {
     }
   }
 }
+
+export const userModel = {
+  id: true,
+  name: true,
+  lastName: true,
+  email: true,
+  image: true,
+  aboutMe: true,
+  rol: true,
+  socials: true,
+  sellerSales: true
+}
