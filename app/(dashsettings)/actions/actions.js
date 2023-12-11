@@ -14,3 +14,15 @@ export const changeProductStatus = async (id, newStatus) => {
   revalidatePath('/')
   revalidatePath('/dashboard')
 }
+
+export const changeUserRol = async (id, role) => {
+  await prisma.user.update({
+    where: {
+      id
+    },
+    data: {
+      rol: role
+    }
+  })
+  revalidatePath('/')
+}
