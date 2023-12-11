@@ -1,33 +1,20 @@
-"use client";
-import CardPublication from "./CardPublication";
-import { useSelector, useDispatch } from "react-redux";
-import { useSession } from "next-auth/react";
-import { useEffect } from "react";
-import { GET_INFO } from "../../store/slice";
-import axios from "axios";
-const CardsPublication = () => {
-  const { data: session } = useSession();
-  const dispatch = useDispatch();
+import CardPublication from './CardPublication'
+import { getSession } from '../../app/lib/serverSession'
+import { getAllProducts } from '../../app/lib/services/products'
+import { getUserProducts } from '../../app/lib/services/users'
+import { Suspense } from 'react'
 
-  useEffect(() => {
-    const getProducts = () => {
-      return axios.get("/api/products");
-    };
-    const products = getProducts().then(() => (products.data ? dispatch(GET_INFO(products.data)) : ""));
-  }, [dispatch]);
-
-  let allproducts = useSelector((state) => state.valores.dashProducts);
-  let products = [...allproducts];
-  if (session && session.user.role === "USER") {
-    products = allproducts.filter((product) => product.user.email === session.user.email);
-  } else {
-    products = allproducts;
+const CardsPublication = async ({ activeFilter }) => {
+  const user = await getSession()
+  let products = []
+  products = user?.role === 'ADMIN' ? await getAllProducts({ activeFilter }) : await getUserProducts({ id: user?.id, filter: activeFilter })
+  if (products.length === 0) {
+    return <h1>No se encontraron publicaciones</h1>
   }
-
   return (
     <>
-      {products.length ? (
-        products.map((product) => (
+      <Suspense fallback={<h1>Loading...</h1>}>
+        {products.map((product) => (
           <CardPublication
             key={product.id}
             id={product.id}
@@ -39,12 +26,10 @@ const CardsPublication = () => {
             userImage={product.user.image}
             status={product.status}
           />
-        ))
-      ) : (
-        <div className="px-4 py-3 rounded-lg shadow-md items-center gap-3 inline-flex mx-3 font-medium">No hay publicaciones</div>
-      )}
+        ))}
+      </Suspense>
     </>
-  );
-};
+  )
+}
 
-export default CardsPublication;
+export default CardsPublication

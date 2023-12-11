@@ -5,28 +5,28 @@ import ColPublication from './ColPublication'
 import ColUsers from './ColUsers'
 import CardsUser from './CardsUser'
 import CardsMetrics from './CardsMetrics'
-
 import DashHeader from './DashHeader.jsx'
 
-const Dashboard = ({ activeSection }) => {
+const Dashboard = async ({ activeSection, activeFilter }) => {
+  const currentSection = activeSection ?? 'publications'
   return (
     <div className="w-full flex-col justify-start items-start flex">
       <DashHeader />
-      {activeSection === 'publications' ? (
+      {currentSection === 'publications' ? (
         <div className="flex flex-col w-full">
           <div className="px-6 pt-11 pb-2.5 justify-start items-start gap-2 inline-flex">
             <OptionPublicationBar />
           </div>
           <ColPublication />
-          <CardsPublication />
+          <CardsPublication activeFilter={activeFilter} />
         </div>
-      ) : activeSection === 'user' ? (
+      ) : currentSection === 'user' ? (
         <div className="w-full flex flex-col ">
           <div className="px-6 pt-11 pb-2.5 justify-start items-start gap-2 inline-flex">
             <OptionUserBar />
           </div>
           <ColUsers />
-          <CardsUser />
+          <CardsUser activeFilter={activeFilter} />
         </div>
       ) : (
         <CardsMetrics />

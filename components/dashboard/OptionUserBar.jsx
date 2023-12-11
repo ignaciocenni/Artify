@@ -1,7 +1,6 @@
 'use client'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import clsx from 'clsx'
-import { useEffect } from 'react'
 
 const UserOptions = {
   ALL: 'ALL',

@@ -1,23 +1,16 @@
-"use client";
+import { getAllUsers } from '../../app/lib/services/users'
+import CardUser from './CardUser'
+import { Suspense } from 'react'
 
-import CardUser from "./CardUser";
-import { useSelector, useDispatch } from "react-redux";
-import { getUsers } from "../../store/slice";
-import axios from "axios";
-import { useEffect } from "react";
-const CardsUser = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const getAllUsers = () => {
-      return axios.get("/api/users");
-    };
-    const AllUsers = getAllUsers().then(() => (users.data ? dispatch(getUsers(AllUsers.data)) : ""));
-  }, [dispatch]);
-  const users = useSelector((state) => state.valores.dashUsers);
+const CardsUser = async ({ activeFilter }) => {
+  const users = await getAllUsers({ activeFilter })
+  if (users.length === 0) {
+    return <h1>No se encontrarón usuarios</h1>
+  }
   return (
     <>
-      {users.length ? (
-        users.map((user) => (
+      <Suspense fallback={<h1>Loading...</h1>}>
+        {users.map((user) => (
           <CardUser
             key={user.id}
             id={user.id}
@@ -27,12 +20,10 @@ const CardsUser = () => {
             rol={user.rol}
             image={user.image}
           />
-        ))
-      ) : (
-        <div>No hay informacion!</div>
-      )}
+        ))}
+      </Suspense>
     </>
-  );
-};
+  )
+}
 
-export default CardsUser;
+export default CardsUser

@@ -2,7 +2,7 @@ import apply from '../../public/images/apply.svg'
 import Image from 'next/image'
 import { changeProductStatus } from '../../app/(dashsettings)/actions/actions'
 
-function ApplyButton({ id, value, prevStatus, prevRol }) {
+function ProductsApplyButton({ id, value }) {
   return (
     <form action={async () => await changeProductStatus(id, value)}>
       <button
@@ -17,4 +17,4 @@ function ApplyButton({ id, value, prevStatus, prevRol }) {
   )
 }
 
-export default ApplyButton
+export default ProductsApplyButton

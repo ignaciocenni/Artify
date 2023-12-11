@@ -1,17 +1,18 @@
-import Image from "next/image";
-import Link from "next/link";
-import ApplyButton from "../buttons/ApplyButton";
-import { useState } from "react";
-import { useSession } from "next-auth/react";
+'use client'
+import Image from 'next/image'
+import Link from 'next/link'
+import ApplyButton from '../buttons/ProductsApplyButton'
+import { useState } from 'react'
+import { useSession } from 'next-auth/react'
 
 const CardPublication = (props) => {
-  const { id, image, user, price, title, userImage, category, status } = props;
+  const { id, image, user, price, title, userImage, category, status } = props
 
-  const [statusChange, setStatusChange] = useState("default");
-  const { data } = useSession();
+  const [statusChange, setStatusChange] = useState('default')
+  const { data } = useSession()
   const handleChange = (event) => {
-    setStatusChange(event.target.value);
-  };
+    setStatusChange(event.target.value)
+  }
 
   return (
     <div className="px-4 py-3 rounded-lg shadow-md justify-start items-center gap-3 inline-flex mx-4">
@@ -23,7 +24,7 @@ const CardPublication = (props) => {
           fill
           sizes="100vw"
           style={{
-            objectFit: "cover",
+            objectFit: 'cover'
           }}
         />
       </div>
@@ -40,7 +41,7 @@ const CardPublication = (props) => {
         <h1 className="w-20 font-semibold">{status}</h1>
       </div>
 
-      {data?.user?.role === "ADMIN" ? (
+      {data?.user?.role === 'ADMIN' ? (
         <select
           onChange={handleChange}
           className="px-3 py-2 bg-[var(--primary)] border border-black border-opacity-25 justify-center items-center gap-2 flex font-medium rounded-xl cursor-pointer"
@@ -59,11 +60,11 @@ const CardPublication = (props) => {
           </option>
         </select>
       ) : (
-        ""
+        ''
       )}
       <ApplyButton id={id} value={statusChange} prevStatus={status} />
     </div>
-  );
-};
+  )
+}
 
-export default CardPublication;
+export default CardPublication
