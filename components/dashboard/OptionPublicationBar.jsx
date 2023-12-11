@@ -1,67 +1,68 @@
-"use client";
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setDashProducts } from "../../store/slice";
+'use client'
+import clsx from 'clsx'
+import { useSearchParams, usePathname, useRouter } from 'next/navigation'
+
+const PublicationOptions = {
+  ALL: 'ALL',
+  ACTIVE: 'ACTIVE',
+  PENDING: 'PENDING',
+  INACTIVE: 'INACTIVE'
+}
 
 const OptionPublicationBar = () => {
-  const [activeOption, setActiveOption] = useState("ALL");
-  const products = useSelector((state) => state.valores.products);
-  const dispatch = useDispatch();
-  const handleOptionClick = (category) => {
-    setActiveOption(category);
-    if (category === "ACTIVE") {
-      let filtered = products.filter((product) => product.status === "ACTIVE");
-      dispatch(setDashProducts([filtered, "ACTIVE"]));
-    }
-    if (category === "INACTIVE") {
-      let filtered = products.filter((product) => product.status === "INACTIVE");
-      dispatch(setDashProducts([filtered, "INACTIVE"]));
-    }
-    if (category === "PENDING") {
-      let filtered = products.filter((product) => product.status === "PENDING");
-      dispatch(setDashProducts([filtered, "PENDING"]));
-    }
-    if (category === "ALL") {
-      dispatch(setDashProducts([products, "ALL"]));
-    }
-  };
-
+  const searchParams = useSearchParams()
+  const path = usePathname()
+  const { replace } = useRouter()
+  const filter = searchParams.get('filter') ?? PublicationOptions.ALL
+  const handleOptionClick = (activeFilter) => {
+    const params = new URLSearchParams(searchParams)
+    params.set('filter', activeFilter)
+    replace(`${path}?${params.toString()}`)
+  }
   return (
     <div className="flex justify-center items-center gap-2 py-1 ">
       <button
-        className={`px-3 py-2 ${
-          activeOption === "ALL" ? "bg-[var(--extra)] text-white shadow-xl" : ""
-        } rounded-lg  border border-zinc-500 border-opacity-25 justify-center items-center gap-2.5 flex text-xl font-medium`}
-        onClick={() => handleOptionClick("ALL")}
+        className={clsx(
+          `px-3 py-2 rounded-lg  border border-zinc-500 border-opacity-25
+           justify-center items-center gap-2.5 flex text-xl font-medium`,
+          { 'bg-[var(--extra)] text-white shadow-xl': filter === PublicationOptions.ALL }
+        )}
+        onClick={() => handleOptionClick(PublicationOptions.ALL)}
       >
         Todas
       </button>
       <button
-        className={`px-3 py-2 ${
-          activeOption === "ACTIVE" ? "bg-[var(--extra)] text-white shadow-xl" : ""
-        } rounded-lg  border border-zinc-500 border-opacity-25 justify-center items-center gap-2.5 flex text-xl font-medium`}
-        onClick={() => handleOptionClick("ACTIVE")}
+        className={clsx(
+          `px-3 py-2 rounded-lg  border border-zinc-500 border-opacity-25
+           justify-center items-center gap-2.5 flex text-xl font-medium`,
+          { 'bg-[var(--extra)] text-white shadow-xl': filter === PublicationOptions.ACTIVE }
+        )}
+        onClick={() => handleOptionClick(PublicationOptions.ACTIVE)}
       >
         Activas
       </button>
       <button
-        className={`px-3 py-2 ${
-          activeOption === "PENDING" ? "bg-[var(--extra)] text-white shadow-xl" : ""
-        } rounded-lg  border border-zinc-500 border-opacity-25 justify-center items-center gap-2.5 flex text-xl font-medium`}
-        onClick={() => handleOptionClick("PENDING")}
+        className={clsx(
+          `px-3 py-2 rounded-lg  border border-zinc-500 border-opacity-25
+           justify-center items-center gap-2.5 flex text-xl font-medium`,
+          { 'bg-[var(--extra)] text-white shadow-xl': filter === PublicationOptions.PENDING }
+        )}
+        onClick={() => handleOptionClick(PublicationOptions.PENDING)}
       >
         Pendientes
       </button>
       <button
-        className={`px-3 py-2 ${
-          activeOption === "INACTIVE" ? "bg-[var(--extra)] text-white shadow-xl" : ""
-        } rounded-lg border border-zinc-500 border-opacity-25 justify-center items-center gap-2.5 flex text-xl font-medium`}
-        onClick={() => handleOptionClick("INACTIVE")}
+        className={clsx(
+          `px-3 py-2 rounded-lg  border border-zinc-500 border-opacity-25
+           justify-center items-center gap-2.5 flex text-xl font-medium`,
+          { 'bg-[var(--extra)] text-white shadow-xl': filter === PublicationOptions.INACTIVE }
+        )}
+        onClick={() => handleOptionClick(PublicationOptions.INACTIVE)}
       >
         Inactivas
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default OptionPublicationBar;
+export default OptionPublicationBar
