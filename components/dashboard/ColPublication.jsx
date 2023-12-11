@@ -1,5 +1,3 @@
-import React from "react";
-
 const ColPublication = () => {
   return (
     <div className="flex p-4 justify-start items-center gap-5 ">
@@ -9,7 +7,7 @@ const ColPublication = () => {
       <h1 className="font-bold text-lg w-28">Precio</h1>
       <h1 className="font-bold text-lg w-32 ">Usuario</h1>
     </div>
-  );
-};
+  )
+}
 
-export default ColPublication;
+export default ColPublication
